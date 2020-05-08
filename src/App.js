@@ -26,6 +26,7 @@ function App() {
 
   // helper functions
   const changeViewHandler = viewStr => {
+    // alt+f remove logs once project is done
     console.log('clicked!')
     console.log(viewStr)
     setState({...state, view: viewStr})
@@ -38,28 +39,28 @@ function App() {
       buttonTitle={'Main Page'}
       changeViewHandler={changeViewHandler}/>
 
-      {state.view == 'LandingView' &&
+      {state.view === 'LandingView' &&
       <LandingView
       changeViewHandler={changeViewHandler}/>}
 
-      {state.view == 'GuestLobbyView' && <GuestLobbyView />}
+      {state.view === 'GuestLobbyView' && <GuestLobbyView />}
 
-      {state.view == 'HostLobbyView' &&
+      {state.view === 'HostLobbyView' &&
       <HostLobbyView
       changeViewHandler={changeViewHandler}/>}
 
-      {state.view == 'InstructionsView' &&
+      {state.view === 'InstructionsView' &&
       <InstructionsView
       changeViewHandler={changeViewHandler}/>}
 
-      {state.view == 'DrawGameView' && <DrawGameView
+      {state.view === 'DrawGameView' && <DrawGameView
       changeViewHandler={changeViewHandler}/>}
 
-      {state.view == 'ResultsView' &&
+      {state.view === 'ResultsView' &&
       <ResultsView
       changeViewHandler={changeViewHandler}/>}
 
-      {state.view == 'ShareView' &&
+      {state.view === 'ShareView' &&
       <ShareView
       changeViewHandler={changeViewHandler}/>}
 
