@@ -6,11 +6,12 @@ const PORT = process.env.PORT || 5555
 //middleware
 //app.use(cors())  --> uncomment when we need
 
-// new changes lasdfasdf
-
 //basic route
+app.get('/', (req, res) => {
+  res.json({message: "This is the '/' route!"})
+})
 app.get('/test', (req, res) => {
-  res.json({message: "Hello World"})
+  res.json({message: "This is the '/test' route!"})
 })
 
 //server

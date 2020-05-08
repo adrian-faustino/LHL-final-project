@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
-const API = "http://localhost:5555/test"
+// View Components
+import DrawGameView from './components/DrawGameView';
+import GuestLobbyView from './components/GuestLobbyView';
+import HostLobbyView from './components/HostLobbyView';
+import InstructionsView from './components/InstructionsView';
+import LandingView from './components/LandingView';
+import ResultsView from './components/ResultsView';
+import ShareView from './components/ShareView';
 
 function App() {
+  const API = "http://localhost:5555/test"
 
-  fetch(API)
-    .then(data => data.json())
-    .then(result => console.log(result))
 
   return (
     <div className="App">
-      hey it works again
+      Put modules below
+      <DrawGameView />
+      <GuestLobbyView />
+      <HostLobbyView />
+      <InstructionsView />
+      <LandingView />
+      <ResultsView />
+      <ShareView />
     </div>
   );
 }
