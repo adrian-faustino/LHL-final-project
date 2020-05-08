@@ -36,17 +36,19 @@ function App() {
   */
   const [state, setState] = useState({
     view: 'LandingView',
-    playerType: ''
+    playerType: '',
+    username: ''
   });
 
 
   // <NavButton /> helper functions
-  const changeViewHandler = viewStr => {
-    // alt+f remove logs once project is done
-    console.log('clicked!')
-    console.log(viewStr)
-    setState({...state, view: viewStr})
-  }
+  const changeViewHandler = viewStr => setState({...state, view: viewStr});
+
+  // <LandingView /> helper functions
+  const inputChangeHandler = str => {
+    const username = str.target.value;
+    setState({...state, username})
+  };
 
   return (
     <div className="App">
@@ -57,12 +59,15 @@ function App() {
 
       {state.view === 'LandingView' &&
       <LandingView
+      inputChangeHandler={inputChangeHandler}
       changeViewHandler={changeViewHandler}/>}
 
-      {state.view === 'GuestLobbyView' && <GuestLobbyView />}
+      {state.view === 'GuestLobbyView' &&
+      <GuestLobbyView />}
 
       {state.view === 'HostLobbyView' &&
       <HostLobbyView
+      username={state.username}
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'InstructionsView' &&

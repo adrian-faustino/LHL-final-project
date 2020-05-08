@@ -8,6 +8,10 @@ export default function HostLobbyView(props) {
     <div>
       <h1>Find me at components/HostLobbyView.js</h1>
 
+      <h1>Hello, {props.username}!</h1>
+      <h2>Share this code to your friends</h2>
+      <p>123456</p>
+
       <NavButton
       nextView={'InstructionsView'}
       buttonTitle={'Start game'}

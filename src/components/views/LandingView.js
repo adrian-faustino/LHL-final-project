@@ -8,6 +8,12 @@ export default function LandingView(props) {
     <div>
       <h1>Find me at components/LandingView.js</h1>
 
+      <form>
+        <label htmlFor="username">Play as:</label>
+        <input type="text" id="username" placeholder="Your name"
+        onChange={props.inputChangeHandler}/>
+      </form>
+
       <NavButton
       nextView={'HostLobbyView'}
       buttonTitle={'Create a lobby'}
