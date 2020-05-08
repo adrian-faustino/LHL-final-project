@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+
+// Socket
+import socketIOClient from 'socket.io-client';
 
 // View Components
 import DrawGameView from './components/views/DrawGameView';
@@ -12,17 +15,30 @@ import ShareView from './components/views/ShareView';
 import NavButton from './components/NavButton';
 
 function App() {
-  // constants
-  const API = "http://localhost:5555/test"
 
-  // state
-    // view: this is how we will switch between modes. Conditional rendering based on what the value of this key will be. 
-        //i.e. view: "DrawGameView" -> renders DrawGameView
-    // playerType: "HOST" or "GUEST"
+  // constants
+  const ENDPOINT = "http://localhost:5555/test"
+
+  // Socket
+  useEffect(() => {
+    const socket = socketIOClient(ENDPOINT);
+
+    socket.on('welcome', data => {
+      console.log('Data ==>' + data)
+    })
+  }, []);
+
+
+  /* View State
+  * view: this is how we will switch between modes. Conditional rendering based on what * the value of this key will be. 
+  * i.e. view: "DrawGameView" -> renders DrawGameView
+  * playerType: "HOST" or "GUEST"
+  */
   const [state, setState] = useState({
     view: 'LandingView',
     playerType: ''
   });
+
 
   // helper functions
   const changeViewHandler = viewStr => {
