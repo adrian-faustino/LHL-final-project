@@ -37,7 +37,8 @@ function App() {
   const [state, setState] = useState({
     view: 'LandingView',
     playerType: '',
-    username: ''
+    username: '',
+    readyStatus: false
   });
 
 
@@ -50,11 +51,17 @@ function App() {
     setState({...state, username})
   };
 
+  // <GuestLobbyView /> helper functions
+  const readyStatusHandler = () => {
+    console.log(state.readyStatus + ' ready status')
+    setState({...state, readyStatus: !state.readyStatus});
+  }
+
   return (
     <div className="App">
       <NavButton
       nextView={'LandingView'}
-      buttonTitle={'Main Page'}
+      buttonTitle={'Main Page - Delete this button later'}
       changeViewHandler={changeViewHandler}/>
 
       {state.view === 'LandingView' &&
@@ -63,7 +70,10 @@ function App() {
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'GuestLobbyView' &&
-      <GuestLobbyView />}
+      <GuestLobbyView
+      username={state.username}
+      readyStatus={state.readyStatus}
+      readyStatusHandler={readyStatusHandler}/>}
 
       {state.view === 'HostLobbyView' &&
       <HostLobbyView
