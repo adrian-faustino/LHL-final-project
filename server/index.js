@@ -7,8 +7,6 @@ const PORT = process.env.PORT || 5555
 //app.use(cors())  --> uncomment when we need
 
 
-// I made a change!
-
 //basic route
 app.get('/test', (req, res) => {
   res.json({message: "Hello World"})
