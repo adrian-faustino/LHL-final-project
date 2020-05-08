@@ -11,20 +11,38 @@ import ResultsView from './components/views/ResultsView';
 import ShareView from './components/views/ShareView';
 
 function App() {
+  // constants
   const API = "http://localhost:5555/test"
-  const [view, setView] = setSate('');
 
+  // state
+  const [state, setState] = useState({
+    view: ''
+  });
+
+  // helper functions
+  const changeViewHandler = viewStr => {
+    console.log('clicked!')
+    console.log(viewStr)
+  }
 
   return (
     <div className="App">
       Put modules below
-      <DrawGameView />
+      <DrawGameView
+      changeViewHandler={changeViewHandler}/>
+
       <GuestLobbyView />
+
       <HostLobbyView />
+
       <InstructionsView />
+
       <LandingView />
+
       <ResultsView />
+
       <ShareView />
+
     </div>
   );
 }
