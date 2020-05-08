@@ -1,5 +1,7 @@
 import React from 'react'
 
+// Notes: COMPLETE for now. Desired functionality tested.
+
 export default function NavButton(props) {
   const onClickHandler = e => {
     e.preventDefault()

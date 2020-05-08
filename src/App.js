@@ -9,39 +9,59 @@ import InstructionsView from './components/views/InstructionsView';
 import LandingView from './components/views/LandingView';
 import ResultsView from './components/views/ResultsView';
 import ShareView from './components/views/ShareView';
+import NavButton from './components/NavButton';
 
 function App() {
   // constants
   const API = "http://localhost:5555/test"
 
   // state
+    // view: this is how we will switch between modes. Conditional rendering based on what the value of this key will be. 
+        //i.e. view: "DrawGameView" -> renders DrawGameView
+    // playerType: "HOST" or "GUEST"
   const [state, setState] = useState({
-    view: ''
+    view: 'LandingView',
+    playerType: ''
   });
 
   // helper functions
   const changeViewHandler = viewStr => {
     console.log('clicked!')
     console.log(viewStr)
+    setState({...state, view: viewStr})
   }
 
   return (
     <div className="App">
-      Put modules below
-      <DrawGameView
+      <NavButton
+      nextView={'LandingView'}
+      buttonTitle={'Main Page'}
       changeViewHandler={changeViewHandler}/>
 
-      <GuestLobbyView />
+      {state.view == 'LandingView' &&
+      <LandingView
+      changeViewHandler={changeViewHandler}/>}
 
-      <HostLobbyView />
+      {state.view == 'GuestLobbyView' && <GuestLobbyView />}
 
-      <InstructionsView />
+      {state.view == 'HostLobbyView' &&
+      <HostLobbyView
+      changeViewHandler={changeViewHandler}/>}
 
-      <LandingView />
+      {state.view == 'InstructionsView' &&
+      <InstructionsView
+      changeViewHandler={changeViewHandler}/>}
 
-      <ResultsView />
+      {state.view == 'DrawGameView' && <DrawGameView
+      changeViewHandler={changeViewHandler}/>}
 
-      <ShareView />
+      {state.view == 'ResultsView' &&
+      <ResultsView
+      changeViewHandler={changeViewHandler}/>}
+
+      {state.view == 'ShareView' &&
+      <ShareView
+      changeViewHandler={changeViewHandler}/>}
 
     </div>
   );

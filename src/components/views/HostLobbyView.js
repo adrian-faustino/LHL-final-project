@@ -1,9 +1,17 @@
 import React from 'react'
 
-export default function HostLobbyView() {
+// subcomponents
+import NavButton from '../NavButton'
+
+export default function HostLobbyView(props) {
   return (
     <div>
       <h1>Find me at components/HostLobbyView.js</h1>
+
+      <NavButton
+      nextView={'InstructionsView'}
+      buttonTitle={'Start game'}
+      changeViewHandler={props.changeViewHandler}/>
     </div>
   )
 }
