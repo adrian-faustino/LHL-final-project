@@ -21,13 +21,25 @@ app.get('/test', (req, res) => {
   res.json({message: "This is the '/test' route!"})
 })
 
+const lobbies = [];
 
 // socket
 io.on('connection', client => {
   console.log('A user connected!');
   
-  io.emit('welcome', "Welcome!")
+  io.emit('welcome', "A user has joined!")
+  client.emit('welcome', 'Hello you!')
+
+  // attempt at making unique rooms...
+  client.on('joinRoom', room => {
+    // if (lobbies.include(lobbyID)) ...
+    client.join('randomizeThisLater')
+    return client.emit('lobby_join_success', 'Welcome to the room!')
+    // else error handle "room doesnt exist!"
+  })
 })
+
+// on disconnect, remove that ID from the list of lobbies on line 24
 
 
 // server

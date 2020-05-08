@@ -26,11 +26,19 @@ function App() {
     socket.on('welcome', data => {
       console.log('Server says: ' + data)
     })
+
+    // to join a specific lobby...
+    socket.emit('joinRoom', 'randomizeThisLater')
+
+    socket.on('lobby_join_success', data => {
+      console.log('Lobby joined?' + data)
+    })
   }, []);
 
 
   /* View State
-  * view: this is how we will switch between modes. Conditional rendering based on what * the value of this key will be. 
+  * view: this is how we will switch between modes. Conditional rendering based on what 
+  * the value of this key will be. 
   * i.e. view: "DrawGameView" -> renders DrawGameView
   * playerType: "HOST" or "GUEST"
   */
