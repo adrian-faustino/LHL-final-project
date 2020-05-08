@@ -17,14 +17,14 @@ import NavButton from './components/NavButton';
 function App() {
 
   // constants
-  const ENDPOINT = "http://localhost:5555/test"
+  const ENDPOINT = "http://localhost:5555"
 
   // Socket
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
 
     socket.on('welcome', data => {
-      console.log('Data ==>' + data)
+      console.log('Server says: ' + data)
     })
   }, []);
 
@@ -40,7 +40,7 @@ function App() {
   });
 
 
-  // helper functions
+  // <NavButton /> helper functions
   const changeViewHandler = viewStr => {
     // alt+f remove logs once project is done
     console.log('clicked!')
@@ -69,7 +69,8 @@ function App() {
       <InstructionsView
       changeViewHandler={changeViewHandler}/>}
 
-      {state.view === 'DrawGameView' && <DrawGameView
+      {state.view === 'DrawGameView' &&
+      <DrawGameView
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'ResultsView' &&

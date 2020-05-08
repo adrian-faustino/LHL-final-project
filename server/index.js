@@ -26,7 +26,7 @@ app.get('/test', (req, res) => {
 io.on('connection', client => {
   console.log('A user connected!');
   
-  io.emit('welcome', {message: 'Welcome user!'})
+  io.emit('welcome', "Welcome!")
 })
 
 
