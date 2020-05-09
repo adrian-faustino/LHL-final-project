@@ -28,7 +28,6 @@ function App() {
   */
   const [state, setState] = useState({
     view: 'LandingView',
-    playerType: '',
     username: '',
     readyStatus: false,
     lobbyID: '',
@@ -84,6 +83,7 @@ function App() {
       <GuestLobbyView
       socket={state.socket}
       username={state.username}
+      changeViewHandler={changeViewHandler}
       readyStatus={state.readyStatus}
       readyStatusHandler={readyStatusHandler}/>}
 

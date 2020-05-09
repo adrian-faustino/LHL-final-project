@@ -19,6 +19,11 @@ export default function GuestLobbyView(props) {
       
       setState({...state, host, playerList: data});
     })
+
+    // listen to host unmount (change view)
+    props.socket.on('receiveView', nextView => {
+      props.changeViewHandler(nextView)
+    })
   }, [])
 
   // when this component mounts join a room and when user submits a room ID refire?

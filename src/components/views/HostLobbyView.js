@@ -27,14 +27,20 @@ export default function HostLobbyView(props) {
     props.socket.emit('joinRoom', data);
 
     // recieve list of players for rendering
-    props.socket.on('playersInLobby', data => {
-      
-      setPlayerList(data);
-    })
+    props.socket.on('playersInLobby', data => setPlayerList(data));
+
+    return () => {
+      // when host component unmounts trigger a view change for all players
+      const data = {
+        lobbyID,
+        nextView: 'InstructionsView'
+      }
+      props.socket.emit('changeView', data);
+    }
   }, []);
 
   // greeting logic
-  const username = props.username.trim()
+  const username = props.username.trim() // *TODO: we need to sanitize the input before it's thrown into the db, not here.
   const greeting = username.length === 0 ? 'Hello!' : `Hello, ${username}!`;
 
   // map for rendering

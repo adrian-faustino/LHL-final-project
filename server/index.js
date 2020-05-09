@@ -47,7 +47,6 @@ io.on('connection', client => {
   // ...then receive the host's request to join their own lobby
   client.on('joinRoom', data => {
     const { lobbyID, username } = data;
-    console.log(lobbyID)
 
     // ...if they successfully join, start updating user data and emit it
     if(lobbies.includes(lobbyID)) {
@@ -65,6 +64,13 @@ io.on('connection', client => {
       return client.emit('err', `Failed to join lobby: ${lobbyID}`)
     }
   });
+
+  // to synchronize all the client to start game emit a change of view triggered by host component unmount
+  client.on('changeView', data => {
+    const { lobbyID, nextView } = data;
+
+    io.to(lobbyID).emit('receiveView', nextView )
+  })
 })
 
 // on disconnect, remove that ID from the list of lobbies on line 24
