@@ -3,10 +3,26 @@ const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const cors = require('cors');
+const mongoose = require('mongoose');
+
+require('dotenv').config();
 
 
 // constants
-const PORT = process.env.PORT || 5555
+const PORT = process.env.PORT;
+const DB_URI = process.env.ATLAS_URI;
+
+
+// database
+mongoose.connect(DB_URI, {
+  useNewUrlParser: true,
+  useCreateIndex: true, 
+  useUnifiedTopology: true
+  });
+const connection = mongoose.connection;
+connection.once('open', () => {
+  console.log('MongoDB database connection established successfully.');
+})
 
 
 // middleware
@@ -36,6 +52,11 @@ const dummyPlayers = [{
 // GAME STATE
 const lobbies = [];
 const players = [];
+
+const db = {
+  lobbyID: '',
+  players: []
+};
 
 // socket
 io.on('connection', client => {
