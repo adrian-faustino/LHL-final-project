@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import uuid from 'react-uuid'
+
+
 
 // subcomponents
 import PlayerInLobby from '../PlayInLobby';
@@ -54,7 +57,7 @@ export default function GuestLobbyView(props) {
   const greeting = username.length === 0 ? 'Hello!' : `Hello, ${username}!`;
 
   // map for rendering
-  const playersInLobby = state.playerList.map(player => <PlayerInLobby username={player.username}/>);
+  const playersInLobby = state.playerList.map(player => <PlayerInLobby key={uuid} username={player.username}/>);
 
   return (
     <div>

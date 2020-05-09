@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import uuid from 'react-uuid'
+
+
 
 // subcomponents
 import NavButton from '../NavButton'
@@ -44,7 +47,7 @@ export default function HostLobbyView(props) {
   const greeting = username.length === 0 ? 'Hello!' : `Hello, ${username}!`;
 
   // map for rendering
-  const playersInLobby = playerList.map(player => <PlayerInLobby username={player.username}/>);
+  const playersInLobby = playerList.map(player => <PlayerInLobby hey={uuid()} username={player.username}/>);
 
   return (
     <div>

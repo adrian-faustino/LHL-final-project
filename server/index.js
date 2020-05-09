@@ -47,7 +47,7 @@ const db = {
 
 // socket
 io.on('connection', client => {
-  // when user selects "create lobby", append to list of lobbies
+  // when user selects "create lobby", append to list of lobbi  es
   client.on('createLobby', lobbyID => {
     lobbies.push(lobbyID);
   })
