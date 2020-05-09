@@ -8,6 +8,8 @@ export default function ShareView(props) {
     <div>
       <h1>Find me at components/ShareView.js</h1>
 
+      <h3>Your goal is to draw a picture as a team!</h3>
+
       <NavButton
       nextView={'LandingView'}
       buttonTitle={'New Game'}

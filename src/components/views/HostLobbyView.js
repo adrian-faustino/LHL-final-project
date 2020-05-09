@@ -5,7 +5,7 @@ import uuid from 'react-uuid'
 
 // subcomponents
 import NavButton from '../NavButton'
-import PlayerInLobby from '../PlayInLobby';
+import PlayerLobbyStatus from '../PlayerLobbyStatus';
 
 // Helpers
 import util from '../../helpers/util'
@@ -47,7 +47,7 @@ export default function HostLobbyView(props) {
   const greeting = username.length === 0 ? 'Hello!' : `Hello, ${username}!`;
 
   // map for rendering
-  const playersInLobby = playerList.map(player => <PlayerInLobby hey={uuid()} username={player.username}/>);
+  const playersInLobby = playerList.map(player => <PlayerLobbyStatus key={uuid()} username={player.username}/>);
 
   return (
     <div>
