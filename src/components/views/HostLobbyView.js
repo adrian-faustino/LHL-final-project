@@ -8,12 +8,19 @@ import util from '../../helpers/util'
 
 export default function HostLobbyView(props) {
 
-  const [lobbyID, setLobbyID] = useState('')
+  const [lobbyID, setLobbyID] = useState('');
 
   // when this component mounts, we will generate a lobby ID
   useEffect(() => {
-    const roomID = util.generateRoomID(6);
-    setLobbyID(roomID);
+    const lobbyID = util.generateLobbyID(6);
+    setLobbyID(lobbyID);
+
+
+    // ask server to add this lobby to list of lobbies
+    props.socket.emit('createLobby', lobbyID)
+
+    // ...then join that lobby
+    props.socket.emit('joinRoom', lobbyID);
   }, []);
 
   // greeting logic

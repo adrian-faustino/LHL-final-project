@@ -21,14 +21,34 @@ app.get('/test', (req, res) => {
   res.json({message: "This is the '/test' route!"})
 })
 
+// replace this var with a db later?
 const lobbies = [];
 
 // socket
 io.on('connection', client => {
-  console.log('A user connected!');
+  // when user selects "create lobby", append to list of lobbies
+  client.on('createLobby', lobbyID => {
+    lobbies.push(lobbyID);
+  })
+
+  // ...then receive the host's request to join their own lobby
+  client.on('joinRoom', lobbyID => {
+    if(lobbies.includes(lobbyID)) {
+      client.join(lobbyID)
+      return client.emit('success', `You are now in this lobby: ${lobbyID}`);
+    } else {
+      return client.emit('err', `Failed to join lobby: ${lobbyID}`)
+    }
+  });
+
+  //====
+
+  // when client joins, ask for name
+  client.emit('nameReq');
+  client.on('nameRes', name => {
+    console.log(name)
+  })
   
-  io.emit('welcome', "A user has joined!")
-  client.emit('welcome', 'Hello you!')
 
   // attempt at making unique rooms...
   client.on('joinRoom', room => {

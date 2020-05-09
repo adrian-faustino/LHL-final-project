@@ -6,7 +6,7 @@ const randomNumAllInclusive = (min, max) => {
 }
 
 // returns a 6 digit alphanumeric all capital ID
-const generateRoomID = (ID_length) => {
+const generateLobbyID = (ID_length) => {
   // List does not include 0 or O;
   const ALPHA_NUM = 'ABCDEFGHIJKLMNPQRSTUVWXYZ123456789';
   let id = ''
@@ -22,7 +22,7 @@ const generateRoomID = (ID_length) => {
 
 const util = {
   randomNumAllInclusive,
-  generateRoomID
+  generateLobbyID
 };
 
 export default util;

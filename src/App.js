@@ -20,23 +20,6 @@ function App() {
   // constants
   const ENDPOINT = "http://localhost:5555"
 
-  // Socket
-  useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
-
-    socket.on('welcome', data => {
-      console.log('Server says: ' + data)
-    })
-
-    // to join a specific lobby...
-    socket.emit('joinRoom', 'randomizeThisLater')
-
-    socket.on('lobby_join_success', data => {
-      console.log('Lobby joined?' + data)
-    })
-  }, []);
-
-
   /* View State
   * view: this is how we will switch between modes. Conditional rendering based on what 
   * the value of this key will be. 
@@ -47,8 +30,42 @@ function App() {
     view: 'LandingView',
     playerType: '',
     username: '',
-    readyStatus: false
+    readyStatus: false,
+    lobbyID: '',
+    socket: null
   });
+
+  // Socket
+  useEffect(() => {
+    const socket = socketIOClient(ENDPOINT);
+    // as client joins, set the socket
+    setState({...state, socket});
+
+    // receive success messages from socket
+    socket.on('success', message => {
+      console.log(`Success! ${message}`)
+    });
+
+    // receive error messages from socket
+    socket.on('err', message => {
+      console.log(`Error! ${message}`)
+    })
+    //====
+
+   // as client joins, receive name request
+   socket.on('nameReq', () => {
+     console.log('Server is asking for name!')
+     socket.emit('nameRes', state.username)
+   })
+
+    // to join a specific lobby...
+    // param1 is the name of the event, param2 is the lobby name
+    socket.emit('joinRoom', state.lobbyID)
+
+    socket.on('lobby_join_success', data => {
+      console.log('Lobby joined?' + data)
+    })
+  }, [state.lobbyID]);
 
 
   // <NavButton /> helper functions
@@ -80,12 +97,14 @@ function App() {
 
       {state.view === 'GuestLobbyView' &&
       <GuestLobbyView
+      socket={state.socket}
       username={state.username}
       readyStatus={state.readyStatus}
       readyStatusHandler={readyStatusHandler}/>}
 
       {state.view === 'HostLobbyView' &&
       <HostLobbyView
+      socket={state.socket}
       username={state.username}
       changeViewHandler={changeViewHandler}/>}
 
