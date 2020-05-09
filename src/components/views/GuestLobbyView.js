@@ -12,7 +12,8 @@ export default function GuestLobbyView(props) {
     tempInput: '',
     lobbyID: '',
     host: '',
-    playerList: []
+    playerList: [],
+    error: ''
   });
 
   useEffect(() => {
@@ -27,6 +28,9 @@ export default function GuestLobbyView(props) {
     props.socket.on('receiveView', nextView => {
       props.changeViewHandler(nextView)
     })
+
+    // listen for errors
+    props.socket.on('err', error => setState({...state, error}))
   }, [])
 
   // when this component mounts join a room and when user submits a room ID refire?
@@ -71,6 +75,10 @@ export default function GuestLobbyView(props) {
         type="submit"
         onClick={e => onSubmitHandler(e)}>Join</button>
       </form>
+
+      {state.error && (
+        <div>{state.error}</div>
+      )}
 
       <h1>{greeting}</h1>
       {state.host && <h2>Welcome to {state.host}'s lobby!</h2>}

@@ -18,6 +18,8 @@ body {
   url(./assets/background.jpg);
   animation: background_scroll 60s linear infinite;
   text-align: center;
+
+  color: white;
 }
 
 @keyframes background_scroll{

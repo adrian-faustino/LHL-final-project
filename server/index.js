@@ -10,6 +10,7 @@ require('dotenv').config();
 // constants
 const PORT = process.env.PORT;
 const DB_URI = process.env.ATLAS_URI;
+const MAX_PLAYERS_PER_ROOM = 4;
 
 
 // database
@@ -55,6 +56,11 @@ io.on('connection', client => {
   // ...then receive the host's request to join their own lobby
   client.on('joinRoom', data => {
     const { lobbyID, username } = data;
+
+    // if lobby is full, emit error msg
+    if(players.length >= MAX_PLAYERS_PER_ROOM) {
+      return client.emit('err', 'Room is full!');
+    }
 
     // ...if they successfully join, start updating user data and emit it
     if(lobbies.includes(lobbyID)) {
