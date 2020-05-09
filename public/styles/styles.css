@@ -1,0 +1,19 @@
+body {
+  background:
+  linear-gradient(
+    rgba(0, 0, 0, 0.8), 
+    rgba(0, 0, 0, 0.8)
+  ),
+  url(../assets/background.jpg);
+  animation: background_scroll 60s linear infinite;
+  /* background-size: cover; */
+}
+
+@keyframes background_scroll{
+  0% {background-position: 50% 0;}
+  25% {background-position: 100% 50% ;}
+  50% {background-position: 50% 100%;}
+  75% {background-position: 0 50%;}
+  100% {background-position: 50% 0;}
+}
+
