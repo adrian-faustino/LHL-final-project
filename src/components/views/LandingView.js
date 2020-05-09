@@ -6,7 +6,7 @@ import NavButton from '../NavButton'
 export default function LandingView(props) {
   return (
     <div>
-      <h1>Find me at components/LandingView.js</h1>
+      <h1 style={{color: "red", fontSize: "16px"}}>Find me at components/LandingView.js</h1>
 
       <form>
         <label htmlFor="username">Play as:</label>
