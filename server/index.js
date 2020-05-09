@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
-
 // constants
 const PORT = process.env.PORT;
 const DB_URI = process.env.ATLAS_URI;
@@ -19,35 +18,23 @@ mongoose.connect(DB_URI, {
   useCreateIndex: true, 
   useUnifiedTopology: true
   });
+
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log('MongoDB database connection established successfully.');
 })
 
 
-// middleware
-//app.use(cors())  --> uncomment when we need
+// routes
+app.get('/', (req, res) => res.send('Welcome!'))
 
 
-// basic testroutes
-app.get('/', (req, res) => {
-  res.json({message: "This is the '/' route!"})
-})
-app.get('/test', (req, res) => {
-  res.json({message: "This is the '/test' route!"})
-})
 
-// replace this var with a db later?
-const dummyLobby = {
-  'V3RFFI':{
-    players: [{}, {}, {}],
-  }
-}
-const dummyPlayers = [{
-  username: 'Mike',
-  coordinates: [{x: 6, y: 5}]
-  // add client id later incase we need to access
-}]
+// models
+let Lobby = require('./models/lobby.model');
+let Player = require('./models/player.model');
+let Coordinates = require('./models/coordinates.model');
+
 
 // GAME STATE
 const lobbies = [];
