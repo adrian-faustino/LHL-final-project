@@ -28,7 +28,7 @@ export default function HostLobbyView(props) {
 
     // recieve list of players for rendering
     props.socket.on('playersInLobby', data => {
-      console.log(data, 'fresh data')
+      
       setPlayerList(data);
     })
   }, []);

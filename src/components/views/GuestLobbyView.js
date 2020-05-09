@@ -15,8 +15,9 @@ export default function GuestLobbyView(props) {
   useEffect(() => {
     // recieve list of players for rendering
     props.socket.on('playersInLobby', data => {
-      console.log(data, 'fresh data')
-      setState({...state, playerList: data});
+      const host = data[0].username;
+      
+      setState({...state, host, playerList: data});
     })
   }, [])
 
@@ -64,7 +65,7 @@ export default function GuestLobbyView(props) {
       </form>
 
       <h1>{greeting}</h1>
-      {state.host && <h2>Welcome to {state.host} lobby!</h2>}
+      {state.host && <h2>Welcome to {state.host}'s lobby!</h2>}
       <h3>Waiting for players to join...</h3>
 
       {playersInLobby}
