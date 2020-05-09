@@ -49,22 +49,7 @@ function App() {
     // receive error messages from socket
     socket.on('err', message => {
       console.log(`Error! ${message}`)
-    })
-    //====
-
-   // as client joins, receive name request
-   socket.on('nameReq', () => {
-     console.log('Server is asking for name!')
-     socket.emit('nameRes', state.username)
-   })
-
-    // to join a specific lobby...
-    // param1 is the name of the event, param2 is the lobby name
-    socket.emit('joinRoom', state.lobbyID)
-
-    socket.on('lobby_join_success', data => {
-      console.log('Lobby joined?' + data)
-    })
+    });
   }, [state.lobbyID]);
 
 

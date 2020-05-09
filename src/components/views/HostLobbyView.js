@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 // subcomponents
 import NavButton from '../NavButton'
+import PlayerInLobby from '../PlayInLobby';
 
 // Helpers
 import util from '../../helpers/util'
@@ -9,6 +10,8 @@ import util from '../../helpers/util'
 export default function HostLobbyView(props) {
 
   const [lobbyID, setLobbyID] = useState('');
+  const [playerList, setPlayerList] = useState([]);
+
 
   // when this component mounts, we will generate a lobby ID
   useEffect(() => {
@@ -20,12 +23,22 @@ export default function HostLobbyView(props) {
     props.socket.emit('createLobby', lobbyID)
 
     // ...then join that lobby
-    props.socket.emit('joinRoom', lobbyID);
+    const data = {lobbyID, username: props.username}
+    props.socket.emit('joinRoom', data);
+
+    // recieve list of players for rendering
+    props.socket.on('playersInLobby', data => {
+      console.log(data, 'fresh data')
+      setPlayerList(data);
+    })
   }, []);
 
   // greeting logic
   const username = props.username.trim()
   const greeting = username.length === 0 ? 'Hello!' : `Hello, ${username}!`;
+
+  // map for rendering
+  const playersInLobby = playerList.map(player => <PlayerInLobby username={player.username}/>);
 
   return (
     <div>
@@ -34,6 +47,8 @@ export default function HostLobbyView(props) {
       <h1>{greeting}</h1>
       <h2>Share this code to your friends</h2>
       <p>{lobbyID}</p>
+
+      {playersInLobby}
 
       <NavButton
       nextView={'InstructionsView'}
