@@ -22,7 +22,20 @@ app.get('/test', (req, res) => {
 })
 
 // replace this var with a db later?
+const dummyLobby = {
+  'V3RFFI':{
+    players: [{}, {}, {}],
+  }
+}
+const dummyPlayers = [{
+  username: 'Mike',
+  coordinates: [{x: 6, y: 5}]
+  // add client id later incase we need to access
+}]
+
+// GAME STATE
 const lobbies = [];
+const players = [];
 
 // socket
 io.on('connection', client => {
@@ -32,31 +45,26 @@ io.on('connection', client => {
   })
 
   // ...then receive the host's request to join their own lobby
-  client.on('joinRoom', lobbyID => {
+  client.on('joinRoom', data => {
+    const { lobbyID, username } = data;
+    console.log(lobbyID)
+
+    // ...if they successfully join, start updating user data and emit it
     if(lobbies.includes(lobbyID)) {
       client.join(lobbyID)
+
+      // add player info to array of player objects
+      const playerObj = {username};
+      players.push(playerObj);
+
+      // emit list of players for client ot renter
+      io.emit('playersInLobby', players);
+
       return client.emit('success', `You are now in this lobby: ${lobbyID}`);
     } else {
       return client.emit('err', `Failed to join lobby: ${lobbyID}`)
     }
   });
-
-  //====
-
-  // when client joins, ask for name
-  client.emit('nameReq');
-  client.on('nameRes', name => {
-    console.log(name)
-  })
-  
-
-  // attempt at making unique rooms...
-  client.on('joinRoom', room => {
-    // if (lobbies.include(lobbyID)) ...
-    client.join('randomizeThisLater')
-    return client.emit('lobby_join_success', 'Welcome to the room!')
-    // else error handle "room doesnt exist!"
-  })
 })
 
 // on disconnect, remove that ID from the list of lobbies on line 24
@@ -66,3 +74,8 @@ io.on('connection', client => {
 http.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`)
 })
+
+
+// HELPER FUNCTIONS -- we need to move this to a different folder
+// returns an object
+const createPlayerObject = () => {}
