@@ -1,5 +1,6 @@
 import React from 'react'
-import classNames from "classnames";
+// import classNames from "classnames";
+import "./NavButton.css";
 
 // Notes: COMPLETE for now. Desired functionality tested.
 
@@ -11,14 +12,15 @@ export default function NavButton(props) {
     props.changeViewHandler(props.nextView)
   }
 
-  const buttonClass = classNames({
-    "btn": true,
-    "btn-success": true
-  })
+  // const buttonClass = classNames({
+  //   "btn": true,
+  //   "btn-success": true
+  // })
 
   return (
-    <div className={buttonClass}>
+    <div>
       <button
+      className="button"
       onClick={e => onClickHandler(e)}
       >{props.buttonTitle}</button>
     </div>
