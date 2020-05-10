@@ -50,7 +50,7 @@ export default function HostLobbyView(props) {
       socket.on('lobbyFound', lobbyObj => {
         const { players, lobbyID, currentView } = lobbyObj;
         console.log('Updating players array with...', lobbyObj)
-        setState({...state, players});
+        setState({...state, lobbyID, players});
       });
     });
 

@@ -26,10 +26,11 @@ const errorListener = (socket) => {
   socket.on('err', err => console.log('Error:', err));
 };
 
+
 const util = {
   randomNumAllInclusive,
   generateLobbyID,
-  errorListener
+  errorListener,
 };
 
 export default util;
