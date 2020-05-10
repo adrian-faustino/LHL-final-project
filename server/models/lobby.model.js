@@ -9,7 +9,11 @@ const lobbySchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Player'
     }
-  ]
+  ],
+  currentView: {
+    type: String,
+    required: true, 
+  }
 }, {
   timestamps: true
 })
@@ -22,7 +26,8 @@ module.exports = Lobby;
 
 // lobby = {
 //   lobbyID,
-//   players: []
+//   players: [],
+//   currentView
 // }
 
 // player = {

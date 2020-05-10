@@ -32,9 +32,10 @@ app.get('/', (req, res) => res.send('Welcome!'))
 
 
 // models
-let Lobby = require('./models/lobby.model');
-let Player = require('./models/player.model');
-let Coordinates = require('./models/coordinate.model');
+const Lobby = require('./models/lobby.model');
+const Player = require('./models/player.model');
+const Coordinate = require('./models/coordinate.model');
+const db = {Lobby, Player, Coordinate};
 
 
 // GAME STATE
@@ -46,15 +47,23 @@ const currentLobby = {
   playerList: []
 }
 
+//=== rebuild
 // socket
+const handleCRUD = require('./routes/handleCRUD');
+
+io.on('connection', client => {
+  // handle DB crud
+  handleCRUD(client, db);
+})
+//=== rebuild
 io.on('connection', client => {
   // when user selects "create lobby", append to list of lobbies
-  client.on('createLobby', lobbyID => {
+  client.on('createLobby', lobbyID => { //handleCRUD
     lobbies.push(lobbyID);
   })
 
   // ...then receive the host's request to join their own lobby
-  client.on('joinRoom', data => {
+  client.on('joinRoom', data => {  //handleView
     const { lobbyID, username } = data;
 
     // if lobby is full, emit error msg
