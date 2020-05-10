@@ -1,77 +1,29 @@
-/* @import "~normalize.css/normalize.css";
-
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
-
-@import "styles/variables.scss";
-@import "styles/reset.scss";
-
-@import "styles/typography.scss"; */
-
-
-
-body {
-  background:
-  linear-gradient(
-    rgba(0, 0, 0, 0.8), 
-    rgba(0, 0, 0, 0.8)
-  ),
-  url(./assets/background.jpg);
-  animation: background_scroll 60s linear infinite;
-  text-align: center;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
 }
 
-@keyframes background_scroll{
-  0% {background-position: 50% 0;}
-  25% {background-position: 100% 50% ;}
-  50% {background-position: 50% 100%;}
-  75% {background-position: 0 50%;}
-  100% {background-position: 50% 0;}
+ol,
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* * {
+* {
   box-sizing: border-box;
+  
 }
 
 body {
-  font-family: $font-family;
+  text-align: center;
+  font-family: 'Fredoka One', cursive;
 }
 
-.layout {
-  display: flex;
-  min-height: 100vh;
-}
 
-@media only screen and (max-width: 960px) {
-  html {
-    font-size: 12px;
-  }
 
-  .layout {
-    flex-direction: column;
-  }
-}
-
-@media only screen and (max-width: 320px) {
-  html {
-    font-size: 10px;
-  }
-} */
