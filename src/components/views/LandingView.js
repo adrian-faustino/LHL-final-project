@@ -1,6 +1,7 @@
 import React from 'react'
 import "./LandingView.css";
 
+
 // subcomponents
 import NavButton from '../NavButton'
 import { findRenderedComponentWithType } from 'react-dom/test-utils';
@@ -28,6 +29,19 @@ export default function LandingView(props) {
         buttonTitle={'Join a lobby'}
         changeViewHandler={props.changeViewHandler}/>
       </div>
+
+      <footer>
+        <NavButton
+          nextView={''}
+          buttonTitle={'About'}
+          changeViewHandler={props.changeViewHandler}/>
+        
+        <NavButton
+        nextView={''}
+        buttonTitle={'?'}
+        changeViewHandler={props.changeViewHandler}/>
+      </footer>
+        
     </div>
   )
 }
