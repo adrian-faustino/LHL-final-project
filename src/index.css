@@ -7,6 +7,19 @@ h6 {
   margin: 0;
 }
 
+body {
+  background:
+  linear-gradient(
+    rgba(0, 0, 0, 0.8), 
+    rgba(0, 0, 0, 0.8)
+  ),
+  url(./assets/background.jpg);
+  animation: background_scroll 60s linear infinite;
+  text-align: center;
+
+  color: white;
+}
+
 ol,
 ul,
 li {

@@ -9,7 +9,11 @@ const lobbySchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Player'
     }
-  ]
+  ],
+  currentView: {
+    type: String,
+    required: true, 
+  }
 }, {
   timestamps: true
 })
@@ -17,3 +21,23 @@ const lobbySchema = new Schema({
 const Lobby = mongoose.model('Lobby', lobbySchema);
 
 module.exports = Lobby;
+
+// lobbies = [...lobby];
+
+// lobby = {
+//   lobbyID,
+//   players: [],
+//   currentView
+// }
+
+// player = {
+//   username,
+//   coordinates: []
+// }
+
+// cooordinate = {
+//   x,
+//   y,
+//   color,
+//   lineSize
+// }

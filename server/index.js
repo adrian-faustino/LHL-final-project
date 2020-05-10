@@ -4,8 +4,8 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const cors = require('cors');
 const mongoose = require('mongoose');
-
 require('dotenv').config();
+
 
 // constants
 const PORT = process.env.PORT;
@@ -18,6 +18,7 @@ mongoose.connect(DB_URI, {
   useCreateIndex: true, 
   useUnifiedTopology: true
   });
+mongoose.set('useFindAndModify', false);
 
 const connection = mongoose.connection;
 connection.once('open', () => {
@@ -29,59 +30,26 @@ connection.once('open', () => {
 app.get('/', (req, res) => res.send('Welcome!'))
 
 
-
 // models
-let Lobby = require('./models/lobby.model');
-let Player = require('./models/player.model');
-let Coordinates = require('./models/coordinates.model');
+const Lobby = require('./models/lobby.model');
+const Player = require('./models/player.model');
+const Coordinate = require('./models/coordinate.model');
+const db = {Lobby, Player, Coordinate};
 
 
-// GAME STATE
-const lobbies = [];
-const players = [];
-
-const db = {
-  lobbyID: '',
-  players: []
-};
-
+//=== rebuild
 // socket
+const handleCRUD = require('./routes/handleCRUD');
+const handleGameState = require('./routes/handleGameState');
+
 io.on('connection', client => {
-  // when user selects "create lobby", append to list of lobbi  es
-  client.on('createLobby', lobbyID => {
-    lobbies.push(lobbyID);
-  })
+  // handle DB crud
+  handleCRUD(client, db);
+  handleGameState(client, db, io);
 
-  // ...then receive the host's request to join their own lobby
-  client.on('joinRoom', data => {
-    const { lobbyID, username } = data;
-
-    // ...if they successfully join, start updating user data and emit it
-    if(lobbies.includes(lobbyID)) {
-      client.join(lobbyID)
-
-      // add player info to array of player objects
-      const playerObj = {username};
-      players.push(playerObj);
-
-      // emit list of players for client ot renter
-      io.emit('playersInLobby', players);
-
-      return client.emit('success', `You are now in this lobby: ${lobbyID}`);
-    } else {
-      return client.emit('err', `Failed to join lobby: ${lobbyID}`)
-    }
-  });
-
-  // to synchronize all the client to start game emit a change of view triggered by host component unmount
-  client.on('changeView', data => {
-    const { lobbyID, nextView } = data;
-
-    io.to(lobbyID).emit('receiveView', nextView )
-  })
+  // handle DC client.on('disconnect') STRETCH
 })
-
-// on disconnect, remove that ID from the list of lobbies on line 24
+//=== rebuild
 
 
 // server
@@ -90,6 +58,40 @@ http.listen(PORT, () => {
 })
 
 
-// HELPER FUNCTIONS -- we need to move this to a different folder
-// returns an object
-const createPlayerObject = () => {}
+
+
+
+
+
+
+
+
+
+// io.on('connection', client => {
+  
+
+//   // emit number of players in lobby once game starts for skip button
+//   // HostLobbyView ==> InstructionsView
+//   client.on('checkPlayerAmt', data => {
+//     client.emit('receivePlayerAmt', {
+//       playerAmt: players.length,
+//       lobbyID: data.lobbyID
+//     });
+//   });
+
+//   // handle skip button logic in InstructionsView
+//   client.on('skipOK', data => {
+//     const { username, lobbyID } = data;
+//     const index = players.findIndex(e => e === username);
+//     players.splice(index, 1);
+
+//     if(players.length === 0) {
+//       console.log('everyone is ready!');
+//       io.to(lobbyID).emit('receiveView', 'DrawGameView');
+//     } else {
+//       io.to(lobbyID).emit('receivePlayerAmt', players.length);
+//     }
+//   });
+// });
+
+// on disconnect, remove that ID from the list of lobbies on line 24

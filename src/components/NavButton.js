@@ -18,7 +18,7 @@ export default function NavButton(props) {
   // })
 
   return (
-    <div>
+    <div className="lobby-button">
       <button
       className="button"
       onClick={e => onClickHandler(e)}
@@ -35,3 +35,8 @@ export default function NavButton(props) {
 //      "button--confirm": props.confirm,
 //      "button--danger": props.danger
 //   });
+
+
+// copy pasted code:
+  // <div className="lobby-button"></div>
+  // </div>

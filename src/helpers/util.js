@@ -20,9 +20,16 @@ const generateLobbyID = (ID_length) => {
   return id;
 }
 
+// set up error listener
+const errorListener = (socket) => {
+  socket.on('success', msg => console.log('Success:', msg));
+  socket.on('err', err => console.log('Error:', err));
+};
+
 const util = {
   randomNumAllInclusive,
-  generateLobbyID
+  generateLobbyID,
+  errorListener
 };
 
 export default util;
