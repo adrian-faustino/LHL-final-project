@@ -17,3 +17,22 @@ const lobbySchema = new Schema({
 const Lobby = mongoose.model('Lobby', lobbySchema);
 
 module.exports = Lobby;
+
+// lobbies = [...lobby];
+
+// lobby = {
+//   lobbyID,
+//   players: []
+// }
+
+// player = {
+//   username,
+//   coordinates: []
+// }
+
+// cooordinate = {
+//   x,
+//   y,
+//   color,
+//   lineSize
+// }

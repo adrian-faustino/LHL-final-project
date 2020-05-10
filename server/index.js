@@ -34,7 +34,7 @@ app.get('/', (req, res) => res.send('Welcome!'))
 // models
 let Lobby = require('./models/lobby.model');
 let Player = require('./models/player.model');
-let Coordinates = require('./models/coordinates.model');
+let Coordinates = require('./models/coordinate.model');
 
 
 // GAME STATE

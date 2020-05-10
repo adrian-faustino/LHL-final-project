@@ -9,11 +9,11 @@ const playerSchema = new Schema({
     unique: false,
     trim: true,
   }, 
-  drewCoordinates: {
+  coordinates: {
     type: [
       {
         type: Schema.Types.ObjectId, 
-        ref: 'Coordinates'
+        ref: 'Coordinate'
       }
     ]
   }
