@@ -39,6 +39,9 @@ export default function HostLobbyView(props) {
         nextView: 'InstructionsView'
       }
       props.socket.emit('changeView', data);
+
+      // // also trigger emit to send number of players in lobby for skip button
+      // props.socket.emit('checkPlayerAmt', {lobbyID});
     }
   }, []);
 

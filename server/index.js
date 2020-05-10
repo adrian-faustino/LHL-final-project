@@ -41,14 +41,14 @@ let Coordinates = require('./models/coordinates.model');
 const lobbies = [];
 const players = [];
 
-const db = {
+const currentLobby = {
   lobbyID: '',
-  players: []
-};
+  playerList: []
+}
 
 // socket
 io.on('connection', client => {
-  // when user selects "create lobby", append to list of lobbi  es
+  // when user selects "create lobby", append to list of lobbies
   client.on('createLobby', lobbyID => {
     lobbies.push(lobbyID);
   })
@@ -83,9 +83,32 @@ io.on('connection', client => {
   client.on('changeView', data => {
     const { lobbyID, nextView } = data;
 
-    io.to(lobbyID).emit('receiveView', nextView )
-  })
-})
+    io.to(lobbyID).emit('receiveView', data)
+  });
+
+  // emit number of players in lobby once game starts for skip button
+  // HostLobbyView ==> InstructionsView
+  client.on('checkPlayerAmt', data => {
+    client.emit('receivePlayerAmt', {
+      playerAmt: players.length,
+      lobbyID: data.lobbyID
+    });
+  });
+
+  // handle skip button logic in InstructionsView
+  client.on('skipOK', data => {
+    const { username, lobbyID } = data;
+    const index = players.findIndex(e => e === username);
+    players.splice(index, 1);
+
+    if(players.length === 0) {
+      console.log('everyone is ready!');
+      io.to(lobbyID).emit('receiveView', 'DrawGameView');
+    } else {
+      io.to(lobbyID).emit('receivePlayerAmt', players.length);
+    }
+  });
+});
 
 // on disconnect, remove that ID from the list of lobbies on line 24
 

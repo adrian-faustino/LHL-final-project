@@ -25,8 +25,8 @@ export default function GuestLobbyView(props) {
     })
 
     // listen to host unmount (change view)
-    props.socket.on('receiveView', nextView => {
-      props.changeViewHandler(nextView)
+    props.socket.on('receiveView', data => {
+      props.changeViewHandler(data.nextView)
     })
 
     // listen for errors

@@ -95,6 +95,8 @@ function App() {
 
       {state.view === 'InstructionsView' &&
       <InstructionsView
+      username={state.username}
+      socket={state.socket}
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'DrawGameView' &&
