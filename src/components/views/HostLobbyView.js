@@ -36,7 +36,7 @@ export default function HostLobbyView(props) {
 
         socket.on('playerAdded', lobbyObj => {
           const { lobbyID, players, currentView } = lobbyObj;
-
+          
           socket.emit('joinLobby', { lobbyID });
         });
 

@@ -10,55 +10,63 @@ export default function GuestLobbyView(props) {
   const { socket, username, changeViewHandler } = props;
 
   const [state, setState] = useState({
+    playerObj: null,
+    lobbyObj: null,
     tempInput: '',
     lobbyID: '',
     host: '',
     players: [],
     error: ''
   })
-  const { tempInput, lobbyID, host, players, error } = state;
+  const { tempInput, lobbyID, host, players, error, playerObj } = state;
+
+
+  useEffect(() => {
+    // when user joins,, created
+    socket.emit('createPlayer', { username, coordinate: [] });
+    socket.on('playerCreated', playerObj => {
+      setState({...state, playerObj});
+    });
+
+    // listeners
+    socket.on('err', error => setState({...state, error}));
+    socket.on('playerAdded', lobbyObj => {
+      const { lobbyID, players, currentView} = lobbyObj;
+      const host = players[0];
+      setState({...state, lobbyID, players, host});
+    });
+    socket.on('userJoinLobby', () => {
+      socket.emit('findLobby', { lobbyID });
+      socket.on('lobbyFound', lobbyObj => {
+        const { players, lobbyID, currentView } = lobbyObj;
+
+        console.log('Updating players array with...', lobbyObj);
+        setState({...state, players});
+      })
+    });
+  }, []);
 
 
   useEffect(() => {
     if(lobbyID) {
-      // once there is lobby, lets check db if this loby exist, get that obj and set all the things
+      console.log('lobbyID was updated.');
+      socket.emit('addToPlayers', { lobbyID, playerObj });
+      socket.on('playerAdded', lobbyObj => {
+        const { lobbyID, lobbyobj, players } = lobbyObj;
+
+        socket.emit('joinLobby', { lobbyID });
+      });
     }
-    
   }, [lobbyID]);
-  // ==== rebuild
-
-  useEffect(() => {
-    // recieve list of players for rendering
-    props.socket.on('playersInLobby', data => {
-      const host = data[0].username;
-      
-      setState({...state, host, playerList: data});
-    })
-
-    // listen to host unmount (change view)
-    props.socket.on('receiveView', data => {
-      props.changeViewHandler(data.nextView)
-    })
-
-    // listen for errors
-    props.socket.on('err', error => setState({...state, error}))
-  }, [])
-
-  // when this component mounts join a room and when user submits a room ID refire?
-  useEffect(() => {
-    // wait for user to update lobbyID then attempt to join that lobby
-    if(state.lobbyID) {
-      const data = {lobbyID: state.lobbyID, username: props.username}
-      props.socket.emit('joinRoom', data);
-    }
-  }, [state.lobbyID]);
 
 
   // event handlers
   const onChangeHandler = e => setState({...state, tempInput: e.target.value});
 
+  // join room logic
   const onSubmitHandler = e => {
     e.preventDefault()
+    console.log('Joining room...')
     setState({...state, lobbyID: tempInput});
   }
 
@@ -69,7 +77,7 @@ export default function GuestLobbyView(props) {
 
   // render logic
   const greeting = username.trim().length === 0 ? 'Hello!' : `Hello, ${username}!`;
-  const playerList = players.map(player => <PlayerLobbyStatus key={uuid} username={player.username}/>);
+  const playerList = players.map(player => <PlayerLobbyStatus key={uuid} username={player}/>);
 
   return (
     <div>
@@ -87,8 +95,8 @@ export default function GuestLobbyView(props) {
       {error && <div>{error}</div>}
 
       <h1>{greeting}</h1>
-      {state.host && 
-      <h2>Welcome to {state.host}'s lobby!</h2> &&
+      {host && 
+      <h2>Welcome to {host}'s lobby!</h2> &&
       <h3>Waiting for players to join...</h3> &&
       {playerList} &&
       <button

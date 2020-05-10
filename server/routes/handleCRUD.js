@@ -97,10 +97,13 @@ module.exports = function(client, db) {
     const update = { "$push": {  "players": playerObj }};
     console.log('Server sends playerObj: ', playerObj)
 
-    Lobby.findOneAndUpdate(filter, update, { "new": true, "upsert": true}, (err, lobbyObj) => {
+    Lobby.findOneAndUpdate(filter, update, { "new": true, "upsert": false}, (err, lobbyObj) => {
       if(err) {
         console.log(err);
         client.emit('err', err);
+      } else if (!lobbyObj) {
+        console.log('Could not find lobby.');
+        client.emit('err', `That lobby doesn't exist!`);
       } else {
         console.log(`Successfully updated game state.`, lobbyObj);
         console.log('Server sends lobybyObj: ', lobbyObj)
