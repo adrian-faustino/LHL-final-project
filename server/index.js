@@ -50,10 +50,14 @@ const currentLobby = {
 //=== rebuild
 // socket
 const handleCRUD = require('./routes/handleCRUD');
+const handleGameState = require('./routes/handleGameState');
 
 io.on('connection', client => {
   // handle DB crud
   handleCRUD(client, db);
+  handleGameState(client, db);
+
+  // handle DC client.on('disconnect') STRETCH
 })
 //=== rebuild
 io.on('connection', client => {
