@@ -68,14 +68,21 @@ module.exports = function(client, db) {
   /* Given '_id', return that player object from the DB */
   client.on('findPlayer', data => {
     const { _id } = data;
+    console.log(`Searching for player: ${_id}`)
 
     Player.findOne({_id}, (err, playerObj) => {
       if(err) {
         console.log(`Failed to find player: ${err}`);
         client.emit('err', err);
+      } else if(!playerObj) {
+        console.log('Player does not exist');
+        client.emit('err', 'Player does not exist.');
       } else {
         console.log(`Successfully found player: ${playerObj}`);
-        // client.emit('playerObj', playerObj);
+        client.emit('playerFound', playerObj);
+        
+        // also return player username
+        client.emit('username', playerObj.username);
       }
     });
   });
