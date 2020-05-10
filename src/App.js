@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import util from './helpers/util';
+import "./App.css";
 
 // Socket
 import socketIOClient from 'socket.io-client';
@@ -58,12 +59,12 @@ function App() {
     setState({...state, readyStatus: !state.readyStatus});
   }
 
+  // <NavButton
+  // nextView={'LandingView'}
+  // buttonTitle={'Main Page - Delete this button later'}
+  // changeViewHandler={changeViewHandler}/>
   return (
-    <div className="App">
-      <NavButton
-      nextView={'LandingView'}
-      buttonTitle={'Main Page - Delete this button later'}
-      changeViewHandler={changeViewHandler}/>
+    <div className="app">
 
       {state.view === 'LandingView' &&
       <LandingView

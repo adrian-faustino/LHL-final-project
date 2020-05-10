@@ -32,7 +32,8 @@ module.exports = function(client, db, io) {
   /* ==> Inteded this for host start button. Once clicked, this will be called */
   client.on('changeView', data => {
     const { lobbyID, nextView } = data;
-
+    
+    console.log(`Emitting changeView to everyone in lobby ${lobbyID} to view: ${nextView}`);
     io.in(lobbyID).emit('changeView', data);
   });
 

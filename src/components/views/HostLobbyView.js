@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import uuid from 'react-uuid'
-
-
+import "./HostLobbyView.css";
 
 // subcomponents
 import NavButton from '../NavButton'
@@ -60,10 +59,10 @@ export default function HostLobbyView(props) {
     //   setState({...state, players, lobbyID});
     // });
 
-    // socket.on('changeView', data => {
-    //   const { nextView } = data;
-    //   changeViewHandler(nextView);
-    // });
+    socket.on('changeView', data => {
+      const { nextView } = data;
+      changeViewHandler(nextView);
+    });
 
     // socket.on('playerObj', playerObj => {
     //   setState({...state, playerObj});
@@ -77,7 +76,7 @@ export default function HostLobbyView(props) {
   const onClickHandler = e => {
     e.preventDefault();
 
-    socket.emit('changeView', { nextView: 'InstructionsView' });
+    socket.emit('changeView', { lobbyID, nextView: 'InstructionsView' });
   }
 
 
@@ -86,20 +85,43 @@ export default function HostLobbyView(props) {
   const playersList = players.map(player => <PlayerLobbyStatus key={uuid()} username={player}/>);
 
   return (
-    <div>
-      <h1>Find me at components/HostLobbyView.js</h1>
+    <div className="main-container">
+      <h1 style={{color: "red", fontSize: "14px"}}>HostLobbyView.js</h1>
 
-      <h1>{greeting}</h1>
-      <h2>Share this code to your friends</h2>
-      <p>{lobbyID}</p>
+      <h1 className="title">{greeting}</h1>
+      
+      <div className="lobby-code-container">
+        <h2>Share this code with your friends:</h2>
+        <p>{lobbyID}</p>
+      </div>
 
       {playersList}
-      
+
       <button onClick={e => onClickHandler(e)}>Start game</button>
-      <NavButton
-      nextView={'InstructionsView'}
-      buttonTitle={'Start game'}
-      changeViewHandler={props.changeViewHandler}/>
     </div>
   )
 }
+
+
+
+
+// Jason code
+{/* <ul className="lobby-name-list">
+  {playersList}
+  <li>player 2 <img
+    className=""
+    src="trash.png"
+    alt=""
+    onClick={""}
+    />
+  </li>
+  <li>player 3 <img src="trash.jpg"/></li>
+  <li>player 4 <img src="trash.jpg"/></li>
+</ul>
+
+<div className="lobby-button">
+  <NavButton
+  nextView={'InstructionsView'}
+  buttonTitle={'Start game'}
+  changeViewHandler={props.changeViewHandler}/>
+</div> */}

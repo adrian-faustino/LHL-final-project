@@ -1,0 +1,19 @@
+
+.app {
+  min-height: 100vh;
+  background:
+  linear-gradient(
+    rgba(0, 0, 0, 0.85), 
+    rgba(0, 0, 0, 0.85)
+  ),
+  url(./assets/background-v2.jpg);
+  animation: background_scroll 60s linear infinite;
+}
+
+@keyframes background_scroll{
+  0% {background-position: 50% 0;}
+  25% {background-position: 100% 50% ;}
+  50% {background-position: 50% 100%;}
+  75% {background-position: 0 50%;}
+  100% {background-position: 50% 0;}
+}

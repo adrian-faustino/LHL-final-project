@@ -1,0 +1,52 @@
+/* .main-container {
+  position: absolute;
+  top: 20%;
+  height: 60%;
+  width: 100%;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+} */
+
+.lobby-code-container {
+  position: absolute;
+  top: 25%;
+  width: 100%;
+ }
+ 
+.lobby-code-container h2 {
+  color: white;
+  margin: 0 3.0rem;
+}
+
+.lobby-code-container p {
+  color: white;
+  background-color: rgba(89, 115, 235, 0.60);
+  border-radius: 15px;
+  font-size: 2.0rem;
+  margin: 1.0rem 5.0rem;
+}
+
+.lobby-name-list {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  color: white;
+}
+
+.lobby-name-list li {
+  text-align: left;
+  margin: 0.5rem 2.0rem;
+  font-size: 1.2rem;;
+  padding: 0.25rem 0.5rem;
+  background-color: #5973EB;
+}
+
+.lobby-button {
+  position: absolute;
+  bottom: 10%;
+  width: 100%;
+} 

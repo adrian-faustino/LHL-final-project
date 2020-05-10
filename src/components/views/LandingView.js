@@ -1,28 +1,47 @@
 import React from 'react'
+import "./LandingView.css";
+
 
 // subcomponents
 import NavButton from '../NavButton'
+import { findRenderedComponentWithType } from 'react-dom/test-utils';
 
 export default function LandingView(props) {
+  
   return (
-    <div>
-      <h1 style={{color: "red", fontSize: "16px"}}>Find me at components/LandingView.js</h1>
+    <div className="main-container">
+      <h1 style={{color: "red", fontSize: "14px"}}>LandingView.js</h1>
+      <h1 className="title">Draw-mageddon!</h1>
 
-      <form>
-        <label htmlFor="username">Play as:</label>
-        <input type="text" id="username" placeholder="Your name"
+      <form className="name-form">
+        <input className="name-field" type="text" id="username" placeholder="Enter your name!"
         onChange={props.inputChangeHandler}/>
       </form>
 
-      <NavButton
-      nextView={'HostLobbyView'}
-      buttonTitle={'Create a lobby'}
-      changeViewHandler={props.changeViewHandler}/>
+      <div className="button-container">
+        <NavButton
+        nextView={'HostLobbyView'}
+        buttonTitle={'Create a lobby'}
+        changeViewHandler={props.changeViewHandler}/>
 
-      <NavButton
-      nextView={'GuestLobbyView'}
-      buttonTitle={'Join a lobby'}
-      changeViewHandler={props.changeViewHandler}/>
+        <NavButton
+        nextView={'GuestLobbyView'}
+        buttonTitle={'Join a lobby'}
+        changeViewHandler={props.changeViewHandler}/>
+      </div>
+
+      <footer>
+        <NavButton
+          nextView={''}
+          buttonTitle={'About'}
+          changeViewHandler={props.changeViewHandler}/>
+        
+        <NavButton
+        nextView={''}
+        buttonTitle={'?'}
+        changeViewHandler={props.changeViewHandler}/>
+      </footer>
+        
     </div>
   )
 }
