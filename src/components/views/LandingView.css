@@ -1,14 +1,14 @@
 .main-container {
   position: absolute;
-  top: 15%;
-  height: 70%;
+  top: 10%;
+  height: 90%;
   width: 100%;
 }
 
 .title {
   color: white;
   font-size: 2.0rem;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(89, 115, 235, 0.60);
   padding-top: 1.0rem;
   padding-bottom: 1.0rem;
   margin-left: 2.0rem;
@@ -16,42 +16,36 @@
   border-radius: 15px;
 }
 
-.button-container {
+.name-form {
   position: absolute;
-  bottom: 0;
+  top: 30%;
   width: 100%;
 }
 
-.name-form {
+.button-container {
   position: absolute;
-  bottom: 50%;
+  top: 45%;
   width: 100%;
 }
 
 .name-field {
   text-align: center;
+  width: 50%;
   line-height: 28px;
   border-radius: 15px;
   background-color: #5973EB;
+  color: white;
 }
 
 .name-field::placeholder {
   color: white;
 }
 
-.lobby-code-container {
- position: absolute;
- top: 35%;
- width: 100%;
-}
-
-.lobby-code-container h2 {
-  color: white;
-}
-
-.lobby-container {
-  border: solid blue 1px;
+footer {
   position: absolute;
-  top: 60%;
   width: 100%;
+  bottom: 2%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  /* justify-content: space-between; */
 }

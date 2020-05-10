@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import uuid from 'react-uuid'
-
+import "./HostLobbyView.css";
 
 // subcomponents
 import NavButton from '../NavButton'
@@ -55,18 +55,24 @@ export default function HostLobbyView(props) {
       <h1 className="title">{greeting}</h1>
       
       <div className="lobby-code-container">
-        <h2>Share this code to your friends</h2>
-        <p style={{color: "red"}}>{lobbyID}</p>
+        <h2>Share this code with your friends:</h2>
+        <p>{lobbyID}</p>
       </div>
       
-      <ul style={{color: "red"}} className="lobby-container">
+      <ul className="lobby-name-list">
         {playersInLobby}
-        <li>test name</li>
-        <li>test name</li>
-        <li>test name</li>
+        <li>player 2 <img
+          className=""
+          src="trash.png"
+          alt=""
+          onClick={""}
+          />
+        </li>
+        <li>player 3 <img src="trash.jpg"/></li>
+        <li>player 4 <img src="trash.jpg"/></li>
       </ul>
       
-      <div className="button-container">
+      <div className="lobby-button">
         <NavButton
         nextView={'InstructionsView'}
         buttonTitle={'Start game'}
