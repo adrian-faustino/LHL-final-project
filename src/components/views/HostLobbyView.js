@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import uuid from 'react-uuid'
 
 
-
 // subcomponents
 import NavButton from '../NavButton'
 import PlayerLobbyStatus from '../PlayerLobbyStatus';
@@ -50,19 +49,29 @@ export default function HostLobbyView(props) {
   const playersInLobby = playerList.map(player => <PlayerLobbyStatus key={uuid()} username={player.username}/>);
 
   return (
-    <div>
-      <h1>Find me at components/HostLobbyView.js</h1>
+    <div className="main-container">
+      <h1 style={{color: "red", fontSize: "14px"}}>HostLobbyView.js</h1>
 
-      <h1>{greeting}</h1>
-      <h2>Share this code to your friends</h2>
-      <p>{lobbyID}</p>
-
-      {playersInLobby}
-
-      <NavButton
-      nextView={'InstructionsView'}
-      buttonTitle={'Start game'}
-      changeViewHandler={props.changeViewHandler}/>
+      <h1 className="title">{greeting}</h1>
+      
+      <div className="lobby-code-container">
+        <h2>Share this code to your friends</h2>
+        <p style={{color: "red"}}>{lobbyID}</p>
+      </div>
+      
+      <ul style={{color: "red"}} className="lobby-container">
+        {playersInLobby}
+        <li>test name</li>
+        <li>test name</li>
+        <li>test name</li>
+      </ul>
+      
+      <div className="button-container">
+        <NavButton
+        nextView={'InstructionsView'}
+        buttonTitle={'Start game'}
+        changeViewHandler={props.changeViewHandler}/>
+      </div>
     </div>
   )
 }
