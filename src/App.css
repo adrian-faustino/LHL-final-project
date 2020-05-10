@@ -6,7 +6,7 @@
     rgba(0, 0, 0, 0.8), 
     rgba(0, 0, 0, 0.8)
   ),
-  url(./assets/background.jpg);
+  url(./assets/background-v2.jpg);
   animation: background_scroll 60s linear infinite;
 }
 

@@ -3,11 +3,13 @@ import "./LandingView.css";
 
 // subcomponents
 import NavButton from '../NavButton'
+import { findRenderedComponentWithType } from 'react-dom/test-utils';
 
 export default function LandingView(props) {
   
   return (
     <div className="main-container">
+      <h1 style={{color: "red", fontSize: "14px"}}>LandingView.js</h1>
       <h1 className="title">Draw-mageddon!</h1>
 
       <form className="name-form">
