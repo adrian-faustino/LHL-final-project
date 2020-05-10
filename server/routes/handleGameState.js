@@ -36,5 +36,4 @@ module.exports = function(client, db, io) {
     io.in(lobbyID).emit('changeView', data);
   });
 
-
 }

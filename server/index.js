@@ -18,6 +18,7 @@ mongoose.connect(DB_URI, {
   useCreateIndex: true, 
   useUnifiedTopology: true
   });
+mongoose.set('useFindAndModify', false);
 
 const connection = mongoose.connection;
 connection.once('open', () => {

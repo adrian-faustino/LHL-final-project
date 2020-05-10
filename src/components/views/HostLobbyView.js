@@ -11,46 +11,79 @@ import PlayerLobbyStatus from '../PlayerLobbyStatus';
 import util from '../../helpers/util'
 
 export default function HostLobbyView(props) {
-
-  const [lobbyID, setLobbyID] = useState('');
-  const [playerList, setPlayerList] = useState([]);
+  const { username, socket, changeViewHandler } = props;
 
 
-  // when this component mounts, we will generate a lobby ID
+  const [state, setState] = useState({
+    lobbyID: '',
+    players: [],
+    playerObj: null
+  });
+  const { lobbyID, players, playerObj } = state;
+
+
   useEffect(() => {
+    // establish lobbyID
     const lobbyID = util.generateLobbyID(6);
-    setLobbyID(lobbyID);
+    setState({...state, lobbyID});
 
+    // requests to DB
+    socket.emit('createLobby', { lobbyID }); 
+    socket.on('lobbyCreated', () => {
+      socket.emit('createPlayer', { username, coordinates: [] });
+      socket.on('playerCreated', playerObj => {
+        socket.emit('addToPlayers', { lobbyID, playerObj });
+        setState({...state, playerObj});
 
-    // ask server to add this lobby to list of lobbies
-    props.socket.emit('createLobby', lobbyID)
+        socket.on('playerAdded', lobbyObj => {
+          const { lobbyID, players, currentView } = lobbyObj;
 
-    // ...then join that lobby
-    const data = {lobbyID, username: props.username}
-    props.socket.emit('joinRoom', data);
+          socket.emit('joinLobby', { lobbyID });
+        });
 
-    // recieve list of players for rendering
-    props.socket.on('playersInLobby', data => setPlayerList(data));
+      });
+    });
 
-    return () => {
-      // when host component unmounts trigger a view change for all players
-      const data = {
-        lobbyID,
-        nextView: 'InstructionsView'
-      }
-      props.socket.emit('changeView', data);
+    // listeners
+    socket.on('userJoinLobby', () => {
+      socket.emit('findLobby', { lobbyID });
+      socket.on('lobbyFound', lobbyObj => {
+        const { players, lobbyID, currentView } = lobbyObj;
+        console.log('Updating players array with...', lobbyObj)
+        setState({...state, players});
+      });
+    });
 
-      // // also trigger emit to send number of players in lobby for skip button
-      // props.socket.emit('checkPlayerAmt', {lobbyID});
-    }
+    // socket.on('gameState', data => {
+    //   console.log('Received game state:', data)
+    //   const { lobbyID, players } = data;
+    //   setState({...state, players, lobbyID});
+    // });
+
+    // socket.on('changeView', data => {
+    //   const { nextView } = data;
+    //   changeViewHandler(nextView);
+    // });
+
+    // socket.on('playerObj', playerObj => {
+    //   setState({...state, playerObj});
+    //   socket.emit('addToPlayers', { lobbyID, playerObj });
+    //  });
+
   }, []);
 
-  // greeting logic
-  const username = props.username.trim() // *TODO: we need to sanitize the input before it's thrown into the db, not here.
-  const greeting = username.length === 0 ? 'Hello!' : `Hello, ${username}!`;
 
-  // map for rendering
-  const playersInLobby = playerList.map(player => <PlayerLobbyStatus key={uuid()} username={player.username}/>);
+  // event handlers
+  const onClickHandler = e => {
+    e.preventDefault();
+
+    socket.emit('changeView', { nextView: 'InstructionsView' });
+  }
+
+
+  // render logic
+  const greeting = username.trim().length === 0 ? 'Hello!' : `Hello, ${username}!`;
+  const playersList = players.map(player => <PlayerLobbyStatus key={uuid()} username={player}/>);
 
   return (
     <div>
@@ -60,8 +93,9 @@ export default function HostLobbyView(props) {
       <h2>Share this code to your friends</h2>
       <p>{lobbyID}</p>
 
-      {playersInLobby}
-
+      {playersList}
+      
+      <button onClick={e => onClickHandler(e)}>Start game</button>
       <NavButton
       nextView={'InstructionsView'}
       buttonTitle={'Start game'}

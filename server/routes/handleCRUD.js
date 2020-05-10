@@ -10,12 +10,16 @@ module.exports = function(client, db) {
 
     const newLobby = new Lobby({
       lobbyID,
-      players: []
+      players: [],
+      currentView: 'LandingView'
     })
 
     newLobby.save().then(() => {
-      console.log(`Successfully added ${lobbyID} to the DB.`);
-      client.emit('success', `Successfully added ${lobbyID} to the DB.`);
+      console.log(`Successfully added ${lobbyID} to the Lobby DB.`);
+      client.emit('success', `Successfully added ${lobbyID} to the Lobby DB.`);
+      
+      // emit to the host once lobby is created - await
+      client.emit('lobbyCreated');
     }).catch(err => {
       console.log(err);
       client.emit('err', err);
@@ -33,11 +37,13 @@ module.exports = function(client, db) {
     });
 
     newPlayer.save().then(() => {
-      console.log(`Successfully added ${username} to the DB.`);
-      client.emit('success', `Successfully added ${username} to the DB.`);
+      console.log(`Successfully added ${username} to the Player DB.`);
+      client.emit('success', `Successfully added ${username} to the Player DB.`);
+      client.emit('playerCreated', newPlayer);
     }).catch(err => {
       console.log(err);
       client.emit('err', err);
+    
     });
   });
 
@@ -54,7 +60,22 @@ module.exports = function(client, db) {
         client.emit('err', err);
       } else {
         console.log(`Successfully found lobby: ${lobbyID}`);
-        client.emit('gameState', lobbyObj);
+        client.emit('lobbyFound', lobbyObj);
+      }
+    });
+  });
+
+  /* Given '_id', return that player object from the DB */
+  client.on('findPlayer', data => {
+    const { _id } = data;
+
+    Player.findOne({_id}, (err, playerObj) => {
+      if(err) {
+        console.log(`Failed to find player: ${err}`);
+        client.emit('err', err);
+      } else {
+        console.log(`Successfully found player: ${playerObj}`);
+        // client.emit('playerObj', playerObj);
       }
     });
   });
@@ -64,17 +85,19 @@ module.exports = function(client, db) {
   
   /* Given 'lobbyID', add player to players array (players in lobby) */
   client.on('addToPlayers', data => {
-    const { lobbyID, players } = data;
+    const { lobbyID, playerObj } = data;
     const filter = { lobbyID };
-    const update = { players };
+    const update = { "$push": {  "players": playerObj }};
+    console.log('Server sends playerObj: ', playerObj)
 
-    Lobby.findOneAndUpdate(filter, update, { new: true }, (err, lobbyObj) => {
+    Lobby.findOneAndUpdate(filter, update, { "new": true, "upsert": true}, (err, lobbyObj) => {
       if(err) {
         console.log(err);
         client.emit('err', err);
       } else {
-        console.log(`Successfully updated game state.`);
-        client.emit('gameState', lobbyObj);
+        console.log(`Successfully updated game state.`, lobbyObj);
+        console.log('Server sends lobybyObj: ', lobbyObj)
+        client.emit('playerAdded', lobbyObj);
       }
     });
   })

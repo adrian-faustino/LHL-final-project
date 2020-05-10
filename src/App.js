@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
+import util from './helpers/util';
 
 // Socket
 import socketIOClient from 'socket.io-client';
-
 
 // View Components
 import DrawGameView from './components/views/DrawGameView';
@@ -30,7 +29,6 @@ function App() {
     view: 'LandingView',
     username: '',
     readyStatus: false,
-    lobbyID: '',
     socket: null
   });
 
@@ -40,16 +38,9 @@ function App() {
     // as client joins, set the socket
     setState({...state, socket});
 
-    // receive success messages from socket
-    socket.on('success', message => {
-      console.log(`Success! ${message}`)
-    });
-
-    // receive error messages from socket
-    socket.on('err', message => {
-      console.log(`Error! ${message}`)
-    });
-  }, [state.lobbyID]);
+    // listeners
+    util.errorListener(socket);
+  }, []);
 
 
   // <NavButton /> helper functions

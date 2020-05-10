@@ -7,14 +7,25 @@ import uuid from 'react-uuid'
 import PlayerLobbyStatus from '../PlayerLobbyStatus';
 
 export default function GuestLobbyView(props) {
+  const { socket, username, changeViewHandler } = props;
 
   const [state, setState] = useState({
     tempInput: '',
     lobbyID: '',
     host: '',
-    playerList: [],
+    players: [],
     error: ''
-  });
+  })
+  const { tempInput, lobbyID, host, players, error } = state;
+
+
+  useEffect(() => {
+    if(lobbyID) {
+      // once there is lobby, lets check db if this loby exist, get that obj and set all the things
+    }
+    
+  }, [lobbyID]);
+  // ==== rebuild
 
   useEffect(() => {
     // recieve list of players for rendering
@@ -48,7 +59,7 @@ export default function GuestLobbyView(props) {
 
   const onSubmitHandler = e => {
     e.preventDefault()
-    setState({...state, lobbyID: state.tempInput});
+    setState({...state, lobbyID: tempInput});
   }
 
   const onClickHandler = e => {
@@ -56,12 +67,9 @@ export default function GuestLobbyView(props) {
     
   }
 
-  // greeting logic
-  const username = props.username.trim()
-  const greeting = username.length === 0 ? 'Hello!' : `Hello, ${username}!`;
-
-  // map for rendering
-  const playersInLobby = state.playerList.map(player => <PlayerLobbyStatus key={uuid} username={player.username}/>);
+  // render logic
+  const greeting = username.trim().length === 0 ? 'Hello!' : `Hello, ${username}!`;
+  const playerList = players.map(player => <PlayerLobbyStatus key={uuid} username={player.username}/>);
 
   return (
     <div>
@@ -76,18 +84,15 @@ export default function GuestLobbyView(props) {
         onClick={e => onSubmitHandler(e)}>Join</button>
       </form>
 
-      {state.error && (
-        <div>{state.error}</div>
-      )}
+      {error && <div>{error}</div>}
 
       <h1>{greeting}</h1>
-      {state.host && <h2>Welcome to {state.host}'s lobby!</h2>}
-      <h3>Waiting for players to join...</h3>
-
-      {playersInLobby}
-
+      {state.host && 
+      <h2>Welcome to {state.host}'s lobby!</h2> &&
+      <h3>Waiting for players to join...</h3> &&
+      {playerList} &&
       <button
-      onClick={e => onClickHandler(e)}>{props.readyStatus ? 'Not ready' : 'Ready'}</button>
+      onClick={e => onClickHandler(e)}>{props.readyStatus ? 'Not ready' : 'Ready'}</button>}
     </div>
   )
 }
