@@ -104,8 +104,18 @@ export default function HostLobbyView(props) {
       </div>
 
       {playersList}
+      
+    
+      {/* Begin: Jason dummy code to style with */}
+      <ul className="lobby-name-list">
+        <li>player 2 <img src="trash.png"/></li>
+        <li>player 3 <img src="trash.jpg"/></li>
+        <li>player 4 <img src="trash.jpg"/></li>
+      </ul>
+      {/* End: Jason dummy code to style with */}
 
-      <button onClick={e => onClickHandler(e)}>Start game</button>
+
+      <button className="start-button" onClick={e => onClickHandler(e)}>Start game</button>
     </div>
   )
 }
@@ -114,22 +124,22 @@ export default function HostLobbyView(props) {
 
 
 // Jason code
-{/* <ul className="lobby-name-list">
-  {playersList}
-  <li>player 2 <img
-    className=""
-    src="trash.png"
-    alt=""
-    onClick={""}
-    />
-  </li>
-  <li>player 3 <img src="trash.jpg"/></li>
-  <li>player 4 <img src="trash.jpg"/></li>
-</ul>
+// <ul className="lobby-name-list">
+//   {playersList}
+//   <li>player 2 <img
+//     className=""
+//     src="trash.png"
+//     alt=""
+//     onClick={""}
+//     />
+//   </li>
+//   <li>player 3 <img src="trash.jpg"/></li>
+//   <li>player 4 <img src="trash.jpg"/></li>
+// </ul>
 
-<div className="lobby-button">
-  <NavButton
-  nextView={'InstructionsView'}
-  buttonTitle={'Start game'}
-  changeViewHandler={props.changeViewHandler}/>
-</div> */}
+// <div className="lobby-button">
+//   <NavButton
+//   nextView={'InstructionsView'}
+//   buttonTitle={'Start game'}
+//   changeViewHandler={props.changeViewHandler}/>
+// </div>

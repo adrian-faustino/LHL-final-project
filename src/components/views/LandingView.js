@@ -12,9 +12,10 @@ export default function LandingView(props) {
     <div className="main-container">
       <h1 style={{color: "red", fontSize: "14px"}}>LandingView.js</h1>
       <h1 className="title">Draw-mageddon!</h1>
+      
 
       <form className="name-form">
-        <input className="name-field" type="text" id="username" placeholder="Enter your name!"
+        <input className="name-field" type="text" id="username" placeholder="Enter your name"
         onChange={props.inputChangeHandler}/>
       </form>
 
@@ -30,16 +31,9 @@ export default function LandingView(props) {
         changeViewHandler={props.changeViewHandler}/>
       </div>
 
-      <footer>
-        <NavButton
-          nextView={''}
-          buttonTitle={'About'}
-          changeViewHandler={props.changeViewHandler}/>
-        
-        <NavButton
-        nextView={''}
-        buttonTitle={'?'}
-        changeViewHandler={props.changeViewHandler}/>
+      <footer className="about-container">
+        <button className="about-instruct-buttons">About</button>
+        <button className="about-instruct-buttons">?</button>
       </footer>
         
     </div>
