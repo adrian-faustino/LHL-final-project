@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import uuid from 'react-uuid'
+import uuid from 'react-uuid';
 
+// Helpers
+import util from '../../helpers/util';
 
 
 // subcomponents
@@ -70,7 +72,7 @@ export default function GuestLobbyView(props) {
 
   // render logic
   const greeting = username.trim().length === 0 ? 'Hello!' : `Hello, ${username}!`;
-  const playerList = players.map(player => <PlayerLobbyStatus key={uuid} username={player}/>);
+  const playerList = players.map(player => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={player}/>);
 
   return (
     <div>
