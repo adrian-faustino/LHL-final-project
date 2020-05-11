@@ -31,7 +31,7 @@ export default function GuestLobbyView(props) {
         socket.emit('addToPlayers', { lobbyID, playerObj });
         socket.on('playerAdded', lobbyObj => {
           const { lobbyID, lobbyobj, players } = lobbyObj;
-          
+
           socket.emit('joinLobby', { lobbyID });
         });
       });
@@ -86,13 +86,13 @@ export default function GuestLobbyView(props) {
       </form>
 
       {error && <div>{error}</div>}
-      <div>HOSTMAN: {host}</div>
 
       <h1>{greeting}</h1>
-      {host && 
-      <h2>Welcome to {host}'s lobby!</h2> &&
-      <h3>Waiting for players to join...</h3> &&
-      {playerList} &&
+      {host && <h2>Welcome to {host}'s lobby!</h2>}
+      {playerList}
+    
+      
+      {host && <h3>Waiting for players to join...</h3> &&
       <button
       onClick={e => onClickHandler(e)}>{props.readyStatus ? 'Not ready' : 'Ready'}</button>}
     </div>
