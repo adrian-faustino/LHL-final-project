@@ -20,41 +20,34 @@ export default function GuestLobbyView(props) {
   })
   const { tempInput, lobbyID, host, players, error, playerObj } = state;
 
-
   useEffect(() => {
-    // when user joins,, created
-    socket.emit('createPlayer', { username, coordinate: [] });
-    socket.on('playerCreated', playerObj => {
-      setState({...state, playerObj});
-    });
-
-    // listeners
     socket.on('err', error => setState({...state, error}));
-    socket.on('playerAdded', lobbyObj => {
-      const { lobbyID, players, currentView} = lobbyObj;
-      const host = players[0];
-      setState({...state, lobbyID, players, host});
-    });
-    socket.on('userJoinLobby', () => {
-      socket.emit('findLobby', { lobbyID });
-      socket.on('lobbyFound', lobbyObj => {
-        const { players, lobbyID, currentView } = lobbyObj;
 
-        console.log('Updating players array with...', lobbyObj);
-        setState({...state, players});
-      })
-    });
-  }, []);
+    if (lobbyID) {
+      socket.emit('createPlayer', { username, coordinate: [] });
+      socket.on('playerCreated', playerObj => {
+        setState({...state, playerObj});
 
+        socket.emit('addToPlayers', { lobbyID, playerObj });
+        socket.on('playerAdded', lobbyObj => {
+          const { lobbyID, lobbyobj, players } = lobbyObj;
+          
+          socket.emit('joinLobby', { lobbyID });
+        });
+      });
 
-  useEffect(() => {
-    if(lobbyID) {
-      console.log('lobbyID was updated.');
-      socket.emit('addToPlayers', { lobbyID, playerObj });
-      socket.on('playerAdded', lobbyObj => {
-        const { lobbyID, lobbyobj, players } = lobbyObj;
-
-        socket.emit('joinLobby', { lobbyID });
+      socket.on('userJoinLobby', () => {
+        console.log(`A user has joined the lobby: ${lobbyID}`);
+        socket.emit('findLobby', { lobbyID });
+        socket.on('lobbyFound', lobbyObj => {
+          const { players, lobbyID, currentView } = lobbyObj;
+  
+          console.log('Updating players array with...', lobbyObj);
+          const host = players[0];
+          
+          console.log('Setting host...', host);
+          setState({...state, players, host});
+        })
       });
     }
   }, [lobbyID]);
@@ -66,7 +59,7 @@ export default function GuestLobbyView(props) {
   // join room logic
   const onSubmitHandler = e => {
     e.preventDefault()
-    console.log('Joining room...')
+    console.log(`Joining room: ${tempInput}`)
     setState({...state, lobbyID: tempInput});
   }
 
@@ -93,6 +86,7 @@ export default function GuestLobbyView(props) {
       </form>
 
       {error && <div>{error}</div>}
+      <div>HOSTMAN: {host}</div>
 
       <h1>{greeting}</h1>
       {host && 

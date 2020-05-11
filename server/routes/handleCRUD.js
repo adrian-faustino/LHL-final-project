@@ -58,6 +58,9 @@ module.exports = function(client, db) {
       if(err) {
         console.log(`Failed to find lobby: ${err}`);
         client.emit('err', err);
+      } else if (!lobbyObj) {
+        console.log('Could not find lobby.');
+        client.emit('err', 'Could not find lobby.');
       } else {
         console.log(`Successfully found lobby: ${lobbyID}`);
         client.emit('lobbyFound', lobbyObj);
@@ -102,7 +105,7 @@ module.exports = function(client, db) {
         console.log(err);
         client.emit('err', err);
       } else if (!lobbyObj) {
-        console.log('Could not find lobby.');
+        console.log('Update error => Could not find lobby.');
         client.emit('err', `That lobby doesn't exist!`);
       } else {
         console.log(`Successfully updated game state.`, lobbyObj);

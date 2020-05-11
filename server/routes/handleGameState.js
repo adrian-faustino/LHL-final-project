@@ -9,6 +9,8 @@ module.exports = function(client, db, io) {
   client.on('joinLobby', data => {
     const { lobbyID } = data;
 
+    console.log(`Attempting to join lobby ${lobbyID}...`);
+
     Lobby.findOne({ lobbyID }, (err, lobbyObj) => {
       if(err) {
         console.log(err);
