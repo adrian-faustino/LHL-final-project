@@ -16,9 +16,10 @@ export default function HostLobbyView(props) {
   const [state, setState] = useState({
     lobbyID: '',
     players: [],
-    playerObj: null
+    playerObj: null,
+    lobbyObj: null
   });
-  const { lobbyID, players, playerObj } = state;
+  const { lobbyID, players, playerObj, lobbyObj } = state;
 
 
   useEffect(() => {
@@ -38,6 +39,7 @@ export default function HostLobbyView(props) {
           const { lobbyID, players, currentView } = lobbyObj;
           
           socket.emit('joinLobby', { lobbyID });
+          socket.on('playerAdd')
         });
 
       });
@@ -49,7 +51,7 @@ export default function HostLobbyView(props) {
       socket.on('lobbyFound', lobbyObj => {
         const { players, lobbyID, currentView } = lobbyObj;
         console.log('Updating players array with...', lobbyObj)
-        setState({...state, lobbyID, players});
+        setState(prev => ({...prev, lobbyID, players, lobbyObj}));
       });
     });
 
@@ -69,6 +71,12 @@ export default function HostLobbyView(props) {
     //   socket.emit('addToPlayers', { lobbyID, playerObj });
     //  });
 
+    return () => {
+      console.log('Host unmounted');
+      console.log('lobbyID =>', lobbyID)
+      console.log('lobbyObj =>', lobbyObj);
+      socket.emit('lobbyID', { lobbyID });
+    }
   }, []);
 
 

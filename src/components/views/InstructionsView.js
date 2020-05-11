@@ -5,42 +5,25 @@ import NavButton from '../NavButton'
 import MainImage from '../MainImage'
 
 export default function InstructionsView(props) {
+  const { username, socket, changeViewHandler, lobbyID } = props;
 
   const [state, setState] = useState({
     playerAmt: null,
     skipOK: false,
     lobbyID: ''
   });
+ 
 
   useEffect(() => {
-    // on mount, get lobbyID
-    props.socket.on('receiveView', data => {
-      const { lobbyID } = data;
-      console.log('me?')
-      setState({...state, lobbyID});
-    });
-
-    // ...then req for number of players
-    props.socket.emit('checkPlayerAmt', {lobbyID: state.lobbyID});
-
-
-    props.socket.on('receivePlayerAmt', data => {
-      console.log('receive')
-      const { playerAmt, lobbyID } = data
-      setState({...state, playerAmt, lobbyID});
-    });
+    console.log('Mounted lobby ', lobbyID);
   });
 
   // helpers
   const onClickHandler = e => {
     e.preventDefault()
 
-    // emit ready state to everyone
-    const data = {
-      username: props.username,
-      lobbyID: state.lobbyID
-    }
-    props.socket.emit('skipOK', data)
+    console.log('Ready button clicked.');
+    socket.emit('readyOK', { username }); // lobbyID here
   }
 
   return (

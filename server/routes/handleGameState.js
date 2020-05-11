@@ -30,6 +30,9 @@ module.exports = function(client, db, io) {
     });
   });
 
+
+  // ===> VIEW CHANGE HANDLERS
+
   /* Given 'lobbyID', trigger view changes for all players in a lobby */
   /* ==> Inteded this for host start button. Once clicked, this will be called */
   client.on('changeView', data => {
@@ -38,5 +41,29 @@ module.exports = function(client, db, io) {
     console.log(`Emitting changeView to everyone in lobby ${lobbyID} to view: ${nextView}`);
     io.in(lobbyID).emit('changeView', data);
   });
+  
+  client.on('lobbyID', data => {
+    const { lobbyID } = data;
 
-}
+    console.log(`To all => lobbyID: ${lobbyID}`);
+    io.in(lobbyID).emit('lobbyID', data);
+  });
+
+  
+  // ===> INSTRUCTIONS VIEW
+
+  /* Given 'username' add user to array of ready players */
+  const readyLobbies = {
+    'exampleLobbyID' : {
+      readyLength: ['user1', 'user2'].length,
+      readyUsers: ['tom', 'adrian']
+    }
+  };
+
+  client.on('readyOK', data => {
+    const { username } = data;
+
+
+  });
+
+};

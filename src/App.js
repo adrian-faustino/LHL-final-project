@@ -30,7 +30,8 @@ function App() {
     view: 'LandingView',
     username: '',
     readyStatus: false,
-    socket: null
+    socket: null,
+    lobbyID: null
   });
 
   // Socket
@@ -41,6 +42,11 @@ function App() {
 
     // listeners
     util.errorListener(socket);
+    socket.on('lobbyID', data => {
+      const { lobbyID } = data;
+      console.log(`Setting lobbyID to ${lobbyID} in App.js`)
+      setState(prev => ({...prev, lobbyID}));
+    })
   }, []);
 
 
@@ -87,6 +93,7 @@ function App() {
 
       {state.view === 'InstructionsView' &&
       <InstructionsView
+      lobbyID={state.lobbyID}
       username={state.username}
       socket={state.socket}
       changeViewHandler={changeViewHandler}/>}
