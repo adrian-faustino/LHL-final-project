@@ -49,6 +49,16 @@ module.exports = function(client, db, io) {
     io.in(lobbyID).emit('lobbyID', data);
   });
 
+  // InstructionsView ==> DrawGameView
+  const VIEW_TIME = 5000; // time in MS
+  client.on('viewTimeout', data => {
+    const { lobbyID } = data;
+    const nextView = 'DrawGameView'
+    setTimeout(() => {
+      io.in(lobbyID).emit('changeView', { nextView });
+    }, VIEW_TIME);
+  })
+
   
   // ===> INSTRUCTIONS VIEW
 

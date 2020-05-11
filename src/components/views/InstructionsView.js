@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 // subcomponents
 import NavButton from '../NavButton'
@@ -7,16 +7,19 @@ import MainImage from '../MainImage'
 export default function InstructionsView(props) {
   const { username, socket, changeViewHandler, lobbyID } = props;
 
-  const [state, setState] = useState({
-    playerAmt: null,
-    skipOK: false,
-    lobbyID: ''
-  });
- 
 
   useEffect(() => {
-    console.log('Mounted lobby ', lobbyID);
-  });
+    if(lobbyID) {
+      console.log('Mounted lobby ', lobbyID);
+      socket.emit('viewTimeout', { lobbyID });
+  
+      socket.on('changeView', data => {
+        const { nextView } = data;
+        changeViewHandler(nextView);
+      });
+    }
+  }, [lobbyID]);
+
 
   // helpers
   const onClickHandler = e => {
@@ -36,8 +39,8 @@ export default function InstructionsView(props) {
 
       <p>You will draw this section of the image. You will have 3 minutes to draw!</p>
 
-      {state.playerAmt && <span>Players required to skip: {state.playerAmt}</span>}
-      <button onClick={e => onClickHandler(e)}>Ready!</button>
+      {/* {state.playerAmt && <span>Players required to skip: {state.playerAmt}</span>}
+      <button onClick={e => onClickHandler(e)}>Ready!</button> */}
       {/* <NavButton
       nextView={'DrawGameView'}
       buttonTitle={'Skip'}

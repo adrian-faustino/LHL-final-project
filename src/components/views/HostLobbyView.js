@@ -74,7 +74,6 @@ export default function HostLobbyView(props) {
     return () => {
       console.log('Host unmounted');
       console.log('lobbyID =>', lobbyID)
-      console.log('lobbyObj =>', lobbyObj);
       socket.emit('lobbyID', { lobbyID });
     }
   }, []);
@@ -91,6 +90,7 @@ export default function HostLobbyView(props) {
   // render logic
   const greeting = username.trim().length === 0 ? 'Hello!' : `Hello, ${username}!`;
   const playersList = players.map(player => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={player}/>);
+
 
   return (
     <div className="main-container">
