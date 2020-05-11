@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './DrawGameView.css'
 import draw from '../../helpers/draw';
 
@@ -8,11 +8,23 @@ import draw from '../../helpers/draw';
 import NavButton from '../NavButton'
 
 export default function DrawGameView(props) {
-  
+
+  const [state, setState] = useState({
+    coordinates: {
+      x: null,
+      y: null,
+      color: null,
+      lineSize: null
+    },
+    drawing: false
+  });
+  const { coordinates, drawing } = state;
+  const { x, y, color, lineSize } = coordinates;
+
   // draw helpers
   const { onMouseDownHandler,
           onMouseUpHandler,
-          onChangeHandler } = draw;
+          onMouseMoveHandler } = draw;
   // constants
 
 
@@ -29,10 +41,13 @@ export default function DrawGameView(props) {
       <h1>Find me at components/DrawGameView.js</h1>
 
       <canvas
-      onMouseDown={e => onMouseDownHandler(e)}
-      onMouseUp={e => onMouseUpHandler(e)}
-      onChange={e => onChangeHandler(e)}
+      onMouseDown={e => onMouseDownHandler(e, state, setState)}
+      onMouseUp={e => onMouseUpHandler(e, state, setState)}
+      onMouseMove={e => onMouseMoveHandler(e, state, setState)}
       id={"canvas"}/>
+
+      <h4>x: {x}</h4>
+      <h4>y: {y}</h4>
 
       <NavButton
       nextView={'ResultsView'}
