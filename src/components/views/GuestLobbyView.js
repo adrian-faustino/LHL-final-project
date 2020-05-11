@@ -51,6 +51,11 @@ export default function GuestLobbyView(props) {
           setState({...state, players, host});
         })
       });
+
+      socket.on('changeView', data => {
+        const { nextView } = data;
+        changeViewHandler(nextView);
+      });
     }
   }, [lobbyID]);
 
