@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import './DrawGameView.css'
-import draw from '../../helpers/draw';
+import drawHelpers from '../../helpers/drawHelpers';
 
 // Notes: We will remove the NavButton component later and replace it with a socket emit so it automatically moves to the next page for all the players
 
@@ -8,7 +8,6 @@ import draw from '../../helpers/draw';
 import NavButton from '../NavButton'
 
 export default function DrawGameView(props) {
-
   const [state, setState] = useState({
     coordinates: [{
       x: null,
@@ -17,15 +16,22 @@ export default function DrawGameView(props) {
       lineSize: null
     }],
     drawing: false,
-    currentColor: 'black',
-    currentLineSize: '5'
+    currentColor: 'blue',
+    currentLineSize: 5
   });
+
   const { coordinates, drawing, currentColor, currentLineSize } = state;
 
-  // draw helpers
   const { onMouseDownHandler,
-          onMouseUpHandler,
-          onMouseMoveHandler } = draw;
+    onMouseUpHandler,
+    onMouseMoveHandler } = drawHelpers;
+
+  const canvasRef = useRef(null);
+  // rebuild
+
+
+
+
   // constants
 
 
@@ -38,11 +44,11 @@ export default function DrawGameView(props) {
 
 
   return (
-
-    <div>
+    <div className="no-animaion">
       <h1>Find me at components/DrawGameView.js</h1>
 
       <canvas
+      ref={canvasRef}
       onMouseDown={e => onMouseDownHandler(e, state, setState)}
       onMouseUp={e => onMouseUpHandler(e, state, setState)}
       onMouseMove={e => onMouseMoveHandler(e, state, setState)}
