@@ -1,11 +1,11 @@
-.main-container {
+.GuestLobbyView__container {
   position: absolute;
   top: 10vh;
   height: 90vh;
   width: 100vw;
 }
 
-.title {
+.GuestLobbyView__container--title {
   color: white;
   font-size: 2.0rem;
   padding-top: 1.5rem;
@@ -16,40 +16,96 @@
   background: radial-gradient(#1638D3, #5973EB);
 }
 
-.id-form {
+.GuestLobbyView__container--IdField {
   position: absolute;
-  top: 30%;
-  width: 100%;
+  top: 20vh;
+  width: 100vw;
+ }
+
+ .GuestLobbyView__container--IdField h2 {
+  color: white;
+  margin: 0 3.0rem;
 }
 
-.id-field {
+.GuestLobbyView__container--IdField form {
+  position: absolute;
+  top: 20vh;
+  width: 100vw;
+}
+
+.GuestLobbyView__form--codeInput {
   text-align: center;
-  width: 50%;
-  line-height: 28px;
+  width: 50vw;
+  line-height: 48px;
   border-radius: 15px;
   background-color: #0E289E;
   color: white;
 }
 
-.id-field::placeholder {
+.GuestLobbyView__form--codeInput::placeholder {
   color: white;
 }
 
-/* .lobby-code-container {
+.GuestLobbyView__form--btn {
+  display: block;
+  margin: 0 auto;
+  background: radial-gradient(#1638D3, #5973EB);
+  width: 50vw;
+  margin-top: 2.0rem;
+  padding-top: 1.0rem;
+  padding-bottom: 1.0rem;
+  border-radius: 15px;
+  color: white;
+}
+
+.GuestLobbyView__form--btn:hover {
+  background: radial-gradient(#5973EB, #1638D3);
+  color: black
+}
+
+.GuestLobbyView__namesList--container {
   position: absolute;
-  top: 25%;
+  top: 35vh;
+  height: 50vh;
   width: 100%;
- }
- 
-.lobby-code-container h2 {
+}
+
+.GuestLobbyView__namesList--message {
   color: white;
   margin: 0 3.0rem;
+  padding-bottom: 2.0rem;
 }
 
-.lobby-code-container p {
+.GuestLobbyView__namesList {
+  width: 100vw;
   color: white;
-  background-color: rgba(89, 115, 235, 0.60);
+}
+
+.GuestLobbyView__namesList li {
+  text-align: left;
+  margin: 0.5rem 2.0rem;
+  font-size: 1.2rem;;
+  padding: 0.25rem 0.5rem;
+  background-color: #0E289E;
+}
+
+.GuestLobbyView__btn--cancel {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  bottom: 10vh;
+  width: 50vw;
+  background: radial-gradient(#1638D3, #5973EB);
+  padding-top: 1.0rem;
+  padding-bottom: 1.0rem;
   border-radius: 15px;
-  font-size: 2.0rem;
-  margin: 1.0rem 5.0rem;
-} */
+  color: white;
+}
+
+.GuestLobbyView__btn--cancel:hover {
+  background: radial-gradient(#5973EB, #1638D3);
+  color: black
+}
