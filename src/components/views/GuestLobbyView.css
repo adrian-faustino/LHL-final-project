@@ -1,0 +1,55 @@
+.main-container {
+  position: absolute;
+  top: 10vh;
+  height: 90vh;
+  width: 100vw;
+}
+
+.title {
+  color: white;
+  font-size: 2.0rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-left: 2.0rem;
+  margin-right: 2.0rem;
+  border-radius: 15px;
+  background: radial-gradient(#1638D3, #5973EB);
+}
+
+.id-form {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+}
+
+.id-field {
+  text-align: center;
+  width: 50%;
+  line-height: 28px;
+  border-radius: 15px;
+  background-color: #0E289E;
+  color: white;
+}
+
+.id-field::placeholder {
+  color: white;
+}
+
+/* .lobby-code-container {
+  position: absolute;
+  top: 25%;
+  width: 100%;
+ }
+ 
+.lobby-code-container h2 {
+  color: white;
+  margin: 0 3.0rem;
+}
+
+.lobby-code-container p {
+  color: white;
+  background-color: rgba(89, 115, 235, 0.60);
+  border-radius: 15px;
+  font-size: 2.0rem;
+  margin: 1.0rem 5.0rem;
+} */
