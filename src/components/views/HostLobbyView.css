@@ -1,19 +1,24 @@
-/* .main-container {
+.main-container {
   position: absolute;
-  top: 20%;
-  height: 60%;
-  width: 100%;
+  top: 10vh;
+  height: 90vh;
+  width: 100vw;
 }
 
-.button-container {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-} */
+.title {
+  color: white;
+  font-size: 2.0rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-left: 2.0rem;
+  margin-right: 2.0rem;
+  border-radius: 15px;
+  background: radial-gradient(#1638D3, #5973EB);
+}
 
 .lobby-code-container {
   position: absolute;
-  top: 25%;
+  top: 25vh;
   width: 100%;
  }
  
@@ -24,7 +29,7 @@
 
 .lobby-code-container p {
   color: white;
-  background-color: rgba(89, 115, 235, 0.60);
+  background-color: #0E289E;
   border-radius: 15px;
   font-size: 2.0rem;
   margin: 1.0rem 5.0rem;
@@ -32,7 +37,7 @@
 
 .lobby-name-list {
   position: absolute;
-  top: 50%;
+  top: 45vh;
   width: 100%;
   color: white;
 }
@@ -42,11 +47,26 @@
   margin: 0.5rem 2.0rem;
   font-size: 1.2rem;;
   padding: 0.25rem 0.5rem;
-  background-color: #5973EB;
+  background-color: #0E289E;
 }
 
-.lobby-button {
+.start-button {
   position: absolute;
-  bottom: 10%;
-  width: 100%;
-} 
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  bottom: 10vh;
+  width: 50vw;
+  background: radial-gradient(#1638D3, #5973EB);
+  padding-top: 1.0rem;
+  padding-bottom: 1.0rem;
+  border-radius: 15px;
+  color: white;
+}
+
+.start-button:hover {
+  background: radial-gradient(#5973EB, #1638D3);
+  color: black
+}

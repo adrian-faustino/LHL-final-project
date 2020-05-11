@@ -1,39 +1,40 @@
 .main-container {
   position: absolute;
-  top: 10%;
-  height: 90%;
-  width: 100%;
+  top: 10vh;
+  height: 90vh;
+  width: 100vw;
 }
 
 .title {
   color: white;
   font-size: 2.0rem;
-  background-color: rgba(89, 115, 235, 0.60);
-  padding-top: 1.0rem;
-  padding-bottom: 1.0rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   margin-left: 2.0rem;
   margin-right: 2.0rem;
   border-radius: 15px;
+  background: radial-gradient(#1638D3, #5973EB);
 }
 
 .name-form {
   position: absolute;
-  top: 30%;
-  width: 100%;
+  top: 30vh;
+  width: 100vw;
 }
 
 .button-container {
   position: absolute;
-  top: 45%;
-  width: 100%;
+  top: 45vh;
+  width: 100vw;
 }
 
 .name-field {
   text-align: center;
-  width: 50%;
-  line-height: 28px;
+  width: 50vw;
+  line-height: 48px;
   border-radius: 15px;
-  background-color: #5973EB;
+  background-color: #0E289E;
+  /* background: radial-gradient(#1638D3, #5973EB); */
   color: white;
 }
 
@@ -41,11 +42,26 @@
   color: white;
 }
 
-footer {
+.about-container {
   position: absolute;
-  width: 100%;
-  bottom: 2%;
+  width: 100vw;
+  bottom: 2vh;
   display: grid;
-  grid-template-columns: 50% 50%;
-  /* justify-content: space-between; */
+  grid-template-columns: 50vw 50vw;
+  justify-items: center;
+}
+
+.about-instruct-buttons {
+  background: radial-gradient(#1638D3, #5973EB);
+  width: 50%;
+  margin-top: 2.0rem;
+  padding-top: 1.0rem;
+  padding-bottom: 1.0rem;
+  border-radius: 15px;
+  color: white;
+}
+
+.about-instruct-buttons:hover {
+  background: radial-gradient(#5973EB, #1638D3);
+  color: black
 }

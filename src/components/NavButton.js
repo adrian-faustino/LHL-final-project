@@ -12,26 +12,12 @@ export default function NavButton(props) {
     props.changeViewHandler(props.nextView)
   }
 
-  // const buttonClass = classNames({
-  //   "btn": true,
-  //   "btn-success": true
-  // })
-
   return (
     <div>
       <button
-      className="button"
+      className="nav-button"
       onClick={e => onClickHandler(e)}
       >{props.buttonTitle}</button>
     </div>
   )
 }
-
-
-
-
-//   let buttonClass = classNames({
-//      "button": true,
-//      "button--confirm": props.confirm,
-//      "button--danger": props.danger
-//   });
