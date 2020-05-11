@@ -27,7 +27,7 @@ function App() {
   * playerType: "HOST" or "GUEST"
   */
   const [state, setState] = useState({
-    view: 'LandingView',
+    view: 'DrawGameView',
     username: '',
     readyStatus: false,
     socket: null,
