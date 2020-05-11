@@ -10,16 +10,17 @@ import NavButton from '../NavButton'
 export default function DrawGameView(props) {
 
   const [state, setState] = useState({
-    coordinates: {
+    coordinates: [{
       x: null,
       y: null,
       color: null,
       lineSize: null
-    },
-    drawing: false
+    }],
+    drawing: false,
+    currentColor: 'black',
+    currentLineSize: '5'
   });
-  const { coordinates, drawing } = state;
-  const { x, y, color, lineSize } = coordinates;
+  const { coordinates, drawing, currentColor, currentLineSize } = state;
 
   // draw helpers
   const { onMouseDownHandler,
@@ -32,6 +33,7 @@ export default function DrawGameView(props) {
   const CANV_WIDTH = 800;
   const CANV_BG_COLOR = 'grey';
 
+  console.log('coordinates:', coordinates);
 
 
 
@@ -46,8 +48,6 @@ export default function DrawGameView(props) {
       onMouseMove={e => onMouseMoveHandler(e, state, setState)}
       id={"canvas"}/>
 
-      <h4>x: {x}</h4>
-      <h4>y: {y}</h4>
 
       <NavButton
       nextView={'ResultsView'}

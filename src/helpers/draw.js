@@ -17,11 +17,9 @@ const onMouseUpHandler = (e, state, setState) => {
 
 
 const onMouseMoveHandler = (e, state, setState) => {
-  const { drawing, coordinates } = state;
+  const { coordinates, drawing, currentColor, currentLineSize } = state;
 
   if(drawing) {
-    console.log('drawing...')
-    
     const maxWidth = e.target.offsetWidth;
     const maxHeight = e.target.offsetHeight;
     let x = e.clientX;
@@ -30,14 +28,18 @@ const onMouseMoveHandler = (e, state, setState) => {
     // percentage relative to screen
     x = x / maxWidth;
     y = y / maxHeight;
-    const coordinates = {
+    const color = currentColor;
+    const lineSize = currentLineSize;
+
+
+    const coordinate = {
       x,
-      y
+      y,
+      color,
+      lineSize
     }
   
-    console.log('Mouse drag:', e.clientX, e.clientY);
-    console.log('Percent', x, y);
-    setState({...state, coordinates}); 
+    setState({...state, coordinates: [...coordinates, coordinate]}); 
   }
 
 };
