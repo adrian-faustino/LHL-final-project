@@ -1,11 +1,11 @@
-.main-container {
+.LandingView__container {
   position: absolute;
   top: 10vh;
   height: 90vh;
   width: 100vw;
 }
 
-.title {
+.LandingView__container--title {
   color: white;
   font-size: 2.0rem;
   padding-top: 1.5rem;
@@ -16,19 +16,13 @@
   background: radial-gradient(#1638D3, #5973EB);
 }
 
-.name-form {
+.LandingView__container--nameForm {
   position: absolute;
   top: 30vh;
   width: 100vw;
 }
 
-.button-container {
-  position: absolute;
-  top: 45vh;
-  width: 100vw;
-}
-
-.name-field {
+.LandingView__form--nameField {
   text-align: center;
   width: 50vw;
   line-height: 48px;
@@ -38,11 +32,17 @@
   color: white;
 }
 
-.name-field::placeholder {
+.LandingView__form--nameField::placeholder {
   color: white;
 }
 
-.about-container {
+.LandingView__btnContainer {
+  position: absolute;
+  top: 45vh;
+  width: 100vw;
+}
+
+.LandingView__about--container {
   position: absolute;
   width: 100vw;
   bottom: 2vh;
@@ -51,7 +51,7 @@
   justify-items: center;
 }
 
-.about-instruct-buttons {
+.LandingView__about--button {
   background: radial-gradient(#1638D3, #5973EB);
   width: 50%;
   margin-top: 2.0rem;
@@ -61,7 +61,7 @@
   color: white;
 }
 
-.about-instruct-buttons:hover {
+.LandingView__about--button:hover {
   background: radial-gradient(#5973EB, #1638D3);
   color: black
 }

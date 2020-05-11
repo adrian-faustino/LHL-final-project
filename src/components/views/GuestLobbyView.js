@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import uuid from 'react-uuid';
 import "./GuestLobbyView.css";
 
-
 // Helpers
 import util from '../../helpers/util';
 
@@ -82,51 +81,85 @@ export default function GuestLobbyView(props) {
   const playerList = players.map(player => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={player}/>);
 
   return (
-    <div className="main-container">
+    <div className="GuestLobbyView__container">
       <h1 style={{color: "red", fontSize: "14px"}}>GuestLobbyView.js</h1>
-      <h1 className="title">{greeting}</h1>
+      <h1 className="GuestLobbyView__container--title">{greeting}</h1>
 
-      <form className="id-form">
-        <input
-        className="id-field"
-        onChange={onChangeHandler}
-        placeholder="Enter Lobby ID"/>
-        <button
-        type="submit"
-        onClick={e => onSubmitHandler(e)}>Join</button>
-      </form>
+      <div className="GuestLobbyView__container--IdField">
+        {/* Begin: Jason dummy code to style with. Delete when done. */}
+        {true && <h2>Welcome to "host's" lobby!</h2>}
+        {/* End: Jason dummy code to style with. Delete when done. */}
+          {/* Begin: Original hard code. Use this but replace "false" with "host". */}
+          {false && <h2>Welcome to {host}'s lobby!</h2>}
+          {/* End: Original hard code. Use this. */}
+        
+        {/* Begin: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
+        { false &&
+          <form>
+            <input
+              className="GuestLobbyView__form--codeInput"
+              onChange={onChangeHandler}
+              placeholder="Enter Lobby ID"
+            />
+            <button
+              className="GuestLobbyView__form--btn"
+              type="submit"
+              onClick={e => onSubmitHandler(e)}
+              >Submit ID
+            </button>
+          </form>
+        }
+        {/* End: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
+      </div>
 
-      {error && <div>{error}</div>}
+      <div className="GuestLobbyView__namesList--container">
+        {/* Begin: Jason dummy code to style with. Delete when done. */}
+        {true && <h3 className="GuestLobbyView__namesList--message">Please wait for other players to join...</h3>}
+        {/* End: Jason dummy code to style with. Delete when done. */}
+        
+        {/* Begin: Original hard code. Use this but replace "false" with "host". */}
+        {false && <h3>Please wait for other players to join...</h3> && <button
+          onClick={e => onClickHandler(e)}
+          >{props.readyStatus ? 'Not ready' : 'Ready'}
+          </button>
+        }
+        {/* End: Original hard code. Use this. */}
 
+        {/* Begin: Jason dummy code to style with. Delete when done. */}
+        { true &&
+          <ul className="GuestLobbyView__namesList">
+            <li>player 2</li>
+            <li>player 3</li>
+            <li>player 4</li>
+          </ul>}
+        {/* End: Jason dummy code to style with. Delete when done. */}
+
+
+        {/* -------NOTE!!!--------- */}
+        {/* In HostLobbyView there is the variable "playersList" */}
+        {/* and in GuestLobbyView there is the variable "playerList". */}
+        {/* It this correct? */}
+
+
+        {/* Begin: Jason dummy code to style with. Delete "{ false && " and corresponding closing tag. */}
+        {false && {playerList}}
+        {/* End: Jason dummy code to style with. Delete "{ false && " and corresponding closing tag. */}
+      </div>
       
-      {host && <h2>Welcome to {host}'s lobby!</h2>}
-      {playerList}
-    
-      
-      {host && <h3>Waiting for players to join...</h3> &&
       <button
-      onClick={e => onClickHandler(e)}>{props.readyStatus ? 'Not ready' : 'Ready'}</button>}
+        className="GuestLobbyView__btn--cancel"
+        onClick={e => onClickHandler(e)}
+        >Cancel
+      </button>
+
+
+
+      {/* For error messaging - not sure if we need to worry about this. */}
+      {/* Begin: Jason dummy code to style with */}
+        {true && <div style={{color: "black", fontSize: "14px"}}>error message - not styled</div>}
+      {/* End: Jason dummy code to style with */}
+        {error && <div>{error}</div>}
+
     </div>
   )
 }
-
-
-// <div className="lobby-code-container">
-//       {state.host && <h2 style={{color: "red"}}>Welcome to {state.host}'s lobby!</h2>}
-//       <h2>Waiting for players to join...</h2>
-//       </div>
-
-//       <ul className="lobby-name-list">
-//       {playersInLobby}
-//       <li>player 2</li>
-//       <li>player 3</li>
-//       <li>player 4</li>
-//       </ul>
-      
-//       <div className="lobby-button">
-//         <NavButton
-//           nextView={'HostLobbyView'}
-//           buttonTitle={'Join'}
-//           changeViewHandler={props.changeViewHandler}
-//         />
-//       </div>

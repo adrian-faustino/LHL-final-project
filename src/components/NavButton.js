@@ -15,7 +15,7 @@ export default function NavButton(props) {
   return (
     <div>
       <button
-      className="nav-button"
+      className="NavButton__btn"
       onClick={e => onClickHandler(e)}
       >{props.buttonTitle}</button>
     </div>

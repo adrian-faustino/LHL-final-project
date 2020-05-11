@@ -93,53 +93,41 @@ export default function HostLobbyView(props) {
 
 
   return (
-    <div className="main-container">
+    <div className="HostLobbyView__container">
       <h1 style={{color: "red", fontSize: "14px"}}>HostLobbyView.js</h1>
 
-      <h1 className="title">{greeting}</h1>
+      <h1 className="HostLobbyView__container--title">{greeting}</h1>
       
-      <div className="lobby-code-container">
+      <div className="HostLobbyView__container--IdField">
         <h2>Share this code with your friends:</h2>
         <p>{lobbyID}</p>
       </div>
 
-      {playersList}
-      
-    
-      {/* Begin: Jason dummy code to style with */}
-      <ul className="lobby-name-list">
-        <li>player 2 <img src="trash.png"/></li>
-        <li>player 3 <img src="trash.jpg"/></li>
-        <li>player 4 <img src="trash.jpg"/></li>
-      </ul>
-      {/* End: Jason dummy code to style with */}
+      {/* Begin: Jason dummy code to style with. Delete when done. */}
+      { true &&
+        <ul className="HostLobbyView__namesList">
+          <li>player 2 <img src="trash.png"/></li>
+          <li>player 3 <img src="trash.jpg"/></li>
+          <li>player 4 <img src="trash.jpg"/></li>
+        </ul>}
+      {/* End: Jason dummy code to style with. Delete when done. */}
 
 
-      <button className="start-button" onClick={e => onClickHandler(e)}>Start game</button>
+      {/* -------NOTE!!!--------- */}
+      {/* In HostLobbyView there is the variable "playersList" */}
+      {/* and in GuestLobbyView there is the variable "playerList". */}
+      {/* It this correct? */}
+
+
+      {/* Begin: Jason dummy code to style with. Delete "{ false && " and corresponding closing tag. */}
+      {false && {playersList}}
+      {/* End: Jason dummy code to style with. Delete "{ false && " and corresponding closing tag. */}
+
+      <button
+        className="HostLobbyView__btn--start"
+        onClick={e => onClickHandler(e)}
+        >Start game
+      </button>
     </div>
   )
 }
-
-
-
-
-// Jason code
-// <ul className="lobby-name-list">
-//   {playersList}
-//   <li>player 2 <img
-//     className=""
-//     src="trash.png"
-//     alt=""
-//     onClick={""}
-//     />
-//   </li>
-//   <li>player 3 <img src="trash.jpg"/></li>
-//   <li>player 4 <img src="trash.jpg"/></li>
-// </ul>
-
-// <div className="lobby-button">
-//   <NavButton
-//   nextView={'InstructionsView'}
-//   buttonTitle={'Start game'}
-//   changeViewHandler={props.changeViewHandler}/>
-// </div>
