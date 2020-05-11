@@ -63,7 +63,7 @@ module.exports = function(client, db, io) {
   client.on('readyOK', data => {
     const { username } = data;
 
-
+    console.log(`${username} is ready.`);
   });
 
 };
