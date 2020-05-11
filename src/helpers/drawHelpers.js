@@ -26,8 +26,8 @@ const onMouseMoveHandler = (e, state, setState) => {
     let y = e.clientY;
   
     // percentage relative to screen
-    x = x / maxWidth;
-    y = y / maxHeight;
+    // x = x / maxWidth;
+    // y = y / maxHeight;
     const color = currentColor;
     const lineSize = currentLineSize;
 
@@ -47,6 +47,17 @@ const onMouseMoveHandler = (e, state, setState) => {
 
 const draw = (ctx, coordinate) => {
   const { x, y, color, lineSize } = coordinate;
+  console.log('drawing...',x,y);
+  
+  // const new_x = x * window.innerWidth;
+  // const new_y = y * window.innerHeight;
+
+  ctx.strokeStyle = color;
+  ctx.lineWidth = lineSize;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.lineTo(x, y);
+  ctx.stroke();
 };
 
 const drawHelpers = {

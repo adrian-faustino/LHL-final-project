@@ -38,14 +38,15 @@ export default function DrawGameView(props) {
       draw(ctx, coordinate);
     });
   });
-  
-  console.log('coordinates:', coordinates);
+
+  // console.log('coordinates:', coordinates);
 
 
 
   return (
     <div className="no-animaion">
       <h1>Find me at components/DrawGameView.js</h1>
+      
 
       <canvas
       ref={canvasRef}
@@ -55,10 +56,10 @@ export default function DrawGameView(props) {
       id={"canvas"}/>
 
 
-      <NavButton
+      {/* <NavButton
       nextView={'ResultsView'}
       buttonTitle={'Next'}
-      changeViewHandler={props.changeViewHandler}/>
+      changeViewHandler={props.changeViewHandler}/> */}
     </div>
   )
 }
