@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './DrawGameView.css'
 import drawHelpers from '../../helpers/drawHelpers';
 
@@ -6,6 +6,7 @@ import drawHelpers from '../../helpers/drawHelpers';
 
 // subcomponents
 import NavButton from '../NavButton'
+import draw from '../../helpers/drawHelpers';
 
 export default function DrawGameView(props) {
   const [state, setState] = useState({
@@ -22,23 +23,22 @@ export default function DrawGameView(props) {
 
   const { coordinates, drawing, currentColor, currentLineSize } = state;
 
-  const { onMouseDownHandler,
-    onMouseUpHandler,
-    onMouseMoveHandler } = drawHelpers;
+  const { onMouseUpHandler,
+        onMouseDownHandler,
+        onMouseMoveHandler,
+      draw } = drawHelpers;
 
   const canvasRef = useRef(null);
-  // rebuild
-
-
-
-
-  // constants
-
-
-  const CANV_HEIGHT = 800;
-  const CANV_WIDTH = 800;
-  const CANV_BG_COLOR = 'grey';
-
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, window.innerHeight, window.innerWidth);
+    coordinates.forEach(coordinate => {
+      const { x, y, color, lineSize } = coordinate;
+      draw(ctx, coordinate);
+    });
+  });
+  
   console.log('coordinates:', coordinates);
 
 

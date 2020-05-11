@@ -45,10 +45,15 @@ const onMouseMoveHandler = (e, state, setState) => {
 };
 
 
-const draw = {
+const draw = (ctx, coordinate) => {
+  const { x, y, color, lineSize } = coordinate;
+};
+
+const drawHelpers = {
   onMouseDownHandler,
   onMouseUpHandler,
-  onMouseMoveHandler
+  onMouseMoveHandler,
+  draw
 }
 
-export default draw;
+export default drawHelpers;
