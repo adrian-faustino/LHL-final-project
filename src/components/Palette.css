@@ -1,12 +1,31 @@
-.palette--main {
+.palette--button {
   position: fixed;
   top: 20px;
   right: 100px;
   height: 35px;
   width: 35px;
-  border-radius: 50%;
   background: white;
+  z-index: 50;
+}
+
+.palette--ul {
+  position: absolute;
+  top: 20px;
+  right: 100px;
+  height: 300px;
+  width: 300px;
+  border: 2px solid white;
   
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  align-items: center;
+}
+
+.palette--li {
+  justify-self: center;
+  position: relative;
+  height: 30px;
+  width: 30px;
+  background: red;
 }

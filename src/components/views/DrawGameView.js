@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './DrawGameView.css'
+
+// helpers
+import paletteHelpers from '../../helpers/paletteHelpers';
 import drawHelpers from '../../helpers/drawHelpers';
 
 // Notes: We will remove the NavButton component later and replace it with a socket emit so it automatically moves to the next page for all the players
@@ -7,6 +10,7 @@ import drawHelpers from '../../helpers/drawHelpers';
 // subcomponents
 import NavButton from '../NavButton'
 import Palette from '../Palette';
+
 
 export default function DrawGameView(props) {
   const [state, setState] = useState({
@@ -22,13 +26,15 @@ export default function DrawGameView(props) {
     open: false
   });
 
-  const { coordinates, drawing, currentColor, currentLineSize } = state;
+  const { coordinates, drawing, currentColor, currentLineSize, open } = state;
 
-  const { onMouseUpHandler,
-        onMouseDownHandler,
-        onMouseMoveHandler,
-      draw } = drawHelpers;
 
+  // helpers
+  const { togglePalette, updatePen } = paletteHelpers;
+  const { onMouseUpHandler, onMouseDownHandler, onMouseMoveHandler, draw } = drawHelpers;
+
+
+  // canvas
   const canvasRef = useRef(null);
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -39,13 +45,6 @@ export default function DrawGameView(props) {
       draw(ctx, coordinate);
     });
   });
-
-  // helpers
-  const togglePalette = e => {
-    e.preventDefault();
-    const open = !state.open;
-    setState({...state, open});
-  }
 
 
   return (
@@ -59,9 +58,12 @@ export default function DrawGameView(props) {
       onMouseMove={e => onMouseMoveHandler(e, state, setState)}/>
 
       <button
-      onClick={e=> togglePalette(e)}
-      >test</button>
-      <Palette />
+      className="palette--button"
+      onClick={e=> togglePalette(e, state, setState)}
+      >toggle</button>
+
+
+      {open && <Palette updatePen={updatePen}/>}
 
       {/* <NavButton
       nextView={'ResultsView'}
