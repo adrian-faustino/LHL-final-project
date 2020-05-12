@@ -63,7 +63,10 @@ export default function DrawGameView(props) {
       >toggle</button>
 
 
-      {open && <Palette updatePen={updatePen}/>}
+      {open && (<Palette
+        setState={setState}
+        state={state}
+        updatePen={updatePen}/>)}
 
       {/* <NavButton
       nextView={'ResultsView'}

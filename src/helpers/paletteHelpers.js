@@ -1,18 +1,23 @@
 const togglePalette = (e, state, setState) => {
   e.preventDefault();
   const open = !state.open;
-  
+
   setState({...state, open});
 }
 
-const updatePen = (str, state, setState) => {
-  console.log('Updating pen...');
+const updateColor = (color, state, setState) => {
+  console.log('Updating color to', color);
 
+}
+
+const updateLineSize = (lineSize , state, setState) => {
+  console.log('Updating lineSize to', lineSize);
 }
 
 const paletteHelpers = {
   togglePalette,
-  updatePen
+  updateColor,
+  updateLineSize
 };
 
 export default paletteHelpers;
