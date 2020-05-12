@@ -6,7 +6,7 @@ import drawHelpers from '../../helpers/drawHelpers';
 
 // subcomponents
 import NavButton from '../NavButton'
-import draw from '../../helpers/drawHelpers';
+import Palette from '../Palette';
 
 export default function DrawGameView(props) {
   const [state, setState] = useState({
@@ -18,7 +18,8 @@ export default function DrawGameView(props) {
     }],
     drawing: false,
     currentColor: 'blue',
-    currentLineSize: 5
+    currentLineSize: 5,
+    open: false
   });
 
   const { coordinates, drawing, currentColor, currentLineSize } = state;
@@ -39,8 +40,12 @@ export default function DrawGameView(props) {
     });
   });
 
-  // console.log('coordinates:', coordinates);
-
+  // helpers
+  const togglePalette = e => {
+    e.preventDefault();
+    const open = !state.open;
+    setState({...state, open});
+  }
 
 
   return (
@@ -53,6 +58,10 @@ export default function DrawGameView(props) {
       onMouseUp={e => onMouseUpHandler(e, state, setState)}
       onMouseMove={e => onMouseMoveHandler(e, state, setState)}/>
 
+      <button
+      onClick={e=> togglePalette(e)}
+      >test</button>
+      <Palette />
 
       {/* <NavButton
       nextView={'ResultsView'}
