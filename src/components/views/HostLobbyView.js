@@ -10,23 +10,22 @@ import PlayerLobbyStatus from '../PlayerLobbyStatus';
 import util from '../../helpers/util'
 
 export default function HostLobbyView(props) {
-  const { username, socket, changeViewHandler } = props;
+  const { username, socket, changeViewHandler, setLobbyHandler, lobbyID } = props;
 
 
   const [state, setState] = useState({
-    lobbyID: '',
     players: [],
     playerObj: null,
-    lobbyObj: null
   });
-  const { lobbyID, players, playerObj, lobbyObj } = state;
-
+  const { players, playerObj, lobbyObj } = state;
 
   useEffect(() => {
-    // establish lobbyID
     const lobbyID = util.generateLobbyID(6);
-    setState({...state, lobbyID});
+    setLobbyHandler(lobbyID);
+  }, [])
 
+  useEffect(() => {
+    if(lobbyID) {
     // requests to DB
     socket.emit('createLobby', { lobbyID }); 
     socket.on('lobbyCreated', () => {
@@ -51,7 +50,7 @@ export default function HostLobbyView(props) {
       socket.on('lobbyFound', lobbyObj => {
         const { players, lobbyID, currentView } = lobbyObj;
         console.log('Updating players array with...', lobbyObj)
-        setState(prev => ({...prev, lobbyID, players, lobbyObj}));
+        setState(prev => ({...prev, players, lobbyObj}));
       });
     });
 
@@ -71,18 +70,20 @@ export default function HostLobbyView(props) {
     //   socket.emit('addToPlayers', { lobbyID, playerObj });
     //  });
 
-    return () => {
-      console.log('Host unmounted');
-      console.log('lobbyID =>', lobbyID)
-      socket.emit('lobbyID', { lobbyID });
+    // return () => {
+    //   console.log('Host unmounted');
+    //   console.log('lobbyID =>', lobbyID)
+    //   socket.emit('hostStareGame');
+    // }
     }
-  }, []);
+  }, [lobbyID]);
 
 
   // event handlers
   const onClickHandler = e => {
     e.preventDefault();
 
+    // START GAME
     socket.emit('changeView', { lobbyID, nextView: 'InstructionsView' });
   }
 

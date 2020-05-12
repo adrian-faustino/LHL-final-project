@@ -42,21 +42,28 @@ module.exports = function(client, db, io) {
     io.in(lobbyID).emit('changeView', data);
   });
   
-  client.on('lobbyID', data => {
-    const { lobbyID } = data;
-
-    console.log(`To all => lobbyID: ${lobbyID}`);
-    io.in(lobbyID).emit('lobbyID', data);
-  });
-
+  
   // InstructionsView ==> DrawGameView
   const VIEW_TIME = 5000; // time in MS
-  client.on('viewTimeout', data => {
+  const GAME_TIME = 5000;
+  client.on('instructionsViewTimeout', data => {
     const { lobbyID } = data;
     const nextView = 'DrawGameView'
+
     setTimeout(() => {
+      console.log(`View change: Instructions => Draw in lobby ${lobbyID}`);
       io.in(lobbyID).emit('changeView', { nextView });
     }, VIEW_TIME);
+  })
+
+  client.on('drawViewTimeout', data => {
+    const { lobbyID } = data;
+    const nextView = 'ResultsView';
+
+    console.log(`View change: Draw => Results in lobby ${lobbyID}`);
+    setTimeout(() => {
+      io.in(lobbyID).emit('changeView', { nextView });
+    }, GAME_TIME);
   })
 
   

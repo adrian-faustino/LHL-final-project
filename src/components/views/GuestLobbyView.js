@@ -9,23 +9,27 @@ import util from '../../helpers/util';
 import PlayerLobbyStatus from '../PlayerLobbyStatus';
 
 export default function GuestLobbyView(props) {
-  const { socket, username, changeViewHandler } = props;
+  const { socket, username, changeViewHandler, setLobbyHandler, lobbyID } = props;
 
   const [state, setState] = useState({
     playerObj: null,
     lobbyObj: null,
     tempInput: '',
-    lobbyID: '',
     host: '',
     players: [],
     error: ''
   })
-  const { tempInput, lobbyID, host, players, error, playerObj } = state;
+  const { tempInput, host, players, error, playerObj } = state;
 
   useEffect(() => {
     socket.on('err', error => setState({...state, error}));
 
+    console.log('GuestLobbyView mounted with lobbyID', lobbyID);
+
     if (lobbyID) {
+      console.log('GuestLobbyView mounted with lobbyID', lobbyID);
+      setLobbyHandler(lobbyID);
+
       socket.emit('createPlayer', { username, coordinate: [] });
       socket.on('playerCreated', playerObj => {
         setState({...state, playerObj});
@@ -67,7 +71,7 @@ export default function GuestLobbyView(props) {
   const onSubmitHandler = e => {
     e.preventDefault()
     console.log(`Joining room: ${tempInput}`)
-    setState({...state, lobbyID: tempInput});
+    setLobbyHandler(tempInput);
   }
 
   const onClickHandler = e => {

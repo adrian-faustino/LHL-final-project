@@ -10,8 +10,8 @@ export default function InstructionsView(props) {
 
   useEffect(() => {
     if(lobbyID) {
-      console.log('Mounted lobby ', lobbyID);
-      socket.emit('viewTimeout', { lobbyID });
+      console.log('InstructionsView mounted with lobbyID', lobbyID);
+      socket.emit('instructionsViewTimeout', { lobbyID });
   
       socket.on('changeView', data => {
         const { nextView } = data;

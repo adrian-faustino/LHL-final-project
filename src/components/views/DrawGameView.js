@@ -13,6 +13,8 @@ import Palette from '../Palette';
 
 
 export default function DrawGameView(props) {
+  const { lobbyID, socket, changeViewHandler } = props;
+
   const [state, setState] = useState({
     coordinates: [{
       x: null,
@@ -23,16 +25,27 @@ export default function DrawGameView(props) {
     drawing: false,
     currentColor: 'blue',
     currentLineSize: 5,
-    open: false
+    open: false,
+    roundTime: null
   });
 
-  const { coordinates, drawing, currentColor, currentLineSize, open } = state;
+  const { coordinates, drawing, currentColor, currentLineSize, open, roundTime } = state;
 
 
   // helpers
   const { togglePalette, updateLineSize, updateColor } = paletteHelpers;
   const { onMouseUpHandler, onMouseDownHandler, onMouseMoveHandler, draw } = drawHelpers;
 
+  // set game timer and trigger view change
+  useEffect(() => {
+    console.log('DrawGameView mounted with lobbyID', lobbyID);
+    socket.emit('drawViewTimeout', { lobbyID });
+
+    socket.on('changeView', data => {
+      const { nextView } = data;
+      changeViewHandler(nextView);
+    })
+  }, [])
 
   // canvas
   const canvasRef = useRef(null);

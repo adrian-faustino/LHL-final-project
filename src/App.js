@@ -27,7 +27,7 @@ function App() {
   * playerType: "HOST" or "GUEST"
   */
   const [state, setState] = useState({
-    view: 'DrawGameView',
+    view: 'LandingView',
     username: '',
     readyStatus: false,
     socket: null,
@@ -65,6 +65,11 @@ function App() {
     setState({...state, readyStatus: !state.readyStatus});
   }
 
+  const setLobbyHandler = lobbyID => {
+    console.log('Setting App component lobbyID to', lobbyID);
+    setState({...state, lobbyID});
+  }
+
   // <NavButton
   // nextView={'LandingView'}
   // buttonTitle={'Main Page - Delete this button later'}
@@ -79,6 +84,8 @@ function App() {
 
       {state.view === 'GuestLobbyView' &&
       <GuestLobbyView
+      lobbyID = {state.lobbyID}
+      setLobbyHandler={setLobbyHandler}
       socket={state.socket}
       username={state.username}
       changeViewHandler={changeViewHandler}
@@ -87,6 +94,8 @@ function App() {
 
       {state.view === 'HostLobbyView' &&
       <HostLobbyView
+      lobbyID = {state.lobbyID}
+      setLobbyHandler={setLobbyHandler}
       socket={state.socket}
       username={state.username}
       changeViewHandler={changeViewHandler}/>}
@@ -100,6 +109,8 @@ function App() {
 
       {state.view === 'DrawGameView' &&
       <DrawGameView
+      socket={state.socket}
+      lobbyID={state.lobbyID}
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'ResultsView' &&
