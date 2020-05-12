@@ -41,11 +41,13 @@ const db = {Lobby, Player, Coordinate};
 // socket
 const handleCRUD = require('./routes/handleCRUD');
 const handleGameState = require('./routes/handleGameState');
+const handleImageMerge = require('./routes/handleImageMerge');
 
 io.on('connection', client => {
   // handle DB crud
   handleCRUD(client, db);
   handleGameState(client, db, io);
+  handleImageMerge(client, db, io);
 
   // handle DC client.on('disconnect') STRETCH
 })

@@ -26,10 +26,11 @@ export default function DrawGameView(props) {
     currentColor: 'blue',
     currentLineSize: 5,
     open: false,
-    roundTime: null
+    roundTime: null,
+    roundFinished:false
   });
 
-  const { coordinates, drawing, currentColor, currentLineSize, open, roundTime } = state;
+  const { coordinates, drawing, currentColor, currentLineSize, open, roundTime, roundFinished } = state;
 
 
   // helpers
@@ -41,11 +42,20 @@ export default function DrawGameView(props) {
     console.log('DrawGameView mounted with lobbyID', lobbyID);
     socket.emit('drawViewTimeout', { lobbyID });
 
+    // socket.on('roundFinished', () => {
+    //   const roundFinished = !roundFinished;
+    //   socket.emit('changeView')
+    //   setState({...state, roundFinished});
+    // })
+    
     socket.on('changeView', data => {
+      const roundFinished = !state.roundFinished;
+      setState({...state, roundFinished});
       const { nextView } = data;
+      socket.emit('finalCoords', { lobbyID, coordinates });
       changeViewHandler(nextView);
     })
-  }, [])
+  }, [roundFinished])
 
   // canvas
   const canvasRef = useRef(null);
