@@ -1,9 +1,16 @@
 import React from 'react'
 
-export default function PaletteLi() {
+export default function PaletteLi(props) {
+  const { updateLineSize, updateColor } = props;
+
+  const onClickHandler = () => {
+    console.log('li clicked!')
+  }
+  
   return (
-    <li className="palette--li">
-      palette.li
+    <li
+    onClick={onClickHandler}
+    className="palette--li">
     </li>
   )
 }
