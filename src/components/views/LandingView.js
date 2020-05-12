@@ -9,7 +9,7 @@ import { findRenderedComponentWithType } from 'react-dom/test-utils';
 export default function LandingView(props) {
   
   return (
-    <div className="LandingView__container">
+    <div className="scrolling-background">
       <h1 style={{color: "red", fontSize: "14px"}}>LandingView.js</h1>
       <h1 className="LandingView__container--title">Draw-mageddon!</h1>
       

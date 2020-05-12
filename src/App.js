@@ -27,7 +27,7 @@ function App() {
   * playerType: "HOST" or "GUEST"
   */
   const [state, setState] = useState({
-    view: 'DrawGameView',
+    view: 'InstructionsView',
     username: '',
     readyStatus: false,
     socket: null,
@@ -70,7 +70,7 @@ function App() {
   // buttonTitle={'Main Page - Delete this button later'}
   // changeViewHandler={changeViewHandler}/>
   return (
-    <div className="app">
+    <div className="App__container">
 
       {state.view === 'LandingView' &&
       <LandingView

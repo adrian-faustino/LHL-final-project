@@ -81,20 +81,13 @@ export default function GuestLobbyView(props) {
   const playerList = players.map(player => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={player}/>);
 
   return (
-    <div className="GuestLobbyView__container">
+    <div className="scrolling-background">
       <h1 style={{color: "red", fontSize: "14px"}}>GuestLobbyView.js</h1>
       <h1 className="GuestLobbyView__container--title">{greeting}</h1>
 
       <div className="GuestLobbyView__container--IdField">
-        {/* Begin: Jason dummy code to style with. Delete when done. */}
-        {false && <h2>Welcome to "host's" lobby!</h2>}
-        {/* End: Jason dummy code to style with. Delete when done. */}
-          {/* Begin: Original hard code. Use this but replace "false" with "host". */}
-          {false && <h2>Welcome to {host}'s lobby!</h2>}
-          {/* End: Original hard code. Use this. */}
-        
         {/* Begin: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
-        { true &&
+        { false &&
           <form>
             <input
               className="GuestLobbyView__form--codeInput"
@@ -116,7 +109,14 @@ export default function GuestLobbyView(props) {
 
       <div className="GuestLobbyView__namesList--container">
         {/* Begin: Jason dummy code to style with. Delete when done. */}
-        {false && <h3 className="GuestLobbyView__namesList--message">Please wait for other players to join...</h3>}
+        {true && <h2>Welcome to "host's" lobby!</h2>}
+        {/* End: Jason dummy code to style with. Delete when done. */}
+        {/* Begin: Original hard code. Use this but replace "false" with "host". */}
+        {false && <h2>Welcome to {host}'s lobby!</h2>}
+        {/* End: Original hard code. Use this. */}
+      
+        {/* Begin: Jason dummy code to style with. Delete when done. */}
+        {true && <h3 className="GuestLobbyView__namesList--message">Please wait for other players to join...</h3>}
         {/* End: Jason dummy code to style with. Delete when done. */}
         
         {/* Begin: Original hard code. Use this but replace "false" with "host". */}
@@ -128,7 +128,7 @@ export default function GuestLobbyView(props) {
         {/* End: Original hard code. Use this. */}
 
         {/* Begin: Jason dummy code to style with. Delete when done. */}
-        { false &&
+        { true &&
           <ul className="GuestLobbyView__namesList">
             <li>player 2</li>
             <li>player 3</li>
