@@ -5,13 +5,16 @@ const togglePalette = (e, state, setState) => {
   setState({...state, open});
 }
 
-const updateColor = (color, state, setState) => {
-  console.log('Updating color to', color);
+const updateColor = (currentColor, state, setState) => {
+  console.log('Updating color to', currentColor);
 
+  setState({...state, currentColor})
 }
 
-const updateLineSize = (lineSize , state, setState) => {
-  console.log('Updating lineSize to', lineSize);
+const updateLineSize = (currentLineSize , state, setState) => {
+  console.log('Updating lineSize to', currentLineSize);
+
+  setState({...state, currentLineSize})
 }
 
 const paletteHelpers = {

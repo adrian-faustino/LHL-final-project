@@ -30,7 +30,7 @@ export default function DrawGameView(props) {
 
 
   // helpers
-  const { togglePalette, updatePen } = paletteHelpers;
+  const { togglePalette, updateLineSize, updateColor } = paletteHelpers;
   const { onMouseUpHandler, onMouseDownHandler, onMouseMoveHandler, draw } = drawHelpers;
 
 
@@ -60,13 +60,14 @@ export default function DrawGameView(props) {
       <button
       className="palette--button"
       onClick={e=> togglePalette(e, state, setState)}
-      >toggle</button>
+      ></button>
 
 
       {open && (<Palette
         setState={setState}
         state={state}
-        updatePen={updatePen}/>)}
+        updateLineSize={updateLineSize}
+        updateColor={updateColor}/>)}
 
       {/* <NavButton
       nextView={'ResultsView'}
