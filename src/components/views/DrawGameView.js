@@ -63,11 +63,16 @@ export default function DrawGameView(props) {
       ></button>
 
 
+
+    <div>
+      <h1 style={{color: "red", fontSize: "14px"}}>DrawGameView.js</h1>
+
       {open && (<Palette
         setState={setState}
         state={state}
         updateLineSize={updateLineSize}
         updateColor={updateColor}/>)}
+
 
       {/* <NavButton
       nextView={'ResultsView'}

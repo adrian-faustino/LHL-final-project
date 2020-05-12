@@ -8,7 +8,7 @@ import NavButton from '../NavButton'
 export default function ResultsView(props) {
   return (
     <div>
-      <h1>Find me at components/ResultsView.js</h1>
+      <h1 style={{color: "red", fontSize: "14px"}}>ResultsView.js</h1>
 
       <NavButton
       nextView={'ShareView'}

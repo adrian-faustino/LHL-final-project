@@ -87,19 +87,21 @@ export default function GuestLobbyView(props) {
 
       <div className="GuestLobbyView__container--IdField">
         {/* Begin: Jason dummy code to style with. Delete when done. */}
-        {true && <h2>Welcome to "host's" lobby!</h2>}
+        {false && <h2>Welcome to "host's" lobby!</h2>}
         {/* End: Jason dummy code to style with. Delete when done. */}
           {/* Begin: Original hard code. Use this but replace "false" with "host". */}
           {false && <h2>Welcome to {host}'s lobby!</h2>}
           {/* End: Original hard code. Use this. */}
         
         {/* Begin: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
-        { false &&
+        { true &&
           <form>
             <input
               className="GuestLobbyView__form--codeInput"
+              type="text"
+              id="gameID"
+              placeholder="Enter Game ID"
               onChange={onChangeHandler}
-              placeholder="Enter Lobby ID"
             />
             <button
               className="GuestLobbyView__form--btn"
@@ -114,7 +116,7 @@ export default function GuestLobbyView(props) {
 
       <div className="GuestLobbyView__namesList--container">
         {/* Begin: Jason dummy code to style with. Delete when done. */}
-        {true && <h3 className="GuestLobbyView__namesList--message">Please wait for other players to join...</h3>}
+        {false && <h3 className="GuestLobbyView__namesList--message">Please wait for other players to join...</h3>}
         {/* End: Jason dummy code to style with. Delete when done. */}
         
         {/* Begin: Original hard code. Use this but replace "false" with "host". */}
@@ -126,7 +128,7 @@ export default function GuestLobbyView(props) {
         {/* End: Original hard code. Use this. */}
 
         {/* Begin: Jason dummy code to style with. Delete when done. */}
-        { true &&
+        { false &&
           <ul className="GuestLobbyView__namesList">
             <li>player 2</li>
             <li>player 3</li>

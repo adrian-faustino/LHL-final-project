@@ -6,7 +6,7 @@ import IMG_SRC from '../assets/mona-lisa.jpg'
 export default function MainImage() {
 
   return (
-    <div>
+    <div style={{color: "red", fontSize: "14px"}}>
       Find me at components/MainImage.js
       <img
       className={''}

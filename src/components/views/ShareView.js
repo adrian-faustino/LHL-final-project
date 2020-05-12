@@ -6,7 +6,7 @@ import NavButton from '../NavButton'
 export default function ShareView(props) {
   return (
     <div>
-      <h1>Find me at components/ShareView.js</h1>
+      <h1 style={{color: "red", fontSize: "14px"}}>ShareView.js</h1>
 
       <NavButton
       nextView={'LandingView'}
