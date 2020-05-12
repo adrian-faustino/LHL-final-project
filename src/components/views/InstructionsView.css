@@ -1,0 +1,52 @@
+.InstructionsView__header {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  width: 100vw;
+  height: 10vh;
+  background-color: #0E289E;
+}
+
+.InstructionsView__header p {
+  display: inline;
+  /* justify-self: stretch; */
+  /* place-self: center; */
+  margin: 0;
+  padding: 0;
+  font-size: 2.0rem;
+  color: white;
+  border: solid 1px white;
+  background: radial-gradient(#1638D3, #5973EB);
+  border-radius: 15px;
+}
+
+.InstructionsView__header button {
+  align-self: center;
+  justify-self: stretch;
+  font-size: 2.0rem;
+  color: white;
+  border: solid 1px white;
+  background: radial-gradient(#1638D3, #5973EB);
+  border-radius: 15px;
+}
+
+.InstructionsView__header button:hover {
+  background: radial-gradient(#5973EB, #1638D3);
+  color: black
+}
+
+.InstructionsView__image--toDraw {
+  height: 100vh;
+  background-image: url(MLDrawing.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.InstructionsView__image--reference {
+  position: absolute;
+  height: 18vh;
+  width: 20vw;
+  top: 12vh;
+  left: 7vw;
+  border: solid #5973EB 2px;
+}
