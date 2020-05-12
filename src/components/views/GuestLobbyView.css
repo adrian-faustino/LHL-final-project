@@ -68,6 +68,7 @@
   top: 35vh;
   height: 50vh;
   width: 100%;
+  z-index: -1;
 }
 
 .GuestLobbyView__namesList--message {

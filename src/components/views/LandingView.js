@@ -15,8 +15,13 @@ export default function LandingView(props) {
       
 
       <form className="LandingView__container--nameForm">
-        <input className="LandingView__form--nameField" type="text" id="username" placeholder="Enter your name"
-        onChange={props.inputChangeHandler}/>
+        <input
+          className="LandingView__form--nameField"
+          type="text"
+          id="username"
+          placeholder="Enter your name"
+          onChange={props.inputChangeHandler}
+        />
       </form>
 
       <div className="LandingView__btnContainer">

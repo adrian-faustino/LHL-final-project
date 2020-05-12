@@ -31,13 +31,13 @@ export default function InstructionsView(props) {
 
   return (
     <div>
-      <h1>Find me at components/InstructionsView.js</h1>
+      <h1 style={{color: "red", fontSize: "14px"}}>InstructionsView.js</h1>
 
-      <h3>Your goal is to draw a picture as a team!</h3>
+      <h3 style={{color: "red", fontSize: "14px"}}>Your goal is to draw a picture as a team!</h3>
 
       <MainImage />
 
-      <p>You will draw this section of the image. You will have 3 minutes to draw!</p>
+      <p style={{color: "red", fontSize: "14px"}}>You will draw this section of the image. You will have 3 minutes to draw!</p>
 
       {/* {state.playerAmt && <span>Players required to skip: {state.playerAmt}</span>}
       <button onClick={e => onClickHandler(e)}>Ready!</button> */}
