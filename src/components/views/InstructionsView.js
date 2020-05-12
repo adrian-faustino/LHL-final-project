@@ -35,9 +35,9 @@ export default function InstructionsView(props) {
 
       <h3 style={{color: "red", fontSize: "14px"}}>Your goal is to draw a picture as a team!</h3>
 
-      <MainImage />
-
       <p style={{color: "red", fontSize: "14px"}}>You will draw this section of the image. You will have 3 minutes to draw!</p>
+      
+      {/* <MainImage /> */}
 
       {/* {state.playerAmt && <span>Players required to skip: {state.playerAmt}</span>}
       <button onClick={e => onClickHandler(e)}>Ready!</button> */}

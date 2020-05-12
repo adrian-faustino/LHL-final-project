@@ -85,10 +85,10 @@ export default function GuestLobbyView(props) {
       <h1 style={{color: "red", fontSize: "14px"}}>GuestLobbyView.js</h1>
       <h1 className="GuestLobbyView__container--title">{greeting}</h1>
 
-      <div className="GuestLobbyView__container--IdField">
+      
         {/* Begin: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
         { false &&
-          <form>
+          <form className="GuestLobbyView__container--IdField">
             <input
               className="GuestLobbyView__form--codeInput"
               type="text"
@@ -105,7 +105,7 @@ export default function GuestLobbyView(props) {
           </form>
         }
         {/* End: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
-      </div>
+    
 
       <div className="GuestLobbyView__namesList--container">
         {/* Begin: Jason dummy code to style with. Delete when done. */}
@@ -118,7 +118,6 @@ export default function GuestLobbyView(props) {
         {/* Begin: Jason dummy code to style with. Delete when done. */}
         {true && <h3 className="GuestLobbyView__namesList--message">Please wait for other players to join...</h3>}
         {/* End: Jason dummy code to style with. Delete when done. */}
-        
         {/* Begin: Original hard code. Use this but replace "false" with "host". */}
         {false && <h3>Please wait for other players to join...</h3> && <button
           onClick={e => onClickHandler(e)}
@@ -126,9 +125,9 @@ export default function GuestLobbyView(props) {
           </button>
         }
         {/* End: Original hard code. Use this. */}
-
+        
         {/* Begin: Jason dummy code to style with. Delete when done. */}
-        { true &&
+        {true &&
           <ul className="GuestLobbyView__namesList">
             <li>player 2</li>
             <li>player 3</li>
