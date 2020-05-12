@@ -1,24 +1,18 @@
-.LandingView__container {
-  position: absolute;
-  top: 10vh;
-  height: 90vh;
-  width: 100vw;
-}
-
 .LandingView__container--title {
+  position: relative;
+  display: inline;
+  top: 10vh;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem;
   color: white;
   font-size: 2.0rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  margin-left: 2.0rem;
-  margin-right: 2.0rem;
   border-radius: 15px;
   background: radial-gradient(#1638D3, #5973EB);
 }
 
 .LandingView__container--nameForm {
   position: absolute;
-  top: 30vh;
+  top: 35vh;
   width: 100vw;
 }
 
@@ -37,7 +31,7 @@
 
 .LandingView__btnContainer {
   position: absolute;
-  top: 45vh;
+  top: 50vh;
   width: 100vw;
 }
 

@@ -93,7 +93,7 @@ export default function HostLobbyView(props) {
 
 
   return (
-    <div className="HostLobbyView__container">
+    <div className="scrolling-background">
       <h1 style={{color: "red", fontSize: "14px"}}>HostLobbyView.js</h1>
 
       <h1 className="HostLobbyView__container--title">{greeting}</h1>
@@ -106,9 +106,9 @@ export default function HostLobbyView(props) {
       {/* Begin: Jason dummy code to style with. Delete when done. */}
       { true &&
         <ul className="HostLobbyView__namesList">
-          <li>player 2 <img src="trash.png"/></li>
-          <li>player 3 <img src="trash.jpg"/></li>
-          <li>player 4 <img src="trash.jpg"/></li>
+          <li>player 2 <i class="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
+          <li>player 3 <i class="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
+          <li>player 4 <i class="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
         </ul>}
       {/* End: Jason dummy code to style with. Delete when done. */}
 

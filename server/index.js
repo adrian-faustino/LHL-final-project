@@ -13,11 +13,7 @@ const DB_URI = process.env.ATLAS_URI;
 
 
 // database
-mongoose.connect(DB_URI, {
-  useNewUrlParser: true,
-  useCreateIndex: true, 
-  useUnifiedTopology: true
-  });
+mongoose.connect(DB_URI, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 mongoose.set('useFindAndModify', false);
 
 const connection = mongoose.connection;

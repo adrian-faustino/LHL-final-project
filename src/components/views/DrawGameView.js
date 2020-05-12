@@ -64,7 +64,7 @@ export default function DrawGameView(props) {
 
 
 
-    <div>
+    
       <h1 style={{color: "red", fontSize: "14px"}}>DrawGameView.js</h1>
 
       {open && (<Palette
