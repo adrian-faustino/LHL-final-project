@@ -45,15 +45,13 @@ export default function DrawGameView(props) {
 
   return (
     <div className="no-animaion">
-      <h1>Find me at components/DrawGameView.js</h1>
-      
-
       <canvas
       ref={canvasRef}
+      width={window.innerWidth}
+      height={window.innerHeight}
       onMouseDown={e => onMouseDownHandler(e, state, setState)}
       onMouseUp={e => onMouseUpHandler(e, state, setState)}
-      onMouseMove={e => onMouseMoveHandler(e, state, setState)}
-      id={"canvas"}/>
+      onMouseMove={e => onMouseMoveHandler(e, state, setState)}/>
 
 
       {/* <NavButton
