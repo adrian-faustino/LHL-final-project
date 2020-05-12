@@ -52,7 +52,7 @@ module.exports = function(client, db, io) {
 
     setTimeout(() => {
       console.log(`View change: Instructions => Draw in lobby ${lobbyID}`);
-      io.in(lobbyID).emit('changeView', { nextView });
+      client.to(lobbyID).emit('changeView', { nextView });
     }, VIEW_TIME);
   })
 
@@ -62,7 +62,7 @@ module.exports = function(client, db, io) {
 
     console.log(`View change: Draw => Results in lobby ${lobbyID}`);
     setTimeout(() => {
-      io.in(lobbyID).emit('changeView', { nextView });
+      client.to(lobbyID).emit('changeView', { nextView });
     }, GAME_TIME);
   })
 

@@ -31,7 +31,6 @@ const onMouseMoveHandler = (e, state, setState) => {
     const color = currentColor;
     const lineSize = currentLineSize;
     
-    console.log('Dragging...', x, y);
 
     const coordinate = {
       x,

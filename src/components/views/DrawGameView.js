@@ -8,7 +8,7 @@ import drawHelpers from '../../helpers/drawHelpers';
 // Notes: We will remove the NavButton component later and replace it with a socket emit so it automatically moves to the next page for all the players
 
 // subcomponents
-import NavButton from '../NavButton'
+import NavButton from '../NavButton';
 import Palette from '../Palette';
 
 

@@ -74,11 +74,7 @@ export default function GuestLobbyView(props) {
     setLobbyHandler(tempInput);
   }
 
-  const onClickHandler = e => {
-    e.preventDefault();
-    
-  }
-
+ 
   // render logic
   const greeting = username.trim().length === 0 ? 'Hello!' : `Hello, ${username}!`;
   const playerList = players.map(player => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={player}/>);
@@ -87,6 +83,7 @@ export default function GuestLobbyView(props) {
     <div>
       <h1>Find me at components/GuestLobbyView.js</h1>
 
+      {!lobbyID && (
       <form>
         <input
         onChange={onChangeHandler}
@@ -95,6 +92,7 @@ export default function GuestLobbyView(props) {
         type="submit"
         onClick={e => onSubmitHandler(e)}>Join</button>
       </form>
+      )}
 
       {error && <div>{error}</div>}
 
@@ -103,9 +101,7 @@ export default function GuestLobbyView(props) {
       {playerList}
     
       
-      {host && <h3>Waiting for players to join...</h3> &&
-      <button
-      onClick={e => onClickHandler(e)}>{props.readyStatus ? 'Not ready' : 'Ready'}</button>}
+      {host && <h3>Waiting host to start the game...</h3>}
     </div>
   )
 }

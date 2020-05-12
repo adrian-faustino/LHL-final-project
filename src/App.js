@@ -29,7 +29,6 @@ function App() {
   const [state, setState] = useState({
     view: 'LandingView',
     username: '',
-    readyStatus: false,
     socket: null,
     lobbyID: null
   });
@@ -59,12 +58,6 @@ function App() {
     setState({...state, username})
   };
 
-  // <GuestLobbyView /> helper functions
-  const readyStatusHandler = () => {
-    console.log(state.readyStatus + ' ready status')
-    setState({...state, readyStatus: !state.readyStatus});
-  }
-
   const setLobbyHandler = lobbyID => {
     console.log('Setting App component lobbyID to', lobbyID);
     setState({...state, lobbyID});
@@ -88,9 +81,7 @@ function App() {
       setLobbyHandler={setLobbyHandler}
       socket={state.socket}
       username={state.username}
-      changeViewHandler={changeViewHandler}
-      readyStatus={state.readyStatus}
-      readyStatusHandler={readyStatusHandler}/>}
+      changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'HostLobbyView' &&
       <HostLobbyView
