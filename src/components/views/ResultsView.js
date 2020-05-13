@@ -16,11 +16,11 @@ export default function ResultsView(props) {
     <div className="scrolling-background">
       <h1 style={{color: "red", fontSize: "14px"}}>ResultsView.js</h1>
 
-      <h1 className="ResultsView__container--title">Ta-Daaa!</h1>
+      <h1 className="ResultsView__container--title App__colorScheme--title">Ta-Daaa!</h1>
 
-      <h2 className="ResultsView__message">Such a work of art!</h2>
+      <h2 className="ResultsView__message App__colorScheme--message">Such a work of art!</h2>
         
-      <img className="ResultsView__image" src={MLReference} alt="Portion of image to draw."></img>
+      <img className="ResultsView__image App__colorScheme--referenceBorder" src={MLReference} alt="Portion of image to draw."></img>
 
       {/* I had to create a div to contain this to be able to control it. */}
       <div className="button-temp">

@@ -96,16 +96,16 @@ export default function HostLobbyView(props) {
     <div className="scrolling-background">
       <h1 style={{color: "red", fontSize: "14px"}}>HostLobbyView.js</h1>
 
-      <h1 className="HostLobbyView__container--title">{greeting}</h1>
+      <h1 className="HostLobbyView__container--title App__colorScheme--title">{greeting}</h1>
       
       <div className="HostLobbyView__container--IdField">
-        <h2>Share this code with your friends:</h2>
-        <p>{lobbyID}</p>
+        <h2 className="App__colorScheme--message">Share this code with your friends:</h2>
+        <p className="App__colorScheme--formField">{lobbyID}</p>
       </div>
 
       {/* Begin: Jason dummy code to style with. Delete when done. */}
       { true &&
-        <ul className="HostLobbyView__namesList">
+        <ul className="HostLobbyView__namesList App__colorScheme--namesList">
           <li>player 2 <i className="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
           <li>player 3 <i className="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
           <li>player 4 <i className="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
@@ -124,7 +124,7 @@ export default function HostLobbyView(props) {
       {/* End: Jason dummy code to style with. Delete "{ false && " and corresponding closing tag. */}
 
       <button
-        className="HostLobbyView__btn--start"
+        className="HostLobbyView__btn--start App__colorScheme--button"
         onClick={e => onClickHandler(e)}
         >Start game
       </button>

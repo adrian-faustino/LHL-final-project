@@ -1,14 +1,13 @@
 .NavButton__btn { 
-  background: radial-gradient(#1638D3, #5973EB);
   width: 50vw;
   margin-top: 2.0rem;
   padding-top: 1.0rem;
   padding-bottom: 1.0rem;
   border-radius: 15px;
-  color: white;
+
 }
 
-.NavButton__btn:hover {
+/* .NavButton__btn:hover {
   background: radial-gradient(#5973EB, #1638D3);
   color: black
-}
+} */
