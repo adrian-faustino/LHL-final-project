@@ -31,14 +31,15 @@ function App() {
     username: '',
     socket: null,
     lobbyID: null,
-    playerObj: null
+    playerObj: null,
+    test: null
   });
 
   // Socket
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
     // as client joins, set the socket
-    setState({...state, socket});
+    setState(prev => ({...prev, socket}));
 
     // listeners
     util.errorListener(socket);
@@ -51,7 +52,9 @@ function App() {
 
 
   // <NavButton /> helper functions
-  const changeViewHandler = viewStr => setState({...state, view: viewStr});
+  const changeViewHandler = view => {
+    setState(prev => ({...prev, view}));
+  }
 
   // <LandingView /> helper functions
   const inputChangeHandler = str => {
@@ -66,7 +69,7 @@ function App() {
 
   const setPlayerObjHandler = playerObj => {
     console.log('Setting App component playerObj to',playerObj)
-    setState(prev => ({...prev, playerObj}));
+    setState({...state, playerObj, test: playerObj});
   }
 
   // <NavButton
@@ -109,6 +112,7 @@ function App() {
 
       {state.view === 'DrawGameView' &&
       <DrawGameView
+      test={state.test}
       playerObj={state.playerObj}
       socket={state.socket}
       lobbyID={state.lobbyID}
