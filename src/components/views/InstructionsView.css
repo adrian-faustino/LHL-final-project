@@ -8,21 +8,15 @@
 }
 
 .InstructionsView__header p {
-  display: inline;
-  /* justify-self: stretch; */
-  /* place-self: center; */
   margin: 0;
   padding: 0;
+  left: -5vw;
   font-size: 2.0rem;
   color: white;
-  border: solid 1px white;
-  background: radial-gradient(#1638D3, #5973EB);
-  border-radius: 15px;
 }
 
 .InstructionsView__header button {
-  align-self: center;
-  justify-self: stretch;
+  margin: 0 5vw;
   font-size: 2.0rem;
   color: white;
   border: solid 1px white;
@@ -48,5 +42,5 @@
   width: 20vw;
   top: 12vh;
   left: 7vw;
-  border: solid #5973EB 2px;
+  border: solid #1638D3 4px;
 }

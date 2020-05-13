@@ -106,9 +106,9 @@ export default function HostLobbyView(props) {
       {/* Begin: Jason dummy code to style with. Delete when done. */}
       { true &&
         <ul className="HostLobbyView__namesList">
-          <li>player 2 <i class="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
-          <li>player 3 <i class="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
-          <li>player 4 <i class="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
+          <li>player 2 <i className="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
+          <li>player 3 <i className="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
+          <li>player 4 <i className="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
         </ul>}
       {/* End: Jason dummy code to style with. Delete when done. */}
 
