@@ -6,10 +6,24 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+// data
+const games = require('./data/games');
 
 // constants
 const PORT = process.env.PORT;
 const DB_URI = process.env.ATLAS_URI;
+const games = {
+  'lobby1' : {
+    quad1: {
+      coordinates: {}
+    },
+    quad2: {},
+    quad3: {},
+    quad4: {}
+  },
+  'lobby2' : {},
+  'lobby3' : {}
+}
 
 
 // database
@@ -28,6 +42,9 @@ connection.once('open', () => {
 
 // routes
 app.get('/', (req, res) => res.send('Welcome!'))
+app.post('/test', (req, res) => {
+  console.log('Client sent test data:', req);
+});
 
 
 // models
@@ -45,9 +62,9 @@ const handleImageMerge = require('./routes/handleImageMerge');
 
 io.on('connection', client => {
   // handle DB crud
-  handleCRUD(client, db);
+  handleCRUD(games, client, db);
   handleGameState(client, db, io);
-  handleImageMerge(client, db, io);
+  handleImageMerge(games, client, db, io);
 
   // handle DC client.on('disconnect') STRETCH
 })

@@ -1,4 +1,4 @@
-module.exports = function(client, db, io) {
+module.exports = function(games, client, db, io) {
 
   const { Lobby, Player, Coordinate } = db;
 

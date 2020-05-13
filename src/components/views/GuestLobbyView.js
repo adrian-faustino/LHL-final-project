@@ -85,7 +85,7 @@ export default function GuestLobbyView(props) {
 
   return (
     <div>
-      <h1>Find me at components/GuestLobbyView.js</h1>
+      <h1>Find me at components/GuestLobbyView.js!</h1>
 
       {!lobbyID && (
       <form>
