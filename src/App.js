@@ -30,7 +30,8 @@ function App() {
     view: 'LandingView',
     username: '',
     socket: null,
-    lobbyID: null
+    lobbyID: null,
+    playerObj: null
   });
 
   // Socket
@@ -63,6 +64,10 @@ function App() {
     setState({...state, lobbyID});
   }
 
+  const setPlayerObjHandler = playerObj => {
+    setState(prev => ({...prev, playerObj}));
+  }
+
   // <NavButton
   // nextView={'LandingView'}
   // buttonTitle={'Main Page - Delete this button later'}
@@ -78,6 +83,8 @@ function App() {
       {state.view === 'GuestLobbyView' &&
       <GuestLobbyView
       lobbyID = {state.lobbyID}
+      playerObj={state.playerObj}
+      setPlayerObjHandler={setPlayerObjHandler}
       setLobbyHandler={setLobbyHandler}
       socket={state.socket}
       username={state.username}
@@ -86,6 +93,8 @@ function App() {
       {state.view === 'HostLobbyView' &&
       <HostLobbyView
       lobbyID = {state.lobbyID}
+      playerObj={state.playerObj}
+      setPlayerObjHandler={setPlayerObjHandler}
       setLobbyHandler={setLobbyHandler}
       socket={state.socket}
       username={state.username}

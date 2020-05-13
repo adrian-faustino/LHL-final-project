@@ -9,17 +9,16 @@ import util from '../../helpers/util';
 import PlayerLobbyStatus from '../PlayerLobbyStatus';
 
 export default function GuestLobbyView(props) {
-  const { socket, username, changeViewHandler, setLobbyHandler, lobbyID } = props;
+  const { socket, username, changeViewHandler, setLobbyHandler, lobbyID, setPlayerObjHandler, playerObj } = props;
 
   const [state, setState] = useState({
-    playerObj: null,
     lobbyObj: null,
     tempInput: '',
     host: '',
     players: [],
     error: ''
   })
-  const { tempInput, host, players, error, playerObj } = state;
+  const { tempInput, host, players, error } = state;
 
   useEffect(() => {
     socket.on('err', error => setState({...state, error}));
@@ -32,7 +31,7 @@ export default function GuestLobbyView(props) {
 
       socket.emit('createPlayer', { username, coordinate: [] });
       socket.on('playerCreated', playerObj => {
-        setState({...state, playerObj});
+        setPlayerObjHandler(playerObj);
 
         socket.emit('addToPlayers', { lobbyID, playerObj });
         socket.on('playerAdded', lobbyObj => {
