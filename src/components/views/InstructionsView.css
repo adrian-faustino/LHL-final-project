@@ -30,8 +30,8 @@
 }
 
 .InstructionsView__image--toDraw {
-  height: 100vh;
-  background-image: url(MLDrawing.jpg);
+  height: 90vh;
+  background-image: url(../../assets/MLDrawing.jpg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }

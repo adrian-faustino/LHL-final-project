@@ -8,75 +8,100 @@ export default function Palette(props) {
 
 
   return (
-    <ul className="palette--ul">
+    <ul className="Palette__container">
 
       {/* === LINE SIZE === */}
-
       {/* 1st row */}
       <li onClick={() => {
         updateLineSize(40, state, setState);
-      }}
-      className="palette--li forty"></li>
+        }}
+        >
+        <i id="sizeXL" className="fas fa-paint-brush"></i>
+      </li>
       
       <li onClick={() => {
-        updateLineSize(30, state, setState);
-      }}
-      className="palette--li thirty"></li>
+        updateLineSize(40, state, setState);
+        }}
+        >
+        <i id="sizeL" className="fas fa-paint-brush"></i>
+      </li>
       
       <li onClick={() => {
-        updateLineSize(20, state, setState);
-      }}
-      className="palette--li twenty"></li>
+        updateLineSize(40, state, setState);
+        }}
+        >
+        <i id="sizeM" className="fas fa-paint-brush"></i>
+      </li>
       
       <li onClick={() => {
-        updateLineSize(10, state, setState);
-      }}
-      className="palette--li ten"></li>
+        updateLineSize(40, state, setState);
+        }}
+        >
+        <i id="sizeS" className="fas fa-paint-brush"></i>
+      </li>
       
+
+
+
 
       {/* === COLORS === */}
-
       {/* 2nd row */}
       <li onClick={() => {
         updateColor('red', state, setState);
-      }}
-      className="palette--li red"></li>
+        }}
+        >
+        <i id="redColor" className="fas fa-tint"></i>
+      </li>
       
       <li onClick={() => {
         updateColor('orange', state, setState);
-      }}
-      className="palette--li orange"></li>
+        }}
+        >
+        <i id="orangeColor" className="fas fa-tint"></i>
+      </li>
       
       <li onClick={() => {
         updateColor('yellow', state, setState);
-      }}
-      className="palette--li yellow"></li>
+        }}
+        >
+        <i id="yellowColor" className="fas fa-tint"></i>
+      </li>
       
       <li onClick={() => {
         updateColor('green', state, setState);
-      }}
-      className="palette--li green"></li>
+        }}
+        >
+        <i id="greenColor" className="fas fa-tint"></i>
+      </li>
       
       {/* 3rd row */}
       <li onClick={() => {
         updateColor('blue', state, setState);
-      }}
-      className="palette--li blue"></li>
+        }}
+        >
+        <i id="blueColor" className="fas fa-tint"></i>
+      </li>
       
       <li onClick={() => {
         updateColor('violet', state, setState);
-      }}
-      className="palette--li violet"></li>
+        }}
+        >
+        <i id="violetColor" className="fas fa-tint"></i>
+      </li>
       
       <li onClick={() => {
         updateColor('black', state, setState);
-      }}
-      className="palette--li black"></li>
+        }}
+        >
+        <i id="blackColor" className="fas fa-tint"></i>
+      </li>
       
       <li onClick={() => {
         updateColor('white', state, setState);
-      }}
-      className="palette--li white"></li>
+        }}
+        >
+        <i id="whiteColor" className="fas fa-tint"></i>
+      </li>
       
       
       

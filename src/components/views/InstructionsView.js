@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import "./InstructionsView.css";
-import MLforInstruct from './MLforInstruct.jpg';
+import MLReference from '../../assets/MLReference.jpg';
 
 // subcomponents
 import NavButton from '../NavButton'
@@ -43,7 +43,7 @@ export default function InstructionsView(props) {
       </div>
       
       <div className="InstructionsView__image--toDraw">
-        <img id="test" className="InstructionsView__image--reference" src={MLforInstruct} alt="Portion of image to draw."></img>
+        <img className="InstructionsView__image--reference" src={MLReference} alt="Portion of image to draw."></img>
       </div>
 
 
