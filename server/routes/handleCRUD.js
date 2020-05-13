@@ -115,6 +115,13 @@ module.exports = function(client, db) {
     });
   })
 
+  /* Given Player '_id', update their coordinates array */
+  client.on('saveFinalCoords', data => {
+    const { _id, coordinates } = data;
+
+    console.log('Updating coordinates...', coordinates);
+  });
+
   // ==========> DELETE
 
 

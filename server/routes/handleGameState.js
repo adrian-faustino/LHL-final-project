@@ -66,11 +66,6 @@ module.exports = function(client, db, io) {
       client.to(lobbyID).emit('changeView', { nextView });
     }, GAME_TIME);
   })
-
-  client.on('saveData', data => {
-    console.log('Coordinates ===>', data);
-  })
-
   
   // ===> INSTRUCTIONS VIEW
 

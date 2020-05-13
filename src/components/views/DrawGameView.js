@@ -44,21 +44,21 @@ export default function DrawGameView(props) {
 
     socket.on('roundFinished', () => {
       const roundFinished = true;
-
-      setState(prev => {
-        return {...prev, roundFinished};
-      });
+      setState(prev => ({...prev, roundFinished}));
     })
     
     socket.on('changeView', data => {
-      const roundFinished = !state.roundFinished;
-      setState({...state, roundFinished});
       const { nextView } = data;
-      socket.emit('finalCoords', { lobbyID, coordinates });
       changeViewHandler(nextView);
     })
-
   }, [])
+
+    // send final coordinates before view change
+    useEffect(() => {
+      if(roundFinished) {
+        socket.emit('saveFinalCoords', { coordinates });
+      }
+    }, [roundFinished])
 
   // canvas
   const canvasRef = useRef(null);
@@ -70,19 +70,7 @@ export default function DrawGameView(props) {
       const { x, y, color, lineSize } = coordinate;
       draw(ctx, coordinate);
     });
-
-    // if(roundFinished) {
-    //   socket.emit('saveData', coordinates);
-    // }
-
-    
   });
-
-  useEffect(() => {
-    if(roundFinished) {
-      socket.emit('saveData', coordinates);
-    }
-  }, [roundFinished])
 
 
   return (
