@@ -1,0 +1,41 @@
+.ResultsView__container--title {
+  position: relative;
+  display: inline;
+  top: 10vh;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem;
+  color: white;
+  font-size: 2.0rem;
+  border-radius: 15px;
+  background: radial-gradient(#1638D3, #5973EB);
+}
+
+.ResultsView__message {
+  position: absolute;
+  top: 25vh;
+  width: 100vw;
+  color: white;
+}
+
+.ResultsView__message h2{
+  padding: 0 2.0rem;
+}
+
+.ResultsView__image {
+  position: absolute;
+  top: 20vh;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: block;
+  width: 70vw;
+  border: solid #1638D3 4px;
+}
+
+
+.button-temp {
+  position: absolute;
+  bottom: 2vh;
+  width: 100vw;
+}

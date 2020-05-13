@@ -2,6 +2,7 @@ import React from 'react'
 // import classNames from "classnames";
 import "./NavButton.css";
 
+
 // Notes: COMPLETE for now. Desired functionality tested.
 
 export default function NavButton(props) {
