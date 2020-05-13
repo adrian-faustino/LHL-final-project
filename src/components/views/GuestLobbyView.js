@@ -83,21 +83,21 @@ export default function GuestLobbyView(props) {
   return (
     <div className="scrolling-background">
       <h1 style={{color: "red", fontSize: "14px"}}>GuestLobbyView.js</h1>
-      <h1 className="GuestLobbyView__container--title">{greeting}</h1>
+      <h1 className="GuestLobbyView__container--title App__colorScheme--title">{greeting}</h1>
 
       
         {/* Begin: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
         { false &&
           <form className="GuestLobbyView__container--IdField">
             <input
-              className="GuestLobbyView__form--codeInput"
+              className="GuestLobbyView__form--codeInput App__colorScheme--formField"
               type="text"
               id="gameID"
               placeholder="Enter Game ID"
               onChange={onChangeHandler}
             />
             <button
-              className="GuestLobbyView__form--btn"
+              className="GuestLobbyView__form--btn App__colorScheme--button"
               type="submit"
               onClick={e => onSubmitHandler(e)}
               >Submit ID
@@ -109,17 +109,17 @@ export default function GuestLobbyView(props) {
 
       <div className="GuestLobbyView__namesList--container">
         {/* Begin: Jason dummy code to style with. Delete when done. */}
-        {true && <h2>Welcome to "host's" lobby!</h2>}
+        {true && <h2 className="App__colorScheme--message">Welcome to "host's" lobby!</h2>}
         {/* End: Jason dummy code to style with. Delete when done. */}
         {/* Begin: Original hard code. Use this but replace "false" with "host". */}
-        {false && <h2>Welcome to {host}'s lobby!</h2>}
+        {false && <h2 className="App__colorScheme--message">Welcome to {host}'s lobby!</h2>}
         {/* End: Original hard code. Use this. */}
       
         {/* Begin: Jason dummy code to style with. Delete when done. */}
-        {true && <h3 className="GuestLobbyView__namesList--message">Please wait for other players to join...</h3>}
+        {true && <h3 className="GuestLobbyView__namesList--message App__colorScheme--message">Please wait for other players to join...</h3>}
         {/* End: Jason dummy code to style with. Delete when done. */}
         {/* Begin: Original hard code. Use this but replace "false" with "host". */}
-        {false && <h3>Please wait for other players to join...</h3> && <button
+        {false && <h3 className="GuestLobbyView__namesList--message App__colorScheme--message">Please wait for other players to join...</h3> && <button
           onClick={e => onClickHandler(e)}
           >{props.readyStatus ? 'Not ready' : 'Ready'}
           </button>
@@ -128,7 +128,7 @@ export default function GuestLobbyView(props) {
         
         {/* Begin: Jason dummy code to style with. Delete when done. */}
         {true &&
-          <ul className="GuestLobbyView__namesList">
+          <ul className="GuestLobbyView__namesList App__colorScheme--namesList">
             <li>player 2</li>
             <li>player 3</li>
             <li>player 4</li>
@@ -148,7 +148,7 @@ export default function GuestLobbyView(props) {
       </div>
       
       <button
-        className="GuestLobbyView__btn--cancel"
+        className="GuestLobbyView__btn--cancel App__colorScheme--button"
         onClick={e => onClickHandler(e)}
         >Cancel
       </button>

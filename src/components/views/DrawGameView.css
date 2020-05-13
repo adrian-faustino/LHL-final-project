@@ -4,7 +4,6 @@
   align-items: center;
   width: 100vw;
   height: 10vh;
-  background-color: #0E289E;
 }
 
 .DrawGameView__header p {
@@ -12,22 +11,18 @@
   padding: 0;
   left: -5vw;
   font-size: 2.0rem;
-  color: white;
 }
 
 .DrawGameView__header button {
   margin: 0 5vw;
   font-size: 2.0rem;
-  color: white;
-  border: solid 1px white;
-  background: radial-gradient(#1638D3, #5973EB);
   border-radius: 15px;
 }
 
-.DrawGameView__header button:hover {
+/* .DrawGameView__header button:hover {
   background: radial-gradient(#5973EB, #1638D3);
   color: black
-}
+} */
 
 .DrawGameView__drawPort {
   position: absolute;
@@ -44,6 +39,5 @@
   width: 20vw;
   top: 12vh;
   left: 7vw;
-  border: solid #1638D3 4px;
   z-index: 1;
 }

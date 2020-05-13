@@ -4,17 +4,14 @@
   top: 10vh;
   margin: 0 auto;
   padding: 1.5rem 1.5rem;
-  color: white;
   font-size: 2.0rem;
   border-radius: 15px;
-  background: radial-gradient(#1638D3, #5973EB);
 }
 
 .ResultsView__message {
   position: absolute;
   top: 25vh;
   width: 100vw;
-  color: white;
 }
 
 .ResultsView__message h2{
@@ -30,7 +27,6 @@
   margin: auto;
   display: block;
   width: 70vw;
-  border: solid #1638D3 4px;
 }
 
 

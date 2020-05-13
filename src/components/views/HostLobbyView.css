@@ -4,10 +4,8 @@
   top: 10vh;
   margin: 0 auto;
   padding: 1.5rem 1.5rem;
-  color: white;
   font-size: 2.0rem;
   border-radius: 15px;
-  background: radial-gradient(#1638D3, #5973EB);
 }
 
 .HostLobbyView__container--IdField {
@@ -17,13 +15,10 @@
  }
  
 .HostLobbyView__container--IdField h2 {
-  color: white;
   margin: 0 3.0rem;
 }
 
 .HostLobbyView__container--IdField p {
-  color: white;
-  background-color: #0E289E;
   border-radius: 15px;
   font-size: 2.0rem;
   margin: 1.0rem 5.0rem;
@@ -33,7 +28,6 @@
   position: absolute;
   top: 55vh;
   width: 100vw;
-  color: white;
 }
 
 .HostLobbyView__namesList li {
@@ -41,7 +35,6 @@
   margin: 0.8rem 2.0rem;
   font-size: 1.2rem;;
   padding: 0.25rem 0.5rem;
-  background-color: #0E289E;
 }
 
 .HostLobbyView__namesList--deleteBtn {
@@ -59,14 +52,12 @@
   right: 0;
   text-align: center;
   bottom: 10vh;
-  background: radial-gradient(#1638D3, #5973EB);
   padding-top: 1.0rem;
   padding-bottom: 1.0rem;
   border-radius: 15px;
-  color: white;
 }
 
-.HostLobbyView__btn--start:hover {
+/* .HostLobbyView__btn--start:hover {
   background: radial-gradient(#5973EB, #1638D3);
   color: black
-}
+} */

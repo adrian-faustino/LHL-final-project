@@ -53,10 +53,10 @@ export default function DrawGameView(props) {
 
   return (
     <div>
-      <div className="DrawGameView__header">
-        <p>0:24</p>
+      <div className="DrawGameView__header App__colorScheme--header">
+        <p className="App__colorScheme--message">0:24</p>
         <button
-          className=""
+          className="App__colorScheme--palette"
           onClick={e=> togglePalette(e, state, setState)}
           >
           <i className="fas fa-palette"></i>
@@ -79,7 +79,7 @@ export default function DrawGameView(props) {
         onMouseMove={e => onMouseMoveHandler(e, state, setState)}
       />
 
-      <img className="GameDrawView__image--reference" src={MLReference} alt="Portion of image to draw."></img>
+      <img className="GameDrawView__image--reference App__colorScheme--referenceBorder" src={MLReference} alt="Portion of image to draw."></img>
 
       {/* <NavButton
       nextView={'ResultsView'}
