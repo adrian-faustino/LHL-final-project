@@ -1,18 +1,14 @@
 const onMouseDownHandler = (e, state, setState) => {
   const drawing = true;
-
-  setState({...state,
-    drawing
-  });
+  
+  setState(prev => ({...prev, drawing}));
 };
 
 
 const onMouseUpHandler = (e, state, setState) => {
   const drawing = false;
 
-  setState({...state,
-    drawing
-  });
+  setState(prev => ({...prev, drawing}));
 };
 
 
@@ -38,8 +34,7 @@ const onMouseMoveHandler = (e, state, setState) => {
       color,
       lineSize
     }
-  
-    setState({...state, coordinates: [...coordinates, coordinate]}); 
+    setState(prev => ({...prev, coordinates: [...coordinates, coordinate]}));
   }
 
 };
