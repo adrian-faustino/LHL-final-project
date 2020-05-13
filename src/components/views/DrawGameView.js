@@ -42,11 +42,13 @@ export default function DrawGameView(props) {
     console.log('DrawGameView mounted with lobbyID', lobbyID);
     socket.emit('drawViewTimeout', { lobbyID });
 
-    // socket.on('roundFinished', () => {
-    //   const roundFinished = !roundFinished;
-    //   socket.emit('changeView')
-    //   setState({...state, roundFinished});
-    // })
+    socket.on('roundFinished', () => {
+      const roundFinished = true;
+
+      setState(prev => {
+        return {...prev, roundFinished};
+      });
+    })
     
     socket.on('changeView', data => {
       const roundFinished = !state.roundFinished;
@@ -55,7 +57,8 @@ export default function DrawGameView(props) {
       socket.emit('finalCoords', { lobbyID, coordinates });
       changeViewHandler(nextView);
     })
-  }, [roundFinished])
+
+  }, [])
 
   // canvas
   const canvasRef = useRef(null);
@@ -67,7 +70,19 @@ export default function DrawGameView(props) {
       const { x, y, color, lineSize } = coordinate;
       draw(ctx, coordinate);
     });
+
+    // if(roundFinished) {
+    //   socket.emit('saveData', coordinates);
+    // }
+
+    
   });
+
+  useEffect(() => {
+    if(roundFinished) {
+      socket.emit('saveData', coordinates);
+    }
+  }, [roundFinished])
 
 
   return (

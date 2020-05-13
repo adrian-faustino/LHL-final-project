@@ -62,8 +62,13 @@ module.exports = function(client, db, io) {
 
     console.log(`View change: Draw => Results in lobby ${lobbyID}`);
     setTimeout(() => {
+      client.to(lobbyID).emit('roundFinished');
       client.to(lobbyID).emit('changeView', { nextView });
     }, GAME_TIME);
+  })
+
+  client.on('saveData', data => {
+    console.log('Coordinates ===>', data);
   })
 
   
