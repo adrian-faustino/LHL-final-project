@@ -9,7 +9,6 @@ import MainImage from '../MainImage'
 export default function InstructionsView(props) {
   const { username, socket, changeViewHandler, lobbyID } = props;
 
-
   useEffect(() => {
     if(lobbyID) {
       console.log('Mounted lobby ', lobbyID);
@@ -31,17 +30,20 @@ export default function InstructionsView(props) {
     socket.emit('readyOK', { username }); // lobbyID here
   }
 
+ 
+
+
   return (
     <div>
+
       {/* <h1 style={{color: "red", fontSize: "14px"}}>InstructionsView.js</h1> */}
-      <div className="InstructionsView__header">
-        <p>1:16</p>
-        <button><i class="fas fa-palette"></i></button>
+      <div className="InstructionsView__header" >
+        <p>0:24</p>
+        <button><i className="fas fa-palette"></i></button>
       </div>
       
       <div className="InstructionsView__image--toDraw">
-        <img className="InstructionsView__image--reference" src={MLforInstruct} alt="Portion of image to draw."></img>
-      
+        <img id="test" className="InstructionsView__image--reference" src={MLforInstruct} alt="Portion of image to draw."></img>
       </div>
 
 
@@ -54,12 +56,11 @@ export default function InstructionsView(props) {
       buttonTitle={'Skip'}
       changeViewHandler={props.changeViewHandler}/> */}
 
-      
     </div>
   )
 }
 
-
+// <a href='http://example.com/' data-intro='Hello step one!'></a>
 // <h3 style={{color: "red", fontSize: "14px"}}>Your goal is to draw a picture as a team!</h3>
 // <p style={{color: "red", fontSize: "14px"}}>You will draw this section of the image. You will have 3 minutes to draw!</p>
-      
+    

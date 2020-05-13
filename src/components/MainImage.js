@@ -9,7 +9,8 @@ export default function MainImage() {
     <div style={{color: "red", fontSize: "14px"}}>MainImage.js
       <img
       className={''}
-      src={IMG_SRC}/>
+      src={IMG_SRC}
+      alt={""}/>
     </div>
   )
 }
