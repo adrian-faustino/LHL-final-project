@@ -32,6 +32,8 @@ function App() {
     socket: null,
     lobbyID: null,
     playerObj: null,
+    myQuadrant: null,
+    myLobbyObj: null
   });
 
   // Socket
@@ -70,6 +72,16 @@ function App() {
     console.log('Setting App component playerObj to',playerObj)
     setState(prev => ({...prev, playerObj}));
   }
+  
+  const setMyLobbyObjHandler = myLobbyObj => {
+    console.log('Setting App component myLobbyObj to', myLobbyObj);
+    setState(prev => ({...prev, myLobbyObj}));
+  }
+
+  const setMyQuadrantHandler = myQuadrant => {
+    console.log('Setting App component myQuadrant to', myQuadrant);
+    setState(prev => ({...prev, myQuadrant}));
+  }
 
   // <NavButton
   // nextView={'LandingView'}
@@ -87,6 +99,8 @@ function App() {
       <GuestLobbyView
       lobbyID = {state.lobbyID}
       playerObj={state.playerObj}
+      setMyLobbyObjHandler={setMyLobbyObjHandler}
+      setMyQuadrantHandler={setMyQuadrantHandler}
       setPlayerObjHandler={setPlayerObjHandler}
       setLobbyHandler={setLobbyHandler}
       socket={state.socket}
@@ -96,6 +110,8 @@ function App() {
       {state.view === 'HostLobbyView' &&
       <HostLobbyView
       lobbyID = {state.lobbyID}
+      setMyLobbyObjHandler={setMyLobbyObjHandler}
+      setMyQuadrantHandler={setMyQuadrantHandler}
       setPlayerObjHandler={setPlayerObjHandler}
       setLobbyHandler={setLobbyHandler}
       socket={state.socket}
@@ -111,6 +127,8 @@ function App() {
 
       {state.view === 'DrawGameView' &&
       <DrawGameView
+      myLobbyObj={state.myLobbyObj}
+      myQuadrant={state.myQuadrant}
       playerObj={state.playerObj}
       socket={state.socket}
       lobbyID={state.lobbyID}
@@ -118,6 +136,7 @@ function App() {
 
       {state.view === 'ResultsView' &&
       <ResultsView
+      socket={state.socket}
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'ShareView' &&

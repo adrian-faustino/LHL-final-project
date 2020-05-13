@@ -1,15 +1,15 @@
 const games = {
   'lobby2': {
     coordinates: {
-      quadrant1: [{
+      quadrant_1: [{
         x: 50,
         y: 60,
         color: 'red',
         lineSize: '20'
       }, {}, {}],
-      quadrant2: [{}, {}, {}],
-      quadrant3: [{}],
-      quadrant4: [{}],
+      quadrant_2: [{}, {}, {}],
+      quadrant_3: [{}],
+      quadrant_4: [{}],
     }
   },
   'lobby3': {},

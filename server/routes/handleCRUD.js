@@ -8,6 +8,16 @@ module.exports = function(games, client, db) {
   client.on('createLobby', data => {
     const { lobbyID } = data;
 
+    // ===  rebuild
+    if (!games.hasOwnProperty(lobbyID)) {
+      games[lobbyID] = {
+        coordinates: {}
+      };
+    } else {
+      emit('lobbyExists'); // ask host to make lobby again. Error handling
+    }
+    // === rebuild
+
     const newLobby = new Lobby({
       lobbyID,
       players: [],

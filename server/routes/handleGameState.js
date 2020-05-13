@@ -1,4 +1,4 @@
-module.exports = function(client, db, io) {
+module.exports = function(games, client, db, io) {
   // models
   const { Lobby, Player, Coordinate } = db; 
 
@@ -11,6 +11,32 @@ module.exports = function(client, db, io) {
 
     console.log(`Attempting to join lobby ${lobbyID}...`);
 
+    // === rebuild
+    const currentLobby = games[lobbyID].coordinates;
+    let myQuadrant = '';
+    if(currentLobby) {
+      if(!currentLobby.hasOwnProperty('quadrant_1')) {
+        myQuadrant = 'quadrant_1';
+      } else if (!currentLobby.hasOwnProperty('quadrant_2')) {
+        myQuadrant = 'quadrant_2';
+      } else if (!currentLobby.hasOwnProperty('quadrant_3')) {
+        myQuadrant = 'quadrant_3';
+      } else if(!currentLobby.hasOwnProperty('quadrant_4')) {
+        myQuadrant = 'quadrant_4';
+      } else {
+        console.log('Lobby is full! - games');
+        return client.emit('err', 'Lobby is full!');
+      }
+    } else {
+      console.log(`Lobby doesn't exist. - games`);
+      return client.emit('err', `Lobby doesn't exist`);
+    }
+
+    currentLobby[myQuadrant] = [];
+    client.emit('joinedLobby', { myQuadrant })
+    client.join(lobbyID);
+    // === rebuild
+
     Lobby.findOne({ lobbyID }, (err, lobbyObj) => {
       if(err) {
         console.log(err);
@@ -22,7 +48,7 @@ module.exports = function(client, db, io) {
         client.emit('err', 'Lobby is full!');
       } else {
         console.log(`Joined lobby: ${lobbyID}`);
-        client.join(lobbyID);
+        // client.join(lobbyID); rebuild
 
         // emit to all users to let them know someone joined the lobby
         io.in(lobbyID).emit('userJoinLobby');
@@ -41,11 +67,19 @@ module.exports = function(client, db, io) {
     console.log(`Emitting changeView to everyone in lobby ${lobbyID} to view: ${nextView}`);
     io.in(lobbyID).emit('changeView', data);
   });
+
+  // Lobby ==> InstructionsView
+  client.on('startGame', data => {
+    const { lobbyID, nextView } = data;
+    const myLobbyObj = games[lobbyID];
+
+    io.in(lobbyID).emit('startGame', { myLobbyObj, nextView });
+  })
   
   
   // InstructionsView ==> DrawGameView
   const VIEW_TIME = 1000; // time in MS
-  const GAME_TIME = 1000;
+  const GAME_TIME = 5000;
   client.on('instructionsViewTimeout', data => {
     const { lobbyID } = data;
     const nextView = 'DrawGameView'

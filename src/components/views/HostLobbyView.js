@@ -10,13 +10,24 @@ import PlayerLobbyStatus from '../PlayerLobbyStatus';
 import util from '../../helpers/util'
 
 export default function HostLobbyView(props) {
-  const { username, socket, changeViewHandler, setLobbyHandler, lobbyID, setPlayerObjHandler, playerObj } = props;
+  const { username, socket, changeViewHandler, setLobbyHandler, lobbyID, setPlayerObjHandler, setMyQuadrantHandler, setMyLobbyObjHandler, playerObj } = props;
 
 
   const [state, setState] = useState({
     players: [],
   });
   const { players } = state;
+
+  // === rebuild
+  useEffect(() => {
+    socket.on('startGame', data => {
+      const { myLobbyObj, nextView } = data;
+
+      setMyLobbyObjHandler(myLobbyObj);
+      changeViewHandler(nextView);
+    })
+  }, [])
+  // === rebuild
 
   useEffect(() => {
     const lobbyID = util.generateLobbyID(6);
@@ -37,7 +48,12 @@ export default function HostLobbyView(props) {
             const { lobbyID, players, currentView } = lobbyObj;
             
             socket.emit('joinLobby', { lobbyID });
-            socket.on('playerAdd')
+            // === rebuild
+            socket.on('joinedLobby', data => {
+              const { myQuadrant } = data;
+              setMyQuadrantHandler(myQuadrant);
+            })
+            // === rebuild
           });
 
         });
@@ -66,7 +82,7 @@ export default function HostLobbyView(props) {
     e.preventDefault();
 
     // START GAME
-    socket.emit('changeView', { lobbyID, nextView: 'InstructionsView' });
+    socket.emit('startGame', { lobbyID, nextView: 'InstructionsView' });
   }
 
 

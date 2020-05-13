@@ -17,7 +17,7 @@ const API = 'http://localhost:5555';
 
 
 export default function DrawGameView(props) {
-  const { lobbyID, socket, changeViewHandler, playerObj } = props;
+  const { lobbyID, socket, changeViewHandler, playerObj, myQuadrant, myLobbyObj } = props;
 
   const [state, setState] = useState({
     coordinates: [{
@@ -57,19 +57,32 @@ export default function DrawGameView(props) {
     })
   }, [])
 
+    // === rebuild
     // send final coordinates before view change
     useEffect(() => {
       if(roundFinished) {
-        axios.post(API + '/test', { data: 'test' }).then(msg => {
-          console.log('Server says:', msg);
-        }).catch(err => console.log(err));
+        const PLAYERS_IN_ROOM = Object.keys(myLobbyObj.coordinates).length;
+       
+        const data = {
+          coordinates,
+          lobbyID,
+          myQuadrant,
+          PLAYERS_IN_ROOM
+        }
+        axios.post(API + '/finalCoords', data)
+        .then()
+        .catch(err => console.log(err));
+        // axios.post(API + '/test', { data: 'test' }).then(msg => {
+        //   console.log('Server says:', msg);
+        // }).catch(err => console.log(err));
 
-        socket.emit('saveFinalCoords', { coordinates });
+        // socket.emit('saveFinalCoords', { coordinates });
 
-        console.log('DrawView unmounting...');
-        console.log(playerObj, '<--id');
+        // console.log('DrawView unmounting...');
+        // console.log(playerObj, '<--id');
       }
     }, [roundFinished])
+    // === rebuild
 
   // canvas
   const canvasRef = useRef(null);

@@ -36,7 +36,23 @@ connection.once('open', () => {
 app.get('/', (req, res) => res.send('Welcome!'))
 app.post('/test', (req, res) => {
   console.log('Client sent test data:', req.body);
-  res.json({ msg: 'Post req OK'});
+  res.send('POST successful!');
+});
+app.post('/finalCoords', (req, res) => {
+  const { coordinates, lobbyID, myQuadrant, PLAYERS_IN_ROOM } = req.body;
+  
+  // add coords to games obj
+  games[lobbyID].coordinates[myQuadrant] = coordinates;
+
+  if(Object.keys(games[lobbyID].coordinates).length === PLAYERS_IN_ROOM) {
+    const finalCoordinates = games[lobbyID].coordinates;
+
+    console.log('Sending final coordinates:', finalCoordinates);
+    io.in(lobbyID).emit('finalCoords', finalCoordinates);
+  }
+  // put together
+
+  // io emit to that lobby the final pick and also changeView
 });
 
 
@@ -57,7 +73,7 @@ const handleImageMerge = require('./routes/handleImageMerge');
 io.on('connection', client => {
   // handle DB crud
   handleCRUD(games, client, db);
-  handleGameState(client, db, io);
+  handleGameState(games, client, db, io);
   handleImageMerge(games, client, db, io);
 
   // handle DC client.on('disconnect') STRETCH
