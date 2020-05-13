@@ -16,7 +16,7 @@ export default function HostLobbyView(props) {
   const [state, setState] = useState({
     players: [],
   });
-  const { players, lobbyObj } = state;
+  const { players } = state;
 
   useEffect(() => {
     const lobbyID = util.generateLobbyID(6);
@@ -89,7 +89,7 @@ export default function HostLobbyView(props) {
 
   // render logic
   const greeting = username.trim().length === 0 ? 'Hello!' : `Hello, ${username}!`;
-  const playersList = players.map(player => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={player}/>);
+  const playerList = players.map(player => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={player}/>);
 
 
   return (
@@ -103,7 +103,7 @@ export default function HostLobbyView(props) {
         <p>{lobbyID}</p>
       </div>
 
-      {playersList}
+      {playerList}
 
       <button onClick={e => onClickHandler(e)}>Start game</button>
     </div>

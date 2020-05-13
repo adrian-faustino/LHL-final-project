@@ -13,7 +13,7 @@ import Palette from '../Palette';
 
 
 export default function DrawGameView(props) {
-  const { lobbyID, socket, changeViewHandler } = props;
+  const { lobbyID, socket, changeViewHandler, playerObj } = props;
 
   const [state, setState] = useState({
     coordinates: [{
@@ -57,6 +57,7 @@ export default function DrawGameView(props) {
     useEffect(() => {
       if(roundFinished) {
         socket.emit('saveFinalCoords', { coordinates });
+        console.log(playerObj, '<--id')
       }
     }, [roundFinished])
 

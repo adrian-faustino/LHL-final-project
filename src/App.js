@@ -65,6 +65,7 @@ function App() {
   }
 
   const setPlayerObjHandler = playerObj => {
+    console.log('Setting App component playerObj to',playerObj)
     setState(prev => ({...prev, playerObj}));
   }
 
@@ -93,7 +94,6 @@ function App() {
       {state.view === 'HostLobbyView' &&
       <HostLobbyView
       lobbyID = {state.lobbyID}
-      playerObj={state.playerObj}
       setPlayerObjHandler={setPlayerObjHandler}
       setLobbyHandler={setLobbyHandler}
       socket={state.socket}
@@ -109,6 +109,7 @@ function App() {
 
       {state.view === 'DrawGameView' &&
       <DrawGameView
+      playerObj={state.playerObj}
       socket={state.socket}
       lobbyID={state.lobbyID}
       changeViewHandler={changeViewHandler}/>}
