@@ -26,54 +26,37 @@ export default function HostLobbyView(props) {
   useEffect(() => {
     if(lobbyID) {
     // requests to DB
-    socket.emit('createLobby', { lobbyID }); 
-    socket.on('lobbyCreated', () => {
-      socket.emit('createPlayer', { username, coordinates: [] });
-      socket.on('playerCreated', playerObj => {
-        socket.emit('addToPlayers', { lobbyID, playerObj });
-        setPlayerObjHandler(playerObj);
+      socket.emit('createLobby', { lobbyID }); 
+      socket.on('lobbyCreated', () => {
+        socket.emit('createPlayer', { username, coordinates: [] });
+        socket.on('playerCreated', playerObj => {
+          socket.emit('addToPlayers', { lobbyID, playerObj });
+          setPlayerObjHandler(playerObj);
 
-        socket.on('playerAdded', lobbyObj => {
-          const { lobbyID, players, currentView } = lobbyObj;
-          
-          socket.emit('joinLobby', { lobbyID });
-          socket.on('playerAdd')
+          socket.on('playerAdded', lobbyObj => {
+            const { lobbyID, players, currentView } = lobbyObj;
+            
+            socket.emit('joinLobby', { lobbyID });
+            socket.on('playerAdd')
+          });
+
         });
-
       });
-    });
 
-    // listeners
-    socket.on('userJoinLobby', () => {
-      socket.emit('findLobby', { lobbyID });
-      socket.on('lobbyFound', lobbyObj => {
-        const { players, lobbyID, currentView } = lobbyObj;
-        console.log('Updating players array with...', lobbyObj)
-        setState(prev => ({...prev, players, lobbyObj}));
+      // listeners
+      socket.on('userJoinLobby', () => {
+        socket.emit('findLobby', { lobbyID });
+        socket.on('lobbyFound', lobbyObj => {
+          const { players, lobbyID, currentView } = lobbyObj;
+          console.log('Updating players array with...', lobbyObj)
+          setState(prev => ({...prev, players, lobbyObj}));
+        });
       });
-    });
 
-    // socket.on('gameState', data => {
-    //   console.log('Received game state:', data)
-    //   const { lobbyID, players } = data;
-    //   setState({...state, players, lobbyID});
-    // });
-
-    socket.on('changeView', data => {
-      const { nextView } = data;
-      changeViewHandler(nextView);
-    });
-
-    // socket.on('playerObj', playerObj => {
-    //   setState({...state, playerObj});
-    //   socket.emit('addToPlayers', { lobbyID, playerObj });
-    //  });
-
-    // return () => {
-    //   console.log('Host unmounted');
-    //   console.log('lobbyID =>', lobbyID)
-    //   socket.emit('hostStareGame');
-    // }
+      socket.on('changeView', data => {
+        const { nextView } = data;
+        changeViewHandler(nextView);
+      });
     }
   }, [lobbyID]);
 

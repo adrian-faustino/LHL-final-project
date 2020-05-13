@@ -21,7 +21,9 @@ export default function GuestLobbyView(props) {
   const { tempInput, host, players, error } = state;
 
   useEffect(() => {
-    socket.on('err', error => setState({...state, error}));
+    socket.on('err', error => {
+      setState(prev => ({...prev, error}));
+    });
 
     console.log('GuestLobbyView mounted with lobbyID', lobbyID);
 
@@ -51,7 +53,7 @@ export default function GuestLobbyView(props) {
           const host = players[0];
           
           console.log('Setting host...', host);
-          setState({...state, players, host});
+          setState(prev => ({...prev, players, host}));
         })
       });
 
@@ -64,14 +66,17 @@ export default function GuestLobbyView(props) {
 
 
   // event handlers
-  const onChangeHandler = e => setState({...state, tempInput: e.target.value});
+  const onChangeHandler = e => {
+    const tempInput = e.target.value;
+    setState(prev => ({...prev, tempInput}));
+  };
 
   // join room logic
   const onSubmitHandler = e => {
     e.preventDefault()
     console.log(`Joining room: ${tempInput}`)
     setLobbyHandler(tempInput);
-  }
+  };
 
  
   // render logic

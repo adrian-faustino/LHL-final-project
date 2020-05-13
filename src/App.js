@@ -32,7 +32,6 @@ function App() {
     socket: null,
     lobbyID: null,
     playerObj: null,
-    test: null
   });
 
   // Socket
@@ -59,17 +58,17 @@ function App() {
   // <LandingView /> helper functions
   const inputChangeHandler = str => {
     const username = str.target.value;
-    setState({...state, username})
+    setState(prev => ({...prev, username}));
   };
 
   const setLobbyHandler = lobbyID => {
     console.log('Setting App component lobbyID to', lobbyID);
-    setState({...state, lobbyID});
+    setState(prev => ({...prev, lobbyID}));
   }
 
   const setPlayerObjHandler = playerObj => {
     console.log('Setting App component playerObj to',playerObj)
-    setState({...state, playerObj, test: playerObj});
+    setState(prev => ({...prev, playerObj}));
   }
 
   // <NavButton
@@ -112,7 +111,6 @@ function App() {
 
       {state.view === 'DrawGameView' &&
       <DrawGameView
-      test={state.test}
       playerObj={state.playerObj}
       socket={state.socket}
       lobbyID={state.lobbyID}
