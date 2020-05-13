@@ -5,11 +5,19 @@ import React, { useEffect } from 'react'
 // subcomponents
 import NavButton from '../NavButton'
 
+// helpers
+import renderFinalHelpers from '../../helpers/renderFinalHelpers';
+
 export default function ResultsView(props) {
 
   const { socket } = props;
 
+  // helpers
+  const { testing } = renderFinalHelpers;
+
   useEffect(() => {
+    testing();
+
     socket.on('finalCoords', data => {
       const { finalCoordinates } = data;
       console.log('Received final coordinates:', data);
@@ -20,6 +28,8 @@ export default function ResultsView(props) {
   return (
     <div>
       <h1>Find me at components/ResultsView.js</h1>
+
+      <canvas></canvas>
 
       <NavButton
       nextView={'ShareView'}
