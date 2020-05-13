@@ -44,8 +44,8 @@ module.exports = function(client, db, io) {
   
   
   // InstructionsView ==> DrawGameView
-  const VIEW_TIME = 5000; // time in MS
-  const GAME_TIME = 5000;
+  const VIEW_TIME = 1000; // time in MS
+  const GAME_TIME = 1000;
   client.on('instructionsViewTimeout', data => {
     const { lobbyID } = data;
     const nextView = 'DrawGameView'

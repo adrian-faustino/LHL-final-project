@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
-import './DrawGameView.css'
+import './DrawGameView.css';
+import axios from 'axios';
 
 // helpers
 import paletteHelpers from '../../helpers/paletteHelpers';
@@ -10,6 +11,9 @@ import drawHelpers from '../../helpers/drawHelpers';
 // subcomponents
 import NavButton from '../NavButton';
 import Palette from '../Palette';
+
+// move this to .env later
+const API = 'http://localhost:5555';
 
 
 export default function DrawGameView(props) {
@@ -56,6 +60,10 @@ export default function DrawGameView(props) {
     // send final coordinates before view change
     useEffect(() => {
       if(roundFinished) {
+        axios.post(API + '/test', { data: 'test' }).then(msg => {
+          console.log('Server says:', msg);
+        }).catch(err => console.log(err));
+
         socket.emit('saveFinalCoords', { coordinates });
 
         console.log('DrawView unmounting...');

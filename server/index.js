@@ -6,24 +6,16 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+// middleware
+app.use(cors());
+app.use(express.json());
+
 // data
 const games = require('./data/games');
 
 // constants
 const PORT = process.env.PORT;
 const DB_URI = process.env.ATLAS_URI;
-const games = {
-  'lobby1' : {
-    quad1: {
-      coordinates: {}
-    },
-    quad2: {},
-    quad3: {},
-    quad4: {}
-  },
-  'lobby2' : {},
-  'lobby3' : {}
-}
 
 
 // database
@@ -43,8 +35,10 @@ connection.once('open', () => {
 // routes
 app.get('/', (req, res) => res.send('Welcome!'))
 app.post('/test', (req, res) => {
-  console.log('Client sent test data:', req);
+  console.log('Client sent test data:', req.body);
+  res.json({ msg: 'Post req OK'});
 });
+
 
 
 // models
