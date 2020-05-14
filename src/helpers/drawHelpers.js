@@ -16,27 +16,17 @@ const onMouseMoveHandler = (e, state, setState, maxWidth, maxHeight) => {
   const { coordinates, drawing, currentColor, currentLineSize } = state;
 
   if(drawing) {
-
-    // console.log('x, y:', testx, texty);
-    // const maxWidth = e.target.offsetWidth;
-    // const maxHeight = e.target.offsetHeight;
-
-    // rebuild
     const x_offset = window.innerWidth / 2 - (maxWidth / 2);
-
+    const y_offset = window.innerHeight / 2 - (maxHeight / 2);
 
     let x = e.clientX - x_offset;
-    let y = e.clientY;
+    let y = e.clientY - y_offset;
 
-    console.log('X ==>', x)
-    console.log('Y ==>', y)
-  
     // percentage relative to screen
     y = y / maxHeight;
-    x = x / maxWidth; //rebuild
+    x = x / maxWidth;
     const color = currentColor;
     const lineSize = currentLineSize;
-    console.log('ratio:', x, y);
 
     const coordinate = {
       x,

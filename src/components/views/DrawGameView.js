@@ -109,8 +109,9 @@ export default function DrawGameView(props) {
 
 
   return (
-    <div className="no-animaion">
+    <div className="DrawGameView--container">
       <canvas
+      className="DrawGameView--canvas"
       style={_canvasStyles}
       ref={canvasRef}
       width={CANVAS_W}

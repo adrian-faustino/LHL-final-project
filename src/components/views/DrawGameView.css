@@ -1,8 +1,8 @@
-#canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border: 2px solid white;
-  height: 100vh;
-  width: 100vw;
+.DrawGameView--container {
+  display: grid;
+}
+
+.DrawGameView--canvas {
+  justify-self: center;
+  margin-top: 30px;
 }
