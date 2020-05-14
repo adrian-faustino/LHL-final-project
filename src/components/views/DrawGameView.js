@@ -16,7 +16,6 @@ import MainImage from '../MainImage';
 // styles
 import DrawGameViewStyles from './DrawGameViewStyles';
 const { canvasStyles } = DrawGameViewStyles;
-const _canvasStyles = canvasStyles();
 
 // move this to .env later
 const API = 'http://localhost:5555';
@@ -104,6 +103,12 @@ export default function DrawGameView(props) {
       draw(ctx, data);
     });
   });
+
+  // bg logic
+  const _canvasStyles = canvasStyles();
+  const bg_h = window.innerHeight * 2 + 'px';
+  const bg_w = bg_h * 0.8 + 'px'// change ratio later
+  _canvasStyles['backgroundSize'] = `${bg_h} ${bg_w}`;
 
 
   return (
