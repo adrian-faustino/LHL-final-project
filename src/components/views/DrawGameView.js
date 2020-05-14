@@ -31,10 +31,12 @@ export default function DrawGameView(props) {
     currentLineSize: 5,
     open: false,
     roundTime: null,
-    roundFinished:false
+    roundFinished:false,
+    maxWidth: null,
+    maxHeight: null
   });
 
-  const { coordinates, drawing, currentColor, currentLineSize, open, roundTime, roundFinished } = state;
+  const { coordinates, drawing, currentColor, currentLineSize, open, roundTime, roundFinished, maxWidth, maxHeight } = state;
 
 
   // helpers
