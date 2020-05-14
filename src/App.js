@@ -120,6 +120,7 @@ function App() {
 
       {state.view === 'InstructionsView' &&
       <InstructionsView
+      myQuadrant={state.myQuadrant}
       lobbyID={state.lobbyID}
       username={state.username}
       socket={state.socket}

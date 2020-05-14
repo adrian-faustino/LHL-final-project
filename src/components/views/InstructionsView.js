@@ -5,7 +5,7 @@ import NavButton from '../NavButton'
 import MainImage from '../MainImage'
 
 export default function InstructionsView(props) {
-  const { username, socket, changeViewHandler, lobbyID } = props;
+  const { username, socket, changeViewHandler, lobbyID, myQuadrant } = props;
 
 
   useEffect(() => {
@@ -35,7 +35,8 @@ export default function InstructionsView(props) {
 
       <h3>Your goal is to draw a picture as a team!</h3>
 
-      <MainImage />
+      <MainImage
+      myQuadrant={myQuadrant}/>
 
       <p>You will draw this section of the image. You will have 3 minutes to draw!</p>
 
