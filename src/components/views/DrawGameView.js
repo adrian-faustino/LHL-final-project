@@ -59,32 +59,24 @@ export default function DrawGameView(props) {
     })
   }, [])
 
-    // === rebuild
-    // send final coordinates before view change
-    useEffect(() => {
-      if(roundFinished) {
-        const PLAYERS_IN_ROOM = Object.keys(myLobbyObj.coordinates).length;
-       
-        const data = {
-          coordinates,
-          lobbyID,
-          myQuadrant,
-          PLAYERS_IN_ROOM
-        }
-        axios.post(API + '/finalCoords', data)
-        .then()
-        .catch(err => console.log(err));
-        // axios.post(API + '/test', { data: 'test' }).then(msg => {
-        //   console.log('Server says:', msg);
-        // }).catch(err => console.log(err));
-
-        // socket.emit('saveFinalCoords', { coordinates });
-
-        // console.log('DrawView unmounting...');
-        // console.log(playerObj, '<--id');
+  // === rebuild
+  // send final coordinates before view change
+  useEffect(() => {
+    if(roundFinished) {
+      const PLAYERS_IN_ROOM = Object.keys(myLobbyObj.coordinates).length;
+      
+      const data = {
+        coordinates,
+        lobbyID,
+        myQuadrant,
+        PLAYERS_IN_ROOM
       }
-    }, [roundFinished])
-    // === rebuild
+      axios.post(API + '/finalCoords', data)
+      .then()
+      .catch(err => console.log(err));
+    }
+  }, [roundFinished])
+  // === rebuild
 
   // canvas
   const canvasRef = useRef(null);
@@ -104,6 +96,11 @@ export default function DrawGameView(props) {
     });
   });
 
+  // constants
+  const CANVAS_H = window.innerHeight * 0.9;
+  const CANVAS_W = CANVAS_H * 0.8;
+  console.log('CANVAS W, CAMVAS H', CANVAS_W, CANVAS_H)
+
   // bg logic
   const _canvasStyles = canvasStyles();
   const bg_h = window.innerHeight * 2 + 'px';
@@ -116,11 +113,11 @@ export default function DrawGameView(props) {
       <canvas
       style={_canvasStyles}
       ref={canvasRef}
-      width={window.innerWidth}
-      height={window.innerHeight}
+      width={CANVAS_W}
+      height={CANVAS_H}
       onMouseDown={e => onMouseDownHandler(e, state, setState)}
       onMouseUp={e => onMouseUpHandler(e, state, setState)}
-      onMouseMove={e => onMouseMoveHandler(e, state, setState)}/>
+      onMouseMove={e => onMouseMoveHandler(e, state, setState, CANVAS_W, CANVAS_H)}/>
 
       <button
       className="palette--button"
