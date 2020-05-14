@@ -13,6 +13,11 @@ import NavButton from '../NavButton';
 import Palette from '../Palette';
 import MainImage from '../MainImage';
 
+// styles
+import DrawGameViewStyles from './DrawGameViewStyles';
+const { canvasStyles } = DrawGameViewStyles;
+const _canvasStyles = canvasStyles();
+
 // move this to .env later
 const API = 'http://localhost:5555';
 
@@ -104,6 +109,7 @@ export default function DrawGameView(props) {
   return (
     <div className="no-animaion">
       <canvas
+      style={_canvasStyles}
       ref={canvasRef}
       width={window.innerWidth}
       height={window.innerHeight}
@@ -118,7 +124,7 @@ export default function DrawGameView(props) {
 
       <MainImage
       myQuadrant={myQuadrant}
-      view={view}/>
+      view={view}></MainImage>
 
       {open && (<Palette
         setState={setState}

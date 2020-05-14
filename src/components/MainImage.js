@@ -32,9 +32,9 @@ export default function MainImage(props) {
   }
 
   if(view) {
-    _imgContainerStyles['position'] = 'absolute';
-    _imgContainerStyles['top'] = '10px';
-    _imgContainerStyles['left'] = '10px';
+    // _imgContainerStyles['position'] = 'absolute';
+    // _imgContainerStyles['top'] = '10px';
+    // _imgContainerStyles['left'] = '10px';
   }
 
   return (
