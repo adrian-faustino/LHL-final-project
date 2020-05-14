@@ -20,12 +20,7 @@ export default function DrawGameView(props) {
   const { lobbyID, socket, changeViewHandler, playerObj, myQuadrant, myLobbyObj } = props;
 
   const [state, setState] = useState({
-    coordinates: [{
-      x: null,
-      y: null,
-      color: null,
-      lineSize: null
-    }],
+    coordinates: [],
     drawing: false,
     currentColor: 'blue',
     currentLineSize: 5,

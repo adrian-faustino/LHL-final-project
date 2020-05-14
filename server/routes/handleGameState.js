@@ -79,14 +79,14 @@ module.exports = function(games, client, db, io) {
   
   // InstructionsView ==> DrawGameView
   const VIEW_TIME = 1000; // time in ms
-  const GAME_TIME = 10000; //  time in ms
+  const GAME_TIME = 1000; //  time in ms
   client.on('instructionsViewTimeout', data => {
     const { lobbyID } = data;
     const nextView = 'DrawGameView'
 
     setTimeout(() => {
       console.log(`View change: Instructions => Draw in lobby ${lobbyID}`);
-      client.to(lobbyID).emit('changeView', { nextView });
+      client.emit('changeView', { nextView });
     }, VIEW_TIME);
   })
 
@@ -96,8 +96,8 @@ module.exports = function(games, client, db, io) {
 
     console.log(`View change: Draw => Results in lobby ${lobbyID}`);
     setTimeout(() => {
-      client.to(lobbyID).emit('roundFinished');
-      client.to(lobbyID).emit('changeView', { nextView });
+      client.emit('roundFinished');
+      client.emit('changeView', { nextView });
     }, GAME_TIME);
   })
   
