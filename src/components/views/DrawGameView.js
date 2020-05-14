@@ -94,7 +94,13 @@ export default function DrawGameView(props) {
     ctx.clearRect(0, 0, window.innerHeight, window.innerWidth);
     coordinates.forEach(coordinate => {
       const { x, y, color, lineSize } = coordinate;
-      draw(ctx, coordinate);
+      const data = {
+        x: x * maxWidth,
+        y: y * maxHeight,
+        color,
+        lineSize
+      }
+      draw(ctx, data);
     });
   });
 

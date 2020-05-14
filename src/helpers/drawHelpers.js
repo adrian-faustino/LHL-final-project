@@ -34,7 +34,7 @@ const onMouseMoveHandler = (e, state, setState) => {
       color,
       lineSize
     }
-    setState(prev => ({...prev, coordinates: [...coordinates, coordinate]}));
+    setState(prev => ({...prev, coordinates: [...coordinates, coordinate], maxWidth, maxHeight}));
   }
 
 };
