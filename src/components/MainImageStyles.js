@@ -1,10 +1,12 @@
+// constants
+const window_h = window.innerHeight;
+const window_w = window.innerWidth;
+
 const imgStyles = (key, val) => {
   const style = {
-    position: 'relative',
-    bottom: '400px',
-    right: '300px',
     height: '800px',
-    width: '600px'
+    width: '600px',
+    transform: 'translate(0, -50%)'
   }
   
   if(key) {
@@ -32,8 +34,8 @@ const containerWrapperStyles = (key, val) => {
     height: '100vh',
     width: '100vw',
     display: 'grid',
-    'justify-content': 'center',
-    'align-items': 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
   
   if(key) {
