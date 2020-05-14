@@ -1,7 +1,9 @@
 const draw = (ctx, strokeData) => {
   const { _x, _y, color, lineSize } = strokeData;
-
+  
+  ctx.lineCap = 'round';
   ctx.strokeStyle = color;
+  ctx.lineWidth = lineSize;
   ctx.lineTo(_x, _y);
   ctx.stroke();
 }
@@ -12,16 +14,16 @@ const renderQuad_1 = (ctx, coordinates) => {
   coordinates.forEach(coordinate => {
     const { x, y, color, lineSize } = coordinate;
 
-    ctx.strokeStyle = color;
-    ctx.lineWidth = lineSize;
-    ctx.lineCap = 'round';
-
     // CHANGE RATIO HERE
     const _x = (x * 0.5) * window.innerWidth;
     const _y = (y * 0.5) * window.innerHeight;
+
+    const strokeData = {
+      _x, _y, color, lineSize
+    };
+
     ctx.beginPath();
-    ctx.lineTo(_x, _y);
-    ctx.stroke();
+    draw(ctx, strokeData);
   })
 };
 
