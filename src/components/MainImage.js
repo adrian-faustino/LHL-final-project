@@ -4,7 +4,8 @@ import React from 'react'
 import IMG_SRC from '../assets/mona-lisa.jpg'
 
 // styles
-import './MainImage.css'
+import './MainImage.css';
+import MainImageStyles from './MainImageStyles';
 
 export default function MainImage(props) {
   const { myQuadrant } = props;
@@ -15,7 +16,10 @@ export default function MainImage(props) {
   const IMG_WIDTH = IMG_CONTAINER_HEIGHT * 2;
   const IMG_HEIGHT = IMG_CONTAINER_HEIGHT * 2;
 
-  //
+  // styles
+  const { imgStyles,
+    imgContainerStyles,
+    containerWrapperStyles } = MainImageStyles;
 
   return (
     <div className="MainImage__container-wrapper">
@@ -23,8 +27,7 @@ export default function MainImage(props) {
       height={IMG_CONTAINER_HEIGHT}>
         <img
         className="MainImage__image"
-        width={IMG_WIDTH}
-        height={IMG_HEIGHT}
+        style={imgStyles}
         src={IMG_SRC}/>
       </div>
     </div>
