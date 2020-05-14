@@ -1,3 +1,6 @@
+// CONSTANTS
+const MIN_DRAWTIME = 2000; // time in ms
+
 const draw = (ctx, strokeData) => {
   const { _x, _y, color, lineSize } = strokeData;
   
@@ -9,21 +12,24 @@ const draw = (ctx, strokeData) => {
 }
 
 const renderQuad_1 = (ctx, coordinates) => {
-
+  let delay = 0; // for replay feature
 
   coordinates.forEach(coordinate => {
     const { x, y, color, lineSize } = coordinate;
 
-    // CHANGE RATIO HERE
+    // CHANGE SCREEN RATIO HERE
     const _x = (x * 0.5) * window.innerWidth;
     const _y = (y * 0.5) * window.innerHeight;
 
     const strokeData = {
       _x, _y, color, lineSize
     };
-
-    ctx.beginPath();
-    draw(ctx, strokeData);
+    
+    delay += (MIN_DRAWTIME / coordinates.length) + 3;
+    setTimeout(() => {
+      ctx.beginPath();
+      draw(ctx, strokeData);
+    }, delay);
   })
 };
 

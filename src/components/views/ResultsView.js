@@ -37,6 +37,8 @@ export default function ResultsView(props) {
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, window.innerHeight, window.innerWidth);
     if(finalCoordinates) {
+      console.log('Setting min drawtime...');
+
       renderQuadrants(ctx, finalCoordinates);
     }
   });
