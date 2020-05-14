@@ -33,17 +33,76 @@ const renderQuad_1 = (ctx, coordinates) => {
   })
 };
 
-const renderQuad_2 = (ctx, coordinates) => {
 
+const renderQuad_2 = (ctx, coordinates) => {
+  let delay = 0; // for replay feature
+
+  coordinates.forEach(coordinate => {
+    const { x, y, color, lineSize } = coordinate;
+
+    // CHANGE SCREEN RATIO HERE
+    const _x = ( (x * 0.5) + 0.5 )* window.innerWidth;
+    const _y = (y * 0.5) * window.innerHeight;
+
+    const strokeData = {
+      _x, _y, color, lineSize
+    };
+    
+    delay += (MIN_DRAWTIME / coordinates.length) + 3;
+    setTimeout(() => {
+      ctx.beginPath();
+      draw(ctx, strokeData);
+    }, delay);
+  })
 };
+
 
 const renderQuad_3 = (ctx, coordinates) => {
+  let delay = 0; // for replay feature
 
+  coordinates.forEach(coordinate => {
+    const { x, y, color, lineSize } = coordinate;
+
+    // CHANGE SCREEN RATIO HERE
+    const _x = (x * 0.5) * window.innerWidth;
+    const _y = (y * 0.5) * window.innerHeight;
+
+    const strokeData = {
+      _x, _y, color, lineSize
+    };
+    
+    delay += (MIN_DRAWTIME / coordinates.length) + 3;
+    setTimeout(() => {
+      ctx.beginPath();
+      draw(ctx, strokeData);
+    }, delay);
+  })
 };
+
 
 const renderQuad_4 = (ctx, coordinates) => {
+  let delay = 0; // for replay feature
 
+  coordinates.forEach(coordinate => {
+    const { x, y, color, lineSize } = coordinate;
+
+    // CHANGE SCREEN RATIO HERE
+    const _x = (x * 0.5) * window.innerWidth;
+    const _y = (y * 0.5) * window.innerHeight;
+
+    const strokeData = {
+      _x, _y, color, lineSize
+    };
+    
+    delay += (MIN_DRAWTIME / coordinates.length) + 3;
+    setTimeout(() => {
+      ctx.beginPath();
+      draw(ctx, strokeData);
+    }, delay);
+  })
 };
+
+
 
 
 
@@ -60,11 +119,9 @@ const renderQuadrants = (ctx, finalCoordinates) => {
     if(quadrant === 'quadrant_1') {
       renderQuad_1(ctx, coordinates);
     } else if(quadrant === 'quadrant_2') {
-      
-    
+      renderQuad_2(ctx, coordinates)
     } else if(quadrant === 'quadrant_3') {
-
-    
+      
     } else if(quadrant === 'quadrant_4') {
 
     }
