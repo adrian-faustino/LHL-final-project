@@ -42,9 +42,6 @@ const onMouseMoveHandler = (e, state, setState) => {
 
 const draw = (ctx, coordinate) => {
   const { x, y, color, lineSize } = coordinate;
-  
-  // const new_x = x * window.innerWidth;
-  // const new_y = y * window.innerHeight;
 
   ctx.strokeStyle = color;
   ctx.lineWidth = lineSize;
