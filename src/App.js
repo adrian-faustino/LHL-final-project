@@ -128,6 +128,7 @@ function App() {
 
       {state.view === 'DrawGameView' &&
       <DrawGameView
+      view={state.view}
       myLobbyObj={state.myLobbyObj}
       myQuadrant={state.myQuadrant}
       playerObj={state.playerObj}

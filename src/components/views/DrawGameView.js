@@ -11,13 +11,14 @@ import drawHelpers from '../../helpers/drawHelpers';
 // subcomponents
 import NavButton from '../NavButton';
 import Palette from '../Palette';
+import MainImage from '../MainImage';
 
 // move this to .env later
 const API = 'http://localhost:5555';
 
 
 export default function DrawGameView(props) {
-  const { lobbyID, socket, changeViewHandler, playerObj, myQuadrant, myLobbyObj } = props;
+  const { lobbyID, socket, changeViewHandler, playerObj, myQuadrant, myLobbyObj, view } = props;
 
   const [state, setState] = useState({
     coordinates: [],
@@ -115,6 +116,9 @@ export default function DrawGameView(props) {
       onClick={e=> togglePalette(e, state, setState)}
       ></button>
 
+      <MainImage
+      myQuadrant={myQuadrant}
+      view={view}/>
 
       {open && (<Palette
         setState={setState}
