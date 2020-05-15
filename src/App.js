@@ -65,6 +65,7 @@ function App() {
   
   // <NavButton /> helper functions
   const changeViewHandler = view => {
+    console.log('Updating view to:', view)
     setState(prev => ({...prev, view}));
   }
 

@@ -77,6 +77,7 @@ export default function HostLobbyView(props) {
   /** START GAME BUTTON - add logic later for skip **/
   const onClickHandler = e => {
     e.preventDefault();
+    console.log('Starting game...')
     socket.emit('startGame', { lobbyID, nextView: 'InstructionsView' });
   }
 

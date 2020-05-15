@@ -11,33 +11,20 @@ module.exports = function(games, client, db, io) {
     client.join(lobbyID);
     io.in(lobbyID).emit('newUserJoined');
   });
-
-  client.on('changeView', data => {
-    const { lobbyID, nextView } = data;
-    io.in(lobbyID).emit('changeView', nextView);
-  })
   // === bigrebuld
 
 
   // ===> VIEW CHANGE HANDLERS
 
   /* Given 'lobbyID', trigger view changes for all players in a lobby */
-  /* ==> Inteded this for host start button. Once clicked, this will be called */
-  client.on('changeView', data => {
-    const { lobbyID, nextView } = data;
-    
-    console.log(`Emitting changeView to everyone in lobby ${lobbyID} to view: ${nextView}`);
-    io.in(lobbyID).emit('changeView', data);
-  });
 
-  // Lobby ==> InstructionsView
+  // === bigrebuild
   client.on('startGame', data => {
     const { lobbyID, nextView } = data;
-    const myLobbyObj = games[lobbyID];
-
-    io.in(lobbyID).emit('startGame', { myLobbyObj, nextView });
+    io.in(lobbyID).emit('changeView', nextView);
   })
-  
+  // === bigrebuild
+
   
   // InstructionsView ==> DrawGameView
   const VIEW_TIME = 1000; // time in ms
