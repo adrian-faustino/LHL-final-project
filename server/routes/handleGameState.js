@@ -5,60 +5,18 @@ module.exports = function(games, client, db, io) {
   // constants
   const MAX_PLAYERS = 4;
 
-  /* Given 'lobbyID', allow users to join a lobby */
-  client.on('joinLobby', data => {
-    const { lobbyID } = data;
-
+  // === bigrebuild
+  client.on('joinLobby', lobbyID => {
     console.log(`Attempting to join lobby ${lobbyID}...`);
-
-    // === rebuild
-    const currentLobby = games[lobbyID].coordinates;
-    if(Object.keys(currentLobby).length > MAX_PLAYERS) {
-      console.log('Failed to join. Lobby is full.');
-      return client.emit('err', 'Sorry, that lobby is full!');
-    }
-    let myQuadrant = '';
-    if(currentLobby) {
-      if(!currentLobby.hasOwnProperty('quadrant_1')) {
-        myQuadrant = 'quadrant_1';
-      } else if (!currentLobby.hasOwnProperty('quadrant_2')) {
-        myQuadrant = 'quadrant_2';
-      } else if (!currentLobby.hasOwnProperty('quadrant_3')) {
-        myQuadrant = 'quadrant_3';
-      } else if(!currentLobby.hasOwnProperty('quadrant_4')) {
-        myQuadrant = 'quadrant_4';
-      } else {
-        console.log('Lobby is full! - games');
-        return client.emit('err', 'Lobby is full!');
-      }
-    } else {
-      console.log(`Lobby doesn't exist. - games`);
-      return client.emit('err', `Lobby doesn't exist`);
-    }
-
-    currentLobby[myQuadrant] = [];
-    client.emit('joinedLobby', { myQuadrant })
     client.join(lobbyID);
-    // === rebuild
-
-    Lobby.findOne({ lobbyID }, (err, lobbyObj) => {
-      if(err) {
-        console.log(err);
-        client.emit('err', err);
-      }
-
-      if(lobbyObj.players.length >= MAX_PLAYERS) {
-        console.log('Lobby is full!');
-        client.emit('err', 'Lobby is full!');
-      } else {
-        console.log(`Joined lobby: ${lobbyID}`);
-        // client.join(lobbyID); rebuild
-
-        // emit to all users to let them know someone joined the lobby
-        io.in(lobbyID).emit('userJoinLobby');
-      }
-    });
+    io.in(lobbyID).emit('newUserJoined');
   });
+
+  client.on('changeView', data => {
+    const { lobbyID, nextView } = data;
+    io.in(lobbyID).emit('changeView', nextView);
+  })
+  // === bigrebuld
 
 
   // ===> VIEW CHANGE HANDLERS

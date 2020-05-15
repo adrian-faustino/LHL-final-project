@@ -5,100 +5,89 @@ import uuid from 'react-uuid';
 import util from '../../helpers/util';
 
 
+
 // subcomponents
 import PlayerLobbyStatus from '../PlayerLobbyStatus';
+import axios from 'axios';
+
+// constants
+const API = 'http://localhost:5555';
+
 
 export default function GuestLobbyView(props) {
-  const { socket, username, changeViewHandler, setLobbyHandler, lobbyID, setPlayerObjHandler, setMyQuadrantHandler, setMyLobbyObjHandler, playerObj } = props;
-
+  // === big rebuild 
+  const { myUsername, socket, lobbyID, myLobbyObj, setMyLobbyObjHandler, setMyPlayerIDHandler, setLobbyIDHandler, changeViewHandler } = props;
+  
   const [state, setState] = useState({
-    lobbyObj: null,
     tempInput: '',
     host: '',
-    players: [],
     error: ''
   })
-  const { tempInput, host, players, error } = state;
-
-  // === rebuild
-  useEffect(data => {
-    socket.on('startGame', data => {
-      const { myLobbyObj, nextView } = data;
-
-      setMyLobbyObjHandler(myLobbyObj);
-      changeViewHandler(nextView);
-    })
-  }, [])
-  // === rebuild
-
-  useEffect(() => {
-    socket.on('err', error => {
-      setState(prev => ({...prev, error}));
-    });
-
-    console.log('GuestLobbyView mounted with lobbyID', lobbyID);
-
-    if (lobbyID) {
-      console.log('GuestLobbyView mounted with lobbyID', lobbyID);
-      setLobbyHandler(lobbyID);
-
-      socket.emit('createPlayer', { username, coordinate: [] });
-      socket.on('playerCreated', playerObj => {
-        setPlayerObjHandler(playerObj);
-
-        socket.emit('addToPlayers', { lobbyID, playerObj });
-        socket.on('playerAdded', lobbyObj => {
-          const { lobbyID, lobbyobj, players } = lobbyObj;
-
-          socket.emit('joinLobby', { lobbyID });
-          // === rebuild
-          socket.on('joinedLobby', data => {
-            const { myQuadrant } = data;
-            setMyQuadrantHandler(myQuadrant);
-          })
-          // === rebuild
-        });
-      });
-
-      socket.on('userJoinLobby', () => {
-        console.log(`A user has joined the lobby: ${lobbyID}`);
-        socket.emit('findLobby', { lobbyID });
-        socket.on('lobbyFound', lobbyObj => {
-          const { players, lobbyID, currentView } = lobbyObj;
+  const { tempInput, host, error } = state;
   
-          console.log('Updating players array with...', lobbyObj);
-          const host = players[0];
-          
-          console.log('Setting host...', host);
-          setState(prev => ({...prev, players, host}));
+  /** Handle when a new user joins lobby **/
+  useEffect(() => {
+    if(lobbyID) {
+      socket.on('/newUserJoined', () => {
+        axios.post(API + '/reqLobbyInfo', { lobbyID })
+        .then(resp => {
+          const { myLobbyObj } = resp.data;
+          setMyLobbyObjHandler(myLobbyObj);
         })
-      });
-
-      socket.on('changeView', data => {
-        const { nextView } = data;
-        changeViewHandler(nextView);
-      });
+        .catch(err => console.log(err));
+      })
     }
   }, [lobbyID]);
 
+  /** General Listeners **/
+  useEffect(() => {
+    socket.on('changeView', nextView => {
+      changeViewHandler(nextView);
+    })
+  }, [])
 
-  // event handlers
+ 
+  /** Handle user typing lobbyID to join **/
   const onChangeHandler = e => {
     const tempInput = e.target.value;
     setState(prev => ({...prev, tempInput}));
   };
 
-  // join room logic
-  const onSubmitHandler = e => {
+  /** Handle join lobby **/
+  const joinRoomHandler = e => {
     e.preventDefault()
     console.log(`Joining room: ${tempInput}`)
-    setLobbyHandler(tempInput);
+    
+    const data = {
+      lobbyID: tempInput,
+      myUsername
+    };
+    axios.post(API + '/joinLobby', data)
+    .then(resp => {
+      const { myLobbyObj, myPlayerID } = resp.data;
+      console.log('Guest joined room, ', resp.data);
+      setMyPlayerIDHandler(myPlayerID);
+      setMyLobbyObjHandler(myLobbyObj);
+      setLobbyIDHandler(tempInput);
+    })
+    .catch(err => {
+      console.log('Guest failed to join:', err);
+    });
   };
+  // === big rebuild
 
+  /** Usernames list logic **/
+  const usernameList = [];
+  if(myLobbyObj) {
+    const players = myLobbyObj.players;
+    for(let player in players) {
+      usernameList.push(player.username);
+    }
+  }
  
   // render logic
-  const greeting = username.trim().length === 0 ? 'Hello!' : `Hello, ${username}!`;
-  const playerList = players.map(player => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={player}/>);
+  const greeting = myUsername.trim().length === 0 ? 'Hello!' : `Hello, ${myUsername}!`;
+  const playerList = usernameList.map(username => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={username}/>);
 
   return (
     <div>
@@ -111,7 +100,7 @@ export default function GuestLobbyView(props) {
         placeholder="Enter Lobby ID"/>
         <button
         type="submit"
-        onClick={e => onSubmitHandler(e)}>Join</button>
+        onClick={e => joinRoomHandler(e)}>Join</button>
       </form>
       )}
 
@@ -119,6 +108,7 @@ export default function GuestLobbyView(props) {
 
       <h1>{greeting}</h1>
       {host && <h2>Welcome to {host}'s lobby!</h2>}
+
       {playerList}
     
       

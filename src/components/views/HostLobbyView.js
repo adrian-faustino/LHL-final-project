@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import uuid from 'react-uuid'
 import "./HostLobbyView.css";
+import axios from 'axios';
 
 // subcomponents
 import NavButton from '../NavButton'
@@ -9,88 +10,91 @@ import PlayerLobbyStatus from '../PlayerLobbyStatus';
 // Helpers
 import util from '../../helpers/util'
 
+const { generateLobbyID } = util;
+
+// constants
+const API = 'http://localhost:5555';
+
 export default function HostLobbyView(props) {
-  const { username, socket, changeViewHandler, setLobbyHandler, lobbyID, setPlayerObjHandler, setMyQuadrantHandler, setMyLobbyObjHandler, playerObj } = props;
+  // ===bigrebuild
+  const { myUsername, socket, lobbyID, myLobbyObj, setMyLobbyObjHandler, setMyPlayerIDHandler, setLobbyIDHandler, changeViewHandler } = props;
 
-
-  const [state, setState] = useState({
-    players: [],
-  });
-  const { players } = state;
-
-  // === rebuild
+  /** Handle create lobby **/
   useEffect(() => {
-    socket.on('startGame', data => {
-      const { myLobbyObj, nextView } = data;
+    const genLobbyID = generateLobbyID(6);
+    const data = { genLobbyID, myUsername }
+    axios.post(API + '/createLobby', data)
+      .then(resp => {
+        const myLobbyObj = resp.data;
+        console.log('Created lobby:', myLobbyObj)
+        setMyLobbyObjHandler(myLobbyObj);
+        setLobbyIDHandler(genLobbyID);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
-      setMyLobbyObjHandler(myLobbyObj);
-      changeViewHandler(nextView);
-    })
-  }, [])
-  // === rebuild
-
-  useEffect(() => {
-    const lobbyID = util.generateLobbyID(6);
-    setLobbyHandler(lobbyID);
-  }, [])
-
+  /** Handle join lobby **/
   useEffect(() => {
     if(lobbyID) {
-    // requests to DB
-      socket.emit('createLobby', { lobbyID }); 
-      socket.on('lobbyCreated', () => {
-        socket.emit('createPlayer', { username, coordinates: [] });
-        socket.on('playerCreated', playerObj => {
-          socket.emit('addToPlayers', { lobbyID, playerObj });
-          setPlayerObjHandler(playerObj);
+      console.log('Host joining lobby...');
+      const data = { lobbyID, myUsername };
+      axios.post(API + '/joinLobby', data)
+      .then(resp => {
+        const { myLobbyObj, myPlayerID } = resp.data;
+        console.log('Host: joined room:', resp.data);
+        setMyPlayerIDHandler(myPlayerID);
+        setMyLobbyObjHandler(myLobbyObj);
+        
+        socket.emit('joinLobby', lobbyID);
+      })
+      .catch(err => console.log(err));
+    }
+  }, [lobbyID])
 
-          socket.on('playerAdded', lobbyObj => {
-            const { lobbyID, players, currentView } = lobbyObj;
-            
-            socket.emit('joinLobby', { lobbyID });
-            // === rebuild
-            socket.on('joinedLobby', data => {
-              const { myQuadrant } = data;
-              setMyQuadrantHandler(myQuadrant);
-            })
-            // === rebuild
-          });
-
-        });
-      });
-
-      // listeners
-      socket.on('userJoinLobby', () => {
-        socket.emit('findLobby', { lobbyID });
-        socket.on('lobbyFound', lobbyObj => {
-          const { players, lobbyID, currentView } = lobbyObj;
-          console.log('Updating players array with...', lobbyObj)
-          setState(prev => ({...prev, players, lobbyObj}));
-        });
-      });
-
-      socket.on('changeView', data => {
-        const { nextView } = data;
-        changeViewHandler(nextView);
+  /** Handle when a new user joins lobby */
+  useEffect(() => {
+    if(lobbyID) {
+      socket.on('newUserJoined', () => {
+        axios.post(API + '/reqLobbyInfo', { lobbyID })
+        .then(resp => {
+          const { myLobbyObj } = resp.data;
+          setMyLobbyObjHandler(myLobbyObj);
+        })
+        .catch(err => console.log(err));
       });
     }
   }, [lobbyID]);
 
+  /** General Listeners */
+  useEffect(() => {
+    socket.on('changeView', nextView => {
+      changeViewHandler(nextView);
+    })
+  }, [])
 
-  // event handlers
+
+  /** START GAME BUTTON - add logic later for skip **/
   const onClickHandler = e => {
     e.preventDefault();
-
-    // START GAME
     socket.emit('startGame', { lobbyID, nextView: 'InstructionsView' });
   }
 
 
+  /** Usernames list logic **/
+  const usernameList = [];
+  if(myLobbyObj) {
+    const players = myLobbyObj.players;
+    for(let player in players) {
+      usernameList.push(player.username);
+    }
+  }
+
+
   // render logic
-  const greeting = username.trim().length === 0 ? 'Hello!' : `Hello, ${username}!`;
-  const playerList = players.map(player => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={player}/>);
+  const greeting = myUsername.trim().length === 0 ? 'Hello!' : `Hello, ${myUsername}!`;
+  const playerList = usernameList.map(username => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={username}/>);
 
-
+  // === big rebuild
   return (
     <div className="main-container">
       <h1 style={{color: "red", fontSize: "14px"}}>HostLobbyView.js</h1>

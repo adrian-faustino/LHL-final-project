@@ -17,6 +17,7 @@ import NavButton from './components/NavButton';
 
 function App() {
 
+  // ===bigrebuild
   // constants
   const ENDPOINT = "http://localhost:5555"
 
@@ -28,30 +29,40 @@ function App() {
   */
   const [state, setState] = useState({
     view: 'LandingView',
-    username: '',
+    myUsername: '',
     socket: null,
     lobbyID: null,
-    playerObj: null,
+    myPlayerID: null,
     myQuadrant: null,
     myLobbyObj: null
   });
 
-  // Socket
+  const { myUsername, socket, lobbyID, myPlayerID, myQuadrant, myLobbyObj } = state;
+
+  /** Set up socket and listeners **/
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
-    // as client joins, set the socket
     setState(prev => ({...prev, socket}));
-
-    // listeners
+    
     util.errorListener(socket);
-    socket.on('lobbyID', data => {
-      const { lobbyID } = data;
-      console.log(`Setting lobbyID to ${lobbyID} in App.js`)
-      setState(prev => ({...prev, lobbyID}));
-    })
   }, []);
 
 
+  const setMyLobbyObjHandler = myLobbyObj => {
+    console.log('Setting App component myLobbyObj to', myLobbyObj);
+    setState(prev => ({...prev, myLobbyObj}));
+  }
+
+  const setMyPlayerIDHandler = myPlayerID => {
+    console.log('Setting App component myPlayerID to', myPlayerID);
+    setState(prev => ({...prev, myPlayerID}));
+  }
+
+  const setLobbyIDHandler = lobbyID => {
+    console.log('Setting App component lobbyID to', lobbyID);
+    setState(prev => ({...prev, lobbyID}));
+  }
+  
   // <NavButton /> helper functions
   const changeViewHandler = view => {
     setState(prev => ({...prev, view}));
@@ -59,34 +70,12 @@ function App() {
 
   // <LandingView /> helper functions
   const inputChangeHandler = str => {
-    const username = str.target.value;
-    setState(prev => ({...prev, username}));
+    const myUsername = str.target.value;
+    setState(prev => ({...prev, myUsername}));
   };
 
-  const setLobbyHandler = lobbyID => {
-    console.log('Setting App component lobbyID to', lobbyID);
-    setState(prev => ({...prev, lobbyID}));
-  }
+  // === bigrebuild
 
-  const setPlayerObjHandler = playerObj => {
-    console.log('Setting App component playerObj to',playerObj)
-    setState(prev => ({...prev, playerObj}));
-  }
-  
-  const setMyLobbyObjHandler = myLobbyObj => {
-    console.log('Setting App component myLobbyObj to', myLobbyObj);
-    setState(prev => ({...prev, myLobbyObj}));
-  }
-
-  const setMyQuadrantHandler = myQuadrant => {
-    console.log('Setting App component myQuadrant to', myQuadrant);
-    setState(prev => ({...prev, myQuadrant}));
-  }
-
-  // <NavButton
-  // nextView={'LandingView'}
-  // buttonTitle={'Main Page - Delete this button later'}
-  // changeViewHandler={changeViewHandler}/>
   return (
     <div className="app">
 
@@ -97,32 +86,31 @@ function App() {
 
       {state.view === 'GuestLobbyView' &&
       <GuestLobbyView
-      lobbyID = {state.lobbyID}
-      playerObj={state.playerObj}
+      myUsername={state.myUsername}
+      socket={socket}
+      lobbyID = {lobbyID}
+      myLobbyObj={myLobbyObj}
       setMyLobbyObjHandler={setMyLobbyObjHandler}
-      setMyQuadrantHandler={setMyQuadrantHandler}
-      setPlayerObjHandler={setPlayerObjHandler}
-      setLobbyHandler={setLobbyHandler}
-      socket={state.socket}
-      username={state.username}
+      setMyPlayerIDHandler={setMyPlayerIDHandler}
+      setLobbyIDHandler={setLobbyIDHandler}
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'HostLobbyView' &&
       <HostLobbyView
-      lobbyID = {state.lobbyID}
+      myUsername={myUsername}
+      socket={socket}
+      lobbyID = {lobbyID}
+      myLobbyObj={myLobbyObj}
       setMyLobbyObjHandler={setMyLobbyObjHandler}
-      setMyQuadrantHandler={setMyQuadrantHandler}
-      setPlayerObjHandler={setPlayerObjHandler}
-      setLobbyHandler={setLobbyHandler}
-      socket={state.socket}
-      username={state.username}
+      setMyPlayerIDHandler={setMyPlayerIDHandler}
+      setLobbyIDHandler={setLobbyIDHandler}
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'InstructionsView' &&
       <InstructionsView
       myQuadrant={state.myQuadrant}
       lobbyID={state.lobbyID}
-      username={state.username}
+      myUsername={state.myUsername}
       socket={state.socket}
       changeViewHandler={changeViewHandler}/>}
 
