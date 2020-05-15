@@ -41,7 +41,7 @@ export default function HostLobbyView(props) {
       axios.post(API + '/joinLobby', data)
       .then(resp => {
         const { myLobbyObj, myPlayerID } = resp.data;
-        console.log('Host: joined room:', resp.data);
+        console.log('Successfully joined room:', resp.data);
         setMyPlayerIDHandler(myPlayerID);
         setMyLobbyObjHandler(myLobbyObj);
         
@@ -58,6 +58,7 @@ export default function HostLobbyView(props) {
         axios.post(API + '/reqLobbyInfo', { lobbyID })
         .then(resp => {
           const { myLobbyObj } = resp.data;
+          console.log('Recieved updated lobbyObj:', myLobbyObj)
           setMyLobbyObjHandler(myLobbyObj);
         })
         .catch(err => console.log(err));
@@ -81,20 +82,21 @@ export default function HostLobbyView(props) {
 
 
   /** Usernames list logic **/
-  const usernameList = [];
-  if(myLobbyObj) {
-    const players = myLobbyObj.players;
-    for(let player in players) {
-      usernameList.push(player.username);
-    }
+  const greeting = myUsername.trim().length === 0 ? 'Hello!' : `Hello, ${myUsername}!`;
+
+  let usernames;
+  if(myLobbyObj && myLobbyObj.players) {
+    console.log('Updating player list...');
+    const playerIDs = Object.keys(myLobbyObj.players);
+
+    usernames = playerIDs.map(playerID => {
+      const username = myLobbyObj.players[playerID].username;
+      return <PlayerLobbyStatus key={util.generateLobbyID(4)} username={username}/>;
+    })
   }
 
 
-  // render logic
-  const greeting = myUsername.trim().length === 0 ? 'Hello!' : `Hello, ${myUsername}!`;
-  const playerList = usernameList.map(username => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={username}/>);
 
-  // === big rebuild
   return (
     <div className="main-container">
       <h1 style={{color: "red", fontSize: "14px"}}>HostLobbyView.js</h1>
@@ -106,7 +108,7 @@ export default function HostLobbyView(props) {
         <p>{lobbyID}</p>
       </div>
 
-      {playerList}
+      {usernames}
 
       <button onClick={e => onClickHandler(e)}>Start game</button>
     </div>

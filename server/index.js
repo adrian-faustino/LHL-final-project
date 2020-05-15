@@ -110,32 +110,18 @@ app.post('/joinLobby', (req, res) => {
   /** Add quadrant to coordinates obj **/
   myLobbyObj.coordinates[myQuadrant] = [];
   
-  console.log(`${myUsername} joined lobby ${lobbyID}. This lobby:`, games[lobbyID]);
-  // // constants
-  // console.log('join lobby =>', games[lobbyID])
-  // const MAX_PLAYERS = 4;
-  // if(!games.hasOwnProperty(lobbyID)) {
-  //   console.log(`That lobby doesn't exist!`);
-  //   res.status(400).send({err: `Lobby doesn't exist!`});
-  // } else if (games[lobbyID].players && Object.keys(games[lobbyID].players).length === MAX_PLAYERS) {
-  //   res.status(400).send({err: `Lobby is full!`});
-  // } else {
-  //   const myLobbyObj = games[lobbyID];
-  //   const myPlayerID = generateUniquePID(myLobbyObj.players);
-  //   const myQuadrant = generateQuadrant(myLobbyObj);
-  //   myLobbyObj.players[myPlayerID].username = myUsername;
-  //   myLobbyObj.players[myPlayerID].myQuadrant = myQuadrant;
+  console.log(`${myUsername} joined lobby ${lobbyID}. This lobby:`, myLobbyObj);
 
-  //   const data = { myLobbyObj, myPlayerID };
-  //   res.json(data);
-
-  //   /** When user added to lobby, then add to socket room **/
+  const data = { myLobbyObj, myPlayerID };
+  res.json(data);
 });
 
 /** Handle request for updated game lobby data **/
 app.post('/reqLobbyInfo', (req, res) => {
   const { lobbyID } = req.body;
-  const data = games[lobbyID];
+
+  console.log('User request for lobby obj:', lobbyID);
+  const data = { myLobbyObj: games[lobbyID] }
   res.json(data);
 })
 // === big rebuild

@@ -20,10 +20,9 @@ export default function GuestLobbyView(props) {
   
   const [state, setState] = useState({
     tempInput: '',
-    host: '',
     error: ''
   })
-  const { tempInput, host, error } = state;
+  const { tempInput, error } = state;
   
   /** Handle when a new user joins lobby **/
   useEffect(() => {
@@ -65,29 +64,37 @@ export default function GuestLobbyView(props) {
     axios.post(API + '/joinLobby', data)
     .then(resp => {
       const { myLobbyObj, myPlayerID } = resp.data;
-      console.log('Guest joined room, ', resp.data);
+      console.log('Successfully joined room:', resp.data);
       setMyPlayerIDHandler(myPlayerID);
       setMyLobbyObjHandler(myLobbyObj);
       setLobbyIDHandler(tempInput);
+
+      socket.emit('joinLobby', tempInput);
     })
     .catch(err => {
       console.log('Guest failed to join:', err);
     });
   };
-  // === big rebuild
+
 
   /** Usernames list logic **/
-  const usernameList = [];
-  if(myLobbyObj) {
-    const players = myLobbyObj.players;
-    for(let player in players) {
-      usernameList.push(player.username);
-    }
-  }
- 
-  // render logic
   const greeting = myUsername.trim().length === 0 ? 'Hello!' : `Hello, ${myUsername}!`;
-  const playerList = usernameList.map(username => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={username}/>);
+
+  let usernames;
+  let host;
+  if(myLobbyObj && myLobbyObj.players) {
+    console.log('Updating player list...');
+    const playerIDs = Object.keys(myLobbyObj.players);
+
+    usernames = playerIDs.map(playerID => {
+      const username = myLobbyObj.players[playerID].username;
+      return <PlayerLobbyStatus key={util.generateLobbyID(4)} username={username}/>;
+    })
+
+    /** Set host **/
+    console.log('Setting host...');
+    host = myLobbyObj.host;
+  }
 
   return (
     <div>
@@ -109,7 +116,7 @@ export default function GuestLobbyView(props) {
       <h1>{greeting}</h1>
       {host && <h2>Welcome to {host}'s lobby!</h2>}
 
-      {playerList}
+      {usernames}
     
       
       {host && <h3>Waiting host to start the game...</h3>}
