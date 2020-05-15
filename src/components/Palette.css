@@ -17,7 +17,7 @@
 
 .Palette__container li {
   color: black;
-  font-size: 2.0rem;
+  font-size: 1.8rem;
 }
 
 /* line sizes */
@@ -62,4 +62,30 @@
 }
 #whiteColor {
   color: white;
+}
+
+
+
+@media only screen and (min-width: 700px) {
+  .Palette__container li {
+    color: black;
+  font-size: 2.8rem;
+  }
+  
+  /* line sizes */
+  #sizeXL {
+    font-size: 2.5rem;
+  }
+  
+  #sizeL {
+    font-size: 2.2rem;
+  }
+  
+  #sizeM {
+    font-size: 1.8rem;
+  }
+  
+  #sizeS {
+    font-size: 1.5rem;
+  }
 }

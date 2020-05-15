@@ -1,7 +1,7 @@
 .GuestLobbyView__container--title {
   position: relative;
   display: inline;
-  top: 10vh;
+  top: 15vh;
   margin: 0 auto;
   padding: 1.5rem 1.5rem;
   font-size: 2.0rem;
@@ -10,7 +10,7 @@
 
 .GuestLobbyView__container--IdField {
   position: absolute;
-  top: 35vh;
+  top: 40vh;
   width: 100vw;
   z-index: 1;
 }
@@ -27,10 +27,6 @@
   border-radius: 15px;
 }
 
-/* .GuestLobbyView__form--codeInput::placeholder {
-  color: white;
-} */
-
 .GuestLobbyView__form--btn {
   display: block;
   margin: 0 auto;
@@ -40,11 +36,6 @@
   padding-bottom: 1.0rem;
   border-radius: 15px;
 }
-
-/* .GuestLobbyView__form--btn:hover {
-  background: radial-gradient(#5973EB, #1638D3);
-  color: black
-} */
 
 .GuestLobbyView__namesList--container {
   position: absolute;
@@ -92,7 +83,53 @@
   border-radius: 15px;
 }
 
-/* .GuestLobbyView__btn--cancel:hover {
-  background: radial-gradient(#5973EB, #1638D3);
-  color: black
-} */
+
+@media only screen and (min-width: 700px) {
+  .GuestLobbyView__container--title {
+    padding: 2.5rem 2.5rem;
+    font-size: 3.5rem;
+  }
+  
+  .GuestLobbyView__form--codeInput {
+    line-height: 72px;
+    font-size: 2.0rem;
+  }
+  
+  .GuestLobbyView__form--btn {
+    margin-top: 4.0rem;
+    padding: 2.0rem 0;
+    font-size: 2.0rem;
+  }
+  
+  .GuestLobbyView__namesList--container {
+    top: 30vh;
+  }
+  
+  .GuestLobbyView__namesList--container h2 {
+    font-size: 2.0rem;
+  }
+  
+  .GuestLobbyView__namesList--message {
+    margin: 0 10.0rem;
+    padding: 0;
+    top: 10vh;
+    font-size: 2.0rem;
+  }
+  
+  .GuestLobbyView__namesList {
+    top: 20vh;
+  }
+  
+  .GuestLobbyView__namesList li {
+    margin: 1.5rem 5.0rem;
+    font-size: 1.5rem;;
+    padding: 0.75rem 1.0rem;
+  }
+  
+  .GuestLobbyView__btn--cancel {
+    bottom: 10vh;
+    width: 50vw;
+    padding: 2.0rem 0;
+    font-size: 2.0rem;
+  }
+}

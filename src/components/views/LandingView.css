@@ -1,7 +1,7 @@
 .LandingView__container--title {
   position: relative;
   display: inline;
-  top: 10vh;
+  top: 15vh;
   margin: 0 auto;
   padding: 1.5rem 1.5rem;
   font-size: 2.0rem;
@@ -10,7 +10,7 @@
 
 .LandingView__container--nameForm {
   position: absolute;
-  top: 35vh;
+  top: 40vh;
   width: 100vw;
 }
 
@@ -21,17 +21,13 @@
   border-radius: 15px;
 }
 
-/* .LandingView__form--nameField::placeholder {
-  color: white;
-} */
-
 .LandingView__btnContainer {
   position: absolute;
-  top: 50vh;
+  top: 60vh;
   width: 100vw;
 }
 
-.LandingView__about--container {
+/* .LandingView__about--container {
   position: absolute;
   width: 100vw;
   bottom: 2vh;
@@ -46,9 +42,25 @@
   padding-top: 1.0rem;
   padding-bottom: 1.0rem;
   border-radius: 15px;
-}
-
-/* .LandingView__about--button:hover {
-  background: radial-gradient(#5973EB, #1638D3);
-  color: black
 } */
+
+@media only screen and (min-width: 700px) {
+  .LandingView__container--title {
+    padding: 2.5rem 2.5rem;
+    font-size: 3.5rem;
+  }
+  
+  .LandingView__form--nameField {
+    line-height: 72px;
+    font-size: 2.0rem;
+  }
+  
+  /* .LandingView__about--container {
+    bottom: 2vh;
+  } */
+  
+  /* .LandingView__about--button {
+    margin-top: 2.0rem;
+    padding: 1.0rem 0;
+  } */
+}
