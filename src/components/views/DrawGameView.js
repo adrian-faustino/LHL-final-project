@@ -101,15 +101,12 @@ export default function DrawGameView(props) {
   // constants
   const CANVAS_H = window.innerHeight * 0.9;
   const CANVAS_W = CANVAS_H * 0.8;
-  console.log('CANVAS W, CAMVAS H', CANVAS_W, CANVAS_H)
 
-  // bg logic
+
+  // ** BG LOGIC AND TRANSFORMATIONS ** //
   const _silhouetteStyles = silhouetteStyles();
-
-  // bg transformation
   const bg_h = (window.innerHeight * 0.9) * 2;
   const bg_w = bg_h * 0.8;
-  // _silhouetteStyles['backgroundSize'] = `${bg_w}px ${bg_h}px`;
   
   
   let translation = '';
@@ -122,7 +119,7 @@ export default function DrawGameView(props) {
   } else if(myQuadrant === 'quadrant_4') {
     translation = 'translate(-25%, -25%';
   }
-  // _silhouetteStyles['transform'] = translation;
+  _silhouetteStyles['transform'] = translation;
 
 
   return (

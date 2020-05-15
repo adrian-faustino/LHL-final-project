@@ -13,6 +13,10 @@ module.exports = function(games, client, db, io) {
 
     // === rebuild
     const currentLobby = games[lobbyID].coordinates;
+    if(Object.keys(currentLobby).length > MAX_PLAYERS) {
+      console.log('Failed to join. Lobby is full.');
+      return client.emit('err', 'Sorry, that lobby is full!');
+    }
     let myQuadrant = '';
     if(currentLobby) {
       if(!currentLobby.hasOwnProperty('quadrant_1')) {

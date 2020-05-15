@@ -41,7 +41,7 @@ const renderQuad_2 = (ctx, coordinates) => {
     const { x, y, color, lineSize } = coordinate;
 
     // CHANGE SCREEN RATIO HERE
-    const _x = ( (x * 0.5) + 0.5 )* window.innerWidth;
+    const _x = ( (x * 0.5) + 0.5 ) * window.innerWidth;
     const _y = (y * 0.5) * window.innerHeight;
 
     const strokeData = {
@@ -65,7 +65,7 @@ const renderQuad_3 = (ctx, coordinates) => {
 
     // CHANGE SCREEN RATIO HERE
     const _x = (x * 0.5) * window.innerWidth;
-    const _y = (y * 0.5) * window.innerHeight;
+    const _y = ( (y * 0.5) + 0.5 ) * window.innerHeight;
 
     const strokeData = {
       _x, _y, color, lineSize
@@ -87,8 +87,8 @@ const renderQuad_4 = (ctx, coordinates) => {
     const { x, y, color, lineSize } = coordinate;
 
     // CHANGE SCREEN RATIO HERE
-    const _x = (x * 0.5) * window.innerWidth;
-    const _y = (y * 0.5) * window.innerHeight;
+    const _x = ( (x * 0.5) + 0.5 ) * window.innerWidth;
+    const _y = ( (y * 0.5) + 0.5 ) * window.innerHeight;
 
     const strokeData = {
       _x, _y, color, lineSize
