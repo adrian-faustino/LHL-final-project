@@ -1,5 +1,5 @@
 // CONSTANTS
-const MIN_DRAWTIME = 2000; // time in ms
+const MIN_DRAWTIME = 5000; // time in ms
 
 const draw = (ctx, strokeData) => {
   const { _x, _y, color, lineSize } = strokeData;
@@ -121,9 +121,9 @@ const renderQuadrants = (ctx, finalCoordinates) => {
     } else if(quadrant === 'quadrant_2') {
       renderQuad_2(ctx, coordinates)
     } else if(quadrant === 'quadrant_3') {
-      
+      renderQuad_3(ctx, coordinates);
     } else if(quadrant === 'quadrant_4') {
-
+      renderQuad_4(ctx, coordinates);
     }
   })
 
