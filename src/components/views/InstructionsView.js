@@ -32,8 +32,6 @@ export default function InstructionsView(props) {
 
   return (
     <div>
-
-      {/* <h1 style={{color: "red", fontSize: "14px"}}>InstructionsView.js</h1> */}
       <div className="InstructionsView__header App__colorScheme--header" >
         <p className="App__colorScheme--message">0:24</p>
         <button className="App__colorScheme--palette"><i className="fas fa-palette"></i></button>

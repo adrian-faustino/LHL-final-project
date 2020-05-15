@@ -19,11 +19,6 @@
   border-radius: 15px;
 }
 
-/* .DrawGameView__header button:hover {
-  background: radial-gradient(#5973EB, #1638D3);
-  color: black
-} */
-
 .DrawGameView__drawPort {
   position: absolute;
   top: 10vh;
@@ -40,4 +35,15 @@
   top: 12vh;
   left: 7vw;
   z-index: 1;
+}
+
+
+@media only screen and (min-width: 700px) {
+  .DrawGameView__header p {
+    font-size: 3.0rem;
+  }
+  
+  .DrawGameView__header button {
+    font-size: 3.0rem;
+  }
 }

@@ -1,7 +1,7 @@
 .HostLobbyView__container--title {
   position: relative;
   display: inline;
-  top: 10vh;
+  top: 15vh;
   margin: 0 auto;
   padding: 1.5rem 1.5rem;
   font-size: 2.0rem;
@@ -57,7 +57,46 @@
   border-radius: 15px;
 }
 
-/* .HostLobbyView__btn--start:hover {
-  background: radial-gradient(#5973EB, #1638D3);
-  color: black
-} */
+
+@media only screen and (min-width: 700px) {
+  .HostLobbyView__container--title {
+    padding: 2.5rem 2.5rem;
+    font-size: 3.5rem;
+  }
+  
+  .HostLobbyView__container--IdField {
+    top: 30vh;
+  }
+  
+  .HostLobbyView__container--IdField h2 {
+    font-size: 2.0rem;
+    padding: 0 3.0rem;
+  }
+  
+  .HostLobbyView__container--IdField p {
+    font-size: 2.0rem;
+    margin: 2.0rem 10.0rem;
+    line-height: 72px;
+
+  }
+  
+  .HostLobbyView__namesList {
+    top: 50vh;
+  }
+  
+  .HostLobbyView__namesList li {
+    margin: 1.5rem 5.0rem;
+    font-size: 1.5rem;;
+    padding: 0.75rem 1.0rem;
+  }
+  
+  .HostLobbyView__namesList--deleteBtn {
+    font-size: 1.5rem;
+  }
+  
+  .HostLobbyView__btn--start {
+    bottom: 10vh;
+    font-size: 2.0rem;
+    padding: 2.0rem 0;
+  }
+}

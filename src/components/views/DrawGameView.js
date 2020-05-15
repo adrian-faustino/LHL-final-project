@@ -74,6 +74,8 @@ export default function DrawGameView(props) {
       <canvas
         className="DrawGameView__drawPort"
         ref={canvasRef}
+        width={window.innerWidth}
+        height={window.innerHeight}
         onMouseDown={e => onMouseDownHandler(e, state, setState)}
         onMouseUp={e => onMouseUpHandler(e, state, setState)}
         onMouseMove={e => onMouseMoveHandler(e, state, setState)}
@@ -88,16 +90,3 @@ export default function DrawGameView(props) {
     </div>
   )
 }
-
-
-
-// <canvas
-//   className="DrawGameView__drawPort"
-//   ref={canvasRef}
-//   width={window.innerWidth}
-//   height={window.innerHeight}
-//   onMouseDown={e => onMouseDownHandler(e, state, setState)}
-//   onMouseUp={e => onMouseUpHandler(e, state, setState)}
-//   onMouseMove={e => onMouseMoveHandler(e, state, setState)}
-// />
-// <h1 style={{color: "red", fontSize: "14px"}}>DrawGameView.js</h1>

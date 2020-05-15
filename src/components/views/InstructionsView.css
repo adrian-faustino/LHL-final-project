@@ -19,11 +19,6 @@
   border-radius: 15px;
 }
 
-/* .InstructionsView__header button:hover {
-  background: radial-gradient(#5973EB, #1638D3);
-  color: black
-} */
-
 .InstructionsView__image--toDraw {
   height: 90vh;
   background-image: url(../../assets/MLDrawing.jpg);
@@ -37,4 +32,15 @@
   width: 20vw;
   top: 12vh;
   left: 7vw;
+}
+
+
+@media only screen and (min-width: 700px) {
+  .InstructionsView__header p {
+    font-size: 3.0rem;
+  }
+  
+  .InstructionsView__header button {
+    font-size: 3.0rem;
+  }
 }

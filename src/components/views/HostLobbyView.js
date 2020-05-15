@@ -94,8 +94,6 @@ export default function HostLobbyView(props) {
 
   return (
     <div className="scrolling-background">
-      <h1 style={{color: "red", fontSize: "14px"}}>HostLobbyView.js</h1>
-
       <h1 className="HostLobbyView__container--title App__colorScheme--title">{greeting}</h1>
       
       <div className="HostLobbyView__container--IdField">

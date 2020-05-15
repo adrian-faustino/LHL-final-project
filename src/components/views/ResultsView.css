@@ -1,7 +1,7 @@
 .ResultsView__container--title {
   position: relative;
   display: inline;
-  top: 10vh;
+  top: 15vh;
   margin: 0 auto;
   padding: 1.5rem 1.5rem;
   font-size: 2.0rem;
@@ -10,7 +10,7 @@
 
 .ResultsView__message {
   position: absolute;
-  top: 25vh;
+  top: 30vh;
   width: 100vw;
 }
 
@@ -29,9 +29,31 @@
   width: 70vw;
 }
 
-
-.button-temp {
+.button {
   position: absolute;
-  bottom: 2vh;
+  bottom: 5vh;
   width: 100vw;
+}
+
+
+
+@media only screen and (min-width: 700px) {
+  .ResultsView__container--title {
+    padding: 2.5rem 2.5rem;
+    font-size: 3.5rem;
+  }
+  
+  .ResultsView__message {
+    top: 30vh;
+    font-size: 3.0rem;
+  }
+  
+  .ResultsView__message h2{
+    padding: 0 2.0rem;
+  }
+  
+  .ResultsView__image {
+    top: 20vh;
+    width: 50vw;
+  }
 }

@@ -82,7 +82,6 @@ export default function GuestLobbyView(props) {
 
   return (
     <div className="scrolling-background">
-      <h1 style={{color: "red", fontSize: "14px"}}>GuestLobbyView.js</h1>
       <h1 className="GuestLobbyView__container--title App__colorScheme--title">{greeting}</h1>
 
       
