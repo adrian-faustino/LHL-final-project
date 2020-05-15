@@ -36,11 +36,9 @@ export default function InstructionsView(props) {
       <h1>Your goal is to draw a picture as a team!</h1>
 
       <h2>This is your section of the final image. You will have 3 minutes to draw it!</h2>
-
+      
       <MainImage
       myQuadrant={myQuadrant}/>
-
-
 
       {/* {state.playerAmt && <span>Players required to skip: {state.playerAmt}</span>}
       <button onClick={e => onClickHandler(e)}>Ready!</button> */}

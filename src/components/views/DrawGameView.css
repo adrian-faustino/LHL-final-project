@@ -1,8 +1,33 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .DrawGameView--container {
+  padding-top: 50px;
+  height: 100vh;
+  width: 100vw;
+  background: grey;
+
   display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.DrawGameView--slicer {
+  position: relative;
+  justify-self: center;
+  overflow: hidden;
+}
+
+.DrawGameView--silhouette {
+  position: relative;
 }
 
 .DrawGameView--canvas {
-  justify-self: center;
-  margin-top: 30px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 3px solid blue;
 }

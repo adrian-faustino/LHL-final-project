@@ -1,10 +1,8 @@
 import IMG_SRC from '../../assets/mona-lisa.jpg';
 
-const canvasStyles = (key, val) => {
+const silhouetteStyles = (key, val) => {
   const style = {
-    background: `url(${IMG_SRC})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'fill'
+    transform: 'translate(25%, -25%)'
   };
 
   if(key) {
@@ -15,7 +13,7 @@ const canvasStyles = (key, val) => {
 };
 
 const DrawGameViewStyles = {
-  canvasStyles
+  silhouetteStyles
 }
 
 export default DrawGameViewStyles;
