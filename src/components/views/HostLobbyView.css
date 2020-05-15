@@ -58,7 +58,7 @@
 }
 
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 768px) {
   .HostLobbyView__container--title {
     padding: 2.5rem 2.5rem;
     font-size: 3.5rem;
@@ -74,10 +74,8 @@
   }
   
   .HostLobbyView__container--IdField p {
-    font-size: 2.0rem;
     margin: 2.0rem 10.0rem;
     line-height: 72px;
-
   }
   
   .HostLobbyView__namesList {
@@ -98,5 +96,29 @@
     bottom: 10vh;
     font-size: 2.0rem;
     padding: 2.0rem 0;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .HostLobbyView__container--title {
+    padding: 2.0rem 5.0rem;
+  }
+  
+  .HostLobbyView__container--IdField p {
+    display: inline;
+    padding: 0.5rem 10.0rem;
+  }
+  
+  .HostLobbyView__namesList {
+    top: 45vh;
+  }
+  
+  .HostLobbyView__namesList li {
+    margin: 1.0rem 10.0rem;
+  }
+  
+  .HostLobbyView__btn--start {
+    padding: 1.5rem 0;
+    width: 500px;
   }
 }
