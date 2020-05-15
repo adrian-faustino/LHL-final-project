@@ -33,11 +33,10 @@ function App() {
     socket: null,
     lobbyID: null,
     myPlayerID: null,
-    myQuadrant: null,
     myLobbyObj: null
   });
 
-  const { myUsername, socket, lobbyID, myPlayerID, myQuadrant, myLobbyObj } = state;
+  const { myUsername, socket, lobbyID, myPlayerID, myLobbyObj } = state;
 
   /** Set up socket and listeners **/
   useEffect(() => {
@@ -75,7 +74,14 @@ function App() {
     setState(prev => ({...prev, myUsername}));
   };
 
+
+  /** Set quadrant for slicing img **/
+  let myQuadrant;
+  if(myLobbyObj && myPlayerID && myLobbyObj.players) {
+    myQuadrant = myLobbyObj.players[myPlayerID].myQuadrant;
+  }
   // === bigrebuild
+  
 
   return (
     <div className="app">
@@ -109,9 +115,8 @@ function App() {
 
       {state.view === 'InstructionsView' &&
       <InstructionsView
-      myQuadrant={state.myQuadrant}
+      myQuadrant={myQuadrant}
       lobbyID={state.lobbyID}
-      myUsername={state.myUsername}
       socket={state.socket}
       changeViewHandler={changeViewHandler}/>}
 
