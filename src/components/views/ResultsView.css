@@ -37,7 +37,7 @@
 
 
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 768px) {
   .ResultsView__container--title {
     padding: 2.5rem 2.5rem;
     font-size: 3.5rem;
@@ -46,14 +46,26 @@
   .ResultsView__message {
     top: 30vh;
     font-size: 3.0rem;
-  }
-  
-  .ResultsView__message h2{
     padding: 0 2.0rem;
   }
   
   .ResultsView__image {
     top: 20vh;
     width: 50vw;
+  }
+}
+
+
+@media only screen and (min-width: 1025px) {
+  .LandingView__container--title {
+    padding: 2.0rem 5.0rem;
+  }
+  
+  .ResultsView__message {
+    font-size: 2.5rem;
+  }
+  
+  .ResultsView__image {
+    width: 25vw;
   }
 }

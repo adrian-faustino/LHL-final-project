@@ -44,7 +44,7 @@
   border-radius: 15px;
 } */
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 768px) {
   .LandingView__container--title {
     padding: 2.5rem 2.5rem;
     font-size: 3.5rem;
@@ -55,6 +55,11 @@
     font-size: 2.0rem;
   }
   
+  .LandingView__btnContainer {
+    top: 55vh;
+    width: 100vw;
+  }
+
   /* .LandingView__about--container {
     bottom: 2vh;
   } */
@@ -63,4 +68,14 @@
     margin-top: 2.0rem;
     padding: 1.0rem 0;
   } */
+}
+
+@media only screen and (min-width: 1025px) {
+  .LandingView__container--title {
+    padding: 2.0rem 5.0rem;
+  }
+  
+  .LandingView__form--nameField {
+    width: 500px;
+  }
 }

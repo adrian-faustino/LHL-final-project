@@ -115,7 +115,7 @@ export default function GuestLobbyView(props) {
         {/* End: Original hard code. Use this. */}
       
         {/* Begin: Jason dummy code to style with. Delete when done. */}
-        {true && <h3 className="GuestLobbyView__namesList--message App__colorScheme--message">Please wait for other players to join...</h3>}
+        {true && <h2 className="App__colorScheme--message">Please wait for other players to join...</h2>}
         {/* End: Jason dummy code to style with. Delete when done. */}
         {/* Begin: Original hard code. Use this but replace "false" with "host". */}
         {false && <h3 className="GuestLobbyView__namesList--message App__colorScheme--message">Please wait for other players to join...</h3> && <button
