@@ -19,7 +19,7 @@ module.exports = function(games, client, db, io) {
   /* Given 'lobbyID', trigger view changes for all players in a lobby */  
   // InstructionsView ==> DrawGameView
   const VIEW_TIME = 1000; // time in ms
-  const GAME_TIME = 1000000; //  time in ms
+  const ROUND_TIME = 1000000; //  time in ms
 
 
   // === bigrebuild
@@ -35,7 +35,7 @@ module.exports = function(games, client, db, io) {
       io.in(lobbyID).emit('changeView', 'DrawGameView');
   
 
-      /** Fade logic **/
+      /** Fade logic - Also dictates countdown timer **/
       let interval;
       let opacity = 1;
       setTimeout(() => {
@@ -43,20 +43,16 @@ module.exports = function(games, client, db, io) {
           opacity *= 0.95
           console.log(opacity)
           io.in(lobbyID).emit('fadeSilhouette', opacity);
-
-          if(opacity < 0.04) {
-            console.log('Interval cleared!')
-            clearInterval(interval);
-          }
         }, 1000)
       }, VIEW_TIME);
 
       /** Timeout for DrawGameView **/
       setTimeout(() => {
         console.log('Game finished.');
+        clearInterval(interval);
         io.in(lobbyID).emit('roundFinished')
         io.in(lobbyID).emit('changeView', 'ResultsView');
-      }, GAME_TIME);
+      }, ROUND_TIME);
 
     }, VIEW_TIME);
   });

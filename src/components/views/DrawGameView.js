@@ -13,6 +13,7 @@ import NavButton from '../NavButton';
 import Palette from '../Palette';
 import MainImage from '../MainImage';
 import LineSize from '../LineSize';
+import CountdownTimer from '../CountdownTimer';
 
 // styles
 import IMG_SRC from '../../assets/mona-lisa.jpg'
@@ -184,6 +185,8 @@ export default function DrawGameView(props) {
         state={state}
         updateLineSize={updateLineSize}/>)}
 
+
+      <CountdownTimer />
       {/* <NavButton
       nextView={'ResultsView'}
       buttonTitle={'Next'}
