@@ -12,6 +12,7 @@ import drawHelpers from '../../helpers/drawHelpers';
 import NavButton from '../NavButton';
 import Palette from '../Palette';
 import MainImage from '../MainImage';
+import LineSize from '../LineSize';
 
 // styles
 import IMG_SRC from '../../assets/mona-lisa.jpg'
@@ -31,17 +32,18 @@ export default function DrawGameView(props) {
     drawing: false,
     currentColor: 'blue',
     currentLineSize: 5,
-    open: false,
+    openLineSize: false,
+    openColor: false,
     roundFinished:false,
     maxWidth: null,
     maxHeight: null
   });
 
-  const { coordinates, drawing, currentColor, currentLineSize, open, roundTime, roundFinished, maxWidth, maxHeight } = state;
+  const { coordinates, drawing, currentColor, currentLineSize, openLineSize, openColor, roundTime, roundFinished, maxWidth, maxHeight } = state;
 
 
   // helpers
-  const { togglePalette, updateLineSize, updateColor } = paletteHelpers;
+  const { togglePalette, toggleLineSize, updateLineSize, updateColor } = paletteHelpers;
   const { onMouseUpHandler, onMouseDownHandler, onMouseMoveHandler, draw } = drawHelpers;
 
   useEffect(() => {
@@ -119,6 +121,17 @@ export default function DrawGameView(props) {
   }
   _silhouetteStyles['transform'] = translation;
 
+  // ** PALETTE BUTTONS LOGIC ** //
+  const lineSizeClickHandler = e => {
+    setState(prev => ({...prev, openColor: false}));
+    toggleLineSize(e, state, setState);
+  }
+
+  const colorClickHandler = e => {
+    setState(prev => ({...prev, openLineSize: false}));
+    togglePalette(e, state, setState);
+  }
+
 
   return (
     <div className="DrawGameView--container">
@@ -141,17 +154,29 @@ export default function DrawGameView(props) {
       onMouseDown={e => onMouseDownHandler(e, state, setState)}
       onMouseUp={e => onMouseUpHandler(e, state, setState)}
       onMouseMove={e => onMouseMoveHandler(e, state, setState, CANVAS_W, CANVAS_H)}></canvas>
+      
+      <div className="DrawGameView--toggleBtn-container">
+        <button
+        style={{background: currentColor}}
+        className="palette--button"
+        onClick={e => colorClickHandler(e)}></button>
 
-      <button
-      className="palette--button"
-      onClick={e=> togglePalette(e, state, setState)}
-      ></button>
+        <button
+        style={{height: currentLineSize + 10,
+        width: currentLineSize + 10}}
+        onClick={e => lineSizeClickHandler(e)}
+        className="lineSize--button"></button>
+      </div>
 
-      {open && (<Palette
+      {openColor && (<Palette
         setState={setState}
         state={state}
-        updateLineSize={updateLineSize}
         updateColor={updateColor}/>)}
+
+      {openLineSize && (<LineSize
+        setState={setState}
+        state={state}
+        updateLineSize={updateLineSize}/>)}
 
       {/* <NavButton
       nextView={'ResultsView'}

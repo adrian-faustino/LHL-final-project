@@ -19,7 +19,7 @@ module.exports = function(games, client, db, io) {
   /* Given 'lobbyID', trigger view changes for all players in a lobby */  
   // InstructionsView ==> DrawGameView
   const VIEW_TIME = 1000; // time in ms
-  const GAME_TIME = 10000; //  time in ms
+  const GAME_TIME = 1000000; //  time in ms
 
 
   // === bigrebuild

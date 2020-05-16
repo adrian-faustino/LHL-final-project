@@ -4,6 +4,8 @@
   box-sizing: border-box;
 }
 
+/* Main Canvas */
+
 .DrawGameView--container {
   padding-top: 50px;
   height: 100vh;
@@ -30,4 +32,20 @@
   left: 50%;
   transform: translateX(-50%);
   border: 3px solid blue;
+}
+
+
+/* Button Container */
+
+.DrawGameView--toggleBtn-container {
+  height: 60px;
+  width: 100px;
+  background: red;
+  position: fixed;
+  top: 2vh;
+  left: 10vw;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }

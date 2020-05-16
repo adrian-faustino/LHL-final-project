@@ -1,7 +1,4 @@
 .palette--button {
-  position: fixed;
-  top: 20px;
-  right: 50px;
   height: 35px;
   width: 35px;
   background: white;
@@ -12,8 +9,8 @@
 
 .palette--ul {
   position: absolute;
-  top: 20px;
-  right: 100px;
+  left: 10vw;
+  top: 10vh;
   height: 300px;
   width: 300px;
   border-radius: 7px;

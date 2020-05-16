@@ -25,20 +25,19 @@ export default function ResultsView(props) {
   useEffect(() => {
     socket.on('finalCoords', finalCoordinates => {
       setState(prev => ({...prev, finalCoordinates}));
-      console.log('Received final coordinates:', finalCoordinates);
+      
+      /** Save to DB - STRETCH **/
     });
-  }, [])
+  }, []);
 
   // canvas
   const canvasRef = useRef(null);
   useEffect(() => {
-    console.log('useEffect because of canvas...')
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, window.innerHeight, window.innerWidth);
     if(finalCoordinates) {
-      console.log('Setting min drawtime...');
-
+      console.log('Rendering...');
       renderQuadrants(ctx, finalCoordinates);
     }
   });
