@@ -1,17 +1,31 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // subcomponents
 import NavButton from '../NavButton'
 import MainImage from '../MainImage'
+import CountdownTimer from '../CountdownTimer';
+
+// helpers
+import constants from '../../constants';
+const { VIEW_TIME } = constants;
 
 export default function InstructionsView(props) {
   const { socket, changeViewHandler, myQuadrant } = props;
 
+  const [state, setState] = useState({
+    time: 30000
+  })
+  const { time } = state;
 
   useEffect(() => {
     socket.on('changeView', nextView => {
       changeViewHandler(nextView);
     });
+
+    setInterval(() => {
+      console.log('Ticking...');
+      setState(prev => ({...prev, time: time - 1000}));
+    }, 500);
   }, []);
 
   return (
@@ -24,6 +38,10 @@ export default function InstructionsView(props) {
       
       <MainImage
       myQuadrant={myQuadrant}/>
+      
+      {/* <div style={{position:'absolute', top: '50%'}}>
+      <CountdownTimer timeInMS={time}/>
+      </div> */}
     </div>
   )
 }
