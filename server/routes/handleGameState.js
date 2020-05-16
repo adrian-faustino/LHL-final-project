@@ -35,13 +35,14 @@ module.exports = function(games, client, db, io) {
       /** Fade logic - Also dictates countdown timer **/
       let interval;
       let opacity = 1;
-      setTimeout(() => {
-        interval = setInterval(() => {
-          opacity *= 0.90
-          console.log(opacity)
-          io.in(lobbyID).emit('fadeSilhouette', opacity);
-        }, 800)
-      }, VIEW_TIME);
+     
+      interval = setInterval(() => {
+        console.log('Starting tick.');
+        opacity *= 0.90
+        console.log(opacity)
+        io.in(lobbyID).emit('fadeSilhouette', opacity);
+      }, 800);
+
 
       /** Timeout for DrawGameView **/
       setTimeout(() => {

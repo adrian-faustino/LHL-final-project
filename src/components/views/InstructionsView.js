@@ -21,11 +21,6 @@ export default function InstructionsView(props) {
     socket.on('changeView', nextView => {
       changeViewHandler(nextView);
     });
-
-    setInterval(() => {
-      console.log('Ticking...');
-      setState(prev => ({...prev, time: time - 1000}));
-    }, 500);
   }, []);
 
   return (

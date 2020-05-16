@@ -14,10 +14,10 @@ export default function CountdownTimer(props) {
   const { timeInMS } = props;
 
   const [state, setState] = useState({
-    MAX_TIME: timeInMS,
+    ROUND_TIME: timeInMS,
     startTime: Date.now(),
   })
-  const { MAX_TIME, startTime } = state;
+  const { ROUND_TIME, startTime } = state;
 
   // styles
   const _timerStyles = timerStyles();
@@ -25,7 +25,8 @@ export default function CountdownTimer(props) {
   /** Timer logic **/
   const timeNow = new Date();
   const elapsed = timeNow - startTime;
-  let timeLeft = MAX_TIME - elapsed;
+  let timeLeft = ROUND_TIME - elapsed;
+  console.log('Time left...', timeLeft)
 
   /** Trigger 'Time up' screen */
   if(timeLeft <= 0) {
