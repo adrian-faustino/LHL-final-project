@@ -5,6 +5,9 @@ import "./App.css";
 // Socket
 import socketIOClient from 'socket.io-client';
 
+// Helpers
+import constants from './constants';
+
 // View Components
 import DrawGameView from './components/views/DrawGameView';
 import GuestLobbyView from './components/views/GuestLobbyView';
@@ -15,12 +18,11 @@ import ResultsView from './components/views/ResultsView';
 import ShareView from './components/views/ShareView';
 import NavButton from './components/NavButton';
 
+
+const { API } = constants;
+
+
 function App() {
-
-  // ===bigrebuild
-  // constants
-  const ENDPOINT = "http://localhost:5555"
-
   /* View State
   * view: this is how we will switch between modes. Conditional rendering based on what 
   * the value of this key will be. 
@@ -40,7 +42,7 @@ function App() {
 
   /** Set up socket and listeners **/
   useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
+    const socket = socketIOClient(API);
     setState(prev => ({...prev, socket}));
     
     util.errorListener(socket);

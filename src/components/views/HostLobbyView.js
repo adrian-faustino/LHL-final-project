@@ -9,11 +9,10 @@ import PlayerLobbyStatus from '../PlayerLobbyStatus';
 
 // Helpers
 import util from '../../helpers/util'
+import constants from '../../constants';
 
 const { generateLobbyID } = util;
-
-// constants
-const API = 'http://localhost:5555';
+const { API } = constants;
 
 export default function HostLobbyView(props) {
   // ===bigrebuild

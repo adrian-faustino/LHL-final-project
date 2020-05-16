@@ -1,5 +1,6 @@
-// CONSTANTS
-const MIN_DRAWTIME = 5000; // time in ms
+import constants from '../constants';
+const { MIN_RENDER_TIME } = constants;
+
 
 const draw = (ctx, strokeData) => {
   const { _x, _y, color, lineSize } = strokeData;
@@ -25,7 +26,7 @@ const renderQuad_1 = (ctx, coordinates) => {
       _x, _y, color, lineSize
     };
     
-    delay += (MIN_DRAWTIME / coordinates.length) + 3;
+    delay += (MIN_RENDER_TIME / coordinates.length) + 3;
     setTimeout(() => {
       ctx.beginPath();
       draw(ctx, strokeData);
@@ -48,7 +49,7 @@ const renderQuad_2 = (ctx, coordinates) => {
       _x, _y, color, lineSize
     };
     
-    delay += (MIN_DRAWTIME / coordinates.length) + 3;
+    delay += (MIN_RENDER_TIME / coordinates.length) + 3;
     setTimeout(() => {
       ctx.beginPath();
       draw(ctx, strokeData);
@@ -71,7 +72,7 @@ const renderQuad_3 = (ctx, coordinates) => {
       _x, _y, color, lineSize
     };
     
-    delay += (MIN_DRAWTIME / coordinates.length) + 3;
+    delay += (MIN_RENDER_TIME / coordinates.length) + 3;
     setTimeout(() => {
       ctx.beginPath();
       draw(ctx, strokeData);
@@ -94,7 +95,7 @@ const renderQuad_4 = (ctx, coordinates) => {
       _x, _y, color, lineSize
     };
     
-    delay += (MIN_DRAWTIME / coordinates.length) + 3;
+    delay += (MIN_RENDER_TIME / coordinates.length) + 3;
     setTimeout(() => {
       ctx.beginPath();
       draw(ctx, strokeData);

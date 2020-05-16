@@ -1,7 +1,3 @@
-// constants
-const window_h = window.innerHeight;
-const window_w = window.innerWidth;
-
 const imgStyles = (key, val) => {
   const style = {
     height: '800px',

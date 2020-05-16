@@ -5,6 +5,7 @@ import axios from 'axios';
 // helpers
 import paletteHelpers from '../../helpers/paletteHelpers';
 import drawHelpers from '../../helpers/drawHelpers';
+import constants from '../../constants';
 
 // Notes: We will remove the NavButton component later and replace it with a socket emit so it automatically moves to the next page for all the players
 
@@ -18,11 +19,11 @@ import CountdownTimer from '../CountdownTimer';
 // styles
 import IMG_SRC from '../../assets/mona-lisa.jpg'
 import DrawGameViewStyles from './DrawGameViewStyles';
+
+
+
+const { API, ROUND_TIME } = constants;
 const { silhouetteStyles } = DrawGameViewStyles;
-
-
-// move this to .env later
-const API = 'http://localhost:5555';
 
 
 export default function DrawGameView(props) {
@@ -64,7 +65,7 @@ export default function DrawGameView(props) {
     })
   }, [])
 
-  // === rebuild
+
   // send final coordinates before view change
   useEffect(() => {
     if(roundFinished) {
@@ -84,7 +85,7 @@ export default function DrawGameView(props) {
       .catch(err => console.log(err));
     }
   }, [roundFinished])
-  // === rebuild
+
 
   // canvas
   const canvasRef = useRef(null);
@@ -104,7 +105,6 @@ export default function DrawGameView(props) {
     });
   });
 
-  // constants
   const CANVAS_H = window.innerHeight * 0.9;
   const CANVAS_W = CANVAS_H * 0.8;
 
@@ -186,7 +186,8 @@ export default function DrawGameView(props) {
         updateLineSize={updateLineSize}/>)}
 
 
-      <CountdownTimer />
+      <CountdownTimer
+      timeInMS={ROUND_TIME}/>
       {/* <NavButton
       nextView={'ResultsView'}
       buttonTitle={'Next'}

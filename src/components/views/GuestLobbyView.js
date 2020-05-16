@@ -3,15 +3,15 @@ import uuid from 'react-uuid';
 
 // Helpers
 import util from '../../helpers/util';
-
+import constants from '../../constants';
 
 
 // subcomponents
 import PlayerLobbyStatus from '../PlayerLobbyStatus';
 import axios from 'axios';
 
-// constants
-const API = 'http://localhost:5555';
+
+const { API } = constants;
 
 
 export default function GuestLobbyView(props) {
