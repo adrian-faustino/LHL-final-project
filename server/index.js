@@ -31,31 +31,29 @@ connection.once('open', () => {
   console.log('MongoDB database connection established successfully.');
 })
 
+// == big rebuild
 
 // routes
 app.get('/', (req, res) => res.send('Welcome!'))
-app.post('/test', (req, res) => {
-  console.log('Client sent test data:', req.body);
-  res.send('POST successful!');
-});
+
 app.post('/finalCoords', (req, res) => {
   const { coordinates, lobbyID, myQuadrant, PLAYERS_IN_ROOM } = req.body;
   
-  // add coords to games obj
-  games[lobbyID].coordinates[myQuadrant] = coordinates;
+  console.log(`Recieved coordinates from lobby ${lobbyID}:`, coordinates);
 
+  /** Populate quadrants **/
+  games[lobbyID].coordinates[myQuadrant] = coordinates;
+  
+  /** Emit final coordinates once all quadrants have been received **/
   if(Object.keys(games[lobbyID].coordinates).length === PLAYERS_IN_ROOM) {
     const finalCoordinates = games[lobbyID].coordinates;
 
     console.log('Sending final coordinates:', finalCoordinates);
     io.in(lobbyID).emit('finalCoords', finalCoordinates);
   }
-  // put together
-
-  // io emit to that lobby the final pick and also changeView
 });
 
-// === big rebuild
+
 /** Handle create lobby **/
 app.post('/createLobby', (req, res) => {
   const { genLobbyID, myUsername } = req.body;

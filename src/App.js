@@ -116,16 +116,13 @@ function App() {
       {state.view === 'InstructionsView' &&
       <InstructionsView
       myQuadrant={myQuadrant}
-      lobbyID={state.lobbyID}
       socket={state.socket}
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'DrawGameView' &&
       <DrawGameView
-      view={state.view}
       myLobbyObj={state.myLobbyObj}
-      myQuadrant={state.myQuadrant}
-      playerObj={state.playerObj}
+      myQuadrant={myQuadrant}
       socket={state.socket}
       lobbyID={state.lobbyID}
       changeViewHandler={changeViewHandler}/>}

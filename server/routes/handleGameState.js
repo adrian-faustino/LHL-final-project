@@ -16,54 +16,28 @@ module.exports = function(games, client, db, io) {
 
   // ===> VIEW CHANGE HANDLERS
 
-  /* Given 'lobbyID', trigger view changes for all players in a lobby */
+  /* Given 'lobbyID', trigger view changes for all players in a lobby */  
+  // InstructionsView ==> DrawGameView
+  const VIEW_TIME = 1000; // time in ms
+  const GAME_TIME = 10000; //  time in ms
+
 
   // === bigrebuild
   client.on('startGame', data => {
     const { lobbyID, nextView } = data;
     io.in(lobbyID).emit('changeView', nextView);
-  })
-  // === bigrebuild
 
-  
-  // InstructionsView ==> DrawGameView
-  const VIEW_TIME = 1000; // time in ms
-  const GAME_TIME = 30000; //  time in ms
-  client.on('instructionsViewTimeout', data => {
-    const { lobbyID } = data;
-    const nextView = 'DrawGameView'
-
+    /** Timeout for InstructionsView **/
     setTimeout(() => {
-      console.log(`View change: Instructions => Draw in lobby ${lobbyID}`);
-      client.emit('changeView', { nextView });
+      io.in(lobbyID).emit('changeView', 'DrawGameView');
+
+      /** Timeout for DrawGameView **/
+      setTimeout(() => {
+        console.log('Game finished.');
+        io.in(lobbyID).emit('roundFinished')
+        io.in(lobbyID).emit('changeView', 'ResultsView');
+      }, GAME_TIME);
+
     }, VIEW_TIME);
-  })
-
-  client.on('drawViewTimeout', data => {
-    const { lobbyID } = data;
-    const nextView = 'ResultsView';
-
-    console.log(`View change: Draw => Results in lobby ${lobbyID}`);
-    setTimeout(() => {
-      client.emit('roundFinished');
-      client.emit('changeView', { nextView });
-    }, GAME_TIME);
-  })
-  
-  // ===> INSTRUCTIONS VIEW
-
-  /* Given 'username' add user to array of ready players */
-  const readyLobbies = {
-    'exampleLobbyID' : {
-      readyLength: ['user1', 'user2'].length,
-      readyUsers: ['tom', 'adrian']
-    }
-  };
-
-  client.on('readyOK', data => {
-    const { username } = data;
-
-    console.log(`${username} is ready.`);
   });
-
 };

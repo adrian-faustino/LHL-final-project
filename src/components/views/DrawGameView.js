@@ -24,7 +24,7 @@ const API = 'http://localhost:5555';
 
 
 export default function DrawGameView(props) {
-  const { lobbyID, socket, changeViewHandler, playerObj, myQuadrant, myLobbyObj, view } = props;
+  const { lobbyID, socket, changeViewHandler, myQuadrant, myLobbyObj } = props;
 
   const [state, setState] = useState({
     coordinates: [],
@@ -32,7 +32,6 @@ export default function DrawGameView(props) {
     currentColor: 'blue',
     currentLineSize: 5,
     open: false,
-    roundTime: null,
     roundFinished:false,
     maxWidth: null,
     maxHeight: null
@@ -45,18 +44,14 @@ export default function DrawGameView(props) {
   const { togglePalette, updateLineSize, updateColor } = paletteHelpers;
   const { onMouseUpHandler, onMouseDownHandler, onMouseMoveHandler, draw } = drawHelpers;
 
-  // set game timer and trigger view change
   useEffect(() => {
-    console.log('DrawGameView mounted with lobbyID', lobbyID);
-    socket.emit('drawViewTimeout', { lobbyID });
-
     socket.on('roundFinished', () => {
+      console.log('Round finished!');
       const roundFinished = true;
       setState(prev => ({...prev, roundFinished}));
     })
     
-    socket.on('changeView', data => {
-      const { nextView } = data;
+    socket.on('changeView', nextView => {
       changeViewHandler(nextView);
     })
   }, [])
@@ -65,7 +60,7 @@ export default function DrawGameView(props) {
   // send final coordinates before view change
   useEffect(() => {
     if(roundFinished) {
-      const PLAYERS_IN_ROOM = Object.keys(myLobbyObj.coordinates).length;
+      const PLAYERS_IN_ROOM = Object.keys(myLobbyObj.players).length;
       
       const data = {
         coordinates,
@@ -73,6 +68,9 @@ export default function DrawGameView(props) {
         myQuadrant,
         PLAYERS_IN_ROOM
       }
+
+      console.log('Game finished. Sending final coordinates...', coordinates);
+
       axios.post(API + '/finalCoords', data)
       .then()
       .catch(err => console.log(err));
