@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function PlayerLobbyStatus(props) {
   return (
-    <div>
+    <li>
       {props.username + ' has joined the lobby.'}
-    </div>
+    </li>
   )
 }

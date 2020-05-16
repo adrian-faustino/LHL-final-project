@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './Palette.css';
 
 
 export default function Palette(props) {
-  const { updateLineSize, updateColor, state, setState } = props;
+  const { updateColor, state, setState } = props;
 
 
 
@@ -12,7 +12,7 @@ export default function Palette(props) {
 
       {/* === LINE SIZE === */}
       {/* 1st row */}
-      <li onClick={() => {
+      {/* <li onClick={() => {
         updateLineSize(40, state, setState);
         }}
         >
@@ -39,6 +39,8 @@ export default function Palette(props) {
         >
         <i id="sizeS" className="fas fa-paint-brush"></i>
       </li>
+      }}
+      className="palette--li ten"></li> */}
       
 
 

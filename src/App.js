@@ -5,6 +5,9 @@ import "./App.css";
 // Socket
 import socketIOClient from 'socket.io-client';
 
+// Helpers
+import constants from './constants';
+
 // View Components
 import DrawGameView from './components/views/DrawGameView';
 import GuestLobbyView from './components/views/GuestLobbyView';
@@ -15,11 +18,11 @@ import ResultsView from './components/views/ResultsView';
 import ShareView from './components/views/ShareView';
 import NavButton from './components/NavButton';
 
+
+const { API } = constants;
+
+
 function App() {
-
-  // constants
-  const ENDPOINT = "http://localhost:5555"
-
   /* View State
   * view: this is how we will switch between modes. Conditional rendering based on what 
   * the value of this key will be. 
@@ -27,48 +30,61 @@ function App() {
   * playerType: "HOST" or "GUEST"
   */
   const [state, setState] = useState({
-    view: 'ResultsView',
-    username: '',
-    readyStatus: false,
+    view: 'LandingView',
+    myUsername: '',
     socket: null,
-    lobbyID: null
+    lobbyID: null,
+    myPlayerID: null,
+    myLobbyObj: null
   });
 
-  // Socket
-  useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
-    // as client joins, set the socket
-    setState({...state, socket});
+  const { myUsername, socket, lobbyID, myPlayerID, myLobbyObj } = state;
 
-    // listeners
+  /** Set up socket and listeners **/
+  useEffect(() => {
+    const socket = socketIOClient(API);
+    setState(prev => ({...prev, socket}));
+    
     util.errorListener(socket);
-    socket.on('lobbyID', data => {
-      const { lobbyID } = data;
-      console.log(`Setting lobbyID to ${lobbyID} in App.js`)
-      setState(prev => ({...prev, lobbyID}));
-    })
   }, []);
 
 
+  const setMyLobbyObjHandler = myLobbyObj => {
+    console.log('Setting App component myLobbyObj to', myLobbyObj);
+    setState(prev => ({...prev, myLobbyObj}));
+  }
+
+  const setMyPlayerIDHandler = myPlayerID => {
+    console.log('Setting App component myPlayerID to', myPlayerID);
+    setState(prev => ({...prev, myPlayerID}));
+  }
+
+  const setLobbyIDHandler = lobbyID => {
+    console.log('Setting App component lobbyID to', lobbyID);
+    setState(prev => ({...prev, lobbyID}));
+  }
+  
   // <NavButton /> helper functions
-  const changeViewHandler = viewStr => setState({...state, view: viewStr});
+  const changeViewHandler = view => {
+    console.log('Updating view to:', view)
+    setState(prev => ({...prev, view}));
+  }
 
   // <LandingView /> helper functions
   const inputChangeHandler = str => {
-    const username = str.target.value;
-    setState({...state, username})
+    const myUsername = str.target.value;
+    setState(prev => ({...prev, myUsername}));
   };
 
-  // <GuestLobbyView /> helper functions
-  const readyStatusHandler = () => {
-    console.log(state.readyStatus + ' ready status')
-    setState({...state, readyStatus: !state.readyStatus});
-  }
 
-  // <NavButton
-  // nextView={'LandingView'}
-  // buttonTitle={'Main Page - Delete this button later'}
-  // changeViewHandler={changeViewHandler}/>
+  /** Set quadrant for slicing img **/
+  let myQuadrant;
+  if(myLobbyObj && myPlayerID && myLobbyObj.players) {
+    myQuadrant = myLobbyObj.players[myPlayerID].myQuadrant;
+  }
+  // === bigrebuild
+  
+
   return (
     <div className="App__container">
 
@@ -79,31 +95,43 @@ function App() {
 
       {state.view === 'GuestLobbyView' &&
       <GuestLobbyView
-      socket={state.socket}
-      username={state.username}
-      changeViewHandler={changeViewHandler}
-      readyStatus={state.readyStatus}
-      readyStatusHandler={readyStatusHandler}/>}
+      myUsername={state.myUsername}
+      socket={socket}
+      lobbyID = {lobbyID}
+      myLobbyObj={myLobbyObj}
+      setMyLobbyObjHandler={setMyLobbyObjHandler}
+      setMyPlayerIDHandler={setMyPlayerIDHandler}
+      setLobbyIDHandler={setLobbyIDHandler}
+      changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'HostLobbyView' &&
       <HostLobbyView
-      socket={state.socket}
-      username={state.username}
+      myUsername={myUsername}
+      socket={socket}
+      lobbyID = {lobbyID}
+      myLobbyObj={myLobbyObj}
+      setMyLobbyObjHandler={setMyLobbyObjHandler}
+      setMyPlayerIDHandler={setMyPlayerIDHandler}
+      setLobbyIDHandler={setLobbyIDHandler}
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'InstructionsView' &&
       <InstructionsView
-      lobbyID={state.lobbyID}
-      username={state.username}
+      myQuadrant={myQuadrant}
       socket={state.socket}
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'DrawGameView' &&
       <DrawGameView
+      myLobbyObj={state.myLobbyObj}
+      myQuadrant={myQuadrant}
+      socket={state.socket}
+      lobbyID={state.lobbyID}
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'ResultsView' &&
       <ResultsView
+      socket={state.socket}
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'ShareView' &&

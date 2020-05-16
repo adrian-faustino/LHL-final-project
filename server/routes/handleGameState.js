@@ -1,79 +1,56 @@
-module.exports = function(client, db, io) {
+const constants = require('../constants');
+const { VIEW_TIME, ROUND_TIME } = constants; 
+
+module.exports = function(games, client, db, io) {
   // models
   const { Lobby, Player, Coordinate } = db; 
 
-  // constants
-  const MAX_PLAYERS = 4;
 
-  /* Given 'lobbyID', allow users to join a lobby */
-  client.on('joinLobby', data => {
-    const { lobbyID } = data;
 
+  // === bigrebuild
+  client.on('joinLobby', lobbyID => {
     console.log(`Attempting to join lobby ${lobbyID}...`);
-
-    Lobby.findOne({ lobbyID }, (err, lobbyObj) => {
-      if(err) {
-        console.log(err);
-        client.emit('err', err);
-      }
-
-      if(lobbyObj.players.length >= MAX_PLAYERS) {
-        console.log('Lobby is full!');
-        client.emit('err', 'Lobby is full!');
-      } else {
-        console.log(`Joined lobby: ${lobbyID}`);
-        client.join(lobbyID);
-
-        // emit to all users to let them know someone joined the lobby
-        io.in(lobbyID).emit('userJoinLobby');
-      }
-    });
+    client.join(lobbyID);
+    io.in(lobbyID).emit('newUserJoined');
   });
+  // === bigrebuld
 
 
   // ===> VIEW CHANGE HANDLERS
 
-  /* Given 'lobbyID', trigger view changes for all players in a lobby */
-  /* ==> Inteded this for host start button. Once clicked, this will be called */
-  client.on('changeView', data => {
-    const { lobbyID, nextView } = data;
-    
-    console.log(`Emitting changeView to everyone in lobby ${lobbyID} to view: ${nextView}`);
-    io.in(lobbyID).emit('changeView', data);
-  });
-  
-  client.on('lobbyID', data => {
-    const { lobbyID } = data;
-
-    console.log(`To all => lobbyID: ${lobbyID}`);
-    io.in(lobbyID).emit('lobbyID', data);
-  });
-
+  /* Given 'lobbyID', trigger view changes for all players in a lobby */  
   // InstructionsView ==> DrawGameView
-  const VIEW_TIME = 5000; // time in MS
-  client.on('viewTimeout', data => {
-    const { lobbyID } = data;
-    const nextView = 'DrawGameView'
+  client.on('startGame', data => {
+    const { lobbyID, nextView } = data;
+    io.in(lobbyID).emit('changeView', nextView);
+
+    let opacity = 1;
+    let interval;
+
+    /** Timeout for InstructionsView **/
     setTimeout(() => {
-      io.in(lobbyID).emit('changeView', { nextView });
-    }, VIEW_TIME);
-  })
-
+      io.in(lobbyID).emit('changeView', 'DrawGameView');
   
-  // ===> INSTRUCTIONS VIEW
 
-  /* Given 'username' add user to array of ready players */
-  const readyLobbies = {
-    'exampleLobbyID' : {
-      readyLength: ['user1', 'user2'].length,
-      readyUsers: ['tom', 'adrian']
-    }
-  };
+      /** Fade logic - Also dictates countdown timer **/
+      let interval;
+      let opacity = 1;
+      setTimeout(() => {
+        interval = setInterval(() => {
+          opacity *= 0.90
+          console.log(opacity)
+          io.in(lobbyID).emit('fadeSilhouette', opacity);
+        }, 800)
+      }, VIEW_TIME);
 
-  client.on('readyOK', data => {
-    const { username } = data;
+      /** Timeout for DrawGameView **/
+      setTimeout(() => {
+        console.log('Game finished.');
+        clearInterval(interval);
+        io.in(lobbyID).emit('roundFinished')
+        io.in(lobbyID).emit('changeView', 'ResultsView');
+      }, ROUND_TIME);
 
-    console.log(`${username} is ready.`);
+    }, VIEW_TIME);
   });
-
 };

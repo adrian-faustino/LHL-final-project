@@ -1,4 +1,4 @@
-module.exports = function(client, db) {
+module.exports = function(games, client, db) {
   // models
   const { Lobby, Player, Coordinate } = db; 
 
@@ -7,6 +7,16 @@ module.exports = function(client, db) {
   /* Add lobby to DB */
   client.on('createLobby', data => {
     const { lobbyID } = data;
+
+    // ===  rebuild
+    if (!games.hasOwnProperty(lobbyID)) {
+      games[lobbyID] = {
+        coordinates: {}
+      };
+    } else {
+      emit('lobbyExists'); // ask host to make lobby again. Error handling
+    }
+    // === rebuild
 
     const newLobby = new Lobby({
       lobbyID,
@@ -114,6 +124,13 @@ module.exports = function(client, db) {
       }
     });
   })
+
+  /* Given Player '_id', update their coordinates array */
+  client.on('saveFinalCoords', data => {
+    const { _id, coordinates } = data;
+
+    console.log('Updating coordinates...', coordinates);
+  });
 
   // ==========> DELETE
 

@@ -1,37 +1,32 @@
 const onMouseDownHandler = (e, state, setState) => {
   const drawing = true;
-
-  setState({...state,
-    drawing
-  });
+  
+  setState(prev => ({...prev, drawing}));
 };
 
 
 const onMouseUpHandler = (e, state, setState) => {
   const drawing = false;
 
-  setState({...state,
-    drawing
-  });
+  setState(prev => ({...prev, drawing}));
 };
 
 
-const onMouseMoveHandler = (e, state, setState) => {
+const onMouseMoveHandler = (e, state, setState, maxWidth, maxHeight) => {
   const { coordinates, drawing, currentColor, currentLineSize } = state;
 
   if(drawing) {
-    // const maxWidth = e.target.offsetWidth;
-    // const maxHeight = e.target.offsetHeight;
-    let x = e.clientX;
-    let y = e.clientY;
-  
+    const x_offset = window.innerWidth / 2 - (maxWidth / 2);
+    const y_offset = window.innerHeight / 2 - (maxHeight / 2);
+
+    let x = e.clientX - x_offset;
+    let y = e.clientY - y_offset;
+
     // percentage relative to screen
-    // x = x / maxWidth;
-    // y = y / maxHeight;
+    y = y / maxHeight;
+    x = x / maxWidth;
     const color = currentColor;
     const lineSize = currentLineSize;
-    
-    console.log('Dragging...', x, y);
 
     const coordinate = {
       x,
@@ -39,8 +34,7 @@ const onMouseMoveHandler = (e, state, setState) => {
       color,
       lineSize
     }
-  
-    setState({...state, coordinates: [...coordinates, coordinate]}); 
+    setState(prev => ({...prev, coordinates: [...coordinates, coordinate], maxWidth, maxHeight}));
   }
 
 };
@@ -48,9 +42,6 @@ const onMouseMoveHandler = (e, state, setState) => {
 
 const draw = (ctx, coordinate) => {
   const { x, y, color, lineSize } = coordinate;
-  
-  // const new_x = x * window.innerWidth;
-  // const new_y = y * window.innerHeight;
 
   ctx.strokeStyle = color;
   ctx.lineWidth = lineSize;

@@ -1,34 +1,35 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./InstructionsView.css";
-import MLReference from '../../assets/MLReference.jpg';
+// import MLReference from '../../assets/MLReference.jpg';
+
 
 // subcomponents
 import NavButton from '../NavButton'
 import MainImage from '../MainImage'
+import CountdownTimer from '../CountdownTimer';
+
+// helpers
+import constants from '../../constants';
+const { VIEW_TIME } = constants;
 
 export default function InstructionsView(props) {
-  const { username, socket, changeViewHandler, lobbyID } = props;
+  const { socket, changeViewHandler, myQuadrant } = props;
+
+  const [state, setState] = useState({
+    time: 30000
+  })
+  const { time } = state;
 
   useEffect(() => {
-    if(lobbyID) {
-      console.log('Mounted lobby ', lobbyID);
-      socket.emit('viewTimeout', { lobbyID });
-  
-      socket.on('changeView', data => {
-        const { nextView } = data;
-        changeViewHandler(nextView);
-      });
-    }
-  }, [lobbyID]);
+    socket.on('changeView', nextView => {
+      changeViewHandler(nextView);
+    });
 
-
-  // helpers
-  const onClickHandler = e => {
-    e.preventDefault()
-
-    console.log('Ready button clicked.');
-    socket.emit('readyOK', { username }); // lobbyID here
-  }
+    setInterval(() => {
+      console.log('Ticking...');
+      setState(prev => ({...prev, time: time - 1000}));
+    }, 500);
+  }, []);
 
   return (
     <div>
@@ -37,20 +38,16 @@ export default function InstructionsView(props) {
         <button className="App__colorScheme--palette"><i className="fas fa-palette"></i></button>
       </div>
       
-      <div className="InstructionsView__image--toDraw">
+      {/* <div className="InstructionsView__image--toDraw">
         <img className="InstructionsView__image--reference App__colorScheme--referenceBorder" src={MLReference} alt="Portion of image to draw."></img>
-      </div>
+      </div> */}
 
-
-      {/* <MainImage /> */}
-
-      {/* {state.playerAmt && <span>Players required to skip: {state.playerAmt}</span>}
-      <button onClick={e => onClickHandler(e)}>Ready!</button> */}
-      {/* <NavButton
-      nextView={'DrawGameView'}
-      buttonTitle={'Skip'}
-      changeViewHandler={props.changeViewHandler}/> */}
-
+      <MainImage
+      myQuadrant={myQuadrant}/>
+      
+      {/* <div style={{position:'absolute', top: '50%'}}>
+      <CountdownTimer timeInMS={time}/>
+      </div> */}
     </div>
   )
 }

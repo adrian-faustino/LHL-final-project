@@ -4,89 +4,159 @@ import "./GuestLobbyView.css";
 
 // Helpers
 import util from '../../helpers/util';
+import constants from '../../constants';
 
 
 // subcomponents
 import PlayerLobbyStatus from '../PlayerLobbyStatus';
+import axios from 'axios';
+
+
+const { API } = constants;
+
 
 export default function GuestLobbyView(props) {
-  const { socket, username, changeViewHandler } = props;
-
+  // === big rebuild 
+  const { myUsername, socket, lobbyID, myLobbyObj, setMyLobbyObjHandler, setMyPlayerIDHandler, setLobbyIDHandler, changeViewHandler } = props;
+  
   const [state, setState] = useState({
-    playerObj: null,
-    lobbyObj: null,
     tempInput: '',
-    lobbyID: '',
-    host: '',
-    players: [],
     error: ''
   })
-  const { tempInput, lobbyID, host, players, error, playerObj } = state;
-
-  useEffect(() => {
-    socket.on('err', error => setState({...state, error}));
-
-    if (lobbyID) {
-      socket.emit('createPlayer', { username, coordinate: [] });
-      socket.on('playerCreated', playerObj => {
-        setState({...state, playerObj});
-
-        socket.emit('addToPlayers', { lobbyID, playerObj });
-        socket.on('playerAdded', lobbyObj => {
-          const { lobbyID, lobbyobj, players } = lobbyObj;
-
-          socket.emit('joinLobby', { lobbyID });
-        });
-      });
-
-      socket.on('userJoinLobby', () => {
-        console.log(`A user has joined the lobby: ${lobbyID}`);
-        socket.emit('findLobby', { lobbyID });
-        socket.on('lobbyFound', lobbyObj => {
-          const { players, lobbyID, currentView } = lobbyObj;
+  const { tempInput, error } = state;
   
-          console.log('Updating players array with...', lobbyObj);
-          const host = players[0];
-          
-          console.log('Setting host...', host);
-          setState({...state, players, host});
+  /** Handle when a new user joins lobby **/
+  useEffect(() => {
+    if(lobbyID) {
+      socket.on('/newUserJoined', () => {
+        axios.post(API + '/reqLobbyInfo', { lobbyID })
+        .then(resp => {
+          const { myLobbyObj } = resp.data;
+          setMyLobbyObjHandler(myLobbyObj);
         })
-      });
-
-      socket.on('changeView', data => {
-        const { nextView } = data;
-        changeViewHandler(nextView);
-      });
+        .catch(err => console.log(err));
+      })
     }
   }, [lobbyID]);
 
+  /** General Listeners **/
+  useEffect(() => {
+    socket.on('changeView', nextView => {
+      changeViewHandler(nextView);
+    })
+  }, [])
 
-  // event handlers
-  const onChangeHandler = e => setState({...state, tempInput: e.target.value});
+ 
+  /** Handle user typing lobbyID to join **/
+  const onChangeHandler = e => {
+    const tempInput = e.target.value;
+    setState(prev => ({...prev, tempInput}));
+  };
 
-  // join room logic
-  const onSubmitHandler = e => {
+  /** Handle join lobby **/
+  const joinRoomHandler = e => {
     e.preventDefault()
     console.log(`Joining room: ${tempInput}`)
-    setState({...state, lobbyID: tempInput});
-  }
-
-  const onClickHandler = e => {
-    e.preventDefault();
     
-  }
+    const data = {
+      lobbyID: tempInput,
+      myUsername
+    };
+    axios.post(API + '/joinLobby', data)
+    .then(resp => {
+      const { myLobbyObj, myPlayerID } = resp.data;
+      console.log('Successfully joined room:', resp.data);
+      setMyPlayerIDHandler(myPlayerID);
+      setMyLobbyObjHandler(myLobbyObj);
+      setLobbyIDHandler(tempInput);
 
-  // render logic
-  const greeting = username.trim().length === 0 ? 'Hello!' : `Hello, ${username}!`;
-  const playerList = players.map(player => <PlayerLobbyStatus key={util.generateLobbyID(4)} username={player}/>);
+      socket.emit('joinLobby', tempInput);
+    })
+    .catch(err => {
+      console.log('Guest failed to join:', err);
+    });
+  };
+
+
+  /** Usernames list logic **/
+  const greeting = myUsername.trim().length === 0 ? 'Hello!' : `Hello, ${myUsername}!`;
+
+  let usernames;
+  let host;
+  if(myLobbyObj && myLobbyObj.players) {
+    console.log('Updating player list...');
+    const playerIDs = Object.keys(myLobbyObj.players);
+
+    usernames = playerIDs.map(playerID => {
+      const username = myLobbyObj.players[playerID].username;
+      return <PlayerLobbyStatus key={util.generateLobbyID(4)} username={username}/>;
+    })
+
+    /** Set host **/
+    console.log('Setting host...');
+    host = myLobbyObj.host;
+  }
 
   return (
+
     <div className="scrolling-background">
       <h1 className="GuestLobbyView__container--title App__colorScheme--title">{greeting}</h1>
 
+      {!lobbyID && (
+        <form className="GuestLobbyView__container--IdField">
+        <input
+        className="GuestLobbyView__form--codeInput App__colorScheme--formField"
+        onChange={onChangeHandler}
+        placeholder="Enter Lobby ID"/>
+        <button
+        className="GuestLobbyView__form--btn App__colorScheme--button"
+        type="submit"
+        onClick={e => joinRoomHandler(e)}>Join</button>
+      </form>
+      )}
+
+
+      {error && <div>{error}</div>}
+    
+
+      <div className="GuestLobbyView__namesList--container">
+        {/* Begin: Jason dummy code to style with. Delete when done. */}
+        {false && <h2 className="App__colorScheme--message">Welcome to "host's" lobby!</h2>}
+        {/* End: Jason dummy code to style with. Delete when done. */}
+        {/* Begin: Original hard code. Use this but replace "false" with "host". */}
+        {host && <h2 className="App__colorScheme--message">Welcome to {host}'s lobby!</h2>}
+        {/* End: Original hard code. Use this. */}
       
-        {/* Begin: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
-        { false &&
+        {/* Begin: Jason dummy code to style with. Delete when done. */}
+        {false && <h2 className="App__colorScheme--message">Please wait for other players to join...</h2>}
+        {/* End: Jason dummy code to style with. Delete when done. */}
+        {/* Begin: Original hard code. Use this but replace "false" with "host". */}
+        {host && <h2 className="GuestLobbyView__namesList--message App__colorScheme--message">Waiting host to start the game...</h2>}
+        {/* End: Original hard code. Use this. */}
+
+        
+        {/* Begin: Jason dummy code to style with. Delete when done. */}
+        {true &&
+          <ul className="GuestLobbyView__namesList App__colorScheme--namesList">
+            {usernames}
+          </ul>}
+        {/* End: Jason dummy code to style with. Delete when done. */}
+      </div>
+    </div>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+       {/* Begin: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
+       {/* { false &&
           <form className="GuestLobbyView__container--IdField">
             <input
               className="GuestLobbyView__form--codeInput App__colorScheme--formField"
@@ -102,64 +172,14 @@ export default function GuestLobbyView(props) {
               >Submit ID
             </button>
           </form>
-        }
+        } */}
         {/* End: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
-    
-
-      <div className="GuestLobbyView__namesList--container">
-        {/* Begin: Jason dummy code to style with. Delete when done. */}
-        {true && <h2 className="App__colorScheme--message">Welcome to "host's" lobby!</h2>}
-        {/* End: Jason dummy code to style with. Delete when done. */}
-        {/* Begin: Original hard code. Use this but replace "false" with "host". */}
-        {false && <h2 className="App__colorScheme--message">Welcome to {host}'s lobby!</h2>}
-        {/* End: Original hard code. Use this. */}
-      
-        {/* Begin: Jason dummy code to style with. Delete when done. */}
-        {true && <h2 className="App__colorScheme--message">Please wait for other players to join...</h2>}
-        {/* End: Jason dummy code to style with. Delete when done. */}
-        {/* Begin: Original hard code. Use this but replace "false" with "host". */}
-        {false && <h3 className="GuestLobbyView__namesList--message App__colorScheme--message">Please wait for other players to join...</h3> && <button
-          onClick={e => onClickHandler(e)}
-          >{props.readyStatus ? 'Not ready' : 'Ready'}
-          </button>
-        }
-        {/* End: Original hard code. Use this. */}
-        
-        {/* Begin: Jason dummy code to style with. Delete when done. */}
-        {true &&
-          <ul className="GuestLobbyView__namesList App__colorScheme--namesList">
-            <li>player 2</li>
-            <li>player 3</li>
-            <li>player 4</li>
-          </ul>}
-        {/* End: Jason dummy code to style with. Delete when done. */}
-
-
-        {/* -------NOTE!!!--------- */}
-        {/* In HostLobbyView there is the variable "playersList" */}
-        {/* and in GuestLobbyView there is the variable "playerList". */}
-        {/* It this correct? */}
-
-
-        {/* Begin: Jason dummy code to style with. Delete "{ false && " and corresponding closing tag. */}
-        {false && {playerList}}
-        {/* End: Jason dummy code to style with. Delete "{ false && " and corresponding closing tag. */}
-      </div>
-      
-      <button
-        className="GuestLobbyView__btn--cancel App__colorScheme--button"
-        onClick={e => onClickHandler(e)}
-        >Cancel
-      </button>
 
 
 
-      {/* For error messaging - not sure if we need to worry about this. */}
-      {/* Begin: Jason dummy code to style with */}
-        {true && <div style={{color: "black", fontSize: "14px"}}>error message - not styled</div>}
-      {/* End: Jason dummy code to style with */}
-        {error && <div>{error}</div>}
-
-    </div>
-  )
-}
+      // for back button - TO DO LIST
+      //   <button
+      //   className="GuestLobbyView__btn--cancel App__colorScheme--button"
+      //   onClick={e => onClickHandler(e)}
+      //   >Cancel
+      // </button>
