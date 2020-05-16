@@ -31,15 +31,16 @@ export default function DrawGameView(props) {
     coordinates: [],
     drawing: false,
     currentColor: 'blue',
-    currentLineSize: 5,
+    currentLineSize: 12,
     openLineSize: false,
     openColor: false,
     roundFinished:false,
     maxWidth: null,
-    maxHeight: null
+    maxHeight: null,
+    opacity: 1
   });
 
-  const { coordinates, drawing, currentColor, currentLineSize, openLineSize, openColor, roundTime, roundFinished, maxWidth, maxHeight } = state;
+  const { coordinates, drawing, currentColor, currentLineSize, openLineSize, openColor, roundTime, roundFinished, maxWidth, maxHeight, opacity } = state;
 
 
   // helpers
@@ -55,6 +56,10 @@ export default function DrawGameView(props) {
     
     socket.on('changeView', nextView => {
       changeViewHandler(nextView);
+    })
+
+    socket.on('fadeSilhouette', opacity => {
+      setState(prev => ({...prev, opacity}));
     })
   }, [])
 
@@ -120,6 +125,7 @@ export default function DrawGameView(props) {
     translation = 'translate(-25%, -25%';
   }
   _silhouetteStyles['transform'] = translation;
+  _silhouetteStyles['opacity'] = opacity;
 
   // ** PALETTE BUTTONS LOGIC ** //
   const lineSizeClickHandler = e => {
@@ -162,8 +168,8 @@ export default function DrawGameView(props) {
         onClick={e => colorClickHandler(e)}></button>
 
         <button
-        style={{height: currentLineSize + 10,
-        width: currentLineSize + 10}}
+        style={{height: currentLineSize,
+        width: currentLineSize}}
         onClick={e => lineSizeClickHandler(e)}
         className="lineSize--button"></button>
       </div>

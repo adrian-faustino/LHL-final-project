@@ -27,9 +27,29 @@ module.exports = function(games, client, db, io) {
     const { lobbyID, nextView } = data;
     io.in(lobbyID).emit('changeView', nextView);
 
+    let opacity = 1;
+    let interval;
+
     /** Timeout for InstructionsView **/
     setTimeout(() => {
       io.in(lobbyID).emit('changeView', 'DrawGameView');
+  
+
+      /** Fade logic **/
+      let interval;
+      let opacity = 1;
+      setTimeout(() => {
+        interval = setInterval(() => {
+          opacity *= 0.95
+          console.log(opacity)
+          io.in(lobbyID).emit('fadeSilhouette', opacity);
+
+          if(opacity < 0.04) {
+            console.log('Interval cleared!')
+            clearInterval(interval);
+          }
+        }, 1000)
+      }, VIEW_TIME);
 
       /** Timeout for DrawGameView **/
       setTimeout(() => {

@@ -1,24 +1,26 @@
 .lineSize--button {
-  height: 35px;
-  width: 35px;
-  padding: 15px;
   background: black;
   border-radius: 50%;
   z-index: 50;
   outline: none;
+  transition: all 0.6s;
+  box-shadow: 0 0 3px black;
+  border: none;
 }
 
 .lineSize--ul {
   position: absolute;
   left: 10vw;
   top: 10vh;
-  height: 50px;
-  width: 140px;
-  background: red;
-
+  height: 60px;
+  width: 240px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 255, 0.411);
+  box-shadow: 0 0 4px black;
+ 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  justify-content: center;
+  justify-items: center;
   align-items: center;
 }
 
@@ -26,4 +28,14 @@
   margin: 0 2px;
   background: black;
   border-radius: 50%;
+  box-shadow: 0 0 3px black;
+}
+
+.lineSize--li::before {
+  content: '';
+  height: 39px;
+  width: 39px;
+  position: absolute;
+  top: 8px;
+  transform: translateX(-50%);
 }

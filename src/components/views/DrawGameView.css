@@ -10,7 +10,6 @@
   padding-top: 50px;
   height: 100vh;
   width: 100vw;
-  background: grey;
 
   display: grid;
   justify-content: center;
@@ -25,13 +24,16 @@
 
 .DrawGameView--silhouette {
   position: relative;
+  margin-bottom: 20px;
+  /* band-aid */
+  transition: all 1s;
 }
 
 .DrawGameView--canvas {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  border: 3px solid blue;
+  box-shadow: inset 0 0 10px 1px black;
 }
 
 
@@ -39,13 +41,17 @@
 
 .DrawGameView--toggleBtn-container {
   height: 60px;
-  width: 100px;
-  background: red;
+  width: 125px;
   position: fixed;
   top: 2vh;
   left: 10vw;
+  box-shadow: inset 0 0 5px black;
+  background: rgba(128, 128, 128, 0.76);
+  padding: 4px;
+  border-radius: 6px;
 
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
   align-items: center;
 }
