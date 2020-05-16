@@ -11,7 +11,7 @@ const { timerStyles } = CountdownTimerStyles;
 const { formatZero, formatMS } = countdownHelpers;
 
 export default function CountdownTimer(props) {
-  const { timeInMS } = props;
+  const { timeInMS, warningOn } = props;
 
   const [state, setState] = useState({
     ROUND_TIME: timeInMS,
@@ -33,7 +33,7 @@ export default function CountdownTimer(props) {
     timeLeft = 0;
   }
 
-  if(timeLeft <= 30000) {
+  if(timeLeft <= 30000 && warningOn) {
     _timerStyles['animation'] = 'flash--warning 0.4s infinite';
     _timerStyles['animationDirection'] = 'alternate-reverse';
   } 

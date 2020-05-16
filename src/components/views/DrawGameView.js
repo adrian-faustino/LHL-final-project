@@ -187,6 +187,7 @@ export default function DrawGameView(props) {
 
 
       <CountdownTimer
+      warningOn={true}
       timeInMS={ROUND_TIME}/>
       {/* <NavButton
       nextView={'ResultsView'}
