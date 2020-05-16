@@ -16,6 +16,8 @@ const games = require('./data/games');
 // constants
 const PORT = process.env.PORT;
 const DB_URI = process.env.ATLAS_URI;
+const constants = require('./constants');
+const { MAX_PLAYERS_PER_LOBBY } = constants;
 
 
 // database
@@ -86,11 +88,9 @@ app.post('/joinLobby', (req, res) => {
     return res.status(400).json({err: 'Lobby doesn`t exist!'});
   }
 
-  // constants
-  const MAX_PLAYERS = 4;
   const currentUserNum = Object.keys(games[lobbyID].players).length;
 
-  if(currentUserNum === MAX_PLAYERS) {
+  if(currentUserNum === MAX_PLAYERS_PER_LOBBY) {
     console.log('Lobby is full!');
     return res.status(400).json({err: 'Lobby is full!'});
   }
@@ -191,7 +191,8 @@ http.listen(PORT, () => {
 
 // on disconnect, remove that ID from the list of lobbies on line 24
 
-// === big rebuild
+
+
 function randomNumAllInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -237,4 +238,3 @@ function generateQuadrant(coordinatesObj) {
 
   return myQuadrant;
 }
-// === big rebuild

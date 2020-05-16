@@ -1,9 +1,11 @@
+const constants = require('../constants');
+const { VIEW_TIME, ROUND_TIME } = constants; 
+
 module.exports = function(games, client, db, io) {
   // models
   const { Lobby, Player, Coordinate } = db; 
 
-  // constants
-  const MAX_PLAYERS = 4;
+
 
   // === bigrebuild
   client.on('joinLobby', lobbyID => {
@@ -18,11 +20,6 @@ module.exports = function(games, client, db, io) {
 
   /* Given 'lobbyID', trigger view changes for all players in a lobby */  
   // InstructionsView ==> DrawGameView
-  const VIEW_TIME = 10000; // time in ms
-  const ROUND_TIME = 10000; //  time in ms
-
-
-  // === bigrebuild
   client.on('startGame', data => {
     const { lobbyID, nextView } = data;
     io.in(lobbyID).emit('changeView', nextView);
