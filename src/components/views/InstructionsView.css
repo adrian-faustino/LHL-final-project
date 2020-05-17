@@ -1,16 +1,17 @@
 .InstructionsView__header {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 33% 34% 33%;
   align-items: center;
   width: 100vw;
   height: 10vh;
 }
 
-.InstructionsView__header p {
+.InstructionsView__header--timer {
   margin: 0;
   padding: 0;
   left: -5vw;
   font-size: 2.0rem;
+  color: white;
 }
 
 .InstructionsView__header button {
@@ -19,7 +20,7 @@
   border-radius: 15px;
 }
 
-.InstructionsView__image--toDraw {
+/* .InstructionsView__image--toDraw {
   height: 90vh;
   background-image: url(../../assets/MLDrawing.jpg);
   background-repeat: no-repeat;
@@ -32,7 +33,7 @@
   width: 20vw;
   top: 12vh;
   left: 7vw;
-}
+} */
 
 
 @media only screen and (min-width: 768px) {

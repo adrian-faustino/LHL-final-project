@@ -10,11 +10,12 @@ export default function LandingView(props) {
   
   return (
     <div className="scrolling-background">
-      <h1 className="LandingView__container--title App__colorScheme--title">Draw-mageddon!</h1>
-      
+    
+      <h1 className="LandingView__titleAnimation">Draw-mageddon!</h1>
+
       <form className="LandingView__container--nameForm">
         <input
-          className="LandingView__form--nameField App__colorScheme--formField"
+          className="LandingView__form--inputField App__colorScheme--inputField"
           type="text"
           id="username"
           placeholder="Enter your name"

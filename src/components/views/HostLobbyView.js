@@ -103,24 +103,17 @@ export default function HostLobbyView(props) {
       
       <div className="HostLobbyView__container--IdField">
         <h2 className="App__colorScheme--message">Share this code with your friends:</h2>
-        <p className="App__colorScheme--formField">{lobbyID}</p>
+        <p className="App__colorScheme--code">{lobbyID}</p>
       </div>
 
-      {/* Begin: Jason dummy code to style with. Delete when done. */}
-      {/* { true &&
-        <ul className="HostLobbyView__namesList App__colorScheme--namesList">
-          <li>player 2 <i className="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
-          <li>player 3 <i className="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
-          <li>player 4 <i className="fas fa-user-minus HostLobbyView__namesList--deleteBtn"></i></li>
-        </ul>} */}
-      {/* End: Jason dummy code to style with. Delete when done. */}
-
-      {usernames}
+      <ul className="HostLobbyView__namesList App__colorScheme--namesList">
+        {usernames}
+      </ul>
 
       <button
         className="HostLobbyView__btn--start App__colorScheme--button"
         onClick={e => onClickHandler(e)}
-        >Start game
+        >Start Game
       </button>
     </div>
   )

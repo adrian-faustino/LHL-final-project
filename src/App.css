@@ -26,7 +26,7 @@
 /* LandingView, GuestLobbyView, HostLobbyView, ResultsView */
 .App__colorScheme--title {
   color: white;
-  background: radial-gradient(#1638D3, #5973EB);
+  background: radial-gradient(#D46600, #FF9B3F);
 }
 
 /* LandingView, GuestLobbyView, HostLobbyView, InstructionsView, DrawGameView, ResultsView */
@@ -35,37 +35,142 @@
 }
 
 /* LandingView, GuestLobbyView, HostLobbyView */
-.App__colorScheme--formField {
-  background-color: #0E289E;
+.App__colorScheme--inputField {
+  background: linear-gradient( #3E036F, #8F3ED1, #3E036F);
+  color: white;
+  /* background-color: #5611C1; */
+  outline: hidden;
+}
+.App__colorScheme--inputField::placeholder {
   color: white;
 }
-.App__colorScheme--formField::placeholder {
+
+/* GuestLobbyView, HostLobbyView */
+.App__colorScheme--code {
   color: white;
+  background-color: #5611C1;
 }
 
 /* GuestLobbyView, HostLobbyView */
 .App__colorScheme--namesList li {
   color: white;
-  background-color: #0E289E;
+  background-color: #5611C1;
 }
 
 /* LandingView, GuestLobbyView, HostLobbyView */
 .App__colorScheme--button {
+  /* background: linear-gradient(#262626, #eaeaea, #262626); */
+  background: radial-gradient( #FF9B3F, #D46600);
+  color: white;
+  border: solid 1px white;
+}
+.App__colorScheme--button:hover {
+  background: radial-gradient(#FF9B3F, #D46600);
+  color: black;
+  border: solid 1px black;
+}
+
+/* InstructionsView, DrawGameView */
+.App__colorScheme--header {
+  background-color: #5611C1;
+}
+
+/* InstructionsView, DrawGameView */
+.App__colorScheme--palette {
+  background: radial-gradient(#D46600, #FF9B3F);
+  color: white;
+  border: solid 1px white;
+}
+.App__colorScheme--palette:hover {
+  background: radial-gradient(#FF9B3F, #D46600);
+  color: black;
+  border: solid 1px black;
+}
+
+/* InstructionsView, DrawGameView */
+.App__colorScheme--timeUp {
+  background: rgba(86, 17, 193, 0.8);
+  color: red;
+}
+
+/* InstructionsView, DrawGameView, ResultsView */
+/* .App__colorScheme--referenceBorder {
+  border: solid #5611C1 4px;
+} */
+
+
+
+
+
+/* -------------Original code----------- */
+/* .App__container {
+  height: 100vh;
+  width: 100vw;
+}
+
+.scrolling-background {
+  height: 100vh;
+  background:
+  linear-gradient(
+    rgba(0, 0, 0, 0.85), 
+    rgba(0, 0, 0, 0.85)
+  ),
+  url(./assets/background-v2.jpg);
+  animation: background_scroll 60s linear infinite;
+}
+
+@keyframes background_scroll{
+  0% {background-position: 50% 0;}
+  25% {background-position: 100% 50% ;}
+  50% {background-position: 50% 100%;}
+  75% {background-position: 0 50%;}
+  100% {background-position: 50% 0;}
+} */
+
+
+/* LandingView, GuestLobbyView, HostLobbyView, ResultsView */
+/* .App__colorScheme--title {
+  color: white;
+  background: radial-gradient(#1638D3, #5973EB);
+} */
+
+/* LandingView, GuestLobbyView, HostLobbyView, InstructionsView, DrawGameView, ResultsView */
+/* .App__colorScheme--message {
+  color: white;
+} */
+
+/* LandingView, GuestLobbyView, HostLobbyView */
+/* .App__colorScheme--formField {
+  background-color: #0E289E;
+  color: white;
+}
+.App__colorScheme--formField::placeholder {
+  color: white;
+} */
+
+/* GuestLobbyView, HostLobbyView */
+/* .App__colorScheme--namesList li {
+  color: white;
+  background-color: #0E289E;
+} */
+
+/* LandingView, GuestLobbyView, HostLobbyView */
+/* .App__colorScheme--button {
   background: radial-gradient(#1638D3, #5973EB);
   color: white;
 }
 .App__colorScheme--button:hover {
   background: radial-gradient(#5973EB, #1638D3);
   color: black
-}
+} */
 
 /* InstructionsView, DrawGameView */
-.App__colorScheme--header {
+/* .App__colorScheme--header {
   background-color: #0E289E;
-}
+} */
 
 /* InstructionsView, DrawGameView */
-.App__colorScheme--palette {
+/* .App__colorScheme--palette {
   background: radial-gradient(#1638D3, #5973EB);
   color: white;
   border: solid 1px white;
@@ -74,9 +179,9 @@
   background: radial-gradient(#5973EB, #1638D3);
   color: black;
   border: solid 1px black;
-}
+} */
 
 /* InstructionsView, DrawGameView, ResultsView */
-.App__colorScheme--referenceBorder {
+/* .App__colorScheme--referenceBorder {
   border: solid #1638D3 4px;
-}
+} */

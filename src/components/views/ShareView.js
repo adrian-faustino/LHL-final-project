@@ -5,8 +5,7 @@ import NavButton from '../NavButton'
 
 export default function ShareView(props) {
   return (
-    <div>
-      <h1 style={{color: "red", fontSize: "14px"}}>ShareView.js</h1>
+    <div className="scrolling-background">
 
       <NavButton
       nextView={'LandingView'}

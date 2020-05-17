@@ -146,47 +146,52 @@ export default function DrawGameView(props) {
 
   return (
     <div>
-      <div className="DrawGameView__header App__colorScheme--header">
-
-        <div
-        className="DrawGameView--slicer"
-        height={CANVAS_H}
-        width={CANVAS_W}>
-          <img
-          className="DrawGameView--silhouette"
-          style={_silhouetteStyles}
-          height={bg_h}
-          width={bg_w}
-          src={IMG_SRC} alt="silhouette"/>
-        </div>
-
-        <CountdownTimer
-        timeInMS={ROUND_TIME}/>
+      <div className="InstructionsView__header App__colorScheme--header" >
+        <CountdownTimer timeInMS={ROUND_TIME}/>
+        <button
+        className="App__colorScheme--palette"
+        onClick={e => colorClickHandler(e)}><i className="fas fa-palette"></i>
+        </button>
         
-        <div className="DrawGameView--toggleBtn-container">
-          <button
-          style={{background: currentColor}}
-          className="palette--button"
-          onClick={e => colorClickHandler(e)}></button>
 
-          <button
-          style={{height: currentLineSize,
-          width: currentLineSize}}
-          onClick={e => lineSizeClickHandler(e)}
-          className="lineSize--button"></button>
-        </div>
-
+        <button
+          className="App__colorScheme--palette"
+          onClick={e => lineSizeClickHandler(e)}><i className="fas fa-paint-brush"></i>
+        </button>
+        
       </div>
 
       {openColor && (<Palette
         setState={setState}
         state={state}
         updateColor={updateColor}/>)}
-
       {openLineSize && (<LineSize
         setState={setState}
         state={state}
         updateLineSize={updateLineSize}/>)}
+
+
+
+
+
+
+
+
+        <div
+        className="DrawGameView--slicer"
+        height={CANVAS_H}
+        width={CANVAS_W}
+        >
+        <img
+        className="DrawGameView--silhouette"
+        style={_silhouetteStyles}
+        height={bg_h}
+        width={bg_w}
+        src={IMG_SRC} alt="silhouette"
+        />
+      </div>
+
+
 
 
       <canvas

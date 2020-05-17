@@ -105,7 +105,7 @@ export default function GuestLobbyView(props) {
       {!lobbyID && (
         <form className="GuestLobbyView__container--IdField">
         <input
-        className="GuestLobbyView__form--codeInput App__colorScheme--formField"
+        className="GuestLobbyView__form--codeInput App__colorScheme--inputField"
         onChange={onChangeHandler}
         placeholder="Enter Lobby ID"/>
         <button
@@ -115,33 +115,19 @@ export default function GuestLobbyView(props) {
       </form>
       )}
 
-
-      {error && <div>{error}</div>}
-    
-
       <div className="GuestLobbyView__namesList--container">
-        {/* Begin: Jason dummy code to style with. Delete when done. */}
-        {false && <h2 className="App__colorScheme--message">Welcome to "host's" lobby!</h2>}
-        {/* End: Jason dummy code to style with. Delete when done. */}
-        {/* Begin: Original hard code. Use this but replace "false" with "host". */}
         {host && <h2 className="App__colorScheme--message">Welcome to {host}'s lobby!</h2>}
-        {/* End: Original hard code. Use this. */}
-      
-        {/* Begin: Jason dummy code to style with. Delete when done. */}
-        {false && <h2 className="App__colorScheme--message">Please wait for other players to join...</h2>}
-        {/* End: Jason dummy code to style with. Delete when done. */}
-        {/* Begin: Original hard code. Use this but replace "false" with "host". */}
-        {host && <h2 className="GuestLobbyView__namesList--message App__colorScheme--message">Waiting host to start the game...</h2>}
-        {/* End: Original hard code. Use this. */}
-
         
-        {/* Begin: Jason dummy code to style with. Delete when done. */}
+        {host && <h2 className="GuestLobbyView__namesList--message App__colorScheme--message">Please wait for {host} to start the game...</h2>}
+        
         {true &&
           <ul className="GuestLobbyView__namesList App__colorScheme--namesList">
-            {usernames}
-          </ul>}
-        {/* End: Jason dummy code to style with. Delete when done. */}
+          {usernames}
+          </ul>
+        }
       </div>
+      
+      {error && <div style={{color: "red"}}>{error}</div>}
     </div>
   )
 }

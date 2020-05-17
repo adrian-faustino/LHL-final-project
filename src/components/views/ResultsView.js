@@ -58,9 +58,9 @@ export default function ResultsView(props) {
       {/* <img className="ResultsView__image App__colorScheme--referenceBorder" src={MLReference} alt="Portion of image to draw."></img> */}
 
       <canvas
-      ref={canvasRef}
-      width={window.innerWidth}
-      height={window.innerHeight}>
+        ref={canvasRef}
+        width={window.innerWidth}
+        height={window.innerHeight}>
       </canvas>
 
 

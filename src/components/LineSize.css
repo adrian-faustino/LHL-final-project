@@ -1,4 +1,48 @@
-.lineSize--button {
+.LineSize__container {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  justify-items: center;
+  width: 50vw;
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.LineSize__container li {
+  color: black;
+  padding: 0.5rem 0;
+}
+
+#sizeXL {
+  font-size: 2.0rem;
+}
+
+#sizeL {
+  font-size: 1.7rem;
+}
+
+#sizeM {
+  font-size: 1.3rem;
+}
+
+#sizeS {
+  font-size: 1.0rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* .lineSize--button {
   background: black;
   border-radius: 50%;
   z-index: 50;
@@ -38,4 +82,4 @@
   position: absolute;
   top: 8px;
   transform: translateX(-50%);
-}
+} */

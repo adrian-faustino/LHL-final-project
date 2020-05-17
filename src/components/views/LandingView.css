@@ -1,11 +1,15 @@
-.LandingView__container--title {
-  position: relative;
+.LandingView__titleAnimation {
+	position: relative;
   display: inline;
   top: 15vh;
   margin: 0 auto;
   padding: 1.5rem 1.5rem;
   font-size: 2.0rem;
-  border-radius: 15px;
+  background-image: url(../../assets/source2.gif);
+	background-size: cover;
+	color: transparent;
+	-moz-background-clip: text;
+  -webkit-background-clip: text;
 }
 
 .LandingView__container--nameForm {
@@ -14,7 +18,7 @@
   width: 100vw;
 }
 
-.LandingView__form--nameField {
+.LandingView__form--inputField {
   text-align: center;
   width: 50vw;
   line-height: 48px;
@@ -25,6 +29,10 @@
   position: absolute;
   top: 60vh;
   width: 100vw;
+}
+
+input:focus, textarea:focus, select:focus, button:focus {
+  outline: none;
 }
 
 /* .LandingView__about--container {
