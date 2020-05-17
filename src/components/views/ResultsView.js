@@ -1,12 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './ResultsView.css'
 
-// Begin: Dummy code to have static reference image. Take out when real image is available.
-// import MLReference from '../../assets/MLReference.jpg';
-// End: Dummy code to have static reference image. Take out when real image is available.
-
-
-
 // Notes: We will remove the NavButton component later and replace it with a socket emit so it automatically moves to the next page for all the players
 
 // subcomponents

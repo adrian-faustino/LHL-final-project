@@ -20,21 +20,17 @@
   border-radius: 15px;
 }
 
-/* .InstructionsView__image--toDraw {
-  height: 90vh;
-  background-image: url(../../assets/MLDrawing.jpg);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+.InstructionsView__message {
+  position: absolute;
+  font-size: 1.2rem;
+  margin: 1.0rem;
+  padding: 0.5rem;
+  border-radius: 15px;
 }
 
-.InstructionsView__image--reference {
-  position: absolute;
-  height: 18vh;
-  width: 20vw;
-  top: 12vh;
-  left: 7vw;
-} */
-
+.InstructionsView__canvasBackground {
+  background-image: url(../../assets/canvasBackground.jpg);
+}
 
 @media only screen and (min-width: 768px) {
   .InstructionsView__header p {

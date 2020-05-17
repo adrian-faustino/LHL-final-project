@@ -39,7 +39,7 @@ export default function MainImage(props) {
 
   return (
     <div style={_containerWrapperStyles}>
-      <div style={_imgContainerStyles}>
+      <div className="MainImage__reference" style={_imgContainerStyles}>
         <img
         style={_imgStyles}
         src={IMG_SRC}/>
