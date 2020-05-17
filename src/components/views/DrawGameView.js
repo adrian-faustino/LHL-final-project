@@ -185,15 +185,6 @@ export default function DrawGameView(props) {
         setState={setState}
         state={state}
         updateLineSize={updateLineSize}/>)}
-
-
-      <CountdownTimer
-      warningOn={true}
-      timeInMS={ROUND_TIME}/>
-      {/* <NavButton
-      nextView={'ResultsView'}
-      buttonTitle={'Next'}
-      changeViewHandler={props.changeViewHandler}/> */}
     </div>
   )
 }

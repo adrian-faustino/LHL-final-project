@@ -20,10 +20,11 @@ export default function ResultsView(props) {
   const { socket, changeViewHandler } = props;
 
   const [state, setState] = useState({
-    finalCoordinates: null
+    finalCoordinates: null,
+    toggleReplay: false
   })
   
-  const { finalCoordinates } = state;
+  const { finalCoordinates, toggleReplay } = state;
 
   // helpers
   const { renderQuadrants } = renderFinalHelpers;
@@ -50,6 +51,11 @@ export default function ResultsView(props) {
     }
   });
 
+  const replayHandler = e => {
+    e.preventDefault();
+    setState(prev => ({...prev, toggleReplay: !toggleReplay}));
+  }
+
   return (
     <div>
       <div className="ResultsView--container">
@@ -68,10 +74,11 @@ export default function ResultsView(props) {
       </div>
 
       <div className="ResultsView--doneBtn-container">
-      <NavButton
-      nextView={'ShareView'}
-      buttonTitle={'Done'}
-      changeViewHandler={changeViewHandler}/>
+        <button onClick={e => replayHandler(e)}>Replay</button>
+        <NavButton
+        nextView={'LandingView'}
+        buttonTitle={'Done'}
+        changeViewHandler={changeViewHandler}/>
       </div>
     </div>
   )
