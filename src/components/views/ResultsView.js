@@ -7,6 +7,12 @@ import NavButton from '../NavButton'
 
 // helpers
 import renderFinalHelpers from '../../helpers/renderFinalHelpers';
+import constants from '../../constants';
+
+// styles
+import IMG_SRC from '../../assets/mona-lisa.jpg';
+
+const { CANVAS_W, CANVAS_H } = constants;
 
 export default function ResultsView(props) {
 
@@ -48,8 +54,8 @@ export default function ResultsView(props) {
 
       <canvas
       ref={canvasRef}
-      width={window.innerWidth}
-      height={window.innerHeight}>
+      width={CANVAS_W}
+      height={CANVAS_H}>
       </canvas>
 
       <NavButton

@@ -1,5 +1,5 @@
 import constants from '../constants';
-const { MIN_RENDER_TIME } = constants;
+const { MIN_RENDER_TIME, CANVAS_W, CANVAS_H } = constants;
 
 
 const draw = (ctx, strokeData) => {
@@ -19,8 +19,8 @@ const renderQuad_1 = (ctx, coordinates) => {
     const { x, y, color, lineSize } = coordinate;
 
     // CHANGE SCREEN RATIO HERE
-    const _x = (x * 0.5) * window.innerWidth;
-    const _y = (y * 0.5) * window.innerHeight;
+    const _x = (x * 0.5) * CANVAS_W;
+    const _y = (y * 0.5) * CANVAS_H;
 
     const strokeData = {
       _x, _y, color, lineSize
@@ -42,8 +42,8 @@ const renderQuad_2 = (ctx, coordinates) => {
     const { x, y, color, lineSize } = coordinate;
 
     // CHANGE SCREEN RATIO HERE
-    const _x = ( (x * 0.5) + 0.5 ) * window.innerWidth;
-    const _y = (y * 0.5) * window.innerHeight;
+    const _x = ( (x * 0.5) + 0.5 ) * CANVAS_W;
+    const _y = (y * 0.5) * CANVAS_H;
 
     const strokeData = {
       _x, _y, color, lineSize
@@ -65,8 +65,8 @@ const renderQuad_3 = (ctx, coordinates) => {
     const { x, y, color, lineSize } = coordinate;
 
     // CHANGE SCREEN RATIO HERE
-    const _x = (x * 0.5) * window.innerWidth;
-    const _y = ( (y * 0.5) + 0.5 ) * window.innerHeight;
+    const _x = (x * 0.5) * CANVAS_W;
+    const _y = ( (y * 0.5) + 0.5 ) * CANVAS_H;
 
     const strokeData = {
       _x, _y, color, lineSize
@@ -88,8 +88,8 @@ const renderQuad_4 = (ctx, coordinates) => {
     const { x, y, color, lineSize } = coordinate;
 
     // CHANGE SCREEN RATIO HERE
-    const _x = ( (x * 0.5) + 0.5 ) * window.innerWidth;
-    const _y = ( (y * 0.5) + 0.5 ) * window.innerHeight;
+    const _x = ( (x * 0.5) + 0.5 ) * CANVAS_W;
+    const _y = ( (y * 0.5) + 0.5 ) * CANVAS_H;
 
     const strokeData = {
       _x, _y, color, lineSize

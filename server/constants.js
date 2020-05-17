@@ -1,6 +1,6 @@
 const MAX_PLAYERS_PER_LOBBY = 4;
 const VIEW_TIME = 5000; // for InstructionsView
-const ROUND_TIME = 60000;
+const ROUND_TIME = 15000;
 
 const constants = {
   MAX_PLAYERS_PER_LOBBY,
