@@ -1,6 +1,7 @@
 const MAX_PLAYERS_PER_LOBBY = 4;
-const VIEW_TIME = 5000; // the length of time in InstructionsView
-const ROUND_TIME = 15000; // the length of time in DrawGameView
+
+const VIEW_TIME = 2000; // fthe length of time in InstructionsView
+const ROUND_TIME = 2000; // the length of time in DrawGameView
 
 const constants = {
   MAX_PLAYERS_PER_LOBBY,

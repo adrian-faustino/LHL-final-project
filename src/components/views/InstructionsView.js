@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import "./InstructionsView.css";
-// import MLReference from '../../assets/MLReference.jpg';
 
 
 // subcomponents
-import NavButton from '../NavButton'
 import MainImage from '../MainImage'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import CountdownTimer from '../CountdownTimer';
@@ -18,8 +16,10 @@ export default function InstructionsView(props) {
   const { socket, changeViewHandler, myQuadrant } = props;
 
   const [state, setState] = useState({
+
     tick: true,
     interval: null
+
   })
 
   const { tick, interval } = state;
@@ -49,15 +49,24 @@ export default function InstructionsView(props) {
        */}
        
       <div className="InstructionsView__header App__colorScheme--header" >
+
+       
         <CountdownTimer timeInMs={5000}/>
+
         <button className="App__colorScheme--palette"><i className="fas fa-palette"></i></button>
+        <button className="App__colorScheme--palette"><i className="fas fa-paint-brush"></i></button>
       </div>
       
-
-      <MainImage
-      myQuadrant={myQuadrant}/>
-
+      <MainImage myQuadrant={myQuadrant}/>
 
     </div>
   )
 }
+
+
+// {timeLeft <= 0 && (<span className="CountdownTimer__timeUp--container"><div className="CountdownTimer__timeUp--msg">Time's up!</div></span>)}
+
+
+// <div className="InstructionsView__image--toDraw">
+//   <img className="InstructionsView__image--reference App__colorScheme--referenceBorder" src={MLReference} alt="Portion of image to draw."></img>
+// </div> 

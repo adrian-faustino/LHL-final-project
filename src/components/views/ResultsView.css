@@ -94,6 +94,7 @@
   }
   
   .ResultsView__image {
-    width: 25vw;
+    height: 350px;
+    object-fit: fill;
   }
 }

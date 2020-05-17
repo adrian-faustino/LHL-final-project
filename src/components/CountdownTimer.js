@@ -10,6 +10,7 @@ import countdownHelpers from '../helpers/countdownHelpers';
 const { timerStyles } = CountdownTimerStyles;
 const { formatZero, formatMS } = countdownHelpers;
 
+
 export default function CountdownTimer(props) {
   const { timeInMS, warningOn } = props;
 
@@ -35,6 +36,7 @@ export default function CountdownTimer(props) {
   if(timeLeft <= 30000 && warningOn) {
     _timerStyles['animation'] = 'flash--warning 0.4s infinite';
     _timerStyles['animationDirection'] = 'alternate-reverse';
+
   } 
 
   const { h, m, s, ms } = formatMS(timeLeft);
@@ -43,15 +45,14 @@ export default function CountdownTimer(props) {
 
 
   return (
-    <div>
-
-      <div style={_timerStyles} className="CountdownTimer--container">
-      <span className="CountdownTimer--span minute">{formatted_M}</span>:
-      <span className="CountdownTimer--span second">{formatted_S}</span>
-      </div>
-
-      {timeLeft <= 0 && (<span className="CountdownTimer--timeUp-container"><div className="CountdownTimer--timeUp-msg">Time's up!</div></span>)}
-
+    <div className="InstructionsView__header--timer">
+      <span className="">{formatted_M}:{formatted_S}</span>
     </div>
   )
 }
+    
+// {timeLeft <= 0 && (<span className="CountdownTimer__timeUp--container"><div className="CountdownTimer__timeUp--msg">Time's up!</div></span>)}
+
+// <div style={_timerStyles} className="CountdownTimer__container">
+//   <span className="">{formatted_M}</span>:<span className="">{formatted_S}</span>
+// </div>

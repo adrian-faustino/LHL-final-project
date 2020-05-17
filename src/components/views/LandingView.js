@@ -14,13 +14,15 @@ export default function LandingView(props) {
 
   return (
     <div className="scrolling-background">
-      <h1 className="LandingView__container--title App__colorScheme--title">Draw-mageddon!</h1>
 
-      {myUsername ? <h2>{`You will play as ${myUsername}`}</h2> : ''}
+      <h1 className="LandingView__titleAnimation">Draw-mageddon!</h1>
+
+      {myUsername ? <h2 style={{color: "red"}}>{`You will play as ${myUsername}`}</h2> : ''}
       
       <form className="LandingView__container--nameForm">
-        <input className="LandingView__form--nameField App__colorScheme--formField" type="text" id="username" placeholder={placeholder}
+        <input className="LandingView__form--inputField App__colorScheme--inputField" type="text" id="username" placeholder={placeholder}
         onChange={inputChangeHandler}/>
+
       </form>
 
       <div className="LandingView__btnContainer">

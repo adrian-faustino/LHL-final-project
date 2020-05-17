@@ -70,7 +70,6 @@ export default function ResultsView(props) {
 
       <h2 className="ResultsView__message App__colorScheme--message">Such a work of art!</h2> 
 
-
       <div className="ResultsView--container">
         <canvas
         className="ResultsView--canvas"

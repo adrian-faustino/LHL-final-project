@@ -146,7 +146,7 @@ export default function GuestLobbyView(props) {
       {!lobbyID && (
         <form className="GuestLobbyView__container--IdField">
         <input
-        className="GuestLobbyView__form--codeInput App__colorScheme--formField"
+        className="GuestLobbyView__form--codeInput App__colorScheme--inputField"
         onChange={onChangeHandler}
         placeholder="Enter Lobby ID"/>
         <button
@@ -156,7 +156,8 @@ export default function GuestLobbyView(props) {
       </form>
       )}
 
-      {error && <div>{error}</div>}
+
+      {error && <div style={{color: "red"}}>{error}</div>}
     
       {/** Begin: Render when user has successfully joined a lobby **/}
       {host && (<>
@@ -183,7 +184,6 @@ export default function GuestLobbyView(props) {
       nextView={'LandingView'}
       buttonTitle={'Back'}
       changeViewHandler={changeViewHandler}/>}
-
     </div>
   )
 }

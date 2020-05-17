@@ -122,8 +122,9 @@ export default function HostLobbyView(props) {
       
       <div className="HostLobbyView__container--IdField">
         <h2 className="App__colorScheme--message">Share this code with your friends:</h2>
-        <p className="App__colorScheme--formField">{lobbyID}</p>
+        <p className="App__colorScheme--code">{lobbyID}</p>
       </div>
+
 
  
       <ul className="HostLobbyView__namesList App__colorScheme--namesList">
@@ -131,8 +132,8 @@ export default function HostLobbyView(props) {
       </ul>}
  
 
-      <button onClick={e => startButtonHandler(e)}>Start game</button>
-      <button onClick={e => backButtonHandler(e)}>Cancel game</button>
+      <button className="HostLobbyView__btn--start App__colorScheme--button" onClick={e => startButtonHandler(e)}>Start game</button>
+      <button className="HostLobbyView__btn--start App__colorScheme--button" onClick={e => backButtonHandler(e)}>Cancel game</button>
     </div>
   )
 }
