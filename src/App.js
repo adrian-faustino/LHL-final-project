@@ -100,12 +100,16 @@ function App() {
   /** Set quadrant for slicing img **/
   useEffect(() => {
     if(myLobbyObj && myPlayerID && myLobbyObj.players) {
-      const myQuadrant = myLobbyObj.players[myPlayerID].myQuadrant;
-
-      console.log('UPDATING QUADRANT!');
-      setState(prev => ({...prev, myQuadrant}));
+      try {
+        const myQuadrant = myLobbyObj.players[myPlayerID].myQuadrant;
+  
+        console.log('UPDATING QUADRANT!');
+        setState(prev => ({...prev, myQuadrant}));
+      } catch {
+        console.log('Failed to set quadrant');
+      }
     }
-  }, [myPlayerID]);
+  }, [myPlayerID, myLobbyObj]);
   // === bigrebuild
   
 
@@ -116,6 +120,7 @@ function App() {
 
       {state.view === 'LandingView' &&
       <LandingView
+      myUsername={myUsername}
       inputChangeHandler={inputChangeHandler}
       changeViewHandler={changeViewHandler}/>}
 
