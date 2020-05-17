@@ -8,6 +8,7 @@ import constants from '../../constants';
 // subcomponents
 import PlayerLobbyStatus from '../PlayerLobbyStatus';
 import axios from 'axios';
+import NavButton from '../NavButton';
 
 
 const { API } = constants;
@@ -32,7 +33,7 @@ export default function GuestLobbyView(props) {
         axios.post(API + '/reqLobbyInfo', { lobbyID })
         .then(resp => {
           const { myLobbyObj } = resp.data;
-          console.log('Lobby obj====>', myLobbyObj)
+
           setMyLobbyObjHandler(myLobbyObj);
         })
         .catch(error => {
@@ -161,6 +162,11 @@ export default function GuestLobbyView(props) {
       {host && <h3>Waiting host to start the game...</h3>}
 
       {host && <button onClick={e => leaveLobbyHandler(e)}>Leave lobby</button>}
+
+      {!host && <NavButton
+      nextView={'LandingView'}
+      buttonTitle={'Back'}
+      changeViewHandler={changeViewHandler}/>}
     </div>
   )
 }
