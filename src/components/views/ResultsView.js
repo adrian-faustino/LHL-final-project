@@ -31,6 +31,7 @@ export default function ResultsView(props) {
   // receive coords when backend is finished compiling coordinates
   useEffect(() => {
     socket.on('finalCoords', finalCoordinates => {
+      console.log('Rendering final picture...');
       setState(prev => ({...prev, finalCoordinates}));
       
       /** Save to DB - STRETCH **/

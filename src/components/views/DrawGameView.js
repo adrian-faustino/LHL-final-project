@@ -69,6 +69,7 @@ export default function DrawGameView(props) {
   // send final coordinates before view change
   useEffect(() => {
     if(roundFinished) {
+      console.log('Player object==>', myLobbyObj);
       const PLAYERS_IN_ROOM = Object.keys(myLobbyObj.players).length;
       
       const data = {
@@ -81,7 +82,10 @@ export default function DrawGameView(props) {
       console.log('Game finished. Sending final coordinates...', coordinates);
 
       axios.post(API + '/finalCoords', data)
-      .then()
+      .then(res => {
+        console.log(res.data);
+        changeViewHandler('ResultsView');
+      })
       .catch(err => console.log(err));
     }
   }, [roundFinished])

@@ -12,18 +12,23 @@ module.exports = function(games, client, db, io, app) {
   app.post('/finalCoords', (req, res) => {
     const { coordinates, lobbyID, myQuadrant, PLAYERS_IN_ROOM } = req.body;
     
-    console.log(`Recieved coordinates from lobby ${lobbyID}:`, coordinates);
+    // console.log(`Recieved coordinates from lobby ${lobbyID}:`, coordinates);
   
     /** Populate quadrants **/
     games[lobbyID].coordinates[myQuadrant] = coordinates;
     
     /** Emit final coordinates once all quadrants have been received **/
-    if(Object.keys(games[lobbyID].coordinates).length === PLAYERS_IN_ROOM) {
+    const coordKeys = Object.keys(games[lobbyID].coordinates);
+    const updatedCoords = coordKeys.filter(quadrant => games[lobbyID].coordinates[quadrant].length !== 0);
+
+    if(updatedCoords.length === PLAYERS_IN_ROOM) {
       const finalCoordinates = games[lobbyID].coordinates;
   
-      console.log('Sending final coordinates:', finalCoordinates);
+      console.log(`Successfully received coordinates from all ${PLAYERS_IN_ROOM} players`);
       io.in(lobbyID).emit('finalCoords', finalCoordinates);
+      return res.send(`You're last to send data.`)
     }
+    res.send('Successfully sent your final coordinates.');
   });
   
   

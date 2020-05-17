@@ -49,7 +49,6 @@ module.exports = function(games, client, db, io) {
         console.log('Game finished.');
         clearInterval(interval);
         io.in(lobbyID).emit('roundFinished')
-        io.in(lobbyID).emit('changeView', 'ResultsView');
       }, ROUND_TIME);
 
     }, VIEW_TIME);
