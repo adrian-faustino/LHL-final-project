@@ -35,14 +35,14 @@ export default function InstructionsView(props) {
 
       <h2>This is your section of the final image. As time goes, the image will slowly fade. You will have {ROUND_TIME / 60000} {ROUND_TIME / 60000 > 1 ? 'minutes' : 'minute'} to draw it from memory!</h2>
 
-      <div style={{position: 'fixed', top: '5vh', left: '50vw'}}>
+      {/* <div style={{position: 'fixed', top: '5vh', left: '50vw'}}>
       <CountdownCircleTimer
       isPlaying
       duration={VIEW_TIME / 1000}
       initialRemainingTime={100}
       colors={[['#A30000']]}/>
       </div>
-      
+       */}
       <MainImage
       myQuadrant={myQuadrant}/>
 
