@@ -1,0 +1,46 @@
+.InstructionsView__header {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  width: 100vw;
+  height: 10vh;
+}
+
+.InstructionsView__header p {
+  margin: 0;
+  padding: 0;
+  left: -5vw;
+  font-size: 2.0rem;
+}
+
+.InstructionsView__header button {
+  margin: 0 5vw;
+  font-size: 2.0rem;
+  border-radius: 15px;
+}
+
+.InstructionsView__image--toDraw {
+  height: 90vh;
+  background-image: url(../../assets/MLDrawing.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.InstructionsView__image--reference {
+  position: absolute;
+  height: 18vh;
+  width: 20vw;
+  top: 12vh;
+  left: 7vw;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .InstructionsView__header p {
+    font-size: 3.0rem;
+  }
+  
+  .InstructionsView__header button {
+    font-size: 3.0rem;
+  }
+}

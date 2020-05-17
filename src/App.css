@@ -1,6 +1,10 @@
+.App__container {
+  height: 100vh;
+  width: 100vw;
+}
 
-.app {
-  min-height: 100vh;
+.scrolling-background {
+  height: 100vh;
   background:
   linear-gradient(
     rgba(0, 0, 0, 0.85), 
@@ -10,10 +14,69 @@
   animation: background_scroll 60s linear infinite;
 }
 
-/* @keyframes background_scroll{
+@keyframes background_scroll{
   0% {background-position: 50% 0;}
   25% {background-position: 100% 50% ;}
   50% {background-position: 50% 100%;}
   75% {background-position: 0 50%;}
   100% {background-position: 50% 0;}
-} */
+}
+
+
+/* LandingView, GuestLobbyView, HostLobbyView, ResultsView */
+.App__colorScheme--title {
+  color: white;
+  background: radial-gradient(#1638D3, #5973EB);
+}
+
+/* LandingView, GuestLobbyView, HostLobbyView, InstructionsView, DrawGameView, ResultsView */
+.App__colorScheme--message {
+  color: white;
+}
+
+/* LandingView, GuestLobbyView, HostLobbyView */
+.App__colorScheme--formField {
+  background-color: #0E289E;
+  color: white;
+}
+.App__colorScheme--formField::placeholder {
+  color: white;
+}
+
+/* GuestLobbyView, HostLobbyView */
+.App__colorScheme--namesList li {
+  color: white;
+  background-color: #0E289E;
+}
+
+/* LandingView, GuestLobbyView, HostLobbyView */
+.App__colorScheme--button {
+  background: radial-gradient(#1638D3, #5973EB);
+  color: white;
+}
+.App__colorScheme--button:hover {
+  background: radial-gradient(#5973EB, #1638D3);
+  color: black
+}
+
+/* InstructionsView, DrawGameView */
+.App__colorScheme--header {
+  background-color: #0E289E;
+}
+
+/* InstructionsView, DrawGameView */
+.App__colorScheme--palette {
+  background: radial-gradient(#1638D3, #5973EB);
+  color: white;
+  border: solid 1px white;
+}
+.App__colorScheme--palette:hover {
+  background: radial-gradient(#5973EB, #1638D3);
+  color: black;
+  border: solid 1px black;
+}
+
+/* InstructionsView, DrawGameView, ResultsView */
+.App__colorScheme--referenceBorder {
+  border: solid #1638D3 4px;
+}

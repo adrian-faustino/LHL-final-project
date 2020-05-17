@@ -2,6 +2,7 @@ import React from 'react'
 // import classNames from "classnames";
 import "./NavButton.css";
 
+
 // Notes: COMPLETE for now. Desired functionality tested.
 
 export default function NavButton(props) {
@@ -12,26 +13,12 @@ export default function NavButton(props) {
     props.changeViewHandler(props.nextView)
   }
 
-  // const buttonClass = classNames({
-  //   "btn": true,
-  //   "btn-success": true
-  // })
-
   return (
     <div>
       <button
-      className="button"
+      className="NavButton__btn App__colorScheme--button"
       onClick={e => onClickHandler(e)}
       >{props.buttonTitle}</button>
     </div>
   )
 }
-
-
-
-
-//   let buttonClass = classNames({
-//      "button": true,
-//      "button--confirm": props.confirm,
-//      "button--danger": props.danger
-//   });

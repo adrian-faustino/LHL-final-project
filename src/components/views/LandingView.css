@@ -1,51 +1,81 @@
-.main-container {
-  position: absolute;
-  top: 10%;
-  height: 90%;
-  width: 100%;
+.LandingView__container--title {
+  position: relative;
+  display: inline;
+  top: 15vh;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem;
+  font-size: 2.0rem;
+  border-radius: 15px;
 }
 
-.title {
-  color: white;
-  font-size: 2.0rem;
-  background-color: rgba(89, 115, 235, 0.60);
+.LandingView__container--nameForm {
+  position: absolute;
+  top: 40vh;
+  width: 100vw;
+}
+
+.LandingView__form--nameField {
+  text-align: center;
+  width: 50vw;
+  line-height: 48px;
+  border-radius: 15px;
+}
+
+.LandingView__btnContainer {
+  position: absolute;
+  top: 60vh;
+  width: 100vw;
+}
+
+/* .LandingView__about--container {
+  position: absolute;
+  width: 100vw;
+  bottom: 2vh;
+  display: grid;
+  grid-template-columns: 50vw 50vw;
+  justify-items: center;
+}
+
+.LandingView__about--button {
+  width: 50%;
+  margin-top: 2.0rem;
   padding-top: 1.0rem;
   padding-bottom: 1.0rem;
-  margin-left: 2.0rem;
-  margin-right: 2.0rem;
   border-radius: 15px;
+} */
+
+@media only screen and (min-width: 768px) {
+  .LandingView__container--title {
+    padding: 2.5rem 2.5rem;
+    font-size: 3.5rem;
+  }
+  
+  .LandingView__form--nameField {
+    line-height: 72px;
+    font-size: 2.0rem;
+  }
+  
+  .LandingView__btnContainer {
+    top: 55vh;
+    width: 100vw;
+  }
+
+  /* .LandingView__about--container {
+    bottom: 2vh;
+  } */
+  
+  /* .LandingView__about--button {
+    margin-top: 2.0rem;
+    padding: 1.0rem 0;
+  } */
 }
 
-.name-form {
-  position: absolute;
-  top: 30%;
-  width: 100%;
-}
-
-.button-container {
-  position: absolute;
-  top: 45%;
-  width: 100%;
-}
-
-.name-field {
-  text-align: center;
-  width: 50%;
-  line-height: 28px;
-  border-radius: 15px;
-  background-color: #5973EB;
-  color: white;
-}
-
-.name-field::placeholder {
-  color: white;
-}
-
-footer {
-  position: absolute;
-  width: 100%;
-  bottom: 2%;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  /* justify-content: space-between; */
+@media only screen and (min-width: 1025px) {
+  .LandingView__container--title {
+    padding: 2.0rem 5.0rem;
+  }
+  
+  .LandingView__form--nameField {
+    width: 500px;
+  }
 }

@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import "./InstructionsView.css";
+// import MLReference from '../../assets/MLReference.jpg';
+
 
 // subcomponents
 import NavButton from '../NavButton'
 import MainImage from '../MainImage'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import CountdownTimer from '../CountdownTimer';
 
 
 // helpers
@@ -43,6 +47,13 @@ export default function InstructionsView(props) {
       colors={[['#A30000']]}/>
       </div>
        */}
+       
+      <div className="InstructionsView__header App__colorScheme--header" >
+        <CountdownTimer timeInMs={5000}/>
+        <button className="App__colorScheme--palette"><i className="fas fa-palette"></i></button>
+      </div>
+      
+
       <MainImage
       myQuadrant={myQuadrant}/>
 

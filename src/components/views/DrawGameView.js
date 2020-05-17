@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import './DrawGameView.css';
 import axios from 'axios';
 
+// Begin: Dummy code to have static reference image. Take out when real image is available.
+import MLReference from '../../assets/MLReference.jpg';
+// End: Dummy code to have static reference image. Take out when real image is available.
+
 // helpers
 import paletteHelpers from '../../helpers/paletteHelpers';
 import drawHelpers from '../../helpers/drawHelpers';
@@ -142,38 +146,37 @@ export default function DrawGameView(props) {
 
 
   return (
-    <div className="DrawGameView--container">
-      <div
-      className="DrawGameView--slicer"
-      height={CANVAS_H}
-      width={CANVAS_W}>
-        <img
-        className="DrawGameView--silhouette"
-        style={_silhouetteStyles}
-        height={bg_h}
-        width={bg_w}
-        src={IMG_SRC} alt="silhouette"/>
-      </div>
-      <canvas
-      className="DrawGameView--canvas"
-      ref={canvasRef}
-      width={CANVAS_W}
-      height={CANVAS_H}
-      onMouseDown={e => onMouseDownHandler(e, state, setState)}
-      onMouseUp={e => onMouseUpHandler(e, state, setState)}
-      onMouseMove={e => onMouseMoveHandler(e, state, setState, CANVAS_W, CANVAS_H)}></canvas>
-      
-      <div className="DrawGameView--toggleBtn-container">
-        <button
-        style={{background: currentColor}}
-        className="palette--button"
-        onClick={e => colorClickHandler(e)}></button>
+    <div>
+      <div className="DrawGameView__header App__colorScheme--header">
 
-        <button
-        style={{height: currentLineSize,
-        width: currentLineSize}}
-        onClick={e => lineSizeClickHandler(e)}
-        className="lineSize--button"></button>
+        <div
+        className="DrawGameView--slicer"
+        height={CANVAS_H}
+        width={CANVAS_W}>
+          <img
+          className="DrawGameView--silhouette"
+          style={_silhouetteStyles}
+          height={bg_h}
+          width={bg_w}
+          src={IMG_SRC} alt="silhouette"/>
+        </div>
+
+        <CountdownTimer
+        timeInMS={ROUND_TIME}/>
+        
+        <div className="DrawGameView--toggleBtn-container">
+          <button
+          style={{background: currentColor}}
+          className="palette--button"
+          onClick={e => colorClickHandler(e)}></button>
+
+          <button
+          style={{height: currentLineSize,
+          width: currentLineSize}}
+          onClick={e => lineSizeClickHandler(e)}
+          className="lineSize--button"></button>
+        </div>
+
       </div>
 
       {openColor && (<Palette
@@ -185,6 +188,17 @@ export default function DrawGameView(props) {
         setState={setState}
         state={state}
         updateLineSize={updateLineSize}/>)}
+
+
+      <canvas
+        className="DrawGameView--canvas"
+        ref={canvasRef}
+        width={CANVAS_W}
+        height={CANVAS_H}
+        onMouseDown={e => onMouseDownHandler(e, state, setState)}
+        onMouseUp={e => onMouseUpHandler(e, state, setState)}
+        onMouseMove={e => onMouseMoveHandler(e, state, setState, CANVAS_W, CANVAS_H)}></canvas>
+
     </div>
   )
 }

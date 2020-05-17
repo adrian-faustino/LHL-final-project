@@ -117,44 +117,22 @@ export default function HostLobbyView(props) {
 
 
   return (
-    <div className="main-container">
-      <h1 style={{color: "red", fontSize: "14px"}}>HostLobbyView.js</h1>
-
-      <h1 className="title">{greeting}</h1>
+    <div className="scrolling-background">
+      <h1 className="HostLobbyView__container--title App__colorScheme--title">{greeting}</h1>
       
-      <div className="lobby-code-container">
-        <h2>Share this code with your friends:</h2>
-        <p>{lobbyID}</p>
+      <div className="HostLobbyView__container--IdField">
+        <h2 className="App__colorScheme--message">Share this code with your friends:</h2>
+        <p className="App__colorScheme--formField">{lobbyID}</p>
       </div>
 
-      {usernames}
+ 
+      <ul className="HostLobbyView__namesList App__colorScheme--namesList">
+        {usernames}    
+      </ul>}
+ 
 
       <button onClick={e => startButtonHandler(e)}>Start game</button>
       <button onClick={e => backButtonHandler(e)}>Cancel game</button>
     </div>
   )
 }
-
-
-
-
-// Jason code
-{/* <ul className="lobby-name-list">
-  {playersList}
-  <li>player 2 <img
-    className=""
-    src="trash.png"
-    alt=""
-    onClick={""}
-    />
-  </li>
-  <li>player 3 <img src="trash.jpg"/></li>
-  <li>player 4 <img src="trash.jpg"/></li>
-</ul>
-
-<div className="lobby-button">
-  <NavButton
-  nextView={'InstructionsView'}
-  buttonTitle={'Start game'}
-  changeViewHandler={props.changeViewHandler}/>
-</div> */}

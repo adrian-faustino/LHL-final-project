@@ -1,3 +1,32 @@
+.DrawGameView__header {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  width: 100vw;
+  height: 10vh;
+}
+
+.DrawGameView__header p {
+  margin: 0;
+  padding: 0;
+  left: -5vw;
+  font-size: 2.0rem;
+}
+
+.DrawGameView__header button {
+  margin: 0 5vw;
+  font-size: 2.0rem;
+  border-radius: 15px;
+}
+
+.DrawGameView__drawPort {
+  position: absolute;
+  top: 10vh;
+  right: 0;
+  left: 0;
+  height: 90vh;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -54,4 +83,24 @@
   grid-template-columns: repeat(2, 1fr);
   justify-items: center;
   align-items: center;
+}
+
+.GameDrawView__image--reference {
+  position: absolute;
+  height: 18vh;
+  width: 20vw;
+  top: 12vh;
+  left: 7vw;
+  z-index: 1;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .DrawGameView__header p {
+    font-size: 3.0rem;
+  }
+  
+  .DrawGameView__header button {
+    font-size: 3.0rem;
+  }
 }

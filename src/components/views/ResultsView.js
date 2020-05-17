@@ -1,4 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
+import './ResultsView.css'
+
+// Begin: Dummy code to have static reference image. Take out when real image is available.
+// import MLReference from '../../assets/MLReference.jpg';
+// End: Dummy code to have static reference image. Take out when real image is available.
+
+
 
 // Notes: We will remove the NavButton component later and replace it with a socket emit so it automatically moves to the next page for all the players
 
@@ -57,7 +64,13 @@ export default function ResultsView(props) {
   }
 
   return (
-    <div>
+    <div className="scrolling-background">
+
+      <h1 className="ResultsView__container--title App__colorScheme--title">Ta-Daaa!</h1>
+
+      <h2 className="ResultsView__message App__colorScheme--message">Such a work of art!</h2> 
+
+
       <div className="ResultsView--container">
         <canvas
         className="ResultsView--canvas"

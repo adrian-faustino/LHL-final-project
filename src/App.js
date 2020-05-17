@@ -114,8 +114,7 @@ function App() {
   
 
   return (
-    <div className="app">
-      
+    <div className="App__container">
       <h2>{gamePrompt}</h2>
 
       {state.view === 'LandingView' &&

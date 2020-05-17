@@ -1,52 +1,124 @@
-/* .main-container {
-  position: absolute;
-  top: 20%;
-  height: 60%;
-  width: 100%;
+.HostLobbyView__container--title {
+  position: relative;
+  display: inline;
+  top: 15vh;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem;
+  font-size: 2.0rem;
+  border-radius: 15px;
 }
 
-.button-container {
+.HostLobbyView__container--IdField {
   position: absolute;
-  bottom: 0;
-  width: 100%;
-} */
-
-.lobby-code-container {
-  position: absolute;
-  top: 25%;
-  width: 100%;
+  top: 30vh;
+  width: 100vw;
  }
  
-.lobby-code-container h2 {
-  color: white;
+.HostLobbyView__container--IdField h2 {
   margin: 0 3.0rem;
 }
 
-.lobby-code-container p {
-  color: white;
-  background-color: rgba(89, 115, 235, 0.60);
+.HostLobbyView__container--IdField p {
   border-radius: 15px;
   font-size: 2.0rem;
   margin: 1.0rem 5.0rem;
 }
 
-.lobby-name-list {
+.HostLobbyView__namesList {
   position: absolute;
-  top: 50%;
-  width: 100%;
-  color: white;
+  top: 55vh;
+  width: 100vw;
 }
 
-.lobby-name-list li {
+.HostLobbyView__namesList li {
   text-align: left;
-  margin: 0.5rem 2.0rem;
+  margin: 0.8rem 2.0rem;
   font-size: 1.2rem;;
   padding: 0.25rem 0.5rem;
-  background-color: #5973EB;
 }
 
-.lobby-button {
+.HostLobbyView__namesList--deleteBtn {
+  float: right;
+  font-size: 0.9rem;
+  padding-top: 0.25rem;
+}
+
+.HostLobbyView__btn--start {
   position: absolute;
-  bottom: 10%;
-  width: 100%;
-} 
+  width: 50vw;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  bottom: 10vh;
+  padding-top: 1.0rem;
+  padding-bottom: 1.0rem;
+  border-radius: 15px;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .HostLobbyView__container--title {
+    padding: 2.5rem 2.5rem;
+    font-size: 3.5rem;
+  }
+  
+  .HostLobbyView__container--IdField {
+    top: 30vh;
+  }
+  
+  .HostLobbyView__container--IdField h2 {
+    font-size: 2.0rem;
+    padding: 0 3.0rem;
+  }
+  
+  .HostLobbyView__container--IdField p {
+    margin: 2.0rem 10.0rem;
+    line-height: 72px;
+  }
+  
+  .HostLobbyView__namesList {
+    top: 50vh;
+  }
+  
+  .HostLobbyView__namesList li {
+    margin: 1.5rem 5.0rem;
+    font-size: 1.5rem;;
+    padding: 0.75rem 1.0rem;
+  }
+  
+  .HostLobbyView__namesList--deleteBtn {
+    font-size: 1.5rem;
+  }
+  
+  .HostLobbyView__btn--start {
+    bottom: 10vh;
+    font-size: 2.0rem;
+    padding: 2.0rem 0;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .HostLobbyView__container--title {
+    padding: 2.0rem 5.0rem;
+  }
+  
+  .HostLobbyView__container--IdField p {
+    display: inline;
+    padding: 0.5rem 10.0rem;
+  }
+  
+  .HostLobbyView__namesList {
+    top: 45vh;
+  }
+  
+  .HostLobbyView__namesList li {
+    margin: 1.0rem 10.0rem;
+  }
+  
+  .HostLobbyView__btn--start {
+    padding: 1.5rem 0;
+    width: 500px;
+  }
+}

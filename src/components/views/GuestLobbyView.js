@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import uuid from 'react-uuid';
+import "./GuestLobbyView.css";
 
 // Helpers
 import util from '../../helpers/util';
@@ -137,36 +139,89 @@ export default function GuestLobbyView(props) {
   }
 
   return (
-    <div>
-      <h1>Find me at components/GuestLobbyView.js!</h1>
+
+    <div className="scrolling-background">
+      <h1 className="GuestLobbyView__container--title App__colorScheme--title">{greeting}</h1>
 
       {!lobbyID && (
-      <form>
+        <form className="GuestLobbyView__container--IdField">
         <input
+        className="GuestLobbyView__form--codeInput App__colorScheme--formField"
         onChange={onChangeHandler}
         placeholder="Enter Lobby ID"/>
         <button
+        className="GuestLobbyView__form--btn App__colorScheme--button"
         type="submit"
         onClick={e => joinRoomHandler(e)}>Join</button>
       </form>
       )}
 
       {error && <div>{error}</div>}
-
-      <h1>{greeting}</h1>
-      {host && <h2>Welcome to {host}'s lobby!</h2>}
-
-      {usernames}
     
+      {/** Begin: Render when user has successfully joined a lobby **/}
+      {host && (<>
+
+      <div className="GuestLobbyView__namesList--container">
+        <h2 className="App__colorScheme--message">Welcome to {host}'s lobby!</h2>}
       
-      {host && <h3>Waiting host to start the game...</h3>}
+        
+        <ul className="GuestLobbyView__namesList App__colorScheme--namesList">
+          {usernames}
+        </ul>}
 
-      {host && <button onClick={e => leaveLobbyHandler(e)}>Leave lobby</button>}
 
+        <h2 className="GuestLobbyView__namesList--message App__colorScheme--message">Waiting for ${host} to start the game...</h2>}
+      </div>
+
+      <button onClick={e => leaveLobbyHandler(e)}>Leave lobby</button>
+
+      </>)}
+      {/** End: Render when user has successfully joined a lobby **/}
+
+  
       {!host && <NavButton
       nextView={'LandingView'}
       buttonTitle={'Back'}
       changeViewHandler={changeViewHandler}/>}
+
     </div>
   )
 }
+
+
+
+
+
+
+
+
+
+
+       {/* Begin: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
+       {/* { false &&
+          <form className="GuestLobbyView__container--IdField">
+            <input
+              className="GuestLobbyView__form--codeInput App__colorScheme--formField"
+              type="text"
+              id="gameID"
+              placeholder="Enter Game ID"
+              onChange={onChangeHandler}
+            />
+            <button
+              className="GuestLobbyView__form--btn App__colorScheme--button"
+              type="submit"
+              onClick={e => onSubmitHandler(e)}
+              >Submit ID
+            </button>
+          </form>
+        } */}
+        {/* End: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
+
+
+
+      // for back button - TO DO LIST
+      //   <button
+      //   className="GuestLobbyView__btn--cancel App__colorScheme--button"
+      //   onClick={e => onClickHandler(e)}
+      //   >Cancel
+      // </button>
