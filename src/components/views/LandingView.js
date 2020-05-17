@@ -35,20 +35,7 @@ export default function LandingView(props) {
         nextView={'GuestLobbyView'}
         buttonTitle={'Join a lobby'}
         changeViewHandler={changeViewHandler}/>
-      </div>
-
-      <footer>
-        <NavButton
-          nextView={''}
-          buttonTitle={'About'}
-          changeViewHandler={changeViewHandler}/>
-        
-        <NavButton
-        nextView={''}
-        buttonTitle={'?'}
-        changeViewHandler={changeViewHandler}/>
-      </footer>
-        
+      </div>        
     </div>
   )
 }

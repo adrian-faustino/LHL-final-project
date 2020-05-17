@@ -51,7 +51,7 @@ export default function DrawGameView(props) {
 
   // helpers
   const { togglePalette, toggleLineSize, updateLineSize, updateColor } = paletteHelpers;
-  const { onMouseUpHandler, onMouseDownHandler, onMouseMoveHandler, draw } = drawHelpers;
+  const { onMouseOutHandler, onMouseUpHandler, onMouseDownHandler, onMouseMoveHandler, draw } = drawHelpers;
 
   useEffect(() => {
     socket.on('roundFinished', () => {
@@ -200,6 +200,7 @@ export default function DrawGameView(props) {
         ref={canvasRef}
         width={CANVAS_W}
         height={CANVAS_H}
+        onMouseOut={e => onMouseOutHandler(e, state, setState)}
         onMouseDown={e => onMouseDownHandler(e, state, setState)}
         onMouseUp={e => onMouseUpHandler(e, state, setState)}
         onMouseMove={e => onMouseMoveHandler(e, state, setState, CANVAS_W, CANVAS_H)}></canvas>

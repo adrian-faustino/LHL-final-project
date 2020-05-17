@@ -133,7 +133,7 @@ export default function HostLobbyView(props) {
  
 
       <button className="HostLobbyView__btn--start App__colorScheme--button" onClick={e => startButtonHandler(e)}>Start game</button>
-      <button className="HostLobbyView__btn--start App__colorScheme--button" onClick={e => backButtonHandler(e)}>Cancel game</button>
+      {/* <button className="HostLobbyView__btn--start App__colorScheme--button" onClick={e => backButtonHandler(e)}>Cancel game</button> */}
     </div>
   )
 }

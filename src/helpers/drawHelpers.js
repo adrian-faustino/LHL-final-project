@@ -1,3 +1,7 @@
+const onMouseOutHandler = (e, state, setState) => {
+  console.log('Mouse out! =>', e);
+}
+
 const onMouseDownHandler = (e, state, setState) => {
   const drawing = true;
   
@@ -52,6 +56,7 @@ const draw = (ctx, coordinate) => {
 };
 
 const drawHelpers = {
+  onMouseOutHandler,
   onMouseDownHandler,
   onMouseUpHandler,
   onMouseMoveHandler,
