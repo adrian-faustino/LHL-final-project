@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import uuid from 'react-uuid';
+import React, { useState, useEffect } from 'react';
 
 // Helpers
 import util from '../../helpers/util';
@@ -27,13 +26,17 @@ export default function GuestLobbyView(props) {
   /** Handle when a new user joins lobby **/
   useEffect(() => {
     if(lobbyID) {
-      socket.on('/newUserJoined', () => {
+      socket.on('newUserJoined', () => {
+        console.log('A player joined the lobby!');
         axios.post(API + '/reqLobbyInfo', { lobbyID })
         .then(resp => {
           const { myLobbyObj } = resp.data;
+          console.log('Lobby obj====>', myLobbyObj)
           setMyLobbyObjHandler(myLobbyObj);
         })
-        .catch(err => console.log(err));
+        .catch(error => {
+          setState(prev => ({...prev, error}));
+        });
       })
     }
   }, [lobbyID]);
@@ -72,7 +75,8 @@ export default function GuestLobbyView(props) {
       socket.emit('joinLobby', tempInput);
     })
     .catch(err => {
-      console.log('Guest failed to join:', err);
+      const error = err.response.data.err;
+      setState(prev => ({...prev, error}));
     });
   };
 

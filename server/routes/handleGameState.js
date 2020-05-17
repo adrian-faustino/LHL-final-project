@@ -37,9 +37,8 @@ module.exports = function(games, client, db, io) {
       let opacity = 1;
      
       interval = setInterval(() => {
-        console.log('Starting tick.');
         opacity *= 0.90
-        console.log(opacity)
+  
         io.in(lobbyID).emit('fadeSilhouette', opacity);
       }, 800);
 

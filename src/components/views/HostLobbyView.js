@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import uuid from 'react-uuid'
+
 import "./HostLobbyView.css";
 import axios from 'axios';
 
@@ -54,6 +54,7 @@ export default function HostLobbyView(props) {
   useEffect(() => {
     if(lobbyID) {
       socket.on('newUserJoined', () => {
+        console.log('A new user joined!')
         axios.post(API + '/reqLobbyInfo', { lobbyID })
         .then(resp => {
           const { myLobbyObj } = resp.data;
