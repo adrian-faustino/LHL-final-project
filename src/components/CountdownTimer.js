@@ -26,7 +26,6 @@ export default function CountdownTimer(props) {
   const timeNow = new Date();
   const elapsed = timeNow - startTime;
   let timeLeft = ROUND_TIME - elapsed;
-  console.log('Time left...', timeLeft)
 
   /** Trigger 'Time up' screen */
   if(timeLeft <= 0) {

@@ -8,7 +8,7 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
 // helpers
 import constants from '../../constants';
-const { VIEW_TIME } = constants;
+const { VIEW_TIME, ROUND_TIME } = constants;
 
 export default function InstructionsView(props) {
   const { socket, changeViewHandler, myQuadrant } = props;
@@ -33,7 +33,7 @@ export default function InstructionsView(props) {
 
       <h1>Your goal is to draw a picture as a team!</h1>
 
-      <h2>This is your section of the final image. You will have 3 minutes to draw it!</h2>
+      <h2>This is your section of the final image. As time goes, the image will slowly fade. You will have {ROUND_TIME / 60000} {ROUND_TIME / 60000 > 1 ? 'minutes' : 'minute'} to draw it from memory!</h2>
 
       <div style={{position: 'fixed', top: '5vh', left: '50vw'}}>
       <CountdownCircleTimer
