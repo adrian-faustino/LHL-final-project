@@ -55,14 +55,14 @@ module.exports = function(games, client, db, io, app) {
     console.log(`${myUsername} attempting to join lobby: ${lobbyID}`);
   
     if(!games[lobbyID]) {
-      console.log(`Lobby doesn't exist!`);
+      console.log(`That lobby doesn't exist!`);
       return res.status(500).send({err: 'Lobby doesn`t exist!'});
     }
   
     const currentUserNum = Object.keys(games[lobbyID].players).length;
   
     if(currentUserNum === MAX_PLAYERS_PER_LOBBY) {
-      console.log('Lobby is full!');
+      console.log('That lobby is full!');
       return res.status(500).send({err: 'Lobby is full!'});
     }
 
