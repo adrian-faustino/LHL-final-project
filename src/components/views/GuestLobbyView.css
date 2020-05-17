@@ -69,7 +69,15 @@
   padding: 0.5rem 0.5rem;
 }
 
-.GuestLobbyView__btn--cancel {
+.temp {
+  position: absolute;
+  bottom: 10vh;
+}
+
+
+
+
+/* .GuestLobbyView__btn--cancel {
   position: absolute;
   margin-left: auto;
   margin-right: auto;
@@ -81,7 +89,7 @@
   padding-top: 1.0rem;
   padding-bottom: 1.0rem;
   border-radius: 15px;
-}
+} */
 
 
 @media only screen and (min-width: 768px) {

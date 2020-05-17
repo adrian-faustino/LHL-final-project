@@ -38,7 +38,6 @@
 .App__colorScheme--inputField {
   background: linear-gradient( #3E036F, #8F3ED1, #3E036F);
   color: white;
-  /* background-color: #5611C1; */
   outline: hidden;
 }
 .App__colorScheme--inputField::placeholder {
@@ -59,7 +58,6 @@
 
 /* LandingView, GuestLobbyView, HostLobbyView */
 .App__colorScheme--button {
-  /* background: linear-gradient(#262626, #eaeaea, #262626); */
   background: radial-gradient( #FF9B3F, #D46600);
   color: white;
   border: solid 1px white;
