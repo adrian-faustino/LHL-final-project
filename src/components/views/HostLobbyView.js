@@ -71,6 +71,11 @@ export default function HostLobbyView(props) {
     socket.on('changeView', nextView => {
       changeViewHandler(nextView);
     })
+
+    socket.on('userLeft', data => {
+      const { myLobbyObj, leaver } = data;
+      setMyLobbyObjHandler(myLobbyObj);
+    })
   }, [])
 
   /** BACK BUTTON **/

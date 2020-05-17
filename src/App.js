@@ -37,10 +37,10 @@ function App() {
     myPlayerID: null,
     myLobbyObj: null,
     myQuadrant: null,
-    error: null
+    gamePrompt: null
   });
 
-  const { view, myUsername, socket, lobbyID, myPlayerID, myLobbyObj, myQuadrant, error } = state;
+  const { view, myUsername, socket, lobbyID, myPlayerID, myLobbyObj, myQuadrant, gamePrompt } = state;
 
   /** Set up socket and listeners **/
   useEffect(() => {
@@ -65,8 +65,8 @@ function App() {
     };
   }, [view]);
 
-  const setErrorHandler = error => {
-    setState(prev => ({...prev, error}));
+  const setGamePromptHandler = gamePrompt => {
+    setState(prev => ({...prev, gamePrompt}));
   }
 
   const setMyLobbyObjHandler = myLobbyObj => {
@@ -112,7 +112,7 @@ function App() {
   return (
     <div className="app">
       
-      <h2>{error}</h2>
+      <h2>{gamePrompt}</h2>
 
       {state.view === 'LandingView' &&
       <LandingView
@@ -121,7 +121,8 @@ function App() {
 
       {state.view === 'GuestLobbyView' &&
       <GuestLobbyView
-      setErrorHandler={setErrorHandler}
+      myPlayerID={myPlayerID}
+      setGamePromptHandler={setGamePromptHandler}
       myUsername={state.myUsername}
       socket={socket}
       lobbyID = {lobbyID}

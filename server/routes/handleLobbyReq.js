@@ -99,6 +99,27 @@ module.exports = function(games, client, db, io, app) {
   })
   // === big rebuild
 
+  app.post('/leaveLobby', (req, res) => {
+    const { lobbyID, myUsername, myPlayerID } = req.body;
 
+    try {
+      const myQuadrant = games[lobbyID].players[myPlayerID].myQuadrant;
+      
+      /** Delete player from games obj and leave room **/
+      delete games[lobbyID].coordinates[myQuadrant];
+      delete games[lobbyID].players[myPlayerID];
+      client.leave(lobbyID);
+      
+      const data = {
+        myLobbyObj: games[lobbyID],
+        leaver: myUsername
+      }
+      io.in(lobbyID).emit('userLeft', data);
+      res.send({nextView: 'LandingView'});
+    } catch(err) {
+      console.log(`That player doesn't exist in this lobby.`);
+      res.status(500).send({err: 'Something went wrong.'});
+    }
+  })
 
 };
