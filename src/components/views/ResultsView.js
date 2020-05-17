@@ -10,13 +10,14 @@ import renderFinalHelpers from '../../helpers/renderFinalHelpers';
 import constants from '../../constants';
 
 // styles
+import './ResultsView.css';
 import IMG_SRC from '../../assets/mona-lisa.jpg';
 
 const { CANVAS_W, CANVAS_H } = constants;
 
 export default function ResultsView(props) {
 
-  const { socket } = props;
+  const { socket, changeViewHandler } = props;
 
   const [state, setState] = useState({
     finalCoordinates: null
@@ -50,18 +51,27 @@ export default function ResultsView(props) {
 
   return (
     <div>
-      <h1>Find me at components/ResultsView.js</h1>
+      <div className="ResultsView--container">
+        <canvas
+        className="ResultsView--canvas"
+        ref={canvasRef}
+        width={CANVAS_W}
+        height={CANVAS_H}>
+        </canvas>
 
-      <canvas
-      ref={canvasRef}
-      width={CANVAS_W}
-      height={CANVAS_H}>
-      </canvas>
+        <img
+        width={CANVAS_W}
+        height={CANVAS_H}
+        className="ResultsView--origImg"
+        src={IMG_SRC}/>
+      </div>
 
+      <div className="ResultsView--doneBtn-container">
       <NavButton
       nextView={'ShareView'}
       buttonTitle={'Done'}
-      changeViewHandler={props.changeViewHandler}/>
+      changeViewHandler={changeViewHandler}/>
+      </div>
     </div>
   )
 }
