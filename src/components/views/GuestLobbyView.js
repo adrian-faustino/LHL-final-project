@@ -15,7 +15,7 @@ const { API } = constants;
 
 export default function GuestLobbyView(props) {
   // === big rebuild 
-  const { myUsername, socket, lobbyID, myLobbyObj, setMyLobbyObjHandler, setMyPlayerIDHandler, setLobbyIDHandler, changeViewHandler } = props;
+  const { myUsername, socket, lobbyID, myLobbyObj, setMyLobbyObjHandler, setMyPlayerIDHandler, setLobbyIDHandler, changeViewHandler, setErrorHandler } = props;
   
   const [state, setState] = useState({
     tempInput: '',
@@ -44,6 +44,11 @@ export default function GuestLobbyView(props) {
   /** General Listeners **/
   useEffect(() => {
     socket.on('changeView', nextView => {
+      changeViewHandler(nextView);
+    })
+
+    socket.on('cancelGame', nextView => {
+      setErrorHandler('The host cancelled the game.');
       changeViewHandler(nextView);
     })
   }, [])

@@ -73,9 +73,22 @@ export default function HostLobbyView(props) {
     })
   }, [])
 
+  /** BACK BUTTON **/
+  const backButtonHandler = e => {
+    e.preventDefault();
+    
+    // stretch, remove from db instead of just switching view
+    const data = {
+      lobbyID,
+      nextView: 'LandingView'
+    }
+    socket.emit('cancelGame', data);
+    changeViewHandler(data.nextView);
+  }
+
 
   /** START GAME BUTTON - add logic later for skip **/
-  const onClickHandler = e => {
+  const startButtonHandler = e => {
     e.preventDefault();
     console.log('Starting game...')
     socket.emit('startGame', { lobbyID, nextView: 'InstructionsView' });
@@ -111,7 +124,8 @@ export default function HostLobbyView(props) {
 
       {usernames}
 
-      <button onClick={e => onClickHandler(e)}>Start game</button>
+      <button onClick={e => startButtonHandler(e)}>Start game</button>
+      <button onClick={e => backButtonHandler(e)}>Cancel game</button>
     </div>
   )
 }

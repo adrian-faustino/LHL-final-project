@@ -35,10 +35,12 @@ function App() {
     socket: null,
     lobbyID: null,
     myPlayerID: null,
-    myLobbyObj: null
+    myLobbyObj: null,
+    myQuadrant: null,
+    error: null
   });
 
-  const { myUsername, socket, lobbyID, myPlayerID, myLobbyObj } = state;
+  const { view, myUsername, socket, lobbyID, myPlayerID, myLobbyObj, myQuadrant, error } = state;
 
   /** Set up socket and listeners **/
   useEffect(() => {
@@ -48,6 +50,24 @@ function App() {
     util.errorListener(socket);
   }, []);
 
+  /** Reset data when players go back to LandingView **/
+  useEffect(() => {
+    if(view === 'LandingView') {
+      console.log('Back to App ====>')
+      setState(prev => {
+        return ({...prev,
+          lobbyID: null,
+          myPlayerID: null,
+          myLobbyObj: null,
+          myQuadrant: null
+        });
+      });
+    };
+  }, [view]);
+
+  const setErrorHandler = error => {
+    setState(prev => ({...prev, error}));
+  }
 
   const setMyLobbyObjHandler = myLobbyObj => {
     console.log('Setting App component myLobbyObj to', myLobbyObj);
@@ -78,15 +98,21 @@ function App() {
 
 
   /** Set quadrant for slicing img **/
-  let myQuadrant;
-  if(myLobbyObj && myPlayerID && myLobbyObj.players) {
-    myQuadrant = myLobbyObj.players[myPlayerID].myQuadrant;
-  }
+  useEffect(() => {
+    if(myLobbyObj && myPlayerID && myLobbyObj.players) {
+      const myQuadrant = myLobbyObj.players[myPlayerID].myQuadrant;
+
+      console.log('UPDATING QUADRANT!');
+      setState(prev => ({...prev, myQuadrant}));
+    }
+  }, [myPlayerID]);
   // === bigrebuild
   
 
   return (
     <div className="app">
+      
+      <h2>{error}</h2>
 
       {state.view === 'LandingView' &&
       <LandingView
@@ -95,6 +121,7 @@ function App() {
 
       {state.view === 'GuestLobbyView' &&
       <GuestLobbyView
+      setErrorHandler={setErrorHandler}
       myUsername={state.myUsername}
       socket={socket}
       lobbyID = {lobbyID}
