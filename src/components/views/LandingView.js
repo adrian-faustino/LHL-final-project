@@ -17,12 +17,12 @@ export default function LandingView(props) {
 
       <h1 className="LandingView__titleAnimation">Draw-mageddon!</h1>
 
-      {myUsername ? <h2 style={{color: "red"}}>{`You will play as ${myUsername}`}</h2> : ''}
-      
       <form className="LandingView__container--nameForm">
-        <input className="LandingView__form--inputField App__colorScheme--inputField" type="text" id="username" placeholder={placeholder}
+        <input className="LandingView__form--inputField App__colorScheme--inputField"
+        type="text"
+        id="username"
+        placeholder={placeholder}
         onChange={inputChangeHandler}/>
-
       </form>
 
       <div className="LandingView__btnContainer">
@@ -35,12 +35,9 @@ export default function LandingView(props) {
         nextView={'GuestLobbyView'}
         buttonTitle={'Join a lobby'}
         changeViewHandler={changeViewHandler}/>
-      </div>        
+      </div>
     </div>
   )
 }
 
-// <footer className="LandingView__about--container">
-//         <button className="LandingView__about--button App__colorScheme--button">About</button>
-//         <button className="LandingView__about--button App__colorScheme--button">?</button>
-//       </footer>
+// {myUsername ? <h2 style={{color: "red"}}>{`You will play as ${myUsername}`}</h2> : ''}

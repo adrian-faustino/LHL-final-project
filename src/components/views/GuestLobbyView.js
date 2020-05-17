@@ -139,7 +139,6 @@ export default function GuestLobbyView(props) {
   }
 
   return (
-
     <div className="scrolling-background">
       <h1 className="GuestLobbyView__container--title App__colorScheme--title">{greeting}</h1>
 
@@ -153,37 +152,32 @@ export default function GuestLobbyView(props) {
         className="GuestLobbyView__form--btn App__colorScheme--button"
         type="submit"
         onClick={e => joinRoomHandler(e)}>Join</button>
-      </form>
+        <NavButton
+        nextView={'LandingView'}
+        buttonTitle={'Back'}
+        changeViewHandler={changeViewHandler}/>
+        </form>
       )}
-
 
       {error && <div style={{color: "red"}}>{error}</div>}
     
       {/** Begin: Render when user has successfully joined a lobby **/}
-      {host && (<>
-
-      <div className="GuestLobbyView__namesList--container">
-        <h2 className="App__colorScheme--message">Welcome to {host}'s lobby!</h2>}
-      
+      {host && (
+        <div className="GuestLobbyView__namesList--container">
+          <h2 className="App__colorScheme--message">Welcome to {host}'s lobby!</h2>}
         
-        <ul className="GuestLobbyView__namesList App__colorScheme--namesList">
-          {usernames}
-        </ul>}
+          
+          <ul className="GuestLobbyView__namesList App__colorScheme--namesList">
+            {usernames}
+          </ul>}
 
 
-        <h2 className="GuestLobbyView__namesList--message App__colorScheme--message">Waiting for ${host} to start the game...</h2>}
-      </div>
-
-      <button onClick={e => leaveLobbyHandler(e)}>Leave lobby</button>
-
-      </>)}
+          <h2 className="GuestLobbyView__namesList--message App__colorScheme--message">Waiting for ${host} to start the game...</h2>}
+          <button onClick={e => leaveLobbyHandler(e)}>Leave lobby</button>
+        </div>)}
       {/** End: Render when user has successfully joined a lobby **/}
 
-  
-      {!host && <NavButton
-      nextView={'LandingView'}
-      buttonTitle={'Back'}
-      changeViewHandler={changeViewHandler}/>}
+      
     </div>
   )
 }

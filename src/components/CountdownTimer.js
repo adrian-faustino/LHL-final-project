@@ -36,7 +36,6 @@ export default function CountdownTimer(props) {
   if(timeLeft <= 30000 && warningOn) {
     _timerStyles['animation'] = 'flash--warning 0.4s infinite';
     _timerStyles['animationDirection'] = 'alternate-reverse';
-
   } 
 
   const { h, m, s, ms } = formatMS(timeLeft);
@@ -46,7 +45,9 @@ export default function CountdownTimer(props) {
 
   return (
     <div className="InstructionsView__header--timer">
-      <span className="">{formatted_M}:{formatted_S}</span>
+      <span 
+      style={_timerStyles}
+      className="CountdownTimer__container">{formatted_M}:{formatted_S}</span>
     </div>
   )
 }

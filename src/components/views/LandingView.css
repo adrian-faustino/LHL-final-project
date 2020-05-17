@@ -35,23 +35,6 @@ input:focus, textarea:focus, select:focus, button:focus {
   outline: none;
 }
 
-/* .LandingView__about--container {
-  position: absolute;
-  width: 100vw;
-  bottom: 2vh;
-  display: grid;
-  grid-template-columns: 50vw 50vw;
-  justify-items: center;
-}
-
-.LandingView__about--button {
-  width: 50%;
-  margin-top: 2.0rem;
-  padding-top: 1.0rem;
-  padding-bottom: 1.0rem;
-  border-radius: 15px;
-} */
-
 @media only screen and (min-width: 768px) {
   .LandingView__container--title {
     padding: 2.5rem 2.5rem;

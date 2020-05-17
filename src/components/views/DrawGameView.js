@@ -2,10 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import './DrawGameView.css';
 import axios from 'axios';
 
-// Begin: Dummy code to have static reference image. Take out when real image is available.
-import MLReference from '../../assets/MLReference.jpg';
-// End: Dummy code to have static reference image. Take out when real image is available.
-
 // helpers
 import paletteHelpers from '../../helpers/paletteHelpers';
 import drawHelpers from '../../helpers/drawHelpers';
@@ -65,7 +61,7 @@ export default function DrawGameView(props) {
     })
 
     socket.on('fadeSilhouette', opacity => {
-      // setState(prev => ({...prev, opacity}));
+      setState(prev => ({...prev, opacity}));
     })
   }, [])
 
