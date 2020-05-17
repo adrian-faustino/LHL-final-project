@@ -32,41 +32,26 @@ export default function InstructionsView(props) {
   }, []);
 
   return (
-    <div>
-      <h5>Find me at components/InstructionsView.js</h5>
-
-      <h1>Your goal is to draw a picture as a team!</h1>
-
-      <h2>This is your section of the final image. As time goes, the image will slowly fade. You will have {ROUND_TIME / 60000} {ROUND_TIME / 60000 > 1 ? 'minutes' : 'minute'} to draw it from memory!</h2>
-
-      {/* <div style={{position: 'fixed', top: '5vh', left: '50vw'}}>
-      <CountdownCircleTimer
-      isPlaying
-      duration={VIEW_TIME / 1000}
-      initialRemainingTime={100}
-      colors={[['#A30000']]}/>
-      </div>
-       */}
-       
+    <div className="InstructionsView__canvasBackground">
       <div className="InstructionsView__header App__colorScheme--header" >
-
-       
         <CountdownTimer timeInMs={5000}/>
-
         <button className="App__colorScheme--palette"><i className="fas fa-palette"></i></button>
         <button className="App__colorScheme--palette"><i className="fas fa-paint-brush"></i></button>
-      </div>
+        </div>
+        <p className="InstructionsView__message App__colorScheme--title">Your goal is to draw a picture as a team! This is your section of the final image. You can choose you colors and brsh size above. Good Luck!</p>
       
-      <MainImage myQuadrant={myQuadrant}/>
-
+      
+      <MainImage  
+      myQuadrant={myQuadrant}/>
+      
     </div>
   )
 }
 
 
+
+// <p className="InstructionsView__message">Your goal is to draw a picture as a team! This is your section of the final image. As time goes, the image will slowly fade. You will have {ROUND_TIME / 60000} {ROUND_TIME / 60000 > 1 ? 'minutes' : 'minute'} to draw it from memory!</p>
+
+
+
 // {timeLeft <= 0 && (<span className="CountdownTimer__timeUp--container"><div className="CountdownTimer__timeUp--msg">Time's up!</div></span>)}
-
-
-// <div className="InstructionsView__image--toDraw">
-//   <img className="InstructionsView__image--reference App__colorScheme--referenceBorder" src={MLReference} alt="Portion of image to draw."></img>
-// </div> 

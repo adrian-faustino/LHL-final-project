@@ -18,7 +18,10 @@ export default function LandingView(props) {
       <h1 className="LandingView__titleAnimation">Draw-mageddon!</h1>
 
       <form className="LandingView__container--nameForm">
-        <input className="LandingView__form--inputField App__colorScheme--inputField" type="text" id="username" placeholder={placeholder}
+        <input className="LandingView__form--inputField App__colorScheme--inputField"
+        type="text"
+        id="username"
+        placeholder={placeholder}
         onChange={inputChangeHandler}/>
       </form>
 
