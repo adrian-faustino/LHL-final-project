@@ -12,8 +12,24 @@ const silhouetteStyles = (key, val) => {
   return style;
 };
 
+const slicerStyles = (key, val) => {
+  const style = {
+    height: null,
+    width: null
+  }
+
+  if(key) {
+    style[key] = val;
+  }
+
+  return style;
+}
+
+
+
 const DrawGameViewStyles = {
-  silhouetteStyles
+  silhouetteStyles,
+  slicerStyles
 }
 
 export default DrawGameViewStyles;

@@ -27,7 +27,7 @@ import DrawGameViewStyles from './DrawGameViewStyles';
 
 
 const { API, ROUND_TIME, CANVAS_W, CANVAS_H } = constants;
-const { silhouetteStyles } = DrawGameViewStyles;
+const { silhouetteStyles, slicerStyles } = DrawGameViewStyles;
 
 
 export default function DrawGameView(props) {
@@ -65,7 +65,7 @@ export default function DrawGameView(props) {
     })
 
     socket.on('fadeSilhouette', opacity => {
-      setState(prev => ({...prev, opacity}));
+      // setState(prev => ({...prev, opacity}));
     })
   }, [])
 
@@ -116,22 +116,34 @@ export default function DrawGameView(props) {
 
   // ** BG LOGIC AND TRANSFORMATIONS ** //
   const _silhouetteStyles = silhouetteStyles();
+  const _slicerStyles = slicerStyles();
   const bg_h = (window.innerHeight * 0.9) * 2;
   const bg_w = bg_h * 0.8;
   
   
-  let translation = '';
+  let top;
+  let right;
   if(myQuadrant === 'quadrant_1') {
-    translation = 'translate(25%, 25%)';
+    top = '50%';
+    right = '50%';
   } else if(myQuadrant === 'quadrant_2') {
-    translation = 'translate(-25%, 25%)';
+    top = '50%';
+    right = '150%';
   } else if(myQuadrant === 'quadrant_3') {
-    translation = 'translate(25%, -25%';
+    top = '-50%';
+    right = '50%';
   } else if(myQuadrant === 'quadrant_4') {
-    translation = 'translate(-25%, -25%';
+    top = '-50%';
+    right = '150%';
   }
-  _silhouetteStyles['transform'] = translation;
+  _silhouetteStyles['top'] = top;
+  _silhouetteStyles['right'] = right;
   _silhouetteStyles['opacity'] = opacity;
+
+  /** Set slicer height and width **/
+  _slicerStyles['height'] = CANVAS_H;
+  _slicerStyles['width'] = CANVAS_W;
+  console.log('Slicer STYLE', _slicerStyles);
 
   // ** PALETTE BUTTONS LOGIC ** //
   const lineSizeClickHandler = e => {
@@ -149,18 +161,18 @@ export default function DrawGameView(props) {
     <div>
       <div className="InstructionsView__header App__colorScheme--header" >
         <CountdownTimer timeInMS={ROUND_TIME}/>
+
         <button
         className="App__colorScheme--palette"
         onClick={e => colorClickHandler(e)}><i className="fas fa-palette"></i>
         </button>
-        
 
         <button
           className="App__colorScheme--palette"
           onClick={e => lineSizeClickHandler(e)}><i className="fas fa-paint-brush"></i>
         </button>
-        
       </div>
+
 
       {openColor && (<Palette
         setState={setState}
@@ -172,39 +184,28 @@ export default function DrawGameView(props) {
         updateLineSize={updateLineSize}/>)}
 
 
-
-
-
-
-
-
+      {/* Begin: Canvas and draw functionality */}
+      <div className="DrawGameView--container">
         <div
         className="DrawGameView--slicer"
-        height={CANVAS_H}
-        width={CANVAS_W}
-        >
-        <img
-        className="DrawGameView--silhouette"
-        style={_silhouetteStyles}
-        height={bg_h}
-        width={bg_w}
-        src={IMG_SRC} alt="silhouette"
-        />
-      </div>
-
-
-
-
-      <canvas
+        style={_slicerStyles}>
+          <img
+          className="DrawGameView--silhouette"
+          style={_silhouetteStyles}
+          height={bg_h}
+          width={bg_w}
+          src={IMG_SRC} alt="silhouette"/>
+        </div>
+        <canvas
         className="DrawGameView--canvas"
         ref={canvasRef}
         width={CANVAS_W}
         height={CANVAS_H}
-        onMouseOut={e => onMouseOutHandler(e, state, setState)}
         onMouseDown={e => onMouseDownHandler(e, state, setState)}
         onMouseUp={e => onMouseUpHandler(e, state, setState)}
         onMouseMove={e => onMouseMoveHandler(e, state, setState, CANVAS_W, CANVAS_H)}></canvas>
-
+      </div>
+      {/* End: Canvas and draw functionality */}
     </div>
   )
 }

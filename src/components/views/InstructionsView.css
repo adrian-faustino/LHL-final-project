@@ -1,9 +1,11 @@
 .InstructionsView__header {
+  position: absolute;
   display: grid;
   grid-template-columns: 33% 34% 33%;
   align-items: center;
   width: 100vw;
-  height: 10vh;
+  height: 8vh;
+  z-index: 30;
 }
 
 .InstructionsView__header--timer {
