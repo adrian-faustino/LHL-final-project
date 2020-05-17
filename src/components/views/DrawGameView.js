@@ -26,7 +26,7 @@ import DrawGameViewStyles from './DrawGameViewStyles';
 
 
 
-const { API, ROUND_TIME } = constants;
+const { API, ROUND_TIME, CANVAS_W, CANVAS_H } = constants;
 const { silhouetteStyles } = DrawGameViewStyles;
 
 
@@ -73,6 +73,7 @@ export default function DrawGameView(props) {
   // send final coordinates before view change
   useEffect(() => {
     if(roundFinished) {
+      console.log('Player object==>', myLobbyObj);
       const PLAYERS_IN_ROOM = Object.keys(myLobbyObj.players).length;
       
       const data = {
@@ -85,7 +86,10 @@ export default function DrawGameView(props) {
       console.log('Game finished. Sending final coordinates...', coordinates);
 
       axios.post(API + '/finalCoords', data)
-      .then()
+      .then(res => {
+        console.log(res.data);
+        changeViewHandler('ResultsView');
+      })
       .catch(err => console.log(err));
     }
   }, [roundFinished])
@@ -108,9 +112,6 @@ export default function DrawGameView(props) {
       draw(ctx, data);
     });
   });
-
-  const CANVAS_H = window.innerHeight * 0.9;
-  const CANVAS_W = CANVAS_H * 0.8;
 
 
   // ** BG LOGIC AND TRANSFORMATIONS ** //

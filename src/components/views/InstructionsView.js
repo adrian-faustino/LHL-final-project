@@ -4,40 +4,61 @@ import "./InstructionsView.css";
 
 // subcomponents
 import MainImage from '../MainImage'
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import CountdownTimer from '../CountdownTimer';
+
 
 // helpers
 import constants from '../../constants';
-const { VIEW_TIME } = constants;
+const { VIEW_TIME, ROUND_TIME } = constants;
 
 export default function InstructionsView(props) {
   const { socket, changeViewHandler, myQuadrant } = props;
 
   const [state, setState] = useState({
-    time: 10000 // This is the time for the instruction view cownt down but it doesn't transition the page. That code is in constants.js.
+
+    tick: true,
+    interval: null
+
   })
-  const { time } = state;
+
+  const { tick, interval } = state;
 
   useEffect(() => {
     socket.on('changeView', nextView => {
       changeViewHandler(nextView);
     });
-
-    setInterval(() => {
-      console.log('Ticking...');
-      setState(prev => ({...prev, time: time - 1000}));
-    }, 500);
+  
   }, []);
 
   return (
     <div>
+      <h5>Find me at components/InstructionsView.js</h5>
+
+      <h1>Your goal is to draw a picture as a team!</h1>
+
+      <h2>This is your section of the final image. As time goes, the image will slowly fade. You will have {ROUND_TIME / 60000} {ROUND_TIME / 60000 > 1 ? 'minutes' : 'minute'} to draw it from memory!</h2>
+
+      {/* <div style={{position: 'fixed', top: '5vh', left: '50vw'}}>
+      <CountdownCircleTimer
+      isPlaying
+      duration={VIEW_TIME / 1000}
+      initialRemainingTime={100}
+      colors={[['#A30000']]}/>
+      </div>
+       */}
+       
       <div className="InstructionsView__header App__colorScheme--header" >
-        <CountdownTimer timeInMS={time}/>
+
+       
+        <CountdownTimer timeInMs={5000}/>
+
         <button className="App__colorScheme--palette"><i className="fas fa-palette"></i></button>
         <button className="App__colorScheme--palette"><i className="fas fa-paint-brush"></i></button>
       </div>
       
       <MainImage myQuadrant={myQuadrant}/>
+
     </div>
   )
 }

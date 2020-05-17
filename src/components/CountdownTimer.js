@@ -12,13 +12,13 @@ const { formatZero, formatMS } = countdownHelpers;
 
 
 export default function CountdownTimer(props) {
-  const { timeInMS } = props;
+  const { timeInMS, warningOn } = props;
 
   const [state, setState] = useState({
-    MAX_TIME: timeInMS,
+    ROUND_TIME: timeInMS,
     startTime: Date.now(),
   })
-  const { MAX_TIME, startTime } = state;
+  const { ROUND_TIME, startTime } = state;
 
   // styles
   const _timerStyles = timerStyles();
@@ -26,16 +26,17 @@ export default function CountdownTimer(props) {
   /** Timer logic **/
   const timeNow = new Date();
   const elapsed = timeNow - startTime;
-  let timeLeft = MAX_TIME - elapsed;
+  let timeLeft = ROUND_TIME - elapsed;
 
   /** Trigger 'Time up' screen */
   if(timeLeft <= 0) {
     timeLeft = 0;
   }
 
-  if(timeLeft <= 30000) {
-    // _timerStyles['animation'] = 'flash--warning 0.4s infinite';
-    // _timerStyles['animationDirection'] = 'alternate-reverse';
+  if(timeLeft <= 30000 && warningOn) {
+    _timerStyles['animation'] = 'flash--warning 0.4s infinite';
+    _timerStyles['animationDirection'] = 'alternate-reverse';
+
   } 
 
   const { h, m, s, ms } = formatMS(timeLeft);

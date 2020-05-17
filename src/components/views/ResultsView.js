@@ -14,16 +14,24 @@ import NavButton from '../NavButton'
 
 // helpers
 import renderFinalHelpers from '../../helpers/renderFinalHelpers';
+import constants from '../../constants';
+
+// styles
+import './ResultsView.css';
+import IMG_SRC from '../../assets/mona-lisa.jpg';
+
+const { CANVAS_W, CANVAS_H } = constants;
 
 export default function ResultsView(props) {
 
-  const { socket } = props;
+  const { socket, changeViewHandler } = props;
 
   const [state, setState] = useState({
-    finalCoordinates: null
+    finalCoordinates: null,
+    toggleReplay: false
   })
   
-  const { finalCoordinates } = state;
+  const { finalCoordinates, toggleReplay } = state;
 
   // helpers
   const { renderQuadrants } = renderFinalHelpers;
@@ -31,6 +39,7 @@ export default function ResultsView(props) {
   // receive coords when backend is finished compiling coordinates
   useEffect(() => {
     socket.on('finalCoords', finalCoordinates => {
+      console.log('Rendering final picture...');
       setState(prev => ({...prev, finalCoordinates}));
       
       /** Save to DB - STRETCH **/
@@ -49,28 +58,39 @@ export default function ResultsView(props) {
     }
   });
 
+  const replayHandler = e => {
+    e.preventDefault();
+    setState(prev => ({...prev, toggleReplay: !toggleReplay}));
+  }
+
   return (
     <div className="scrolling-background">
+
       <h1 className="ResultsView__container--title App__colorScheme--title">Ta-Daaa!</h1>
 
-      <h2 className="ResultsView__message App__colorScheme--message">Such a work of art!</h2>
-        
-      {/* <img className="ResultsView__image App__colorScheme--referenceBorder" src={MLReference} alt="Portion of image to draw."></img> */}
+      <h2 className="ResultsView__message App__colorScheme--message">Such a work of art!</h2> 
 
-      <canvas
+      <div className="ResultsView--container">
+        <canvas
+        className="ResultsView--canvas"
         ref={canvasRef}
-        width={window.innerWidth}
-        height={window.innerHeight}>
-      </canvas>
+        width={CANVAS_W}
+        height={CANVAS_H}>
+        </canvas>
 
+        <img
+        width={CANVAS_W}
+        height={CANVAS_H}
+        className="ResultsView--origImg"
+        src={IMG_SRC}/>
+      </div>
 
-      {/* I had to create a div to contain this to be able to control it. */}
-      <div className="button">
+      <div className="ResultsView--doneBtn-container">
+        <button onClick={e => replayHandler(e)}>Replay</button>
         <NavButton
-        nextView={'ShareView'}
+        nextView={'LandingView'}
         buttonTitle={'Done'}
-        changeViewHandler={props.changeViewHandler}
-        />
+        changeViewHandler={changeViewHandler}/>
       </div>
     </div>
   )

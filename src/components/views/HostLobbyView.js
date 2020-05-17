@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import uuid from 'react-uuid'
+
 import "./HostLobbyView.css";
 import axios from 'axios';
 
@@ -54,6 +54,7 @@ export default function HostLobbyView(props) {
   useEffect(() => {
     if(lobbyID) {
       socket.on('newUserJoined', () => {
+        console.log('A new user joined!')
         axios.post(API + '/reqLobbyInfo', { lobbyID })
         .then(resp => {
           const { myLobbyObj } = resp.data;
@@ -70,11 +71,29 @@ export default function HostLobbyView(props) {
     socket.on('changeView', nextView => {
       changeViewHandler(nextView);
     })
+
+    socket.on('userLeft', data => {
+      const { myLobbyObj, leaver } = data;
+      setMyLobbyObjHandler(myLobbyObj);
+    })
   }, [])
+
+  /** BACK BUTTON **/
+  const backButtonHandler = e => {
+    e.preventDefault();
+    
+    // stretch, remove from db instead of just switching view
+    const data = {
+      lobbyID,
+      nextView: 'LandingView'
+    }
+    socket.emit('cancelGame', data);
+    changeViewHandler(data.nextView);
+  }
 
 
   /** START GAME BUTTON - add logic later for skip **/
-  const onClickHandler = e => {
+  const startButtonHandler = e => {
     e.preventDefault();
     console.log('Starting game...')
     socket.emit('startGame', { lobbyID, nextView: 'InstructionsView' });
@@ -106,15 +125,15 @@ export default function HostLobbyView(props) {
         <p className="App__colorScheme--code">{lobbyID}</p>
       </div>
 
-      <ul className="HostLobbyView__namesList App__colorScheme--namesList">
-        {usernames}
-      </ul>
 
-      <button
-        className="HostLobbyView__btn--start App__colorScheme--button"
-        onClick={e => onClickHandler(e)}
-        >Start Game
-      </button>
+ 
+      <ul className="HostLobbyView__namesList App__colorScheme--namesList">
+        {usernames}    
+      </ul>}
+ 
+
+      <button className="HostLobbyView__btn--start App__colorScheme--button" onClick={e => startButtonHandler(e)}>Start game</button>
+      <button className="HostLobbyView__btn--start App__colorScheme--button" onClick={e => backButtonHandler(e)}>Cancel game</button>
     </div>
   )
 }

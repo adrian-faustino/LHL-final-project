@@ -35,10 +35,12 @@ function App() {
     socket: null,
     lobbyID: null,
     myPlayerID: null,
-    myLobbyObj: null
+    myLobbyObj: null,
+    myQuadrant: null,
+    gamePrompt: null
   });
 
-  const { myUsername, socket, lobbyID, myPlayerID, myLobbyObj } = state;
+  const { view, myUsername, socket, lobbyID, myPlayerID, myLobbyObj, myQuadrant, gamePrompt } = state;
 
   /** Set up socket and listeners **/
   useEffect(() => {
@@ -48,6 +50,24 @@ function App() {
     util.errorListener(socket);
   }, []);
 
+  /** Reset data when players go back to LandingView **/
+  useEffect(() => {
+    if(view === 'LandingView') {
+      console.log('Back to App ====>')
+      setState(prev => {
+        return ({...prev,
+          lobbyID: null,
+          myPlayerID: null,
+          myLobbyObj: null,
+          myQuadrant: null
+        });
+      });
+    };
+  }, [view]);
+
+  const setGamePromptHandler = gamePrompt => {
+    setState(prev => ({...prev, gamePrompt}));
+  }
 
   const setMyLobbyObjHandler = myLobbyObj => {
     console.log('Setting App component myLobbyObj to', myLobbyObj);
@@ -78,23 +98,35 @@ function App() {
 
 
   /** Set quadrant for slicing img **/
-  let myQuadrant;
-  if(myLobbyObj && myPlayerID && myLobbyObj.players) {
-    myQuadrant = myLobbyObj.players[myPlayerID].myQuadrant;
-  }
+  useEffect(() => {
+    if(myLobbyObj && myPlayerID && myLobbyObj.players) {
+      try {
+        const myQuadrant = myLobbyObj.players[myPlayerID].myQuadrant;
+  
+        console.log('UPDATING QUADRANT!');
+        setState(prev => ({...prev, myQuadrant}));
+      } catch {
+        console.log('Failed to set quadrant');
+      }
+    }
+  }, [myPlayerID, myLobbyObj]);
   // === bigrebuild
   
 
   return (
     <div className="App__container">
+      <h2>{gamePrompt}</h2>
 
       {state.view === 'LandingView' &&
       <LandingView
+      myUsername={myUsername}
       inputChangeHandler={inputChangeHandler}
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'GuestLobbyView' &&
       <GuestLobbyView
+      myPlayerID={myPlayerID}
+      setGamePromptHandler={setGamePromptHandler}
       myUsername={state.myUsername}
       socket={socket}
       lobbyID = {lobbyID}

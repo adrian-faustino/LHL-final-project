@@ -1,3 +1,31 @@
+.ResultsView--container {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  border: 2px solid white;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.ResultsView--canvas {
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+.ResultsView--origImg {
+  border-radius: 5px;
+}
+
+.ResultsView--doneBtn-container {
+  position: relative;
+  top: 80vh;
+  /* height: min-content;
+  width: min-content; */
+}
+
 .ResultsView__container--title {
   position: relative;
   display: inline;

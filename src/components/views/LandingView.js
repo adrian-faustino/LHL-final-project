@@ -8,34 +8,47 @@ import "./LandingView.css";;
 
 export default function LandingView(props) {
   
+  const { myUsername, inputChangeHandler, changeViewHandler } = props;
+
+  const placeholder = myUsername ? 'Change your username!' : 'Enter your name!'
+
   return (
     <div className="scrolling-background">
-    
+
       <h1 className="LandingView__titleAnimation">Draw-mageddon!</h1>
 
+      {myUsername ? <h2 style={{color: "red"}}>{`You will play as ${myUsername}`}</h2> : ''}
+      
       <form className="LandingView__container--nameForm">
-        <input
-          className="LandingView__form--inputField App__colorScheme--inputField"
-          type="text"
-          id="username"
-          placeholder="Enter your name"
-          onChange={props.inputChangeHandler}
-        />
+        <input className="LandingView__form--inputField App__colorScheme--inputField" type="text" id="username" placeholder={placeholder}
+        onChange={inputChangeHandler}/>
+
       </form>
 
       <div className="LandingView__btnContainer">
         <NavButton
         nextView={'HostLobbyView'}
         buttonTitle={'Create a lobby'}
-        changeViewHandler={props.changeViewHandler}/>
+        changeViewHandler={changeViewHandler}/>
 
         <NavButton
         nextView={'GuestLobbyView'}
         buttonTitle={'Join a lobby'}
-        changeViewHandler={props.changeViewHandler}/>
+        changeViewHandler={changeViewHandler}/>
       </div>
 
-      
+      <footer>
+        <NavButton
+          nextView={''}
+          buttonTitle={'About'}
+          changeViewHandler={changeViewHandler}/>
+        
+        <NavButton
+        nextView={''}
+        buttonTitle={'?'}
+        changeViewHandler={changeViewHandler}/>
+      </footer>
+        
     </div>
   )
 }
