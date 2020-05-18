@@ -3,10 +3,10 @@
 const API = 'http://localhost:5555';
 
 /** length of time in InstructionsView **/
-const VIEW_TIME = 3000; 
+const VIEW_TIME = 7000; 
 
 /** length of time in DrawingGameView **/
-const ROUND_TIME = 3000;
+const ROUND_TIME = 30000;
 
 /** for rendering final picture animation **/
 const MIN_RENDER_TIME = 4000; 

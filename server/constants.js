@@ -3,10 +3,10 @@
 const MAX_PLAYERS_PER_LOBBY = 4;
 
 /** length of time in InstructionsView **/
-const VIEW_TIME = 3000;
+const VIEW_TIME = 7000;
 
 /** length of time in DrawGameView **/
-const ROUND_TIME = 3000; 
+const ROUND_TIME = 30000; 
 
 /** the length of time we wait before sending the final coordinates out in the event that a player disconnects during the game **/
 const DELAY_FOR_COORDS = 3000;
