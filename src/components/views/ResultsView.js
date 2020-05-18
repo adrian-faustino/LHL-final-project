@@ -52,8 +52,6 @@ export default function ResultsView(props) {
 
       <h1 className="ResultsView__container--title App__colorScheme--title">Ta-Daaa!</h1>
 
-      <h2 className="ResultsView__message App__colorScheme--message">Such a work of art!</h2> 
-
       <div className="ResultsView--container">
         <canvas
         className="ResultsView--canvas"
@@ -70,8 +68,11 @@ export default function ResultsView(props) {
         src={IMG_SRC}/>
       </div>
 
-      <div className="ResultsView--doneBtn-container">
-        <button onClick={e => replayHandler(e)}>Replay</button>
+      <div className="ResultsView__container--button">
+        <button
+        className="NavButton__btn App__colorScheme--button"
+        onClick={e => replayHandler(e)}>Replay
+        </button>
         <NavButton
         nextView={'LandingView'}
         buttonTitle={'Done'}
@@ -80,3 +81,5 @@ export default function ResultsView(props) {
     </div>
   )
 }
+
+// <h2 className="ResultsView__message App__colorScheme--message">Such a work of art!</h2> 

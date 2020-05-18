@@ -145,7 +145,7 @@ export default function HostLobbyView(props) {
 
 
  
-      <ul className="HostLobbyView__namesList App__colorScheme--namesList">
+      <ul className="HostLobbyView__container--namesList App__colorScheme--namesList">
         {usernames}    
       </ul>}
  

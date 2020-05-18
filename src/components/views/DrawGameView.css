@@ -97,11 +97,11 @@
 
 
 @media only screen and (min-width: 768px) {
-  .DrawGameView__header p {
-    font-size: 3.0rem;
+  .InstructionsView__header--timer {
+    font-size: 2.5rem;
   }
   
-  .DrawGameView__header button {
-    font-size: 3.0rem;
+  .InstructionsView__header button {
+    font-size: 2.5rem;
   }
 }

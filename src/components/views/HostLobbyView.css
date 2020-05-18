@@ -24,13 +24,13 @@
   margin: 1.0rem 5.0rem;
 }
 
-.HostLobbyView__namesList {
+.HostLobbyView__container--namesList {
   position: absolute;
   top: 55vh;
   width: 100vw;
 }
 
-.HostLobbyView__namesList li {
+.HostLobbyView__container--namesList li {
   text-align: left;
   margin: 0.8rem 2.0rem;
   font-size: 1.0rem;;
@@ -61,65 +61,40 @@
 
 @media only screen and (min-width: 768px) {
   .HostLobbyView__container--title {
-    padding: 2.5rem 2.5rem;
+    padding: 2.0rem 2.0rem;
     font-size: 3.5rem;
   }
   
   .HostLobbyView__container--IdField {
-    top: 30vh;
-  }
-  
+    top: 25vh;
+   }
+   
   .HostLobbyView__container--IdField h2 {
+    padding: 2.0rem 2.0rem;
     font-size: 2.0rem;
-    padding: 0 3.0rem;
   }
   
   .HostLobbyView__container--IdField p {
-    margin: 2.0rem 10.0rem;
-    line-height: 72px;
-  }
-  
-  .HostLobbyView__namesList {
-    top: 50vh;
-  }
-  
-  .HostLobbyView__namesList li {
-    margin: 1.5rem 5.0rem;
-    font-size: 1.5rem;;
-    padding: 0.75rem 1.0rem;
-  }
-  
-  .HostLobbyView__namesList--deleteBtn {
-    font-size: 1.5rem;
-  }
-  
-  .HostLobbyView__btn--start {
-    bottom: 10vh;
     font-size: 2.0rem;
-    padding: 2.0rem 0;
-  }
-}
-
-@media only screen and (min-width: 1025px) {
-  .HostLobbyView__container--title {
-    padding: 2.0rem 5.0rem;
-  }
-  
-  .HostLobbyView__container--IdField p {
-    display: inline;
-    padding: 0.5rem 10.0rem;
-  }
-  
-  .HostLobbyView__namesList {
-    top: 45vh;
-  }
-  
-  .HostLobbyView__namesList li {
+    padding: 0.5rem 0;
     margin: 1.0rem 10.0rem;
   }
   
-  .HostLobbyView__btn--start {
-    padding: 1.5rem 0;
-    width: 500px;
+  .HostLobbyView__container--namesList {
+    top: 45vh;
+  }
+  
+  .HostLobbyView__container--namesList li {
+    margin: 0.8rem 2.0rem;
+    font-size: 2.0rem;;
+    padding: 1.0rem 1.0rem;
+  }
+  
+  .HostLobbyView__namesList--deleteBtn {
+    font-size: 1.9rem;
+  }
+  
+  .HostLobbyView__btn {
+    font-size: 2.0rem;
   }
 }
