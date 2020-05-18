@@ -16,7 +16,7 @@ app.use(express.urlencoded({limit: '50mb'}));
 const games = require('./data/games');
 
 // constants
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5555;
 const DB_URI = process.env.ATLAS_URI;
 
 // database
