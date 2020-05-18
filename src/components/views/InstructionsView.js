@@ -43,14 +43,16 @@ export default function InstructionsView(props) {
         <CountdownTimer timeInMS={VIEW_TIME}/>
         <button className="App__colorScheme--palette"><i className="fas fa-palette"></i></button>
         <button className="App__colorScheme--palette"><i className="fas fa-paint-brush"></i></button>
-        </div>
-        <p className="InstructionsView__message App__colorScheme--title">Your goal is to draw a picture as a team! This is your section of the final image. You can choose you colors and brsh size above. Good Luck!</p>
-      
+      </div>
+
+      <p className="InstructionsView__message--top App__colorScheme--title">Your goal is to draw a picture as a team!</p>
       
       <MainImage
-      draggable={false}
-      myQuadrant={myQuadrant}/>
-      
+        draggable={false}
+        myQuadrant={myQuadrant}
+      />
+
+      <p className="InstructionsView__message--bottom App__colorScheme--title">This is your section of the final image. You can choose you colors and brush size above. Good Luck!</p>
     </div>
   )
 }

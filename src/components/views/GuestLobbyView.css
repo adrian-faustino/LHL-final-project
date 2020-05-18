@@ -37,14 +37,14 @@
   border-radius: 15px;
 }
 
-.GuestLobbyView__namesList--container {
+.GuestLobbyView__container--namesList {
   position: absolute;
   top: 30vh;
   height: 50vh;
   width: 100%;
 }
 
-.GuestLobbyView__namesList--container h2 {
+.GuestLobbyView__welcomeMessage {
   margin: 1.0rem 3.0rem;
 }
 
@@ -69,104 +69,56 @@
   padding: 0.5rem 0.5rem;
 }
 
-.temp {
-  position: absolute;
-  bottom: 10vh;
-}
 
 
 
 
-/* .GuestLobbyView__btn--cancel {
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  text-align: center;
-  bottom: 10vh;
-  width: 50vw;
-  padding-top: 1.0rem;
-  padding-bottom: 1.0rem;
-  border-radius: 15px;
-} */
 
 
 @media only screen and (min-width: 768px) {
   .GuestLobbyView__container--title {
-    padding: 2.5rem 2.5rem;
+    padding: 2.0rem 2.0rem;
     font-size: 3.5rem;
   }
   
+  .GuestLobbyView__container--IdField {
+    top: 40vh;
+  }
+  
   .GuestLobbyView__form--codeInput {
-    line-height: 72px;
     font-size: 2.0rem;
+    padding: 0.5rem 0;
+    margin: 1.0rem 10.0rem;
   }
   
   .GuestLobbyView__form--btn {
-    margin-top: 4.0rem;
+    margin-top: 3.0rem;
     padding: 2.0rem 0;
     font-size: 2.0rem;
   }
   
-  .GuestLobbyView__namesList--container {
-    top: 30vh;
+  .GuestLobbyView__container--namesList {
+    top: 25vh;
   }
   
-  .GuestLobbyView__namesList--container h2 {
+  .GuestLobbyView__welcomeMessage {
+    padding: 2.0rem 2.0rem;
     font-size: 2.0rem;
   }
   
   .GuestLobbyView__namesList--message {
-    margin: 0 10.0rem;
-    padding: 0;
-    top: 10vh;
     font-size: 2.0rem;
-  }
-  
-  .GuestLobbyView__namesList {
-    top: 20vh;
-  }
-  
-  .GuestLobbyView__namesList li {
-    margin: 1.5rem 5.0rem;
-    font-size: 1.5rem;;
-    padding: 0.75rem 1.0rem;
-  }
-  
-  .GuestLobbyView__btn--cancel {
-    bottom: 10vh;
-    width: 50vw;
-    padding: 2.0rem 0;
-    font-size: 2.0rem;
-  }
-}
-
-
-@media only screen and (min-width: 1025px) {
-  .GuestLobbyView__container--title {
-    padding: 2.0rem 5.0rem;
-  }
-  
-  .GuestLobbyView__form--codeInput {
-    width: 500px;
-  }
-  
-  .GuestLobbyView__form--btn {
-    padding: 1.5rem 0;
-    width: 500px;
-  }
-  
-  .GuestLobbyView__namesList {
-    top: 15vh;
-  }
-  
-  .GuestLobbyView__namesList li {
+    padding: 0.5rem 0;
     margin: 1.0rem 10.0rem;
   }
   
-  .GuestLobbyView__btn--cancel {
-    padding: 1.5rem 0;
-    width: 500px;
+  .GuestLobbyView__namesList {
+    top: 30vh;
+  }
+  
+  .GuestLobbyView__namesList li {
+    margin: 0.8rem 2.0rem;
+    font-size: 2.0rem;;
+    padding: 1.0rem 1.0rem;
   }
 }

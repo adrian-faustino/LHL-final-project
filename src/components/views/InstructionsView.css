@@ -22,24 +22,51 @@
   border-radius: 15px;
 }
 
-.InstructionsView__message {
+.InstructionsView__message--top {
   position: absolute;
+  top: 7vh;
   font-size: 1.2rem;
   margin: 1.0rem;
-  padding: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 15px;
+}
+
+.InstructionsView__message--bottom {
+  position: absolute;
+  bottom: 2vh;
+  font-size: 1.0rem;
+  margin: 1.0rem;
+  padding: 0.5rem 1.0rem;
   border-radius: 15px;
 }
 
 .InstructionsView__canvasBackground {
   background-image: url(../../assets/canvasBackground.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 @media only screen and (min-width: 768px) {
-  .InstructionsView__header p {
-    font-size: 3.0rem;
+  .InstructionsView__header--timer {
+    font-size: 2.5rem;
   }
   
   .InstructionsView__header button {
-    font-size: 3.0rem;
+    font-size: 2.5rem;
+  }
+  
+  .InstructionsView__message--top {
+    top: 10vh;
+    font-size: 2.0rem;
+    left: 0;
+    right: 0;
+    margin: auto 2.0rem;
+    padding: 1.0rem 2.0rem;
+  }
+  
+  .InstructionsView__message--bottom {
+    font-size: 2.0rem;
+    margin: 2.0rem;
+    padding: 1.0rem 2.0rem;
   }
 }
