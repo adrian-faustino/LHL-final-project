@@ -3,7 +3,7 @@
 const API = 'http://localhost:5555';
 
 /** length of time in InstructionsView **/
-const VIEW_TIME = 5000; 
+const VIEW_TIME = 7000; 
 
 /** length of time in DrawingGameView **/
 const ROUND_TIME = 60000;
