@@ -48,10 +48,9 @@ export default function ResultsView(props) {
   }
 
   return (
-    <div className="ResultsView__background">
-
-
+    <div className="scrolling-background">
       <div className="ResultsView--container">
+
         <canvas
         className="ResultsView--canvas"
         ref={canvasRef}
