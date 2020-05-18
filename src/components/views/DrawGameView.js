@@ -156,7 +156,9 @@ export default function DrawGameView(props) {
   return (
     <div>
       <div className="InstructionsView__header App__colorScheme--header" >
-        <CountdownTimer timeInMS={ROUND_TIME}/>
+        <CountdownTimer
+        warningOn={true}
+        timeInMS={ROUND_TIME}/>
 
         <button
         className="App__colorScheme--palette"

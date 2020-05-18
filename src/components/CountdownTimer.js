@@ -47,7 +47,7 @@ export default function CountdownTimer(props) {
     <div className="InstructionsView__header--timer">
       <span 
       style={_timerStyles}
-      className="CountdownTimer__container">{formatted_M}:{formatted_S}</span>
+      className="">{formatted_M}:{formatted_S}</span>
     </div>
   )
 }

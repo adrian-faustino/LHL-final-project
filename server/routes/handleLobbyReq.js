@@ -26,9 +26,10 @@ module.exports = function(games, client, db, io, app) {
   
       console.log(`Successfully received coordinates from all ${PLAYERS_IN_ROOM} players`);
       io.in(lobbyID).emit('finalCoords', finalCoordinates);
-      return res.send(`You're last to send data.`)
+      res.send(`You're last to send data.`)
+    } else {
+      res.send('Successfully sent your final coordinates.');
     }
-    res.send('Successfully sent your final coordinates.');
   });
   
   
