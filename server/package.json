@@ -2,9 +2,13 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "12.16.2"
+  },
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +18,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.13",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"

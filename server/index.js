@@ -3,6 +3,7 @@ const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const cors = require('cors');
+const path = require('path');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
@@ -30,7 +31,16 @@ connection.once('open', () => {
 
 
 // routes
-app.get('/', (req, res) => res.send('Welcome!'))
+app.get('/test', (req, res) => res.send('Welcome to the test route!'));
+
+/** For Heroku Deployment - change to false when working on local **/
+if(true) {
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(paht.resolve(__dirname, 'client', 'build', 'index.html'));
+  })
+}
 
 // models
 const Lobby = require('./models/lobby.model');
