@@ -51,6 +51,15 @@ function App() {
     util.errorListener(socket);
   }, []);
 
+  /** Fade out game prompt **/
+  useEffect(() => {
+    if(gamePrompt) {
+      setTimeout(() => {
+        setState(prev => ({...prev, gamePrompt: null}));
+      }, 2700);
+    }
+  },[gamePrompt])
+
   /** Reset data when players go back to LandingView **/
   useEffect(() => {
     if(view === 'LandingView') {
@@ -121,7 +130,9 @@ function App() {
 
   return (
     <div className="App__container">
-      <h2>{gamePrompt}</h2>
+      {gamePrompt && <div className="App__generalGamePrompt-container">
+        <h2 className="App__generalGamePrompt">{gamePrompt}</h2>
+      </div>}
 
       {state.view === 'LandingView' &&
       <LandingView
@@ -131,6 +142,7 @@ function App() {
 
       {state.view === 'GuestLobbyView' &&
       <GuestLobbyView
+      setGamePromptHandler={setGamePromptHandler}
       myPlayerID={myPlayerID}
       setGamePromptHandler={setGamePromptHandler}
       myUsername={state.myUsername}
@@ -144,6 +156,7 @@ function App() {
 
       {state.view === 'HostLobbyView' &&
       <HostLobbyView
+      setGamePromptHandler={setGamePromptHandler}
       myUsername={myUsername}
       socket={socket}
       lobbyID = {lobbyID}

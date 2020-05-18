@@ -22,16 +22,17 @@ export default function GuestLobbyView(props) {
   
   const [state, setState] = useState({
     tempInput: '',
-    error: '',
     host: null,
   })
-  const { tempInput, error, host } = state;
+  const { tempInput, host } = state;
   
   /** Handle when a new user joins lobby **/
   useEffect(() => {
     if(lobbyID) {
-      socket.on('newUserJoined', () => {
-        console.log('A player joined the lobby!');
+      socket.on('newUserJoined', joiner => {
+        const prompt = `${joiner} has joined the lobby.`
+        setGamePromptHandler(prompt);
+        
         axios.post(API + '/reqLobbyInfo', { lobbyID })
         .then(resp => {
           const { myLobbyObj } = resp.data;
@@ -39,7 +40,7 @@ export default function GuestLobbyView(props) {
           setMyLobbyObjHandler(myLobbyObj);
         })
         .catch(error => {
-          setState(prev => ({...prev, error}));
+          setGamePromptHandler(error);
         });
       })
     }
@@ -54,7 +55,7 @@ export default function GuestLobbyView(props) {
     socket.on('userLeft', data => {
       const { myLobbyObj, leaver } = data;
       const error = `${leaver} has left the lobby.`;
-      setState(prev => ({...prev, error}));
+      setGamePromptHandler(error);
       setMyLobbyObjHandler(myLobbyObj);
     })
   }, [])
@@ -83,11 +84,11 @@ export default function GuestLobbyView(props) {
       setMyLobbyObjHandler(myLobbyObj);
       setLobbyIDHandler(tempInput);
 
-      socket.emit('joinLobby', tempInput);
+      socket.emit('joinLobby', { lobbyID: tempInput, myUsername });
     })
     .catch(err => {
       const error = err.response.data.err;
-      setState(prev => ({...prev, error}));
+      setGamePromptHandler(error);
     });
   };
 
@@ -159,7 +160,6 @@ export default function GuestLobbyView(props) {
         </form>
       )}
 
-      {error && <div style={{color: "red"}}>{error}</div>}
     
       {/** Begin: Render when user has successfully joined a lobby **/}
       {host && (

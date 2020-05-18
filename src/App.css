@@ -183,3 +183,31 @@
 /* .App__colorScheme--referenceBorder {
   border: solid #1638D3 4px;
 } */
+
+.App__generalGamePrompt-container {
+  position: fixed;
+  width: 100vw;
+  padding: 5px;
+  background: rgba(131, 61, 228, 0.66);
+  color: white;
+  display: grid;
+  opacity: 0;
+  justify-content: center;
+  animation: promptFadeInOut 2.5s;
+  animation-iteration-count: 1;
+}
+
+@keyframes promptFadeInOut {
+  0% {
+    opacity: 0;
+  }
+  13% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

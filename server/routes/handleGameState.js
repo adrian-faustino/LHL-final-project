@@ -6,10 +6,11 @@ module.exports = function(games, client, db, io) {
   const { Lobby, Player, Coordinate } = db; 
 
 
-  client.on('joinLobby', lobbyID => {
+  client.on('joinLobby', data => {
+    const { lobbyID, myUsername } = data;
     console.log(`Attempting to join lobby ${lobbyID}...`);
     client.join(lobbyID);
-    io.in(lobbyID).emit('newUserJoined');
+    io.in(lobbyID).emit('newUserJoined', myUsername);
   });
 
 

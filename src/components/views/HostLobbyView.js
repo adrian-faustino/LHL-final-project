@@ -16,7 +16,7 @@ const { API } = constants;
 
 export default function HostLobbyView(props) {
   // ===bigrebuild
-  const { myUsername, socket, lobbyID, myLobbyObj, setMyLobbyObjHandler, setMyPlayerIDHandler, setLobbyIDHandler, changeViewHandler } = props;
+  const { setGamePromptHandler, myUsername, socket, lobbyID, myLobbyObj, setMyLobbyObjHandler, setMyPlayerIDHandler, setLobbyIDHandler, changeViewHandler } = props;
 
   /** Handle create lobby **/
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function HostLobbyView(props) {
         setMyPlayerIDHandler(myPlayerID);
         setMyLobbyObjHandler(myLobbyObj);
         
-        socket.emit('joinLobby', lobbyID);
+        socket.emit('joinLobby', { lobbyID, myUsername });
       })
       .catch(err => console.log(err));
     }
@@ -53,8 +53,10 @@ export default function HostLobbyView(props) {
   /** Handle when a new user joins lobby */
   useEffect(() => {
     if(lobbyID) {
-      socket.on('newUserJoined', () => {
-        console.log('A new user joined!')
+      socket.on('newUserJoined', joiner => {
+        const prompt = `${joiner} has joined the lobby.`;
+        setGamePromptHandler(prompt);
+        
         axios.post(API + '/reqLobbyInfo', { lobbyID })
         .then(resp => {
           const { myLobbyObj } = resp.data;
@@ -74,6 +76,8 @@ export default function HostLobbyView(props) {
 
     socket.on('userLeft', data => {
       const { myLobbyObj, leaver } = data;
+      const prompt = `${leaver} has left the game!`
+      setGamePromptHandler(prompt);
       setMyLobbyObjHandler(myLobbyObj);
     })
   }, [])
