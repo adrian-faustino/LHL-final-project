@@ -173,49 +173,13 @@ export default function GuestLobbyView(props) {
           </ul>}
 
 
-          <button onClick={e => leaveLobbyHandler(e)}>Leave lobby</button>
         </div>)}
-      {/** End: Render when user has successfully joined a lobby **/}
-
-      
+          {/** End: Render when user has successfully joined a lobby **/}
+          
+          
     </div>
   )
 }
-
-
-
-
-
-
-
-
-
-
-       {/* Begin: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
-       {/* { false &&
-          <form className="GuestLobbyView__container--IdField">
-            <input
-              className="GuestLobbyView__form--codeInput App__colorScheme--formField"
-              type="text"
-              id="gameID"
-              placeholder="Enter Game ID"
-              onChange={onChangeHandler}
-            />
-            <button
-              className="GuestLobbyView__form--btn App__colorScheme--button"
-              type="submit"
-              onClick={e => onSubmitHandler(e)}
-              >Submit ID
-            </button>
-          </form>
-        } */}
-        {/* End: Jason dummy code to style with and hard code. Delete "{ false && " and corresponding closing tag at bottom. */}
-
-
-
-      // for back button - TO DO LIST
-      //   <button
-      //   className="GuestLobbyView__btn--cancel App__colorScheme--button"
-      //   onClick={e => onClickHandler(e)}
-      //   >Cancel
-      // </button>
+      
+        
+// <button onClick={e => leaveLobbyHandler(e)}>Leave lobby</button>

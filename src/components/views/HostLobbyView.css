@@ -1,7 +1,7 @@
 .HostLobbyView__container--title {
   position: relative;
   display: inline;
-  top: 15vh;
+  top: 10vh;
   margin: 0 auto;
   padding: 1.5rem 1.5rem;
   font-size: 2.0rem;
@@ -59,14 +59,14 @@
 }
 
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 675px) {
   .HostLobbyView__container--title {
     padding: 2.0rem 2.0rem;
-    font-size: 3.5rem;
+    font-size: 3.0rem;
   }
   
   .HostLobbyView__container--IdField {
-    top: 25vh;
+    top: 20vh;
    }
    
   .HostLobbyView__container--IdField h2 {
@@ -77,11 +77,11 @@
   .HostLobbyView__container--IdField p {
     font-size: 2.0rem;
     padding: 0.5rem 0;
-    margin: 1.0rem 10.0rem;
+    margin: 0 10.0rem;
   }
   
   .HostLobbyView__container--namesList {
-    top: 45vh;
+    top: 40vh;
   }
   
   .HostLobbyView__container--namesList li {

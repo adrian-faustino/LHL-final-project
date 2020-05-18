@@ -48,9 +48,8 @@ export default function ResultsView(props) {
   }
 
   return (
-    <div className="scrolling-background">
+    <div className="ResultsView__background">
 
-      <h1 className="ResultsView__container--title App__colorScheme--title">Ta-Daaa!</h1>
 
       <div className="ResultsView--container">
         <canvas
@@ -87,5 +86,8 @@ export default function ResultsView(props) {
     </div>
   )
 }
+
+
+// <h1 className="ResultsView__container--title App__colorScheme--title">Ta-Daaa!</h1>
 
 // <h2 className="ResultsView__message App__colorScheme--message">Such a work of art!</h2> 

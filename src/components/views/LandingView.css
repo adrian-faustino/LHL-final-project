@@ -1,7 +1,7 @@
 .LandingView__titleAnimation {
 	position: relative;
   display: inline;
-  top: 15vh;
+  top: 10vh;
   margin: 0 auto;
   padding: 1.5rem 1.5rem;
   font-size: 2.0rem;
@@ -36,7 +36,7 @@ input:focus, textarea:focus, select:focus, button:focus {
 }
 
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 675px) {
   .LandingView__titleAnimation {
     font-size: 4.5rem;
   }
