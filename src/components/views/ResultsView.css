@@ -1,3 +1,10 @@
+.ResultsView__background {
+  background: url(../../assets/canvasBackground.jpg);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .ResultsView--container {
   position: absolute;
   top: 0;
@@ -22,15 +29,11 @@
 .ResultsView--doneBtn-container {
   position: relative;
   top: 80vh;
-  /* height: min-content;
-  width: min-content; */
+  
 }
 
 
-
-
-
-.ResultsView__container--title {
+/* .ResultsView__container--title {
   position: relative;
   display: inline;
   top: 15vh;
@@ -38,7 +41,7 @@
   padding: 1.5rem 1.5rem;
   font-size: 2.0rem;
   border-radius: 15px;
-}
+} */
 
 /* .ResultsView__message {
   position: absolute;
@@ -54,11 +57,11 @@
   width: 100vw;
 }
 
-@media only screen and (min-width: 768px) {
-  .ResultsView__container--title {
+@media only screen and (min-width: 675px) {
+  /* .ResultsView__container--title {
     padding: 2.0rem 2.0rem;
     font-size: 3.5rem;
-  }
+  } */
   
   /* .ResultsView__message {
     top: 30vh;
@@ -67,8 +70,7 @@
   } */
   
   .ResultsView__container--button {
-    bottom: 10vh;
-    width: 100vw;
+    
   }
 }
 
