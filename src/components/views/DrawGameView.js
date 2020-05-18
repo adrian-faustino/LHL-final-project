@@ -27,7 +27,7 @@ const { silhouetteStyles, slicerStyles } = DrawGameViewStyles;
 
 
 export default function DrawGameView(props) {
-  const { lobbyID, socket, changeViewHandler, myQuadrant, myLobbyObj } = props;
+  const { lobbyID, socket, changeViewHandler, myQuadrant, myLobbyObj, setFinalCoordinatesHandler } = props;
 
   const [state, setState] = useState({
     coordinates: [],
@@ -49,6 +49,7 @@ export default function DrawGameView(props) {
   const { togglePalette, toggleLineSize, updateLineSize, updateColor } = paletteHelpers;
   const { onMouseOutHandler, onMouseUpHandler, onMouseDownHandler, onMouseMoveHandler, draw } = drawHelpers;
 
+  /** Game state listeners **/
   useEffect(() => {
     socket.on('roundFinished', () => {
       console.log('Round finished!');
@@ -56,8 +57,11 @@ export default function DrawGameView(props) {
       setState(prev => ({...prev, roundFinished}));
     })
     
-    socket.on('changeView', nextView => {
-      changeViewHandler(nextView);
+    /** Listen for final coordinates at the end of the game **/
+    socket.on('finalCoordinates', finalCoordinates => {
+      console.log('Updating final coordinates.....');
+      setFinalCoordinatesHandler(finalCoordinates);
+      changeViewHandler('ResultsView');
     })
 
     socket.on('fadeSilhouette', opacity => {
@@ -81,9 +85,8 @@ export default function DrawGameView(props) {
       console.log('Game finished. Sending final coordinates...', coordinates);
 
       axios.post(API + '/finalCoords', data)
-      .then(res => {
-        console.log(res.data);
-        changeViewHandler('ResultsView');
+      .then(() => {
+        // set mouse pointer events in this view to none
       })
       .catch(err => console.log(err));
     }

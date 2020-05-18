@@ -37,16 +37,17 @@ function App() {
     myPlayerID: null,
     myLobbyObj: null,
     myQuadrant: null,
-    gamePrompt: null
+    gamePrompt: null,
+    finalCoordinates: null
   });
 
-  const { view, myUsername, socket, lobbyID, myPlayerID, myLobbyObj, myQuadrant, gamePrompt } = state;
+  const { view, myUsername, socket, lobbyID, myPlayerID, myLobbyObj, myQuadrant, gamePrompt, finalCoordinates } = state;
 
   /** Set up socket and listeners **/
   useEffect(() => {
     const socket = socketIOClient(API);
     setState(prev => ({...prev, socket}));
-    
+
     util.errorListener(socket);
   }, []);
 
@@ -82,6 +83,11 @@ function App() {
   const setLobbyIDHandler = lobbyID => {
     console.log('Setting App component lobbyID to', lobbyID);
     setState(prev => ({...prev, lobbyID}));
+  }
+
+  const setFinalCoordinatesHandler = finalCoordinates => {
+    console.log('Updating final coordinates... in App');
+    setState(prev => ({...prev, finalCoordinates}));
   }
   
   // <NavButton /> helper functions
@@ -155,6 +161,7 @@ function App() {
 
       {state.view === 'DrawGameView' &&
       <DrawGameView
+      setFinalCoordinatesHandler={setFinalCoordinatesHandler}
       myLobbyObj={state.myLobbyObj}
       myQuadrant={myQuadrant}
       socket={state.socket}
@@ -163,6 +170,7 @@ function App() {
 
       {state.view === 'ResultsView' &&
       <ResultsView
+      finalCoordinates={finalCoordinates}
       socket={state.socket}
       changeViewHandler={changeViewHandler}/>}
 

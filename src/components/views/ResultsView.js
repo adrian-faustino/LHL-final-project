@@ -18,27 +18,17 @@ const { CANVAS_W, CANVAS_H } = constants;
 
 export default function ResultsView(props) {
 
-  const { socket, changeViewHandler } = props;
+  const { socket, changeViewHandler, finalCoordinates } = props;
 
   const [state, setState] = useState({
-    finalCoordinates: null,
     toggleReplay: false
   })
   
-  const { finalCoordinates, toggleReplay } = state;
+  const { toggleReplay } = state;
 
   // helpers
   const { renderQuadrants } = renderFinalHelpers;
 
-  // receive coords when backend is finished compiling coordinates
-  useEffect(() => {
-    socket.on('finalCoords', finalCoordinates => {
-      console.log('Rendering final picture...');
-      setState(prev => ({...prev, finalCoordinates}));
-      
-      /** Save to DB - STRETCH **/
-    });
-  }, []);
 
   // canvas
   const canvasRef = useRef(null);
