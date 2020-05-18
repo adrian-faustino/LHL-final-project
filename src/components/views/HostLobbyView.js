@@ -123,7 +123,7 @@ export default function HostLobbyView(props) {
 
   let usernames;
   if(myLobbyObj && myLobbyObj.players) {
-    console.log('Updating player list...');
+   
     const playerIDs = Object.keys(myLobbyObj.players);
 
     usernames = playerIDs.map(playerID => {

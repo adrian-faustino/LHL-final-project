@@ -40,7 +40,7 @@ export default function InstructionsView(props) {
   return (
     <div className="InstructionsView__canvasBackground">
       <div className="InstructionsView__header App__colorScheme--header" >
-        <CountdownTimer timeInMS={10000}/>
+        <CountdownTimer timeInMS={VIEW_TIME}/>
         <button className="App__colorScheme--palette"><i className="fas fa-palette"></i></button>
         <button className="App__colorScheme--palette"><i className="fas fa-paint-brush"></i></button>
         </div>

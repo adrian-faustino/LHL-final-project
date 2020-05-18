@@ -118,7 +118,6 @@ function App() {
       try {
         const myQuadrant = myLobbyObj.players[myPlayerID].myQuadrant;
   
-        console.log('UPDATING QUADRANT!');
         setState(prev => ({...prev, myQuadrant}));
       } catch {
         console.log('Failed to set quadrant');

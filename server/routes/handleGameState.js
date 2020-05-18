@@ -1,5 +1,5 @@
 const constants = require('../constants');
-const { VIEW_TIME, ROUND_TIME } = constants; 
+const { VIEW_TIME, ROUND_TIME, OPACITY_DECAY } = constants; 
 
 module.exports = function(games, client, db, io) {
   // models
@@ -39,7 +39,7 @@ module.exports = function(games, client, db, io) {
       let opacity = 1;
      
       interval = setInterval(() => {
-        opacity *= 0.90
+        opacity *=  OPACITY_DECAY;
   
         io.in(lobbyID).emit('fadeSilhouette', opacity);
       }, 800);

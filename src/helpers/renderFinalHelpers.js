@@ -5,6 +5,11 @@ const { MIN_RENDER_TIME, CANVAS_W, CANVAS_H } = constants;
 const draw = (ctx, strokeData) => {
   const { _x, _y, color, lineSize } = strokeData;
   
+  let globalAlpha = lineSize < 20 ? 0.8 : 0.2; 
+
+  ctx.globalAlpha = globalAlpha;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = lineSize;
   ctx.lineCap = 'round';
   ctx.strokeStyle = color;
   ctx.lineWidth = lineSize;

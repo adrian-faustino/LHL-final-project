@@ -49,6 +49,9 @@ const onMouseMoveHandler = (e, state, setState, maxWidth, maxHeight) => {
 const draw = (ctx, coordinate) => {
   const { x, y, color, lineSize } = coordinate;
 
+  let globalAlpha = lineSize < 20 ? 0.8 : 0.2; 
+
+  ctx.globalAlpha = globalAlpha;
   ctx.strokeStyle = color;
   ctx.lineWidth = lineSize;
   ctx.lineCap = 'round';

@@ -32,8 +32,8 @@ export default function DrawGameView(props) {
   const [state, setState] = useState({
     coordinates: [],
     drawing: false,
-    currentColor: 'blue',
-    currentLineSize: 12,
+    currentColor: 'black',
+    currentLineSize: 6,
     openLineSize: false,
     openColor: false,
     roundFinished:false,
