@@ -1,7 +1,7 @@
 /** All time variables in milliseconds **/
 
-const VIEW_TIME = 10000; // for InstructionsView;
-const ROUND_TIME = 5000;
+const VIEW_TIME = 1000; // for InstructionsView;
+const ROUND_TIME = 50000000;
 const API = 'http://localhost:5555';
 const MIN_RENDER_TIME = 4000; // for rendering final picture animation
 const CANVAS_H = window.innerHeight * 0.9;

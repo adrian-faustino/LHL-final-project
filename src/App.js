@@ -136,6 +136,7 @@ function App() {
 
       {state.view === 'LandingView' &&
       <LandingView
+      setGamePromptHandler={setGamePromptHandler}
       myUsername={myUsername}
       inputChangeHandler={inputChangeHandler}
       changeViewHandler={changeViewHandler}/>}

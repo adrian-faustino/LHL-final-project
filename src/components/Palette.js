@@ -8,7 +8,35 @@ export default function Palette(props) {
   return (
     <ul className="Palette__container">
 
-      {/* === COLORS === */}
+      {/* 1st row */}
+      <li onClick={() => {
+        updateColor('brown', state, setState);
+        }}
+        >
+        <i id="brownColor" className="fas fa-tint"></i>
+      </li>
+      
+      <li onClick={() => {
+        updateColor('silver', state, setState);
+        }}
+        >
+        <i id="silverColor" className="fas fa-tint"></i>
+      </li>
+      
+      <li onClick={() => {
+        updateColor('pink', state, setState);
+        }}
+        >
+        <i id="pinkColor" className="fas fa-tint"></i>
+      </li>
+      
+      <li onClick={() => {
+        updateColor('green', state, setState);
+        }}
+        >
+        <i id="greenColor" className="fas fa-tint"></i>
+      </li>
+
       {/* 2nd row */}
       <li onClick={() => {
         updateColor('red', state, setState);
@@ -32,10 +60,10 @@ export default function Palette(props) {
       </li>
       
       <li onClick={() => {
-        updateColor('green', state, setState);
+        updateColor('khaki', state, setState);
         }}
         >
-        <i id="greenColor" className="fas fa-tint"></i>
+        <i id="khakiColor" className="fas fa-tint"></i>
       </li>
       
       {/* 3rd row */}
@@ -65,6 +93,35 @@ export default function Palette(props) {
         }}
         >
         <i id="whiteColor" className="fas fa-tint"></i>
+      </li>
+
+      {/* 4th row */}
+      <li onClick={() => {
+        updateColor('lightskyblue', state, setState);
+        }}
+        >
+        <i id="lightskyblueColor" className="fas fa-tint"></i>
+      </li>
+      
+      <li onClick={() => {
+        updateColor('lightgreen', state, setState);
+        }}
+        >
+        <i id="lightgreenColor" className="fas fa-tint"></i>
+      </li>
+      
+      <li onClick={() => {
+        updateColor('purple', state, setState);
+        }}
+        >
+        <i id="purpleColor" className="fas fa-tint"></i>
+      </li>
+      
+      <li onClick={() => {
+        updateColor('coral', state, setState);
+        }}
+        >
+        <i id="coralColor" className="fas fa-tint"></i>
       </li>
     </ul>
   )

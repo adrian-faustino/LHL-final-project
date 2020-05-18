@@ -2,10 +2,20 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  align-items: center;
-  justify-items: center;
-  width: 50vw;
-  border-radius: 15px;
+
+  /* Adrian - move it down for debugging */
+  top: 9vh;
+  left: 8vw;
+  height: min-content;
+  width: min-content;
+  padding: 0 20px;
+  column-gap: 1.5rem;
+  /* Adrian */
+
+
+  /* align-items: center;
+  justify-items: center; */
+  border-radius: 12px;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
@@ -16,6 +26,24 @@
   padding: 0.5rem 0;
 }
 
+/* Adrian - dynamically change the color of the button based on current color */
+.fas.fa-palette,
+.fas.fa-paint-brush {
+  transition: all 0.5s ease-out;
+}
+
+#brownColor {
+  color: brown;
+}
+#silverColor {
+  color: silver;
+}
+#pinkColor {
+  color: pink;
+}
+#khakiColor {
+  color: khaki;
+}
 #redColor {
   color: red;
 }
@@ -32,7 +60,7 @@
   color: blue;
 }
 #violetColor {
-  color: purple;
+  color: violet;
 }
 #blackColor {
   color: black;
@@ -40,7 +68,18 @@
 #whiteColor {
   color: white;
 }
-
+#lightskyblueColor {
+  color: lightskyblue;
+}
+#lightgreenColor {
+  color: lightgreen;
+}
+#purpleColor {
+  color: purple;
+}
+#coralColor {
+  color: coral;
+}
 
 
 @media only screen and (min-width: 768px) {
@@ -67,9 +106,9 @@
   }
 }
 
-@media only screen and (min-width: 1025px) {
+/* @media only screen and (min-width: 1025px) {
   .Palette__container {
     height: 25vh;
     width: 25vw;
   }
-}
+} */
