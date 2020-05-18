@@ -1,3 +1,9 @@
+.InstructionsView__canvasBackground {
+  background-image: url(../../assets/canvasBackground.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .InstructionsView__header {
   position: absolute;
   display: grid;
@@ -40,11 +46,7 @@
   border-radius: 15px;
 }
 
-.InstructionsView__canvasBackground {
-  background-image: url(../../assets/canvasBackground.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+
 
 @media only screen and (min-width: 675px) {
   .InstructionsView__header--timer {
