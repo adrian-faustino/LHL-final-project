@@ -12,6 +12,17 @@ app.use(cors());
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 
+// routes
+app.get('/test', (req, res) => res.send('Welcome to the test route!'));
+
+/** For Heroku Deployment - change to false when working on local **/
+if(true) {
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  })
+}
 
 // data
 const games = require('./data/games');
@@ -30,17 +41,6 @@ connection.once('open', () => {
 })
 
 
-// routes
-app.get('/test', (req, res) => res.send('Welcome to the test route!'));
-
-/** For Heroku Deployment - change to false when working on local **/
-if(true) {
-  app.use(express.static('client/build'));
-
-  app.get('*', (req, res) => {
-    res.sendFile(paht.resolve(__dirname, 'client', 'build', 'index.html'));
-  })
-}
 
 // models
 const Lobby = require('./models/lobby.model');
