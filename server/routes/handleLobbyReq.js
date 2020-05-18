@@ -21,13 +21,11 @@ module.exports = function(games, client, db, io, app) {
     const coordKeys = Object.keys(games[lobbyID].coordinates);
     const updatedCoords = coordKeys.filter(quadrant => games[lobbyID].coordinates[quadrant].length !== 0);
 
-    let finalCoordinatesSent = false;
 
     if(updatedCoords.length === PLAYERS_IN_ROOM) {
       const finalCoordinates = games[lobbyID].coordinates;
   
       console.log(`Successfully received coordinates from all ${PLAYERS_IN_ROOM} players`);
-      finalCoordinatesSent = true;
 
       io.in(lobbyID).emit('finalCoordinates', finalCoordinates);
       res.send(`You're last to send data.`)
@@ -37,8 +35,12 @@ module.exports = function(games, client, db, io, app) {
 
     /** This is to fix the issue where if a player disconnects midway through the game, the final coordinates will never send **/
     setTimeout(() => {
-      if(!finalCoordinatesSent) {
+      const coordKeys = Object.keys(games[lobbyID].coordinates);
+      const updatedCoords = coordKeys.filter(quadrant => games[lobbyID].coordinates[quadrant].length !== 0);
+      
+      if(updatedCoords.length !== PLAYERS_IN_ROOM) {
         const errMsg = `A player disconnected during the game.`
+        console.log(errMsg);
 
         const finalCoordinates = games[lobbyID].coordinates;
 

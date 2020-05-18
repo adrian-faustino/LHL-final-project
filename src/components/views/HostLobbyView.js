@@ -76,7 +76,7 @@ export default function HostLobbyView(props) {
 
     socket.on('userLeft', data => {
       const { myLobbyObj, leaver } = data;
-      const prompt = `${leaver} has left the game!`
+      const prompt = `${leaver} has left the lobby.`
       setGamePromptHandler(prompt);
       setMyLobbyObjHandler(myLobbyObj);
     })

@@ -16,25 +16,31 @@ export default function InstructionsView(props) {
   const { socket, changeViewHandler, myQuadrant } = props;
 
   const [state, setState] = useState({
-
     tick: true,
     interval: null
-
   })
 
   const { tick, interval } = state;
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setState(prev => ({...prev, tick: !tick}));
+      console.log('RERENDERING!?');
+    }, 900);
+
     socket.on('changeView', nextView => {
       changeViewHandler(nextView);
     });
-  
+
+    return () => {
+      clearInterval(interval);
+    }
   }, []);
 
   return (
     <div className="InstructionsView__canvasBackground">
       <div className="InstructionsView__header App__colorScheme--header" >
-        <CountdownTimer timeInMs={5000}/>
+        <CountdownTimer timeInMS={10000}/>
         <button className="App__colorScheme--palette"><i className="fas fa-palette"></i></button>
         <button className="App__colorScheme--palette"><i className="fas fa-paint-brush"></i></button>
         </div>
