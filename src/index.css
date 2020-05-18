@@ -30,3 +30,11 @@ body {
   text-align: center;
   font-family: 'Fredoka One', cursive;
 }
+
+
+/* Disable accidental selection when user drags over an element */
+.unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}

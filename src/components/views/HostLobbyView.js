@@ -103,6 +103,20 @@ export default function HostLobbyView(props) {
     socket.emit('startGame', { lobbyID, nextView: 'InstructionsView' });
   }
 
+  /** COPY lobbyID TO CLIPBOARD **/
+  const copyToClipboard = e => {
+    const toCopyStr = e.target.innerHTML;
+    const tempElement = document.createElement('textarea');
+
+    tempElement.value = toCopyStr;
+    document.body.appendChild(tempElement);
+    tempElement.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempElement);
+
+    setGamePromptHandler('Copied to clipboard!');
+  }
+
 
   /** Usernames list logic **/
   const greeting = myUsername.trim().length === 0 ? 'Hello!' : `Hello, ${myUsername}!`;
@@ -126,7 +140,7 @@ export default function HostLobbyView(props) {
       
       <div className="HostLobbyView__container--IdField">
         <h2 className="App__colorScheme--message">Share this code with your friends:</h2>
-        <p className="App__colorScheme--code">{lobbyID}</p>
+        <p onMouseDown={e => copyToClipboard(e)} className="App__colorScheme--code">{lobbyID}</p>
       </div>
 
 

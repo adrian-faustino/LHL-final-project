@@ -48,6 +48,12 @@
 .App__colorScheme--code {
   color: white;
   background-color: #5611C1;
+
+  /* Adrian */
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 /* GuestLobbyView, HostLobbyView */
