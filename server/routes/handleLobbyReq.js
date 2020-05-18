@@ -29,23 +29,36 @@ module.exports = function(games, client, db, io, app) {
 
       io.in(lobbyID).emit('finalCoordinates', finalCoordinates);
       res.send(`You're last to send data.`)
+      
+      console.log(games);
+      console.log('Deleting game from memory.');
+
+      delete games[lobbyID];
+      return console.log('Deleted =>', games)
     } else {
       res.send('Successfully sent your final coordinates.');
     }
 
     /** This is to fix the issue where if a player disconnects midway through the game, the final coordinates will never send **/
     setTimeout(() => {
-      const coordKeys = Object.keys(games[lobbyID].coordinates);
-      const updatedCoords = coordKeys.filter(quadrant => games[lobbyID].coordinates[quadrant].length !== 0);
-      
-      if(updatedCoords.length !== PLAYERS_IN_ROOM) {
-        const errMsg = `A player disconnected during the game.`
-        console.log(errMsg);
+      if (games[lobbyID]) {
+        const coordKeys = Object.keys(games[lobbyID].coordinates);
+        const updatedCoords = coordKeys.filter(quadrant => games[lobbyID].coordinates[quadrant].length !== 0);
+  
+        if(updatedCoords.length !== PLAYERS_IN_ROOM) {
+   
+          const errMsg = `A player disconnected during the game.`
+          console.log(errMsg);
+  
+          const finalCoordinates = games[lobbyID].coordinates;
+  
+          io.in(lobbyID).emit('err', errMsg);
+          io.in(lobbyID).emit('finalCoordinates', finalCoordinates);
 
-        const finalCoordinates = games[lobbyID].coordinates;
-
-        io.in(lobbyID).emit('err', errMsg);
-        io.in(lobbyID).emit('finalCoordinates', finalCoordinates);
+    
+          delete games[lobbyID];
+          return console.log('Deleted =>', games);
+        }
       }
     }, DELAY_FOR_COORDS);
   });
