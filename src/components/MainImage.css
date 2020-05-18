@@ -1,3 +1,13 @@
 .MainImage__reference {
-  border-radius: 15px;
+  border-radius: 5px;
+}
+
+/* Adrian */
+.MainImage__IMG {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

@@ -63,6 +63,7 @@ export default function ResultsView(props) {
         </canvas>
 
         <img
+        draggable={false}
         width={CANVAS_W}
         height={CANVAS_H}
         className="ResultsView--origImg"

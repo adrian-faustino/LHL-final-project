@@ -13,7 +13,7 @@ const { imgStyles,
   
 
 export default function MainImage(props) {
-  const { myQuadrant, view } = props;
+  const { myQuadrant, draggable } = props;
 
   /*** make shallow copies and modify - fix for strict mode? ***/
   const _imgStyles = imgStyles();
@@ -31,16 +31,13 @@ export default function MainImage(props) {
     _imgStyles['transform'] = 'translate(-50%, -50%)';
   }
 
-  if(view) {
-    // _imgContainerStyles['position'] = 'absolute';
-    // _imgContainerStyles['top'] = '10px';
-    // _imgContainerStyles['left'] = '10px';
-  }
 
   return (
     <div style={_containerWrapperStyles}>
       <div className="MainImage__reference" style={_imgContainerStyles}>
         <img
+        className={"MainImage__IMG"}
+        draggable={draggable}
         style={_imgStyles}
         src={IMG_SRC}/>
       </div>

@@ -47,7 +47,8 @@ export default function InstructionsView(props) {
         <p className="InstructionsView__message App__colorScheme--title">Your goal is to draw a picture as a team! This is your section of the final image. You can choose you colors and brsh size above. Good Luck!</p>
       
       
-      <MainImage  
+      <MainImage
+      draggable={false}
       myQuadrant={myQuadrant}/>
       
     </div>
