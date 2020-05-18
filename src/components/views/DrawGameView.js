@@ -69,7 +69,6 @@ export default function DrawGameView(props) {
   // send final coordinates before view change
   useEffect(() => {
     if(roundFinished) {
-      console.log('Player object==>', myLobbyObj);
       const PLAYERS_IN_ROOM = Object.keys(myLobbyObj.players).length;
       
       const data = {
@@ -139,7 +138,7 @@ export default function DrawGameView(props) {
   /** Set slicer height and width **/
   _slicerStyles['height'] = CANVAS_H;
   _slicerStyles['width'] = CANVAS_W;
-  console.log('Slicer STYLE', _slicerStyles);
+
 
   // ** PALETTE BUTTONS LOGIC ** //
   const lineSizeClickHandler = e => {
@@ -199,8 +198,9 @@ export default function DrawGameView(props) {
         ref={canvasRef}
         width={CANVAS_W}
         height={CANVAS_H}
-        onMouseDown={e => onMouseDownHandler(e, state, setState)}
-        onMouseUp={e => onMouseUpHandler(e, state, setState)}
+        onMouseOut={e => onMouseOutHandler(setState)}
+        onMouseDown={e => onMouseDownHandler(setState)}
+        onMouseUp={e => onMouseUpHandler(setState)}
         onMouseMove={e => onMouseMoveHandler(e, state, setState, CANVAS_W, CANVAS_H)}></canvas>
       </div>
       {/* End: Canvas and draw functionality */}

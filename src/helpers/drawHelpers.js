@@ -1,15 +1,17 @@
-const onMouseOutHandler = (e, state, setState) => {
-  console.log('Mouse out! =>', e);
+const onMouseOutHandler = (setState) => {
+  const drawing = false;
+
+  setState(prev => ({...prev, drawing}));
 }
 
-const onMouseDownHandler = (e, state, setState) => {
+const onMouseDownHandler = (setState) => {
   const drawing = true;
   
   setState(prev => ({...prev, drawing}));
 };
 
 
-const onMouseUpHandler = (e, state, setState) => {
+const onMouseUpHandler = (setState) => {
   const drawing = false;
 
   setState(prev => ({...prev, drawing}));
