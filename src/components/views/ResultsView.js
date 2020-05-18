@@ -69,15 +69,16 @@ export default function ResultsView(props) {
 
       <div className="ResultsView__container--button">
         <button
-        className="NavButton__btn App__colorScheme--button"
-        onClick={e => replayHandler(e)}>Replay
+          className="ResultsView__btn App__colorScheme--button"
+          onClick={e => replayHandler(e)}>Replay
         </button>
         <button
-        onClick={e => {
+          className="ResultsView__btn App__colorScheme--button"
+          onClick={e => {
           e.preventDefault();
           changeViewHandler('LandingView')
-        }}
-        >Done</button>
+        }}>Done
+        </button>
         {/* <NavButton
         nextView={'LandingView'}
         buttonTitle={'Done'}
