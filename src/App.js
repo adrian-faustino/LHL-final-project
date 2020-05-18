@@ -174,6 +174,7 @@ function App() {
 
       {state.view === 'DrawGameView' &&
       <DrawGameView
+      setGamePromptHandler={setGamePromptHandler}
       setFinalCoordinatesHandler={setFinalCoordinatesHandler}
       myLobbyObj={state.myLobbyObj}
       myQuadrant={myQuadrant}

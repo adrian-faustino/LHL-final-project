@@ -1,6 +1,6 @@
 const constants = require('../constants');
 const util = require('../helpers/util');
-const { MAX_PLAYERS_PER_LOBBY } = constants;
+const { MAX_PLAYERS_PER_LOBBY, DELAY_FOR_COORDS } = constants;
 const { generateUniquePID, generateQuadrant } = util;
 
 
@@ -21,15 +21,31 @@ module.exports = function(games, client, db, io, app) {
     const coordKeys = Object.keys(games[lobbyID].coordinates);
     const updatedCoords = coordKeys.filter(quadrant => games[lobbyID].coordinates[quadrant].length !== 0);
 
+    let finalCoordinatesSent = false;
+
     if(updatedCoords.length === PLAYERS_IN_ROOM) {
       const finalCoordinates = games[lobbyID].coordinates;
   
       console.log(`Successfully received coordinates from all ${PLAYERS_IN_ROOM} players`);
+      finalCoordinatesSent = true;
+
       io.in(lobbyID).emit('finalCoordinates', finalCoordinates);
       res.send(`You're last to send data.`)
     } else {
       res.send('Successfully sent your final coordinates.');
     }
+
+    /** This is to fix the issue where if a player disconnects midway through the game, the final coordinates will never send **/
+    setTimeout(() => {
+      if(!finalCoordinatesSent) {
+        const errMsg = `A player disconnected during the game.`
+
+        const finalCoordinates = games[lobbyID].coordinates;
+
+        io.in(lobbyID).emit('err', errMsg);
+        io.in(lobbyID).emit('finalCoordinates', finalCoordinates);
+      }
+    }, DELAY_FOR_COORDS);
   });
   
   

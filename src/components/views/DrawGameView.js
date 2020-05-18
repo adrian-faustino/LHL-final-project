@@ -27,7 +27,7 @@ const { silhouetteStyles, slicerStyles } = DrawGameViewStyles;
 
 
 export default function DrawGameView(props) {
-  const { lobbyID, socket, changeViewHandler, myQuadrant, myLobbyObj, setFinalCoordinatesHandler } = props;
+  const { setGamePromptHandler, lobbyID, socket, changeViewHandler, myQuadrant, myLobbyObj, setFinalCoordinatesHandler } = props;
 
   const [state, setState] = useState({
     coordinates: [],
@@ -66,6 +66,10 @@ export default function DrawGameView(props) {
 
     socket.on('fadeSilhouette', opacity => {
       setState(prev => ({...prev, opacity}));
+    })
+
+    socket.on('err', errMsg => {
+      setGamePromptHandler(errMsg);
     })
   }, [])
 
