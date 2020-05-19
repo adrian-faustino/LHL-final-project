@@ -6,6 +6,8 @@ const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const { isDevMode } = require('./constants');
+
 
 // middleware
 app.use(cors());
@@ -16,11 +18,16 @@ app.use(express.urlencoded({limit: '50mb'}));
 // app.get('/test', (req, res) => res.send('Welcome to the test route!'));
 
 /** For Heroku Deployment - change to false when working on local **/
-if(true) {
-  app.use(express.static('client/build'));
+if(!isDevMode) {
+  app.use(express.static('build'));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname + '/public/index.html'));
+  });
+} else {
+  app.get('*', (req, res) => {
+    console.log('Dev mode');
+    res.send('In dev mode...');
   })
 }
 
@@ -32,13 +39,13 @@ const PORT = process.env.PORT || 5555;
 const DB_URI = process.env.ATLAS_URI;
 
 // database
-mongoose.connect(DB_URI, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
-mongoose.set('useFindAndModify', false);
+// mongoose.connect(DB_URI, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+// mongoose.set('useFindAndModify', false);
 
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log('MongoDB database connection established successfully.');
-})
+// const connection = mongoose.connection;
+// connection.once('open', () => {
+//   console.log('MongoDB database connection established successfully.');
+// })
 
 
 
