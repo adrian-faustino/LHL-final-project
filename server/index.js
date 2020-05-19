@@ -13,7 +13,7 @@ app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 
 // routes
-app.get('/test', (req, res) => res.send('Welcome to the test route!'));
+// app.get('/test', (req, res) => res.send('Welcome to the test route!'));
 
 /** For Heroku Deployment - change to false when working on local **/
 if(true) {
