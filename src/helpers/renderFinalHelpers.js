@@ -1,5 +1,5 @@
 import constants from '../constants';
-const { MIN_RENDER_TIME, CANVAS_W, CANVAS_H } = constants;
+const { MIN_RENDER_TIME, CANVAS_W, CANVAS_H, HEIGHT_OFFSET } = constants;
 
 
 const draw = (ctx, strokeData) => {
@@ -13,7 +13,7 @@ const draw = (ctx, strokeData) => {
   ctx.lineCap = 'round';
   ctx.strokeStyle = color;
   ctx.lineWidth = lineSize;
-  ctx.lineTo(_x, _y);
+  ctx.lineTo(_x, _y - HEIGHT_OFFSET);
   ctx.stroke();
 }
 

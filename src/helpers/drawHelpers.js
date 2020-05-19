@@ -1,3 +1,6 @@
+import constants from '../constants';
+const { HEIGHT_OFFSET } = constants;
+
 const onMouseOutHandler = (setState) => {
   const drawing = false;
 
@@ -35,8 +38,8 @@ const onMouseMoveHandler = (e, state, setState, maxWidth, maxHeight) => {
     const lineSize = currentLineSize;
 
     const coordinate = {
-      x,
-      y,
+      x: x,
+      y: y - HEIGHT_OFFSET,
       color,
       lineSize
     }
