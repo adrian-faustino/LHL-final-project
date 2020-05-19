@@ -12,7 +12,7 @@ const { formatZero, formatMS } = countdownHelpers;
 
 
 export default function CountdownTimer(props) {
-  const { timeInMS, warningOn } = props;
+  const { timeInMS, warningOn, isDemo } = props;
 
   const [state, setState] = useState({
     ROUND_TIME: timeInMS,
@@ -47,8 +47,10 @@ export default function CountdownTimer(props) {
     <div
     style={_timerStyles}
     className="InstructionsView__header--timer">
-      <span
-      className="">{formatted_M}:{formatted_S}</span>
+
+      {isDemo ? <span className="InstructionsView__isDemo-span">{`Game begins in ${s} . . .`}</span> : (
+        <span>{formatted_M}:{formatted_S}</span>
+      )}
 
 
       

@@ -175,7 +175,7 @@ export default function DrawGameView(props) {
         <button
           className="App__colorScheme--palette"
           onClick={e => lineSizeClickHandler(e)}><i 
-          style={{color: currentColor}}
+          style={{color: 'black'}}
           className="fas fa-paint-brush"></i>
         </button>
       </div>

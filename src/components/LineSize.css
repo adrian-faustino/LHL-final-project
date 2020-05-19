@@ -15,6 +15,29 @@
   color: black;
   padding: 0.5rem 1rem;
   cursor: pointer;
+  transition: all 0.5s;
+}
+
+.LineSize__container li:hover {
+  animation: brush 0.6s;
+  color: white;
+  /* animation-direction: alternate-reverse; */
+  /* animation-iteration-count: infinite; */
+}
+
+@keyframes brush {
+  0% {
+    transform: rotate(0deg);
+  }
+  56% {
+    transform: rotate(70deg);
+  }
+  78% {
+    transform: rotate(-40deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
 }
 
 #sizeXL {

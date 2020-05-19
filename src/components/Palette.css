@@ -25,12 +25,20 @@
   font-size: 2.0rem;
   padding: 0.5rem 0;
   cursor: pointer;
+  transition: all 0.4s;
+}
+
+.Palette__container li:hover {
+  transform: scale(1.3) rotate(-20deg);
 }
 
 /* Adrian - dynamically change the color of the button based on current color */
-.fas.fa-palette,
-.fas.fa-paint-brush {
+.fas.fa-palette {
   transition: all 0.5s ease-out;
+  border-radius: 45%;
+  padding: 0 5px;
+  background: radial-gradient( rgba(0, 0, 0, 0.372), rgba(0, 0, 0, 0.171));
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.598);
 }
 
 #brownColor {

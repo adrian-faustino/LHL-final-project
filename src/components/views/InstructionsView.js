@@ -40,19 +40,19 @@ export default function InstructionsView(props) {
   return (
     <div className="InstructionsView__canvasBackground">
       <div className="InstructionsView__header App__colorScheme--header" >
-        <CountdownTimer timeInMS={VIEW_TIME}/>
-        <button className="App__colorScheme--palette"><i className="fas fa-palette"></i></button>
-        <button className="App__colorScheme--palette"><i className="fas fa-paint-brush"></i></button>
+        <CountdownTimer isDemo={true} timeInMS={VIEW_TIME}/>
+        <button style={{pointerEvents: 'none', color: 'black'}} className="App__colorScheme--palette"><i className="fas fa-palette"></i></button>
+        <button style={{pointerEvents: 'none', color: 'black'}}className="App__colorScheme--palette"><i className="fas fa-paint-brush"></i></button>
       </div>
 
-      <p className="InstructionsView__message--top App__colorScheme--title">Your goal is to draw a picture as a team!</p>
+      <p className="InstructionsView__message--top App__colorScheme--title">Your goal is to draw a picture as a team.</p>
       
       <MainImage
         draggable={false}
         myQuadrant={myQuadrant}
       />
 
-      <p className="InstructionsView__message--bottom App__colorScheme--title">This is your section of the final image. You can choose you colors and brush size above. Good Luck!</p>
+      <p className="InstructionsView__message--bottom App__colorScheme--title">This is your section to draw. The picture will fade over time so you will have to rely on your memory as you draw!</p>
     </div>
   )
 }

@@ -72,3 +72,22 @@
     padding: 1.0rem 2.0rem;
   }
 }
+
+.InstructionsView__isDemo-span {
+  font-size: 28px;
+  position: relative;
+  bottom: 6px;
+
+  animation: loading-flash 0.55s ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes loading-flash {
+  0% {
+    color: white;
+  }
+  100% {
+    color: rgba(128, 128, 128, 0.714);
+  }
+}
