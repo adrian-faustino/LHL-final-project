@@ -28,7 +28,7 @@ export default function LandingView(props) {
 
       <form className="LandingView__container--nameForm">
         <input 
-        autocomplete="off"
+        autoComplete="off"
         className="LandingView__form--inputField App__colorScheme--inputField"
         type="text"
         id="username"

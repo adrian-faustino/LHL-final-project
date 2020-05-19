@@ -10,6 +10,11 @@
 	color: transparent;
 	-moz-background-clip: text;
   -webkit-background-clip: text;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
 }
 
 .LandingView__container--nameForm {

@@ -1,5 +1,5 @@
 .InstructionsView__canvasBackground {
-  background-image: url(../../assets/canvasBackground.jpg);
+  background-image: linear-gradient(to bottom, rgba(62, 59, 59, 0.589), rgba(255, 255, 255, 0.249), rgba(18, 16, 16, 0.625)), url(../../assets/canvasBackground.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }

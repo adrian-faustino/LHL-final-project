@@ -52,18 +52,21 @@ export default function ResultsView(props) {
       <div className="ResultsView--container">
 
         <canvas
+        style={{backgroundSize: `${CANVAS_W}px ${CANVAS_H}px`}}
         className="ResultsView--canvas"
         ref={canvasRef}
         width={CANVAS_W}
         height={CANVAS_H}>
         </canvas>
 
+        
         <img
         draggable={false}
         width={CANVAS_W}
         height={CANVAS_H}
         className="ResultsView--origImg"
         src={IMG_SRC}/>
+
       </div>
 
       <div className="ResultsView__container--button">

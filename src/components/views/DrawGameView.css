@@ -44,6 +44,7 @@
   display: grid;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(grey, white);
 }
 
 .DrawGameView--slicer {

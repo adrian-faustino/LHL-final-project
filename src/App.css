@@ -67,6 +67,7 @@
   background: radial-gradient( #FF9B3F, #D46600);
   color: white;
   border: solid 1px white;
+  cursor: pointer;
 }
 .App__colorScheme--button:hover {
   background: radial-gradient(#FF9B3F, #D46600);
@@ -84,6 +85,7 @@
   background: radial-gradient(#D46600, #FF9B3F);
   color: white;
   border: solid 1px white;
+  cursor: pointer;
 }
 .App__colorScheme--palette:hover {
   background: radial-gradient(#FF9B3F, #D46600);
@@ -201,6 +203,7 @@
   justify-content: center;
   animation: promptFadeInOut 2.5s;
   animation-iteration-count: 1;
+  z-index: 30;
 }
 
 @keyframes promptFadeInOut {
