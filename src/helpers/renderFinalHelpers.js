@@ -109,7 +109,49 @@ const renderQuad_4 = (ctx, coordinates) => {
 };
 
 
+const renderDisconnected = (ctx, quadrant) => {
+  let rectX = CANVAS_W;
+  let rectY = CANVAS_H;
+  let textX = CANVAS_W;
+  let textY = CANVAS_H;
+  const rectWidth = CANVAS_W / 2;
+  const rectHeight = CANVAS_H / 2;
 
+  switch (quadrant) {
+    case "quadrant_1":
+      rectX *= 0;
+      rectY *= 0;
+      textX *= 0.25;
+      textY *= 0.25;
+      break;
+    case "quadrant_2":
+      rectX *= 0.5;
+      rectY *= 0;
+      textX *= 0.75;
+      textY *= 0.25;
+      break;
+    case "quadrant_3":
+      rectX *= 0;
+      rectY *= 0.5;
+      textX *= 0.25;
+      textY *= 0.75;
+      break;
+    case "quadrant_4":
+      rectX *= 0.5;
+      rectY *= 0.5;
+      textX *= 0.75;
+      textY *= 0.75;
+      break;
+  }
+
+  ctx.fillStyle = '#363535cb';
+  ctx.fillRect(rectX, rectY, rectWidth, rectHeight);
+  ctx.fillStyle = '#9a777';
+  ctx.font = 'italic bold 20px Fredoka One';
+  ctx.textAlign="center"; 
+  ctx.textBaseline = "middle";
+  ctx.fillText("DISCONNECTED", textX, textY);
+}
 
 
 const renderQuadrants = (ctx, finalCoordinates) => {
@@ -121,6 +163,12 @@ const renderQuadrants = (ctx, finalCoordinates) => {
   // console.log(quadrants)
   quadrants.forEach(quadrant => {
     const coordinates = finalCoordinates[quadrant];
+
+    /** Handle users that DC'ed **/
+    if(coordinates.length === 0) {
+      
+      return renderDisconnected(ctx, quadrant);
+    }
 
     if(quadrant === 'quadrant_1') {
       renderQuad_1(ctx, coordinates);

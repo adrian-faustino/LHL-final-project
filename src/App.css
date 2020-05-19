@@ -71,7 +71,7 @@
 }
 .App__colorScheme--button:hover {
   background: radial-gradient(#FF9B3F, #D46600);
-  color: black;
+  color: rgb(31, 19, 19);
   border: solid 1px black;
 }
 
