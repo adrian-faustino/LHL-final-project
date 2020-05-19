@@ -1,14 +1,14 @@
 /** All time variables in milliseconds **/
 
 /** Switch between dev mode and production **/
-const isDevMode = true;
+const isDevMode = false;
 const API = isDevMode ? 'http://localhost:5555' : 'https://draw-mageddon.herokuapp.com';
 
 /** length of time in InstructionsView **/
-const VIEW_TIME = 2000; 
+const VIEW_TIME = 20000; 
 
 /** length of time in DrawingGameView **/
-const ROUND_TIME = 2000;
+const ROUND_TIME = 60000;
 
 /** for rendering final picture animation **/
 const MIN_RENDER_TIME = 5000; 

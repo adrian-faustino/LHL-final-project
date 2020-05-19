@@ -12,7 +12,8 @@ import constants from '../../constants';
 
 // styles
 import './ResultsView.css';
-import IMG_SRC from '../../assets/mona-lisa.jpg';
+// import IMG_SRC from '../../assets/mona-lisa.jpg';
+import IMG_SRC from '../../assets/alternate2.jpg'
 
 const { CANVAS_W, CANVAS_H } = constants;
 

@@ -1,4 +1,5 @@
-import IMG_SRC from '../../assets/mona-lisa.jpg';
+// import IMG_SRC from '../../assets/mona-lisa.jpg';
+import IMG_SRC from '../../assets/alternate2.jpg'
 
 const silhouetteStyles = (key, val) => {
   const style = {

@@ -17,7 +17,8 @@ import LineSize from '../LineSize';
 import CountdownTimer from '../CountdownTimer';
 
 // styles
-import IMG_SRC from '../../assets/mona-lisa.jpg'
+// import IMG_SRC from '../../assets/mona-lisa.jpg'
+import IMG_SRC from '../../assets/alternate2.jpg'
 import DrawGameViewStyles from './DrawGameViewStyles';
 
 

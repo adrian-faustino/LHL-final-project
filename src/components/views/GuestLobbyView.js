@@ -166,7 +166,7 @@ export default function GuestLobbyView(props) {
         <div className="GuestLobbyView__container--namesList">
           <h2 className="GuestLobbyView__welcomeMessage App__colorScheme--message">Welcome to {host}'s lobby!</h2>
         
-          <h2 className="GuestLobbyView__namesList--message App__colorScheme--message">{`Waiting for ${host} to start the game...`}</h2>
+          <h2 className="GuestLobbyView__namesList--message App__colorScheme--message">{`Waiting for ${host} to start the game . . .`}</h2>
           
           <ul className="GuestLobbyView__namesList App__colorScheme--namesList">
             {usernames}

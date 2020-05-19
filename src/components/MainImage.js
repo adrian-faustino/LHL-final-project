@@ -1,7 +1,8 @@
 import React from 'react'
 
 // assets
-import IMG_SRC from '../assets/mona-lisa.jpg'
+// import IMG_SRC from '../assets/mona-lisa.jpg'
+import IMG_SRC from '../assets/alternate2.jpg'
 
 // styles
 import './MainImage.css';
