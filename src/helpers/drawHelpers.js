@@ -75,10 +75,10 @@ const clearCanvas = (e, state, setState) => {
 /** STRETCH - Undo **/
 const undoCanvas = (e, state, setState) => {
   e.preventDefault();
-  console.log('Undo:', state.undoLengths);
+
   const lastIndex = state.undoLengths.length - 1;
   const spliceBy = state.undoLengths[lastIndex];
-  console.log('Splice by', spliceBy);
+
   const coordinates = state.coordinates.slice(0, -1 * spliceBy);
   setState(prev => ({...prev, coordinates}));
 }
