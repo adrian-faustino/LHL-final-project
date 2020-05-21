@@ -1,7 +1,7 @@
 /** All time variables in milliseconds **/
 
 /** Switch between dev mode and production **/
-const isDevMode = false;
+const isDevMode = true;
 const API = isDevMode ? 'http://localhost:5555' : 'https://draw-mageddon.herokuapp.com';
 
 /** length of time in InstructionsView **/

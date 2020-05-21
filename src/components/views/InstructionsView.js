@@ -43,6 +43,15 @@ export default function InstructionsView(props) {
         <CountdownTimer isDemo={true} timeInMS={VIEW_TIME}/>
         <button style={{pointerEvents: 'none', color: 'black'}} className="App__colorScheme--palette"><i className="fas fa-palette"></i></button>
         <button style={{pointerEvents: 'none', color: 'black'}}className="App__colorScheme--palette"><i className="fas fa-paint-brush"></i></button>
+
+        <button 
+        style={{padding:'0 10px', pointerEvents: 'none'}}
+        className="App__colorScheme--palette">Undo</button>
+
+        <button 
+        style={{padding:'0 10px', pointerEvents: 'none'}}
+        className="App__colorScheme--palette">Clear</button>
+
       </div>
 
       <p className="InstructionsView__message--top App__colorScheme--title">Your goal is to draw a picture as a team.</p>

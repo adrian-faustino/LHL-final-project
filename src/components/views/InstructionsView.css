@@ -7,7 +7,7 @@
 .InstructionsView__header {
   position: absolute;
   display: grid;
-  grid-template-columns: 7fr 9fr 9fr 1fr 1fr;
+  grid-template-columns: 8fr 6fr 6fr 1fr 1fr;
   /* grid-template-columns: repeat(5, 1fr); */
   align-items: center;
   width: 100vw;
@@ -78,7 +78,7 @@
   font-size: 28px;
   position: relative;
   bottom: 6px;
-
+  
   animation: loading-flash 0.55s ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;

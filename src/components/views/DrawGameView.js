@@ -198,11 +198,12 @@ export default function DrawGameView(props) {
 
         <button 
         style={{padding:'0 10px'}}
-        className="App__colorScheme--palette" onClick={e => clearCanvas(e, state, setState)}>Clear</button>
-
+        className="App__colorScheme--palette" onClick={e => undoCanvas(e, state, setState)}>Undo</button>
+        
         <button 
         style={{padding:'0 10px'}}
-        className="App__colorScheme--palette" onClick={e => undoCanvas(e, state, setState)}>Undo</button>
+        className="App__colorScheme--palette" onClick={e => clearCanvas(e, state, setState)}>Clear</button>
+
       </div>
 
 
