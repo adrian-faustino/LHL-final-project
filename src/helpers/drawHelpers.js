@@ -1,9 +1,11 @@
 import constants from '../constants';
 const { HEIGHT_OFFSET } = constants;
 
-const onMouseOutHandler = (setState) => {
+
+const onMouseOutHandler = (setState, currentUndoLength) => {
   const drawing = false;
 
+  // setState(prev => ({...prev, drawing, undoLengths: [...prev.undoLengths, currentUndoLength]}));
   setState(prev => ({...prev, drawing}));
 }
 
@@ -14,9 +16,10 @@ const onMouseDownHandler = (setState) => {
 };
 
 
-const onMouseUpHandler = (setState) => {
+const onMouseUpHandler = (setState, currentUndoLength) => {
   const drawing = false;
 
+  // setState(prev => ({...prev, drawing, undoLengths: [...prev.undoLengths, currentUndoLength]}));
   setState(prev => ({...prev, drawing}));
 };
 
@@ -43,7 +46,7 @@ const onMouseMoveHandler = (e, state, setState, maxWidth, maxHeight) => {
       color,
       lineSize
     }
-    setState(prev => ({...prev, coordinates: [...coordinates, coordinate], maxWidth, maxHeight, openLineSize: false, openColor: false}));
+    setState(prev => ({...prev, coordinates: [...coordinates, coordinate], maxWidth, maxHeight, openLineSize: false, openColor: false, currentUndoLength: prev.currentUndoLength + 1}));
   }
 
 };
@@ -65,9 +68,19 @@ const draw = (ctx, coordinate) => {
 
 /** STRETCH - Clear **/
 const clearCanvas = (e, state, setState) => {
-  console.log('clicked clear')
   e.preventDefault();
   setState(prev => ({...prev, coordinates: []}));
+}
+
+/** STRETCH - Undo **/
+const undoCanvas = (e, state, setState) => {
+  e.preventDefault();
+  console.log('Undo:', state.undoLengths);
+  const lastIndex = state.undoLengths.length - 1;
+  const spliceBy = state.undoLengths[lastIndex];
+  console.log('Splice by', spliceBy);
+  const coordinates = state.coordinates.slice(0, -1 * spliceBy);
+  setState(prev => ({...prev, coordinates}));
 }
 
 const drawHelpers = {
@@ -76,7 +89,8 @@ const drawHelpers = {
   onMouseUpHandler,
   onMouseMoveHandler,
   draw,
-  clearCanvas
+  clearCanvas,
+  undoCanvas
 }
 
 export default drawHelpers;

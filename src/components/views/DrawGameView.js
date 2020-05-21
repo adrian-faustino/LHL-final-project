@@ -41,15 +41,17 @@ export default function DrawGameView(props) {
     roundFinished:false,
     maxWidth: null,
     maxHeight: null,
-    opacity: 1
+    opacity: 1,
+    undoLengths: [],
+    currentUndoLength: 0
   });
 
-  const { coordinates, drawing, currentColor, currentLineSize, openLineSize, openColor, roundTime, roundFinished, maxWidth, maxHeight, opacity } = state;
+  const { coordinates, drawing, currentColor, currentLineSize, openLineSize, openColor, roundTime, roundFinished, maxWidth, maxHeight, opacity, undoLengths, currentUndoLength } = state;
 
 
   // helpers
   const { togglePalette, toggleLineSize, updateLineSize, updateColor } = paletteHelpers;
-  const { onMouseOutHandler, onMouseUpHandler, onMouseDownHandler, onMouseMoveHandler, draw, clearCanvas } = drawHelpers;
+  const { onMouseOutHandler, onMouseUpHandler, onMouseDownHandler, onMouseMoveHandler, draw, clearCanvas, undoCanvas } = drawHelpers;
 
   /** Game state listeners **/
   useEffect(() => {
@@ -123,6 +125,13 @@ export default function DrawGameView(props) {
     });
   });
 
+  /** STRETCH - Undo logic **/
+  useEffect(() => {
+    if(!drawing) {
+      setState(prev => ({...prev, undoLengths: [...undoLengths, currentUndoLength], currentUndoLength: 0}));
+    }
+  }, [drawing]);
+
 
   // ** BG LOGIC AND TRANSFORMATIONS ** //
   const _silhouetteStyles = silhouetteStyles();
@@ -188,6 +197,8 @@ export default function DrawGameView(props) {
         </button>
 
         <button onClick={e => clearCanvas(e, state, setState)}>Clear</button>
+
+        <button onClick={e => undoCanvas(e, state, setState)}>Undo</button>
       </div>
 
 
@@ -218,9 +229,9 @@ export default function DrawGameView(props) {
         ref={canvasRef}
         width={CANVAS_W}
         height={CANVAS_H}
-        onMouseOut={e => onMouseOutHandler(setState)}
+        onMouseOut={e => onMouseOutHandler(setState, currentUndoLength)}
         onMouseDown={e => onMouseDownHandler(setState)}
-        onMouseUp={e => onMouseUpHandler(setState)}
+        onMouseUp={e => onMouseUpHandler(setState, currentUndoLength)}
         onMouseMove={e => onMouseMoveHandler(e, state, setState, CANVAS_W, CANVAS_H)}></canvas>
       </div>
       {/* End: Canvas and draw functionality */}
