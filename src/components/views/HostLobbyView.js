@@ -18,6 +18,12 @@ export default function HostLobbyView(props) {
   // ===bigrebuild
   const { setGamePromptHandler, myUsername, socket, lobbyID, myLobbyObj, setMyLobbyObjHandler, setMyPlayerIDHandler, setLobbyIDHandler, changeViewHandler } = props;
 
+  const [state, setState] = useState({
+    usernames: []
+  })
+
+  const { usernames } = state;
+
   /** Handle create lobby **/
   useEffect(() => {
     const genLobbyID = generateLobbyID(6);
@@ -29,7 +35,12 @@ export default function HostLobbyView(props) {
         setMyLobbyObjHandler(myLobbyObj);
         setLobbyIDHandler(genLobbyID);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err)
+        // const error = err.response.data.err
+        // changeViewHandler('LandingView');
+        // setGamePromptHandler(error);
+      });
   }, []);
 
   /** Handle join lobby **/
@@ -91,8 +102,17 @@ export default function HostLobbyView(props) {
       lobbyID,
       nextView: 'LandingView'
     }
-    socket.emit('cancelGame', data);
-    changeViewHandler(data.nextView);
+    // socket.emit('cancelGame', data);
+    // socket.emit('disconnectClient', lobbyID)
+    // changeViewHandler(data.nextView);
+
+
+    axios.post(API + '/cancelLobby', data)
+    .then(() => {
+      socket.emit('disconnectClient', lobbyID);
+      changeViewHandler('LandingView');
+    })
+    .catch(err => console.log(err))
   }
 
 
@@ -121,18 +141,20 @@ export default function HostLobbyView(props) {
   /** Usernames list logic **/
   const greeting = myUsername.trim().length === 0 ? 'Hello!' : `Hello, ${myUsername}!`;
 
-  let usernames;
-  if(myLobbyObj && myLobbyObj.players) {
-   
-    const playerIDs = Object.keys(myLobbyObj.players);
+  /** Handle usernames list **/
+  useEffect(() => {
+    if(myLobbyObj && myLobbyObj.players) {
+      console.log('Updating player list...');
+      const playerIDs = Object.keys(myLobbyObj.players);
+  
+      const usernames = playerIDs.map(playerID => {
+        const username = myLobbyObj.players[playerID].username;
+        return <PlayerLobbyStatus key={util.generateLobbyID(4)} username={username}/>;
+      });
 
-    usernames = playerIDs.map(playerID => {
-      const username = myLobbyObj.players[playerID].username;
-      return <PlayerLobbyStatus key={util.generateLobbyID(4)} username={username}/>;
-    })
-  }
-
-
+      setState(prev => ({...prev, usernames}))
+    }
+  }, [myLobbyObj]);
 
   return (
     <div className="scrolling-background">

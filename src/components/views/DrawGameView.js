@@ -69,6 +69,7 @@ export default function DrawGameView(props) {
 
       console.log('Updating final coordinates.....');
       setFinalCoordinatesHandler(finalCoordinates);
+      socket.emit('disconnectClient', lobbyID);
     })
 
     socket.on('fadeSilhouette', opacity => {

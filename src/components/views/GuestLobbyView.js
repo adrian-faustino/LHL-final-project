@@ -23,8 +23,9 @@ export default function GuestLobbyView(props) {
   const [state, setState] = useState({
     tempInput: '',
     host: null,
+    usernames: []
   })
-  const { tempInput, host } = state;
+  const { tempInput, host, usernames } = state;
   
   /** Handle when a new user joins lobby **/
   useEffect(() => {
@@ -122,22 +123,29 @@ export default function GuestLobbyView(props) {
       setState(prev => ({...prev, host}));
 
       socket.on('cancelGame', nextView => {
-        setGamePromptHandler(`${host} cancelled the game.`);
+        // setGamePromptHandler(`${host} cancelled the game.`);
+        setGamePromptHandler('Lobby cancelled.');
+        socket.emit('disconnectClient', lobbyID);
         changeViewHandler(nextView);
       })
     }
   }, [myLobbyObj]);
 
-  let usernames;
-  if(myLobbyObj && myLobbyObj.players) {
-    console.log('Updating player list...');
-    const playerIDs = Object.keys(myLobbyObj.players);
 
-    usernames = playerIDs.map(playerID => {
-      const username = myLobbyObj.players[playerID].username;
-      return <PlayerLobbyStatus key={util.generateLobbyID(4)} username={username}/>;
-    })
-  }
+  /** Handle usernames list **/
+  useEffect(() => {
+    if(myLobbyObj && myLobbyObj.players) {
+      console.log('Updating player list...');
+      const playerIDs = Object.keys(myLobbyObj.players);
+  
+      const usernames = playerIDs.map(playerID => {
+        const username = myLobbyObj.players[playerID].username;
+        return <PlayerLobbyStatus key={util.generateLobbyID(4)} username={username}/>;
+      });
+
+      setState(prev => ({...prev, usernames}))
+    }
+  }, [myLobbyObj]);
 
   return (
     <div className="scrolling-background">
