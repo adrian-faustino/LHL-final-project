@@ -140,7 +140,7 @@ export default function GuestLobbyView(props) {
   
       const usernames = playerIDs.map(playerID => {
         const username = myLobbyObj.players[playerID].username;
-        return <PlayerLobbyStatus key={util.generateLobbyID(4)} username={username}/>;
+        return <PlayerLobbyStatus isHost={false} key={util.generateLobbyID(4)} username={username}/>;
       });
 
       setState(prev => ({...prev, usernames}))
