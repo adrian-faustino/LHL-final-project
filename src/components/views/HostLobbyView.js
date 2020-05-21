@@ -143,11 +143,10 @@ export default function HostLobbyView(props) {
         <p onMouseDown={e => copyToClipboard(e)} className="App__colorScheme--code">{lobbyID}</p>
       </div>
 
-
- 
       <ul className="HostLobbyView__container--namesList App__colorScheme--namesList">
         {usernames}    
-      </ul>}
+      </ul>
+
  
       <div className="HostLobbyView__container--button">
         <button className="HostLobbyView__btn App__colorScheme--button" onClick={e => startButtonHandler(e)}>Start game</button>

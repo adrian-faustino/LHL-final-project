@@ -12,6 +12,7 @@
   position: absolute;
   top: 30vh;
   width: 100vw;
+  z-index: 25;
  }
  
 .HostLobbyView__container--IdField h2 {
@@ -22,12 +23,14 @@
   border-radius: 15px;
   font-size: 2.0rem;
   margin: 1.0rem 5.0rem;
+  position: relative;
+  bottom: 3vh;
 }
 
 .HostLobbyView__container--namesList {
   position: absolute;
-  top: 55vh;
   width: 100vw;
+  height: min-content;
 }
 
 .HostLobbyView__container--namesList li {
@@ -45,7 +48,7 @@
 
 .HostLobbyView__container--button {
   position: absolute;
-  bottom: 10vh;
+  bottom: 5vh;
   display: grid;
   grid-template-columns: 50% 50%;
   align-items: center;
