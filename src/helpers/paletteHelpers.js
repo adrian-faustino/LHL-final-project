@@ -13,13 +13,13 @@ const toggleLineSize = (e, state, setState) => {
 }
 
 const updateColor = (currentColor, state, setState) => {
-  console.log('Updating color to', currentColor);
+  // console.log('Updating color to', currentColor);
 
   setState(prev => ({...prev, currentColor, openColor: false}));
 }
 
 const updateLineSize = (currentLineSize , state, setState) => {
-  console.log('Updating lineSize to', currentLineSize);
+  // console.log('Updating lineSize to', currentLineSize);
 
   setState(prev => ({...prev, currentLineSize, openLineSize: false}));
 }

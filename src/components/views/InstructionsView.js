@@ -25,7 +25,7 @@ export default function InstructionsView(props) {
   useEffect(() => {
     const interval = setInterval(() => {
       setState(prev => ({...prev, tick: !tick}));
-      console.log('RERENDERING!?');
+
     }, 900);
 
     socket.on('changeView', nextView => {

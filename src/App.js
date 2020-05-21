@@ -63,7 +63,7 @@ function App() {
   /** Reset data when players go back to LandingView **/
   useEffect(() => {
     if(view === 'LandingView') {
-      console.log('Back to App ====>')
+      // console.log('Back to App ====>')
       setState(prev => {
         return ({...prev,
           lobbyID: null,
@@ -80,28 +80,28 @@ function App() {
   }
 
   const setMyLobbyObjHandler = myLobbyObj => {
-    console.log('Setting App component myLobbyObj to', myLobbyObj);
+    // console.log('Setting App component myLobbyObj to', myLobbyObj);
     setState(prev => ({...prev, myLobbyObj}));
   }
 
   const setMyPlayerIDHandler = myPlayerID => {
-    console.log('Setting App component myPlayerID to', myPlayerID);
+    // console.log('Setting App component myPlayerID to', myPlayerID);
     setState(prev => ({...prev, myPlayerID}));
   }
 
   const setLobbyIDHandler = lobbyID => {
-    console.log('Setting App component lobbyID to', lobbyID);
+    // console.log('Setting App component lobbyID to', lobbyID);
     setState(prev => ({...prev, lobbyID}));
   }
 
   const setFinalCoordinatesHandler = finalCoordinates => {
-    console.log('Updating final coordinates... in App');
+    // console.log('Updating final coordinates... in App');
     setState(prev => ({...prev, finalCoordinates}));
   }
   
   // <NavButton /> helper functions
   const changeViewHandler = view => {
-    console.log('Updating view to:', view)
+    // console.log('Updating view to:', view)
     setState(prev => ({...prev, view}));
   }
 
@@ -120,7 +120,7 @@ function App() {
   
         setState(prev => ({...prev, myQuadrant}));
       } catch {
-        console.log('Failed to set quadrant');
+        // console.log('Failed to set quadrant');
       }
     }
   }, [myPlayerID, myLobbyObj]);

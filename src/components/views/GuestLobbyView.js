@@ -71,7 +71,7 @@ export default function GuestLobbyView(props) {
   /** Handle join lobby **/
   const joinRoomHandler = e => {
     e.preventDefault()
-    console.log(`Joining room: ${tempInput}`)
+    // console.log(`Joining room: ${tempInput}`)
     
     const data = {
       lobbyID: tempInput,
@@ -80,7 +80,7 @@ export default function GuestLobbyView(props) {
     axios.post(API + '/joinLobby', data)
     .then(resp => {
       const { myLobbyObj, myPlayerID } = resp.data;
-      console.log('Successfully joined room:', resp.data);
+      // console.log('Successfully joined room:', resp.data);
       setMyPlayerIDHandler(myPlayerID);
       setMyLobbyObjHandler(myLobbyObj);
       setLobbyIDHandler(tempInput);
@@ -135,7 +135,7 @@ export default function GuestLobbyView(props) {
   /** Handle usernames list **/
   useEffect(() => {
     if(myLobbyObj && myLobbyObj.players) {
-      console.log('Updating player list...');
+      // console.log('Updating player list...');
       const playerIDs = Object.keys(myLobbyObj.players);
   
       const usernames = playerIDs.map(playerID => {

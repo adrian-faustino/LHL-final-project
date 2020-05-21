@@ -54,7 +54,7 @@ export default function DrawGameView(props) {
   /** Game state listeners **/
   useEffect(() => {
     socket.on('roundFinished', () => {
-      console.log('Round finished!');
+      // console.log('Round finished!');
       const roundFinished = true;
       
       setTimeout(() => {
@@ -67,7 +67,7 @@ export default function DrawGameView(props) {
     /** Listen for final coordinates at the end of the game **/
     socket.on('finalCoordinates', finalCoordinates => {
 
-      console.log('Updating final coordinates.....');
+      // console.log('Updating final coordinates.....');
       setFinalCoordinatesHandler(finalCoordinates);
       socket.emit('disconnectClient', lobbyID);
     })
@@ -94,7 +94,7 @@ export default function DrawGameView(props) {
         PLAYERS_IN_ROOM
       }
 
-      console.log('Game finished. Sending final coordinates...', coordinates);
+      // console.log('Game finished. Sending final coordinates...', coordinates);
 
       axios.post(API + '/finalCoords', data)
       .then(() => {

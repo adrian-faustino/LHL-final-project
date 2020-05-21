@@ -31,7 +31,7 @@ export default function HostLobbyView(props) {
     axios.post(API + '/createLobby', data)
       .then(resp => {
         const myLobbyObj = resp.data;
-        console.log('Created lobby:', myLobbyObj)
+        // console.log('Created lobby:', myLobbyObj)
         setMyLobbyObjHandler(myLobbyObj);
         setLobbyIDHandler(genLobbyID);
       })
@@ -46,12 +46,12 @@ export default function HostLobbyView(props) {
   /** Handle join lobby **/
   useEffect(() => {
     if(lobbyID) {
-      console.log('Host joining lobby...');
+      // console.log('Host joining lobby...');
       const data = { lobbyID, myUsername };
       axios.post(API + '/joinLobby', data)
       .then(resp => {
         const { myLobbyObj, myPlayerID } = resp.data;
-        console.log('Successfully joined room:', resp.data);
+        // console.log('Successfully joined room:', resp.data);
         setMyPlayerIDHandler(myPlayerID);
         setMyLobbyObjHandler(myLobbyObj);
         
@@ -71,7 +71,7 @@ export default function HostLobbyView(props) {
         axios.post(API + '/reqLobbyInfo', { lobbyID })
         .then(resp => {
           const { myLobbyObj } = resp.data;
-          console.log('Recieved updated lobbyObj:', myLobbyObj)
+          // console.log('Recieved updated lobbyObj:', myLobbyObj)
           setMyLobbyObjHandler(myLobbyObj);
         })
         .catch(err => console.log(err));
@@ -119,7 +119,7 @@ export default function HostLobbyView(props) {
   /** START GAME BUTTON - add logic later for skip **/
   const startButtonHandler = e => {
     e.preventDefault();
-    console.log('Starting game...')
+    // console.log('Starting game...')
     socket.emit('startGame', { lobbyID, nextView: 'InstructionsView' });
   }
 
@@ -144,7 +144,7 @@ export default function HostLobbyView(props) {
   /** Handle usernames list **/
   useEffect(() => {
     if(myLobbyObj && myLobbyObj.players) {
-      console.log('Updating player list...');
+      // console.log('Updating player list...');
       const playerIDs = Object.keys(myLobbyObj.players);
   
       const usernames = playerIDs.map(playerID => {
