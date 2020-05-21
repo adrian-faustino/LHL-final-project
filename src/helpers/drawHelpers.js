@@ -63,12 +63,20 @@ const draw = (ctx, coordinate) => {
   ctx.stroke();
 };
 
+/** STRETCH - Clear **/
+const clearCanvas = (e, state, setState) => {
+  console.log('clicked clear')
+  e.preventDefault();
+  setState(prev => ({...prev, coordinates: []}));
+}
+
 const drawHelpers = {
   onMouseOutHandler,
   onMouseDownHandler,
   onMouseUpHandler,
   onMouseMoveHandler,
-  draw
+  draw,
+  clearCanvas
 }
 
 export default drawHelpers;

@@ -49,7 +49,7 @@ export default function DrawGameView(props) {
 
   // helpers
   const { togglePalette, toggleLineSize, updateLineSize, updateColor } = paletteHelpers;
-  const { onMouseOutHandler, onMouseUpHandler, onMouseDownHandler, onMouseMoveHandler, draw } = drawHelpers;
+  const { onMouseOutHandler, onMouseUpHandler, onMouseDownHandler, onMouseMoveHandler, draw, clearCanvas } = drawHelpers;
 
   /** Game state listeners **/
   useEffect(() => {
@@ -186,6 +186,8 @@ export default function DrawGameView(props) {
           style={{color: 'black'}}
           className="fas fa-paint-brush"></i>
         </button>
+
+        <button onClick={e => clearCanvas(e, state, setState)}>Clear</button>
       </div>
 
 

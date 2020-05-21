@@ -8,7 +8,7 @@ const API = isDevMode ? 'http://localhost:5555' : 'https://draw-mageddon.herokua
 const VIEW_TIME = 1000; 
 
 /** length of time in DrawingGameView **/
-const ROUND_TIME = 60000000;
+const ROUND_TIME = 8000;
 
 /** for rendering final picture animation **/
 const MIN_RENDER_TIME = 5000; 
