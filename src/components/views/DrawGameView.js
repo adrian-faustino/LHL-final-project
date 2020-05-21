@@ -20,6 +20,7 @@ import CountdownTimer from '../CountdownTimer';
 // import IMG_SRC from '../../assets/mona-lisa.jpg'
 import IMG_SRC from '../../assets/alternate2.jpg'
 import DrawGameViewStyles from './DrawGameViewStyles';
+import RoundFinishedBlocker from '../RoundFinishedBlocker';
 
 
 
@@ -55,14 +56,19 @@ export default function DrawGameView(props) {
     socket.on('roundFinished', () => {
       console.log('Round finished!');
       const roundFinished = true;
+      
+      setTimeout(() => {
+        changeViewHandler('ResultsView');
+      }, 2000);
+
       setState(prev => ({...prev, roundFinished}));
     })
     
     /** Listen for final coordinates at the end of the game **/
     socket.on('finalCoordinates', finalCoordinates => {
+
       console.log('Updating final coordinates.....');
       setFinalCoordinatesHandler(finalCoordinates);
-      changeViewHandler('ResultsView');
     })
 
     socket.on('fadeSilhouette', opacity => {
@@ -215,6 +221,9 @@ export default function DrawGameView(props) {
         onMouseMove={e => onMouseMoveHandler(e, state, setState, CANVAS_W, CANVAS_H)}></canvas>
       </div>
       {/* End: Canvas and draw functionality */}
+
+      <RoundFinishedBlocker roundFinished={roundFinished}/>
+
     </div>
   )
 }

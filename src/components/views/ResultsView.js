@@ -41,7 +41,7 @@ export default function ResultsView(props) {
       console.log('Rendering...');
       renderQuadrants(ctx, finalCoordinates);
     }
-  });
+  }, [toggleReplay]);
 
   const replayHandler = e => {
     e.preventDefault();

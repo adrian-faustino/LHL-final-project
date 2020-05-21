@@ -1,0 +1,42 @@
+.RoundFinishedBlocker__container {
+  position: absolute;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.571);
+  z-index: -1;
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.RoundFinishedBlocker__container.reveal {
+  z-index: 50;
+  opacity: 1;
+}
+
+
+.RoundFinishedBlocker__bounce-span {
+  font-size: 5.0rem;
+  font-style: oblique;
+  animation: timeUpDropdown 2s;
+  animation-fill-mode: forwards;
+  color: white;
+}
+
+@keyframes timeUpDropdown {
+  0% {
+    transform: translateY(-200%) scale(0.6, 0.8);
+  }
+  65% {
+    transform: translateY(100%) scale(1.2, 0.8);
+  }
+  80% {
+    transform: translateY(50%) scale(0.8, 1.1);
+  }
+  100% {
+    transform: translateY(105%) scale(100, 0);
+  }
+}
