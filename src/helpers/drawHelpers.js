@@ -63,10 +63,19 @@ const draw = (ctx, coordinate) => {
   ctx.lineWidth = lineSize;
   ctx.lineCap = 'round';
 
+//     // Wall
+// ctx.strokeRect(75, 140, 150, 110);
+
+// Door
+// ctx.fillRect(x, y, lineSize, lineSize);
+
+
   ctx.beginPath();
   ctx.moveTo(x, y);
   ctx.lineTo(x, y);
   ctx.stroke();
+  ctx.fillStyle = "blue";
+  ctx.fill();
   ctx.closePath();
 };
 
