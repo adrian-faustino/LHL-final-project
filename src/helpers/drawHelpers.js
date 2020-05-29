@@ -11,7 +11,7 @@ const onMouseOutHandler = (setState, currentUndoLength) => {
 
 const onMouseDownHandler = (setState) => {
   const drawing = true;
-  
+
   setState(prev => ({...prev, drawing}));
 };
 
@@ -46,6 +46,7 @@ const onMouseMoveHandler = (e, state, setState, maxWidth, maxHeight) => {
       color,
       lineSize
     }
+  
     setState(prev => ({...prev, coordinates: [...coordinates, coordinate], maxWidth, maxHeight, openLineSize: false, openColor: false, currentUndoLength: prev.currentUndoLength + 1}));
   }
 
@@ -61,9 +62,12 @@ const draw = (ctx, coordinate) => {
   ctx.strokeStyle = color;
   ctx.lineWidth = lineSize;
   ctx.lineCap = 'round';
+
   ctx.beginPath();
+  ctx.moveTo(x, y);
   ctx.lineTo(x, y);
   ctx.stroke();
+  ctx.closePath();
 };
 
 /** STRETCH - Clear **/

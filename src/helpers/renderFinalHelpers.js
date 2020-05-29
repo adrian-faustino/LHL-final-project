@@ -13,8 +13,10 @@ const draw = (ctx, strokeData) => {
   ctx.lineCap = 'round';
   ctx.strokeStyle = color;
   ctx.lineWidth = lineSize;
+  ctx.moveTo(_x, _y - HEIGHT_OFFSET);
   ctx.lineTo(_x, _y - HEIGHT_OFFSET);
   ctx.stroke();
+  ctx.closePath();
 }
 
 const renderQuad_1 = (ctx, coordinates) => {
