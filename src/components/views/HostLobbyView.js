@@ -10,13 +10,15 @@ import PlayerLobbyStatus from '../PlayerLobbyStatus';
 // Helpers
 import util from '../../helpers/util'
 import constants from '../../constants';
+import gameImageHelpers from '../../helpers/gameImageHelpers'
 
 const { generateLobbyID } = util;
-const { API } = constants;
-
+const { isDevMode, API } = constants;
+const { getIMG } = gameImageHelpers;
+ 
 export default function HostLobbyView(props) {
   // ===bigrebuild
-  const { setGamePromptHandler, myUsername, socket, lobbyID, myLobbyObj, setMyLobbyObjHandler, setMyPlayerIDHandler, setLobbyIDHandler, changeViewHandler } = props;
+  const { setGamePromptHandler, myUsername, socket, lobbyID, myLobbyObj, setMyLobbyObjHandler, setMyPlayerIDHandler, setLobbyIDHandler, changeViewHandler, setGameIMGHandler } = props;
 
   const [state, setState] = useState({
     usernames: []
@@ -91,6 +93,13 @@ export default function HostLobbyView(props) {
       setGamePromptHandler(prompt);
       setMyLobbyObjHandler(myLobbyObj);
     })
+
+    /** Set gameIMG **/
+    socket.on('gameIMG', gameIMG => {
+      console.log('Game img ==>', gameIMG.largeImageURL)
+      setGameIMGHandler(gameIMG.largeImageURL);
+      // changeViewHandler('InstructionsView');
+    })
   }, [])
 
   /** BACK BUTTON **/
@@ -119,9 +128,20 @@ export default function HostLobbyView(props) {
   /** START GAME BUTTON - add logic later for skip **/
   const startButtonHandler = e => {
     e.preventDefault();
-    // console.log('Starting game...')
-    socket.emit('startGame', { lobbyID, nextView: 'InstructionsView' });
-  }
+
+    // Switch to use API image or hard coded IMG
+    if (isDevMode) {
+      socket.emit('startGame', { lobbyID, nextView: 'InstructionsView' });
+    } else {
+      console.log('Making post req for images...')
+      axios.post(API + '/getIMG', { lobbyID })
+      .then(resp =>{
+  
+        console.log('starting game...')
+        socket.emit('startGame', { lobbyID, nextView: 'InstructionsView' });
+      }).catch(err => console.log(err))
+    }
+  };
 
   /** COPY lobbyID TO CLIPBOARD **/
   const copyToClipboard = e => {

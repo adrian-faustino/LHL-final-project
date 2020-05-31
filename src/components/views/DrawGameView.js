@@ -29,7 +29,7 @@ const { silhouetteStyles, slicerStyles } = DrawGameViewStyles;
 
 
 export default function DrawGameView(props) {
-  const { setGamePromptHandler, lobbyID, socket, changeViewHandler, myQuadrant, myLobbyObj, setFinalCoordinatesHandler } = props;
+  const { setGamePromptHandler, lobbyID, socket, changeViewHandler, myQuadrant, myLobbyObj, setFinalCoordinatesHandler, gameIMG } = props;
 
   const [state, setState] = useState({
     coordinates: [],
@@ -227,7 +227,7 @@ export default function DrawGameView(props) {
           style={_silhouetteStyles}
           height={bg_h}
           width={bg_w}
-          src={IMG_SRC} alt="silhouette"/>
+          src={gameIMG || IMG_SRC} alt="silhouette"/>
         </div>
         <canvas
         className="DrawGameView--canvas"

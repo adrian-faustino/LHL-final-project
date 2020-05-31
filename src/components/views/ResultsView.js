@@ -19,7 +19,7 @@ const { CANVAS_W, CANVAS_H } = constants;
 
 export default function ResultsView(props) {
 
-  const { socket, changeViewHandler, finalCoordinates } = props;
+  const { socket, changeViewHandler, finalCoordinates, gameIMG } = props;
 
   const [state, setState] = useState({
     toggleReplay: false
@@ -66,7 +66,7 @@ export default function ResultsView(props) {
         width={CANVAS_W}
         height={CANVAS_H}
         className="ResultsView--origImg"
-        src={IMG_SRC}/>
+        src={gameIMG || IMG_SRC}/>
 
       </div>
 

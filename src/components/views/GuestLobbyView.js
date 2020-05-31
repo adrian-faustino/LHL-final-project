@@ -18,7 +18,7 @@ const { API } = constants;
 
 export default function GuestLobbyView(props) {
   // === big rebuild 
-  const { myUsername, socket, lobbyID, myLobbyObj, setMyLobbyObjHandler, setMyPlayerIDHandler, setLobbyIDHandler, changeViewHandler, setGamePromptHandler, myPlayerID } = props;
+  const { myUsername, socket, lobbyID, myLobbyObj, setMyLobbyObjHandler, setMyPlayerIDHandler, setLobbyIDHandler, changeViewHandler, setGamePromptHandler, myPlayerID, setGameIMGHandler } = props;
   
   const [state, setState] = useState({
     tempInput: '',
@@ -58,6 +58,13 @@ export default function GuestLobbyView(props) {
       const error = `${leaver} has left the lobby.`;
       setGamePromptHandler(error);
       setMyLobbyObjHandler(myLobbyObj);
+    })
+
+    /** Set gameIMG **/
+    socket.on('gameIMG', gameIMG => {
+      console.log('Game img ==>', gameIMG.largeImageURL)
+      setGameIMGHandler(gameIMG.largeImageURL);
+      // changeViewHandler('InstructionsView');
     })
   }, [])
 

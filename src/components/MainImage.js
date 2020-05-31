@@ -14,7 +14,7 @@ const { imgStyles,
   
 
 export default function MainImage(props) {
-  const { myQuadrant, draggable } = props;
+  const { myQuadrant, draggable, gameIMG } = props;
 
   /*** make shallow copies and modify - fix for strict mode? ***/
   const _imgStyles = imgStyles();
@@ -40,7 +40,7 @@ export default function MainImage(props) {
         className={"MainImage__IMG"}
         draggable={draggable}
         style={_imgStyles}
-        src={IMG_SRC}/>
+        src={gameIMG || IMG_SRC}/>
       </div>
     </div>
   )

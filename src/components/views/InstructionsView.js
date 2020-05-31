@@ -13,7 +13,7 @@ import constants from '../../constants';
 const { VIEW_TIME, ROUND_TIME } = constants;
 
 export default function InstructionsView(props) {
-  const { socket, changeViewHandler, myQuadrant } = props;
+  const { socket, changeViewHandler, myQuadrant, gameIMG } = props;
 
   const [state, setState] = useState({
     tick: true,
@@ -57,8 +57,9 @@ export default function InstructionsView(props) {
       <p className="InstructionsView__message--top App__colorScheme--title">Your goal is to draw a picture as a team.</p>
       
       <MainImage
-        draggable={false}
-        myQuadrant={myQuadrant}
+      gameIMG={gameIMG}
+      draggable={false}
+      myQuadrant={myQuadrant}
       />
 
       <p className="InstructionsView__message--bottom App__colorScheme--title">This is your section to draw. The picture will fade over time so you will have to rely on your memory as you draw!</p>

@@ -38,10 +38,11 @@ function App() {
     myLobbyObj: null,
     myQuadrant: null,
     gamePrompt: null,
+    gameIMG: null,
     finalCoordinates: null
   });
 
-  const { view, myUsername, socket, lobbyID, myPlayerID, myLobbyObj, myQuadrant, gamePrompt, finalCoordinates } = state;
+  const { view, myUsername, socket, lobbyID, myPlayerID, myLobbyObj, myQuadrant, gamePrompt, finalCoordinates, gameIMG } = state;
 
   /** Set up socket and listeners **/
   useEffect(() => {
@@ -82,6 +83,10 @@ function App() {
   const setMyLobbyObjHandler = myLobbyObj => {
     // console.log('Setting App component myLobbyObj to', myLobbyObj);
     setState(prev => ({...prev, myLobbyObj}));
+  }
+
+  const setGameIMGHandler = gameIMG => {
+    setState(prev => ({...prev, gameIMG}));
   }
 
   const setMyPlayerIDHandler = myPlayerID => {
@@ -145,6 +150,7 @@ function App() {
       setGamePromptHandler={setGamePromptHandler}
       myPlayerID={myPlayerID}
       setGamePromptHandler={setGamePromptHandler}
+      setGameIMGHandler={setGameIMGHandler}
       myUsername={state.myUsername}
       socket={socket}
       lobbyID = {lobbyID}
@@ -157,6 +163,7 @@ function App() {
       {state.view === 'HostLobbyView' &&
       <HostLobbyView
       setGamePromptHandler={setGamePromptHandler}
+      setGameIMGHandler={setGameIMGHandler}
       myUsername={myUsername}
       socket={socket}
       lobbyID = {lobbyID}
@@ -169,13 +176,16 @@ function App() {
       {state.view === 'InstructionsView' &&
       <InstructionsView
       myQuadrant={myQuadrant}
+      gameIMG={gameIMG}
       socket={state.socket}
       changeViewHandler={changeViewHandler}/>}
 
       {state.view === 'DrawGameView' &&
       <DrawGameView
+      gameIMG={gameIMG}
       setGamePromptHandler={setGamePromptHandler}
       setFinalCoordinatesHandler={setFinalCoordinatesHandler}
+      setGameIMGHandler={setGameIMGHandler}
       myLobbyObj={state.myLobbyObj}
       myQuadrant={myQuadrant}
       socket={state.socket}
@@ -184,6 +194,7 @@ function App() {
 
       {state.view === 'ResultsView' &&
       <ResultsView
+      gameIMG={gameIMG}
       finalCoordinates={finalCoordinates}
       socket={state.socket}
       changeViewHandler={changeViewHandler}/>}
